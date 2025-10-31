@@ -38,6 +38,7 @@
 - 2025-11-06 : `npm run typecheck` → ok (repli supplémentaire sur le paquet "undici" si disponible).
 - 2025-11-07 : `npm run typecheck` → ok (gestion élargie des erreurs lors du chargement de "node:undici").
 - 2025-11-08 : `npm run typecheck` → ok (import statique de "node:undici" et repli maintenu).
+- 2025-11-09 : `npm run typecheck` → ok (repli "undici" via `webpackIgnore`).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
