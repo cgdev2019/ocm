@@ -22,6 +22,7 @@
 - Typecheck/lint/tests relances (`npm run typecheck`, `npm run lint`, `npm run test`, `npm run e2e`) => tout vert; `test-results/.last-run.json` mis à jour.
 - Services BillingCycle → Country : hooks TanStack Query, formulaires React Hook Form + Zod, pages App Router et navigation intégrées.
 - Vérifications automatiques relancées (`npm run lint`, `npm run typecheck`, `npm run test`) — tout vert (31/10/2025).
+- Synthèse OpenAPI automatique générée pour `tasks/*.md` via `scripts/generateTasks.mjs`.
 
 ## A faire rapidement
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
