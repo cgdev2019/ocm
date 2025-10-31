@@ -34,6 +34,7 @@
 - 2025-11-03 : `npm run lint` → échec (`scripts/generateTasks.mjs` toujours en défaut `no-irregular-whitespace`, `no-useless-escape`).
 - 2025-11-03 : `npm run test -- --runTestsByPath features/currency/__tests__/useCurrencies.test.tsx features/currency-iso/__tests__/useCurrencyIsos.test.tsx features/filter/__tests__/useFilterSearch.test.tsx` → ok.
 - 2025-11-04 : `npm run typecheck` → ok (pages dynamiques corrigées, runtime Node déclaré).
+- 2025-11-05 : `npm run typecheck` → ok (import dynamique de "node:undici" avec repli gracieux).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
