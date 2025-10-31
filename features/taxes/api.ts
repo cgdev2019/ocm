@@ -6,6 +6,8 @@ import { queryKeys } from '@/lib/api/query-keys';
 import type { ActionStatus } from '@/features/customers/types';
 import type { GetTaxResponse, GetTaxesResponse, TaxDto, TaxFormValues } from '@/features/taxes/types';
 
+export const DEFAULT_TAXES_PAGE_SIZE = 20;
+
 const adaptList = (items: TaxDto[] | undefined) =>
   (items ?? []).map((item) => ({
     code: item.code ?? '',

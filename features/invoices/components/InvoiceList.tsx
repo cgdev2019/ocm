@@ -5,19 +5,27 @@ import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useLocale, useTranslations } from 'next-intl';
-import { useInvoices } from '@/features/invoices/api';
+import { DEFAULT_INVOICES_PAGE_SIZE, useInvoices } from '@/features/invoices/api';
 import type { InvoiceListItem } from '@/features/invoices/types';
 import { formatDate, formatCurrency } from '@/lib/utils/format';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
 
 export const InvoiceList = () => {
   const [search, setSearch] = useState('');
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: DEFAULT_INVOICES_PAGE_SIZE,
+  });
   const t = useTranslations();
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
 
-  const { data, isLoading } = useInvoices({ query: search || undefined, limit: 100, offset: 0 });
+  const { data, isLoading, isFetching } = useInvoices({
+    query: search || undefined,
+    limit: paginationModel.pageSize,
+    offset: paginationModel.page * paginationModel.pageSize,
+  });
 
   const columns: GridColDef<InvoiceListItem>[] = [
     { field: 'invoiceNumber', headerName: t('forms.invoice.number'), flex: 1, minWidth: 160 },
@@ -59,20 +67,28 @@ export const InvoiceList = () => {
         <TextField
           size="small"
           value={search}
-          onChange={(event) => setSearch(event.target.value)}
+          onChange={(event) => {
+            setSearch(event.target.value);
+            setPaginationModel((previous) => ({ ...previous, page: 0 }));
+          }}
           label={t('actions.search')}
         />
       </Stack>
       <Box sx={{ height: 620, width: '100%' }}>
         <DataGrid
-          rows={data ?? []}
+          rows={data?.items ?? []}
           columns={columns}
-          loading={isLoading}
+          loading={isLoading || isFetching}
           disableRowSelectionOnClick
           onRowClick={(params) => router.push(`${pathname}/${params.id}`)}
           slots={{ toolbar: GridToolbar }}
           slotProps={{ toolbar: { showQuickFilter: true } }}
           getRowId={(row) => row.id}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          pageSizeOptions={[10, 20, 50]}
+          paginationMode="server"
+          rowCount={data?.paging.totalRecords ?? 0}
           localeText={{ noRowsLabel: t('table.empty') }}
         />
       </Box>

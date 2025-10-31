@@ -12,6 +12,8 @@ import type {
   GetCustomerAccountResponseDto,
 } from '@/features/customer-accounts/types';
 
+export const DEFAULT_CUSTOMER_ACCOUNTS_PAGE_SIZE = 20;
+
 const adaptList = (items: CustomerAccountDto[] | undefined): CustomerAccountListItem[] =>
   (items ?? []).map((item) => ({
     code: item.code ?? '',

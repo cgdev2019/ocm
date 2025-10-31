@@ -8,15 +8,13 @@ import type {
   InvoiceDto,
   InvoiceFormValues,
   InvoiceListItem,
+  InvoicesList,
+  InvoicesListParams,
   InvoicesResponseDto,
   GetInvoiceResponseDto,
 } from '@/features/invoices/types';
 
-export type InvoiceFilters = {
-  query?: string;
-  limit?: number;
-  offset?: number;
-};
+export const DEFAULT_INVOICES_PAGE_SIZE = 20;
 
 const fallbackId = () =>
   typeof crypto !== 'undefined' && 'randomUUID' in crypto
@@ -49,18 +47,31 @@ const toDto = (values: InvoiceFormValues): InvoiceDto => ({
   sentByEmail: false,
 });
 
-export const useInvoices = (filters: InvoiceFilters) =>
-  useQuery({
-    queryKey: queryKeys.invoices.list(filters),
+const normalizeFilters = (filters: InvoicesListParams = {}) => ({
+  limit: filters.limit ?? DEFAULT_INVOICES_PAGE_SIZE,
+  offset: filters.offset ?? 0,
+  sortBy: filters.sortBy,
+  sortOrder: filters.sortOrder,
+  query: filters.query,
+});
+
+export const useInvoices = (filters?: InvoicesListParams) => {
+  const normalizedFilters = normalizeFilters(filters);
+  const requestQuery = {
+    limit: normalizedFilters.limit,
+    offset: normalizedFilters.offset,
+    ...(normalizedFilters.query ? { query: normalizedFilters.query } : {}),
+    ...(normalizedFilters.sortBy ? { sortBy: normalizedFilters.sortBy } : {}),
+    ...(normalizedFilters.sortOrder ? { sortOrder: normalizedFilters.sortOrder } : {}),
+  } as const;
+
+  return useQuery<InvoicesList>({
+    queryKey: queryKeys.invoices.list(normalizedFilters),
     queryFn: async () => {
       const apiClient = getApiClient();
       const result = await apiClient.GET('/api/rest/invoice/list', {
         params: {
-          query: {
-            query: filters.query,
-            limit: filters.limit,
-            offset: filters.offset,
-          },
+          query: requestQuery,
         },
       });
       const payload = unwrapResponse<InvoicesResponseDto>(
@@ -68,9 +79,26 @@ export const useInvoices = (filters: InvoiceFilters) =>
         'Unable to load invoices',
       );
       assertActionSuccess(payload.actionStatus, 'Invoice list returned an error');
-      return adaptInvoiceList(payload.invoices);
+
+      const items = adaptInvoiceList(payload.invoices);
+      const paging = payload.paging ?? {};
+      const limit = paging.limit ?? normalizedFilters.limit ?? DEFAULT_INVOICES_PAGE_SIZE;
+      const offset = paging.offset ?? normalizedFilters.offset ?? 0;
+      const totalRecords = paging.totalNumberOfRecords ?? items.length;
+
+      return {
+        items,
+        paging: {
+          totalRecords,
+          limit,
+          offset,
+          sortBy: paging.sortBy ?? normalizedFilters.sortBy,
+          sortOrder: paging.sortOrder ?? normalizedFilters.sortOrder,
+        },
+      } satisfies InvoicesList;
     },
   });
+};
 
 export const useInvoice = (id: number | string | null) =>
   useQuery({
@@ -109,7 +137,7 @@ export const useInvoiceMutations = () => {
       return payload as { invoiceId?: number };
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.invoices.list({}) });
+      queryClient.invalidateQueries({ queryKey: queryKeys.invoices.list() });
     },
   });
 

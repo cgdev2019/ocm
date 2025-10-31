@@ -9,6 +9,7 @@
 - Node 22.20.0 via `nvm use 22.20.0` (voir README).
 - Scripts principaux: `npm run dev`, `npm run mock`, `npm run api:gen`.
 - Derniere generation API: `lib/api/generated/schema.ts` (via openapi-typescript).
+- Pagination des tableaux harmonisée avec la vue Clients (customer accounts, invoices, taxes) et rappel ajouté dans `tasks/*.md`.
 
 ## Fait
 - Next.js 16 App Router scaffolding avec TypeScript strict et alias `@/`.
