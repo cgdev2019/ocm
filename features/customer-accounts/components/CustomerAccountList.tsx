@@ -54,7 +54,6 @@ export const CustomerAccountList = () => {
           onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[10, 20, 50]}
           paginationMode="client"
-          rowCount={data?.length ?? 0}
           localeText={{
             noRowsLabel: t('table.empty'),
             toolbarQuickFilterPlaceholder: t('actions.search'),
