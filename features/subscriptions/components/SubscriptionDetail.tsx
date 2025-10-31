@@ -33,7 +33,7 @@ export const SubscriptionDetail = ({ code }: { code: string }) => {
     <Stack spacing={3}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="h4">{data.code}</Typography>
-        <Button onClick={() => router.push(`./${code}/edit`)} startIcon={<EditIcon />} variant="outlined">
+        <Button onClick={() => router.push('./edit')} startIcon={<EditIcon />} variant="outlined">
           {t('actions.edit')}
         </Button>
       </Stack>
