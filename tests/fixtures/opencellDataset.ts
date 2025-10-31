@@ -1,0 +1,186 @@
+import type { CustomerAccountFormValues } from '@/features/customer-accounts/types';
+import type {
+  CustomerFormValues,
+  CustomerListItem,
+  CustomersResponseDto,
+} from '@/features/customers/types';
+import type { InvoiceDto } from '@/features/invoices/types';
+import type { TaxFormValues } from '@/features/taxes/types';
+
+export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
+export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
+
+export const customersResponseFixture: CustomersResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Jeu de données mock' },
+  paging: {
+    page: 1,
+    pageSize: 20,
+    totalPages: 1,
+    totalRecords: 2,
+  },
+  customers: {
+    customer: [
+      {
+        code: 'CUST-001',
+        description: 'Médiapost Paris',
+        customerCategory: 'ENTERPRISE',
+        customerBrand: 'Mediapost',
+        seller: 'SELLER-01',
+        vatNo: 'FR123456789',
+        registrationNo: '852 963 741',
+        contactInformation: {
+          email: 'contact@mediapost.fr',
+          phone: '+33123456789',
+          address: {
+            address1: '12 rue du Général',
+            city: 'Paris',
+            country: 'FR',
+          },
+        },
+      },
+      {
+        code: 'CUST-002',
+        description: 'Agence Lyon',
+        customerCategory: 'SMB',
+        customerBrand: 'Mediapost',
+        seller: 'SELLER-01',
+        vatNo: 'FR987654321',
+        registrationNo: '753 159 456',
+        contactInformation: {
+          email: 'lyon@mediapost.fr',
+          phone: '+33412345678',
+          address: {
+            address1: '5 avenue des Lilas',
+            city: 'Lyon',
+            country: 'FR',
+          },
+        },
+      },
+    ],
+  },
+};
+
+export const customerListItemsFixture: CustomerListItem[] = [
+  {
+    code: 'CUST-001',
+    description: 'Médiapost Paris',
+    customerCategory: 'ENTERPRISE',
+    customerBrand: 'Mediapost',
+    seller: 'SELLER-01',
+    vatNo: 'FR123456789',
+    contactEmail: 'contact@mediapost.fr',
+    city: 'Paris',
+  },
+  {
+    code: 'CUST-002',
+    description: 'Agence Lyon',
+    customerCategory: 'SMB',
+    customerBrand: 'Mediapost',
+    seller: 'SELLER-01',
+    vatNo: 'FR987654321',
+    contactEmail: 'lyon@mediapost.fr',
+    city: 'Lyon',
+  },
+];
+
+export const customerFormFixtures: CustomerFormValues[] = [
+  {
+    code: 'CUST-001',
+    description: 'Médiapost Paris',
+    customerCategory: 'ENTERPRISE',
+    customerBrand: 'Mediapost',
+    seller: 'SELLER-01',
+    vatNo: 'FR123456789',
+    registrationNo: '852 963 741',
+    contactEmail: 'contact@mediapost.fr',
+    contactPhone: '+33123456789',
+    address1: '12 rue du Général',
+    city: 'Paris',
+    country: 'FR',
+  },
+  {
+    code: 'CUST-002',
+    description: 'Agence Lyon',
+    customerCategory: 'SMB',
+    customerBrand: 'Mediapost',
+    seller: 'SELLER-01',
+    vatNo: 'FR987654321',
+    registrationNo: '753 159 456',
+    contactEmail: 'lyon@mediapost.fr',
+    contactPhone: '+33412345678',
+    address1: '5 avenue des Lilas',
+    city: 'Lyon',
+    country: 'FR',
+  },
+];
+
+export const customerAccountFormFixtures: CustomerAccountFormValues[] = [
+  {
+    code: 'ACC-001',
+    description: 'Compte principal Paris',
+    customer: 'CUST-001',
+    currency: 'EUR',
+    language: 'fr',
+    paymentMethod: 'WIRETRANSFER',
+  },
+  {
+    code: 'ACC-002',
+    description: 'Compte Lyon',
+    customer: 'CUST-002',
+    currency: 'EUR',
+    language: 'fr',
+    paymentMethod: 'DIRECTDEBIT',
+  },
+];
+
+export const invoiceFixtures: InvoiceDto[] = [
+  {
+    invoiceId: 1001,
+    invoiceNumber: 'INV-2024-0001',
+    invoiceType: 'STANDARD',
+    invoiceMode: 'AGGREGATED',
+    billingAccountCode: 'ACC-001',
+    invoiceDate: DATASET_INVOICE_DATE,
+    dueDate: DATASET_INVOICE_DUE_DATE,
+    amountWithTax: 1290.4,
+    amountWithoutTax: 1075.33,
+    rawAmount: 1290.4,
+    discountAmount: 0,
+    taxAggregates: [],
+    status: 'VALIDATED',
+    autoValidation: false,
+    sentByEmail: false,
+  },
+  {
+    invoiceId: 1002,
+    invoiceNumber: 'INV-2024-0002',
+    invoiceType: 'STANDARD',
+    invoiceMode: 'DETAILLED',
+    billingAccountCode: 'ACC-002',
+    invoiceDate: DATASET_INVOICE_DATE,
+    dueDate: '2024-06-05T10:00:00.000Z',
+    amountWithTax: 640,
+    amountWithoutTax: 533.33,
+    rawAmount: 640,
+    discountAmount: 0,
+    taxAggregates: [],
+    status: 'NEW',
+    autoValidation: false,
+    sentByEmail: false,
+  },
+];
+
+export const taxFormFixtures: TaxFormValues[] = [
+  {
+    code: 'VAT-20',
+    description: 'TVA 20%',
+    percent: 20,
+    accountingCode: '4457',
+  },
+  {
+    code: 'VAT-5.5',
+    description: 'TVA réduite 5,5%',
+    percent: 5.5,
+    accountingCode: '4456',
+  },
+];

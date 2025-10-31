@@ -30,11 +30,12 @@ npm run api:gen   # regenerate typed OpenAPI client (required after spec changes
 ### Development
 
 ```bash
-npm run dev        # start app against the live API
-npm run mock       # start app with MSW interceptors enabled (uses fixtures)
+npm run dev        # start app with MSW interceptors enabled (default)
+npm run dev:real   # start app against the live API
+npm run mock       # alias of `npm run dev`
 ```
 
-The console is served at [http://localhost:3000](http://localhost:3000). When `MOCK=on`, the app auto-logs with mock credentials; otherwise Keycloak SSO is initiated.
+The console is served at [http://localhost:3000](http://localhost:3000). `npm run dev` enables MSW mocks and auto-logs with mock credentials; use `npm run dev:real` (without `MOCK`) to initiate the Keycloak SSO flow against the live backend.
 
 ### Variables d'environnement
 
@@ -51,8 +52,9 @@ Copiez `.env.example` vers `.env.local` puis ajustez si besoin :
 
 | Script | Description |
 | --- | --- |
-| `npm run dev` | Start Next.js in dev mode |
-| `npm run mock` | Start dev server with MSW mocks enabled |
+| `npm run dev` | Start Next.js in dev mode with MSW mocks (MOCK=on) |
+| `npm run dev:real` | Start Next.js in dev mode against the real API |
+| `npm run mock` | Alias of `npm run dev` |
 | `npm run build` / `start` | Production build & serve |
 | `npm run lint` | ESLint (flat config) + Prettier validation |
 | `npm run typecheck` | TypeScript strict check |
@@ -91,6 +93,7 @@ npm run e2e             # Playwright e2e scenarios
 - `mocks/handlers.ts` contains MSW REST handlers backed by fixture data in `mocks/data.ts`.
 - In development, enabling `MOCK=on` spins up the worker automatically (`AppProviders`).
 - For production, leave `MOCK` unset to target the real API + Keycloak.
+- Les données MSW et Jest proviennent désormais de `tests/fixtures/opencellDataset.ts` afin de garantir un jeu d'essai unique et stable.
 
 ## Directory Layout
 
