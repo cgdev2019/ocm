@@ -29,6 +29,7 @@
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
 - 2025-10-31 : `npm run lint` → échec (`scripts/generateTasks.mjs` bloque toujours `no-irregular-whitespace`, `no-useless-escape`).
 - 2025-10-31 : `npm run typecheck` → ok (prise en charge du proxy HTTP(S) côté route OpenCell).
+- 2025-10-31 : `npm run typecheck` → ok (paramètres asynchrones attendus sur les pages dynamiques).
 - 2025-11-02 : `npm run typecheck` → ok (correction de `params` asynchrone pour la page TaxDetail).
 - 2025-11-03 : `npm run lint` → échec (`scripts/generateTasks.mjs` toujours en défaut `no-irregular-whitespace`, `no-useless-escape`).
 - 2025-11-03 : `npm run test -- --runTestsByPath features/currency/__tests__/useCurrencies.test.tsx features/currency-iso/__tests__/useCurrencyIsos.test.tsx features/filter/__tests__/useFilterSearch.test.tsx` → ok.

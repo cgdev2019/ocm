@@ -1,10 +1,12 @@
 import { ConfigurationEditForm } from '@/features/configuration/components/ConfigurationEditForm';
 
 type Props = {
-  params: { key: string };
+  params: Promise<{ key: string }>;
 };
 
-export default function ConfigurationEditPage({ params }: Props) {
-  const keyName = decodeURIComponent(params.key);
+export default async function ConfigurationEditPage({ params }: Props) {
+  const { key } = await params;
+  const keyName = decodeURIComponent(key);
+
   return <ConfigurationEditForm keyName={keyName} />;
 }

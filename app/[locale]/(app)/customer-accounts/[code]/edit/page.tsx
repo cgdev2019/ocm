@@ -1,9 +1,11 @@
 import { CustomerAccountEditForm } from '@/features/customer-accounts/components/CustomerAccountEditForm';
 
 type Props = {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 };
 
-export default function CustomerAccountEditPage({ params }: Props) {
-  return <CustomerAccountEditForm code={params.code} />;
+export default async function CustomerAccountEditPage({ params }: Props) {
+  const { code } = await params;
+
+  return <CustomerAccountEditForm code={code} />;
 }

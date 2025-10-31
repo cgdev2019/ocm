@@ -1,9 +1,11 @@
 import { CountryIsoDetail } from '@/features/country-iso/components/CountryIsoDetail';
 
 type Props = {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 };
 
-export default function CountryIsoDetailPage({ params }: Props) {
-  return <CountryIsoDetail countryCode={params.code} />;
+export default async function CountryIsoDetailPage({ params }: Props) {
+  const { code } = await params;
+
+  return <CountryIsoDetail countryCode={code} />;
 }
