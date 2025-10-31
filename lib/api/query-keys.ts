@@ -52,4 +52,24 @@ export const queryKeys = {
     list: (code: string) => ['filters', 'list', code] as const,
     detail: (code: string) => ['filters', 'detail', code] as const,
   },
+  genericCodes: {
+    list: (entityClass?: string) =>
+      entityClass
+        ? (['genericCodes', 'list', entityClass] as const)
+        : (['genericCodes', 'list'] as const),
+    detail: (entityClass: string) => ['genericCodes', 'detail', entityClass] as const,
+    version: () => ['genericCodes', 'version'] as const,
+  },
+  invoiceCategories: {
+    list: () => ['invoiceCategories', 'list'] as const,
+    detail: (code: string) => ['invoiceCategories', 'detail', code] as const,
+  },
+  invoiceSequences: {
+    list: () => ['invoiceSequences', 'list'] as const,
+    detail: (code: string) => ['invoiceSequences', 'detail', code] as const,
+  },
+  invoiceSubCategories: {
+    list: () => ['invoiceSubCategories', 'list'] as const,
+    detail: (code: string) => ['invoiceSubCategories', 'detail', code] as const,
+  },
 };

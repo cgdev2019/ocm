@@ -39,6 +39,9 @@
 - 2025-11-07 : `npm run typecheck` → ok (gestion élargie des erreurs lors du chargement de "node:undici").
 - 2025-11-08 : `npm run typecheck` → ok (import statique de "node:undici" et repli maintenu).
 - 2025-11-09 : `npm run typecheck` → ok (repli "undici" via `webpackIgnore`).
+- 2025-11-10 : `npm run typecheck` → ok (services GenericCode / InvoiceCategory / InvoiceSequence / InvoiceSubCategory).
+- 2025-11-10 : `npm run test -- --runTestsByPath features/generic-code/__tests__/useGenericCodes.test.tsx features/invoice-categories/__tests__/useInvoiceCategories.test.tsx features/invoice-sequences/__tests__/useInvoiceSequences.test.tsx features/invoice-sub-categories/__tests__/useInvoiceSubCategories.test.tsx` → ok (validation hooks).
+- 2025-11-11 : `npm run test -- --runTestsByPath features/generic-code/__tests__/useGenericCodes.test.tsx features/invoice-categories/__tests__/useInvoiceCategories.test.tsx features/invoice-sequences/__tests__/useInvoiceSequences.test.tsx features/invoice-sub-categories/__tests__/useInvoiceSubCategories.test.tsx` → ok (vérification suite hooks).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
@@ -58,10 +61,10 @@
 - [x] Service CurrencyIso — cf. `tasks/TASK006.md`
 - [x] Service Currency — cf. `tasks/TASK007.md`
 - [x] Service Filter — cf. `tasks/TASK008.md`
-- [ ] Service GenericCode — cf. `tasks/TASK009.md`
-- [ ] Service InvoiceCategory — cf. `tasks/TASK010.md`
-- [ ] Service InvoiceSequence — cf. `tasks/TASK011.md`
-- [ ] Service InvoiceSubCategory — cf. `tasks/TASK012.md`
+- [x] Service GenericCode — cf. `tasks/TASK009.md`
+- [x] Service InvoiceCategory — cf. `tasks/TASK010.md`
+- [x] Service InvoiceSequence — cf. `tasks/TASK011.md`
+- [x] Service InvoiceSubCategory — cf. `tasks/TASK012.md`
 - [ ] Service InvoiceType — cf. `tasks/TASK013.md`
 - [ ] Service LanguageIso — cf. `tasks/TASK014.md`
 - [ ] Service Language — cf. `tasks/TASK015.md`

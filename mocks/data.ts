@@ -3,6 +3,10 @@ import type { CustomerAccountFormValues } from '@/features/customer-accounts/typ
 import type { CurrencyIsoFormValues } from '@/features/currency-iso/types';
 import type { CurrencyFormValues } from '@/features/currency/types';
 import type { FilterFormValues } from '@/features/filter/types';
+import type { GenericCodeFormValues } from '@/features/generic-code/types';
+import type { InvoiceCategoryFormValues } from '@/features/invoice-categories/types';
+import type { InvoiceSequenceFormValues } from '@/features/invoice-sequences/types';
+import type { InvoiceSubCategoryFormValues } from '@/features/invoice-sub-categories/types';
 import type { InvoiceDto } from '@/features/invoices/types';
 import type { TaxFormValues } from '@/features/taxes/types';
 import {
@@ -13,6 +17,10 @@ import {
   currencyIsoListFixture,
   filterFormFixture,
   invoiceFixtures,
+  genericCodeFormFixture,
+  invoiceCategoryFormFixture,
+  invoiceSequenceFormFixture,
+  invoiceSubCategoryFormFixture,
   taxFormFixtures,
 } from '@/tests/fixtures/opencellDataset';
 
@@ -45,3 +53,11 @@ export const currencies: CurrencyFormValues[] = currencyListFixture.map(({
 }));
 
 export const filtersData: FilterFormValues[] = [filterFormFixture];
+
+export const genericCodes: GenericCodeFormValues[] = [genericCodeFormFixture];
+
+export const invoiceCategoriesData: InvoiceCategoryFormValues[] = [invoiceCategoryFormFixture];
+
+export const invoiceSequencesData: InvoiceSequenceFormValues[] = [invoiceSequenceFormFixture];
+
+export const invoiceSubCategoriesData: InvoiceSubCategoryFormValues[] = [invoiceSubCategoryFormFixture];

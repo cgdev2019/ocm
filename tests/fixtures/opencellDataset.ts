@@ -45,6 +45,30 @@ import type {
   FilterListItem,
   GetFilterResponseDto,
 } from '@/features/filter/types';
+import type {
+  GenericCodeDto,
+  GenericCodeFormValues,
+  GenericCodeListItem,
+  GetGenericCodeResponseDto,
+} from '@/features/generic-code/types';
+import type {
+  GetInvoiceCategoryResponse,
+  InvoiceCategoryFormValues,
+  InvoiceCategoryListItem,
+  InvoiceCategoryResponseDto,
+} from '@/features/invoice-categories/types';
+import type {
+  GetInvoiceSequenceResponse,
+  GetInvoiceSequencesResponse,
+  InvoiceSequenceFormValues,
+  InvoiceSequenceListItem,
+} from '@/features/invoice-sequences/types';
+import type {
+  GetInvoiceSubCategoryResponse,
+  InvoiceSubCategoryFormValues,
+  InvoiceSubCategoryListItem,
+  InvoiceSubCategoryResponseDto,
+} from '@/features/invoice-sub-categories/types';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
@@ -434,4 +458,142 @@ export const filterFormFixture: FilterFormValues = {
   pollingQuery: 'SELECT * FROM invoices',
   shared: true,
   disabled: false,
+};
+
+export const genericCodeDtoFixture: GenericCodeDto = {
+  entityClass: 'org.meveo.model.Invoice',
+  formatEL: 'INV-${sequence}',
+  prefixOverride: 'INV',
+  sequence: {
+    invoiceSequenceCode: 'INV',
+    sequencePattern: 'INV-{0000}',
+    sequenceSize: 4,
+    currentInvoiceNb: 125,
+    sequenceType: 'SEQUENCE',
+    prefixEL: 'INV-',
+  },
+};
+
+export const genericCodeFormFixture: GenericCodeFormValues = {
+  entityClass: 'org.meveo.model.Invoice',
+  formatEL: 'INV-${sequence}',
+  prefixOverride: 'INV',
+  sequence: {
+    invoiceSequenceCode: 'INV',
+    sequencePattern: 'INV-{0000}',
+    sequenceSize: 4,
+    currentInvoiceNb: 125,
+    sequenceType: 'SEQUENCE',
+    prefixEL: 'INV-',
+  },
+};
+
+export const genericCodeListFixture: GenericCodeListItem[] = [
+  {
+    entityClass: 'org.meveo.model.Invoice',
+    formatEL: 'INV-${sequence}',
+    prefixOverride: 'INV',
+    sequenceType: 'SEQUENCE',
+    sequencePattern: 'INV-{0000}',
+  },
+];
+
+export const genericCodeResponseFixture: GetGenericCodeResponseDto = {
+  genericCodeDto: genericCodeDtoFixture,
+};
+
+export const invoiceCategoryFormFixture: InvoiceCategoryFormValues = {
+  code: 'INV-CAT',
+  description: 'Standard billing',
+  occTemplateCode: 'OCC-STD',
+  occTemplateNegativeCode: 'OCC-STD-NEG',
+  sortIndex: 1,
+};
+
+export const invoiceCategoryListFixture: InvoiceCategoryListItem[] = [
+  {
+    code: 'INV-CAT',
+    description: 'Standard billing',
+    occTemplateCode: 'OCC-STD',
+    occTemplateNegativeCode: 'OCC-STD-NEG',
+    sortIndex: 1,
+  },
+];
+
+export const invoiceCategoryResponseFixture: InvoiceCategoryResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  invoiceCategories: {
+    invoiceCategory: invoiceCategoryListFixture,
+  },
+};
+
+export const invoiceCategoryDetailFixture: GetInvoiceCategoryResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  invoiceCategory: invoiceCategoryFormFixture,
+};
+
+export const invoiceSequenceFormFixture: InvoiceSequenceFormValues = {
+  code: 'INV-SEQ',
+  description: 'Invoice numbering',
+  sequencePattern: 'INV-{0000}',
+  sequenceType: 'SEQUENCE',
+  sequenceSize: 4,
+  currentInvoiceNb: 125,
+};
+
+export const invoiceSequenceListFixture: InvoiceSequenceListItem[] = [
+  {
+    code: 'INV-SEQ',
+    description: 'Invoice numbering',
+    sequencePattern: 'INV-{0000}',
+    sequenceType: 'SEQUENCE',
+    sequenceSize: 4,
+    currentInvoiceNb: 125,
+  },
+];
+
+export const invoiceSequencesResponseFixture: GetInvoiceSequencesResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  invoiceSequencesDto: {
+    invoiceSequences: invoiceSequenceListFixture,
+  },
+};
+
+export const invoiceSequenceResponseFixture: GetInvoiceSequenceResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  invoiceSequenceDto: invoiceSequenceFormFixture,
+};
+
+export const invoiceSubCategoryFormFixture: InvoiceSubCategoryFormValues = {
+  code: 'INV-SUB-CAT',
+  description: 'Default VAT subcategory',
+  invoiceCategory: 'INV-CAT',
+  accountingCode: '7060',
+  occTemplateCode: 'OCC-STD',
+  occTemplateNegativeCode: 'OCC-STD-NEG',
+  sortIndex: 1,
+};
+
+export const invoiceSubCategoryListFixture: InvoiceSubCategoryListItem[] = [
+  {
+    code: 'INV-SUB-CAT',
+    description: 'Default VAT subcategory',
+    invoiceCategory: 'INV-CAT',
+    accountingCode: '7060',
+    occTemplateCode: 'OCC-STD',
+    occTemplateNegativeCode: 'OCC-STD-NEG',
+    sortIndex: 1,
+  },
+];
+
+export const invoiceSubCategoryResponseFixture: InvoiceSubCategoryResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  invoiceSubCategories: {
+    invoiceSubCategory: invoiceSubCategoryListFixture,
+  },
+};
+
+export const invoiceSubCategoryDetailFixture: GetInvoiceSubCategoryResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  invoiceSubCategory: invoiceSubCategoryFormFixture,
 };
