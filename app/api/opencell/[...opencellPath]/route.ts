@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import type { Dispatcher } from 'node:undici';
-import { Agent, ProxyAgent } from 'node:undici';
 
 import { env } from '@/lib/config/env';
 
@@ -158,8 +156,40 @@ const selectProxyUrl = (url: URL): string | undefined => {
   return undefined;
 };
 
-const createAgent = () =>
-  new Agent({
+type Dispatcher = unknown;
+
+type UndiciModule = {
+  Agent: new (options?: Record<string, unknown>) => Dispatcher;
+  ProxyAgent: new (options: { uri: string }) => Dispatcher;
+};
+
+type UndiciLoadError = Error & { code?: string };
+
+let undiciModulePromise: Promise<UndiciModule | undefined> | undefined;
+
+const loadUndiciModule = () => {
+  if (!undiciModulePromise) {
+    undiciModulePromise = import('node:undici')
+      .then((module) => module as unknown as UndiciModule)
+      .catch((error: unknown) => {
+        const typedError = error as UndiciLoadError;
+        if (typedError?.code === 'ERR_UNKNOWN_BUILTIN_MODULE') {
+          console.warn(
+            'Le module intégré "node:undici" est indisponible dans cet environnement. Le proxy OpenCell fonctionnera sans configuration avancée des agents.',
+          );
+          return undefined;
+        }
+        throw error;
+      });
+  }
+  return undiciModulePromise;
+};
+
+let defaultAgent: Dispatcher | undefined;
+const proxyAgentCache = new Map<string, Dispatcher>();
+
+const createAgent = (undici: UndiciModule): Dispatcher =>
+  new undici.Agent({
     keepAliveTimeout: 10_000,
     keepAliveMaxTimeout: 60_000,
     ...(env.apiRequestTimeoutMs > 0
@@ -170,28 +200,42 @@ const createAgent = () =>
       : {}),
   });
 
-const defaultAgent = createAgent();
+const getDefaultAgent = (undici: UndiciModule): Dispatcher => {
+  if (!defaultAgent) {
+    defaultAgent = createAgent(undici);
+  }
+  return defaultAgent;
+};
 
-const proxyAgentCache = new Map<string, ProxyAgent>();
-
-const getProxyAgent = (proxyUrl: string): ProxyAgent => {
+const getProxyAgent = (undici: UndiciModule, proxyUrl: string): Dispatcher => {
   const existing = proxyAgentCache.get(proxyUrl);
   if (existing) {
     return existing;
   }
 
-  const agent = new ProxyAgent({ uri: proxyUrl });
+  const agent = new undici.ProxyAgent({ uri: proxyUrl });
   proxyAgentCache.set(proxyUrl, agent);
   return agent;
 };
 
-const selectDispatcher = (url: URL): Dispatcher | undefined => {
+const selectDispatcher = async (url: URL): Promise<Dispatcher | undefined> => {
   const proxyUrl = selectProxyUrl(url);
-  if (proxyUrl) {
-    return getProxyAgent(proxyUrl);
+  const undici = await loadUndiciModule();
+
+  if (!undici) {
+    if (proxyUrl) {
+      console.warn(
+        `Impossible de configurer le proxy HTTP(S) pour ${url.toString()} car "node:undici" est indisponible.`,
+      );
+    }
+    return undefined;
   }
 
-  return defaultAgent;
+  if (proxyUrl) {
+    return getProxyAgent(undici, proxyUrl);
+  }
+
+  return getDefaultAgent(undici);
 };
 
 const buildTargetUrl = (request: NextRequest, path: string[]): URL => {
@@ -374,7 +418,7 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
   const timeoutSignal =
     env.apiRequestTimeoutMs > 0 ? AbortSignal.timeout(env.apiRequestTimeoutMs) : undefined;
 
-  const dispatcher = selectDispatcher(targetUrl);
+  const dispatcher = await selectDispatcher(targetUrl);
 
   const requestInit: RequestInit & { dispatcher?: Dispatcher } = {
     method: request.method,
