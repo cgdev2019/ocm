@@ -64,11 +64,6 @@ const redactHeaderValue = (name: string, value: string) => {
   return value;
 };
 
-const buildSanitizedHeaderEntries = (headers: Headers) =>
-  Array.from(headers.entries())
-    .map(([name, value]) => [name, redactHeaderValue(name, value)] as const)
-    .sort(([a], [b]) => a.localeCompare(b));
-
 const buildCurlCommand = (
   method: string,
   url: URL,
@@ -80,9 +75,11 @@ const buildCurlCommand = (
     commandParts.push('-X', escapeShellArg(method));
   }
 
-  const headerEntries = buildSanitizedHeaderEntries(headers);
+  const headerEntries = Array.from(headers.entries()).sort(([a], [b]) =>
+    a.localeCompare(b),
+  );
   headerEntries.forEach(([name, value]) => {
-    commandParts.push('-H', escapeShellArg(`${name}: ${value}`));
+    commandParts.push('-H', escapeShellArg(`${name}: ${redactHeaderValue(name, value)}`));
   });
 
   let truncatedBody: number | undefined;
@@ -180,6 +177,19 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
       headers: sanitizedHeaders,
       ...(requestLogDetails ?? {}),
     });
+
+    const { command: curlCommand, truncatedBody } = buildCurlCommand(
+      request.method,
+      targetUrl,
+      headers,
+      requestBodyText,
+    );
+    console.warn(`📡 [OpenCell Proxy #${requestId}] ↳ ${curlCommand}`);
+    if (truncatedBody) {
+      console.warn(
+        `📡 [OpenCell Proxy #${requestId}] ↳ Corps tronqué de ${truncatedBody} caractères pour les logs`,
+      );
+    }
 
     const { command: curlCommand, truncatedBody } = buildCurlCommand(
       request.method,
