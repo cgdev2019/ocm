@@ -10,6 +10,7 @@
 - Scripts principaux: `npm run dev`, `npm run mock`, `npm run api:gen`.
 - Derniere generation API: `lib/api/generated/schema.ts` (via openapi-typescript).
 - Pagination des tableaux harmonisée avec la vue Clients (customer accounts, invoices, taxes) et rappel ajouté dans `tasks/*.md`.
+- Client Keycloak par défaut: `opencell-web` (aligné sur l'API protégée).
 
 ## Fait
 - Next.js 16 App Router scaffolding avec TypeScript strict et alias `@/`.
@@ -25,6 +26,7 @@
 - Synthèse OpenAPI automatique générée pour `tasks/*.md` via `scripts/generateTasks.mjs`.
 
 ## A faire rapidement
+- [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.

@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslations } from 'next-intl';
 import { useConfigurationProperties } from '@/features/configuration/api';
 import type { ConfigurationListItem } from '@/features/configuration/types';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
+import { ApiTimeoutError } from '@/lib/api/errors';
 
 const DEFAULT_CONFIGURATION_PAGE_SIZE = 20;
 
@@ -16,10 +17,16 @@ export const ConfigurationList = () => {
     page: 0,
     pageSize: DEFAULT_CONFIGURATION_PAGE_SIZE,
   });
-  const { data, isLoading, isFetching } = useConfigurationProperties();
+  const { data, isLoading, isFetching, isError, refetch, error } = useConfigurationProperties();
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+
+  const errorMessage = error instanceof ApiTimeoutError
+    ? t('feedback.timeout')
+    : error instanceof Error
+      ? error.message
+      : t('feedback.error');
 
   const columns: GridColDef<ConfigurationListItem>[] = [
     { field: 'key', headerName: t('forms.configuration.key'), flex: 1, minWidth: 200 },
@@ -52,6 +59,19 @@ export const ConfigurationList = () => {
           localeText={{ noRowsLabel: t('table.empty') }}
         />
       </Box>
+      {isError ? (
+        <Alert
+          severity="error"
+          action={
+            <Button color="inherit" size="small" onClick={() => refetch()}>
+              {t('actions.retry')}
+            </Button>
+          }
+          sx={{ alignSelf: 'flex-start', width: 'fit-content' }}
+        >
+          {errorMessage}
+        </Alert>
+      ) : null}
     </Stack>
   );
 };

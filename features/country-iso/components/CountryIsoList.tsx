@@ -2,22 +2,29 @@
 
 import { useState } from 'react';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslations } from 'next-intl';
 import { DEFAULT_COUNTRY_ISO_PAGE_SIZE, useCountryIsos } from '@/features/country-iso/api';
 import type { CountryIsoListItem } from '@/features/country-iso/types';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
+import { ApiTimeoutError } from '@/lib/api/errors';
 
 export const CountryIsoList = () => {
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: DEFAULT_COUNTRY_ISO_PAGE_SIZE,
   });
-  const { data, isLoading, isFetching } = useCountryIsos();
+  const { data, isLoading, isFetching, isError, refetch, error } = useCountryIsos();
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+
+  const errorMessage = error instanceof ApiTimeoutError
+    ? t('feedback.timeout')
+    : error instanceof Error
+      ? error.message
+      : t('feedback.error');
 
   const columns: GridColDef<CountryIsoListItem>[] = [
     { field: 'countryCode', headerName: t('forms.countryIso.countryCode'), flex: 1, minWidth: 150 },
@@ -52,6 +59,19 @@ export const CountryIsoList = () => {
           localeText={{ noRowsLabel: t('table.empty') }}
         />
       </Box>
+      {isError ? (
+        <Alert
+          severity="error"
+          action={
+            <Button color="inherit" size="small" onClick={() => refetch()}>
+              {t('actions.retry')}
+            </Button>
+          }
+          sx={{ alignSelf: 'flex-start', width: 'fit-content' }}
+        >
+          {errorMessage}
+        </Alert>
+      ) : null}
     </Stack>
   );
 };

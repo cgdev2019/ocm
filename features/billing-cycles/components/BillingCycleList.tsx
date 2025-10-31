@@ -2,22 +2,29 @@
 
 import { useState } from 'react';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslations } from 'next-intl';
 import { DEFAULT_BILLING_CYCLES_PAGE_SIZE, useBillingCycles } from '@/features/billing-cycles/api';
 import type { BillingCycleListItem } from '@/features/billing-cycles/types';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
+import { ApiTimeoutError } from '@/lib/api/errors';
 
 export const BillingCycleList = () => {
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: DEFAULT_BILLING_CYCLES_PAGE_SIZE,
   });
-  const { data, isLoading, isFetching } = useBillingCycles();
+  const { data, isLoading, isFetching, isError, refetch, error } = useBillingCycles();
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+
+  const errorMessage = error instanceof ApiTimeoutError
+    ? t('feedback.timeout')
+    : error instanceof Error
+      ? error.message
+      : t('feedback.error');
 
   const columns: GridColDef<BillingCycleListItem>[] = [
     { field: 'code', headerName: t('forms.billingCycle.code'), flex: 1, minWidth: 180 },
@@ -64,6 +71,19 @@ export const BillingCycleList = () => {
           localeText={{ noRowsLabel: t('table.empty') }}
         />
       </Box>
+      {isError ? (
+        <Alert
+          severity="error"
+          action={
+            <Button color="inherit" size="small" onClick={() => refetch()}>
+              {t('actions.retry')}
+            </Button>
+          }
+          sx={{ alignSelf: 'flex-start', width: 'fit-content' }}
+        >
+          {errorMessage}
+        </Alert>
+      ) : null}
     </Stack>
   );
 };
