@@ -8,6 +8,7 @@
     "customers": "Clients",
     "customerAccounts": "Comptes clients",
     "invoices": "Factures",
+    "subscriptions": "Abonnements",
     "taxes": "Taxes",
     "scriptInstances": "Instances de script",
     "sellers": "Vendeurs",
@@ -168,6 +169,34 @@
       "state": "Région",
       "addressCountry": "Pays de l'adresse",
       "noDescription": "Aucune description fournie"
+    },
+    "subscription": {
+      "code": "Code abonnement",
+      "description": "Description",
+      "versionNumber": "Version",
+      "userAccount": "Compte utilisateur",
+      "offerTemplate": "Offre",
+      "subscriptionDate": "Date d'abonnement",
+      "terminationDate": "Date de résiliation",
+      "endAgreementDate": "Date de fin d'engagement",
+      "validityDate": "Date de validité",
+      "status": "Statut",
+      "noStatus": "Aucun statut",
+      "statuses": {
+        "CREATED": "Créé",
+        "ACTIVE": "Actif",
+        "CANCELED": "Annulé",
+        "RESILIATED": "Résilié",
+        "CLOSED": "Clôturé",
+        "SUSPENDED": "Suspendu",
+        "PENDING": "En attente"
+      },
+      "billingCycle": "Cycle de facturation",
+      "seller": "Vendeur",
+      "autoEndOfEngagement": "Fin d'engagement automatique",
+      "renewed": "Renouvelé",
+      "renewalNotifiedDate": "Date de notification de renouvellement",
+      "email": "Email de contact"
     },
     "terminationReason": {
       "code": "Code de résiliation",

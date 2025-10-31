@@ -16,6 +16,28 @@ export const queryKeys = {
       filters ? ['invoices', 'list', filters] as const : ['invoices', 'list'] as const,
     detail: (id: number | string) => ['invoices', 'detail', id] as const,
   },
+  subscriptions: {
+    root: ['subscriptions'] as const,
+    list: (filters?: Record<string, unknown> | null) =>
+      filters ? (['subscriptions', 'list', filters] as const) : (['subscriptions', 'list'] as const),
+    detail: (code: string) => ['subscriptions', 'detail', code] as const,
+    byCustomer: (customerCode: string) => ['subscriptions', 'byCustomer', customerCode] as const,
+    dueDateDelay: (criteria?: Record<string, unknown> | null) =>
+      criteria
+        ? (['subscriptions', 'dueDateDelay', criteria] as const)
+        : (['subscriptions', 'dueDateDelay'] as const),
+    serviceInstances: (criteria?: Record<string, unknown> | null) =>
+      criteria
+        ? (['subscriptions', 'serviceInstances', criteria] as const)
+        : (['subscriptions', 'serviceInstances'] as const),
+    serviceInstance: (criteria: Record<string, unknown>) =>
+      ['subscriptions', 'serviceInstance', criteria] as const,
+    oneShotCharges: (criteria?: Record<string, unknown> | null) =>
+      criteria
+        ? (['subscriptions', 'oneShotCharges', criteria] as const)
+        : (['subscriptions', 'oneShotCharges'] as const),
+    version: () => ['subscriptions', 'version'] as const,
+  },
   taxes: {
     list: () => ['taxes', 'list'] as const,
     detail: (code: string) => ['taxes', 'detail', code] as const,

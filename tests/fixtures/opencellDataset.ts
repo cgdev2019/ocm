@@ -149,6 +149,12 @@ import type {
   RatedTransactionListItem,
   RatedTransactionListResponseDto,
 } from '@/features/rated-transactions/types';
+import type {
+  GetSubscriptionResponseDto,
+  SubscriptionDto,
+  SubscriptionListItem,
+  SubscriptionsListResponseDto,
+} from '@/features/subscriptions/types';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
@@ -205,6 +211,46 @@ export const ratedTransactionsFixture: RatedTransactionDto[] = [
     doNotTriggerInvoicing: false,
   },
 ];
+
+export const subscriptionDtoFixture: SubscriptionDto = {
+  code: 'SUB-0001',
+  description: 'Fiber Premium Plan',
+  versionNumber: 1,
+  userAccount: 'UA-0001',
+  offerTemplate: 'OFFER-FIBER',
+  subscriptionDate: '2024-05-01T08:00:00.000Z',
+  billingCycle: 'MONTHLY',
+  seller: 'SELLER-01',
+  status: 'ACTIVE',
+  endAgreementDate: '2025-05-01T08:00:00.000Z',
+  validityDate: '2024-05-01T08:00:00.000Z',
+  autoEndOfEngagement: false,
+  renewed: false,
+  email: 'customer@example.com',
+};
+
+export const subscriptionListResponseFixture: SubscriptionsListResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  subscriptions: { listSize: 1, subscription: [subscriptionDtoFixture] },
+};
+
+export const subscriptionListFixture: SubscriptionListItem[] = [
+  {
+    code: subscriptionDtoFixture.code,
+    description: subscriptionDtoFixture.description,
+    userAccount: subscriptionDtoFixture.userAccount,
+    offerTemplate: subscriptionDtoFixture.offerTemplate,
+    subscriptionDate: subscriptionDtoFixture.subscriptionDate,
+    status: subscriptionDtoFixture.status,
+    billingCycle: subscriptionDtoFixture.billingCycle,
+    seller: subscriptionDtoFixture.seller,
+  },
+];
+
+export const subscriptionResponseFixture: GetSubscriptionResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  subscription: subscriptionDtoFixture,
+};
 
 export const ratedTransactionsListFixture: RatedTransactionListItem[] = ratedTransactionsFixture.map((transaction, index) => ({
   id: transaction.code ? `${transaction.code}-${transaction.usageDate ?? index}` : `transaction-${index}`,

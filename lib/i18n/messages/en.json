@@ -8,6 +8,7 @@
     "customers": "Customers",
     "customerAccounts": "Customer accounts",
     "invoices": "Invoices",
+    "subscriptions": "Subscriptions",
     "taxes": "Taxes",
     "scriptInstances": "Script instances",
     "sellers": "Sellers",
@@ -168,6 +169,34 @@
       "state": "State",
       "addressCountry": "Address country",
       "noDescription": "No description provided"
+    },
+    "subscription": {
+      "code": "Subscription code",
+      "description": "Description",
+      "versionNumber": "Version",
+      "userAccount": "User account",
+      "offerTemplate": "Offer template",
+      "subscriptionDate": "Subscription date",
+      "terminationDate": "Termination date",
+      "endAgreementDate": "End of agreement date",
+      "validityDate": "Validity date",
+      "status": "Status",
+      "noStatus": "No status",
+      "statuses": {
+        "CREATED": "Created",
+        "ACTIVE": "Active",
+        "CANCELED": "Canceled",
+        "RESILIATED": "Resiliated",
+        "CLOSED": "Closed",
+        "SUSPENDED": "Suspended",
+        "PENDING": "Pending"
+      },
+      "billingCycle": "Billing cycle",
+      "seller": "Seller",
+      "autoEndOfEngagement": "Auto end of engagement",
+      "renewed": "Renewed",
+      "renewalNotifiedDate": "Renewal notified date",
+      "email": "Contact email"
     },
     "terminationReason": {
       "code": "Termination code",
