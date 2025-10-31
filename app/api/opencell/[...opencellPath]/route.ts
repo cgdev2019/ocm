@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import type { Dispatcher } from 'node:undici';
+import { Agent, ProxyAgent } from 'node:undici';
 
 import { env } from '@/lib/config/env';
 
@@ -24,6 +26,171 @@ const stripHopByHopHeaders = (headers: Headers) => {
 };
 
 const ensureTrailingSlash = (value: string) => (value.endsWith('/') ? value : `${value}/`);
+
+const readEnv = (key: string) => {
+  const value = process.env[key] ?? process.env[key.toLowerCase()];
+  if (!value) {
+    return undefined;
+  }
+
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : undefined;
+};
+
+const parseNoProxy = (value: string | undefined): string[] => {
+  if (!value) {
+    return [];
+  }
+
+  return value
+    .split(',')
+    .map((segment) => segment.trim())
+    .filter((segment) => segment.length > 0);
+};
+
+const removeIpv6Brackets = (hostname: string) => {
+  if (hostname.startsWith('[') && hostname.endsWith(']')) {
+    return hostname.slice(1, -1);
+  }
+  return hostname;
+};
+
+const normalizeHostname = (hostname: string) => removeIpv6Brackets(hostname).toLowerCase();
+
+const splitHostAndPort = (value: string): { hostname: string; port?: string } => {
+  if (!value) {
+    return { hostname: value };
+  }
+
+  if (value.startsWith('[')) {
+    const closingBracketIndex = value.indexOf(']');
+    if (closingBracketIndex !== -1) {
+      const hostname = value.slice(0, closingBracketIndex + 1);
+      const portSegment = value.slice(closingBracketIndex + 1);
+      if (portSegment.startsWith(':')) {
+        return { hostname, port: portSegment.slice(1) };
+      }
+      return { hostname };
+    }
+  }
+
+  const lastColonIndex = value.lastIndexOf(':');
+  if (lastColonIndex > -1 && value.indexOf(':') === lastColonIndex) {
+    const hostname = value.slice(0, lastColonIndex);
+    const port = value.slice(lastColonIndex + 1);
+    return { hostname, port };
+  }
+
+  return { hostname: value };
+};
+
+const createNoProxyMatcher = (entries: string[]) => {
+  if (entries.length === 0) {
+    return () => false;
+  }
+
+  const matchers = entries.map((entry) => {
+    const trimmed = entry.trim();
+    if (trimmed === '*') {
+      return () => true;
+    }
+
+    const { hostname: rawHostname, port } = splitHostAndPort(trimmed);
+    const hostname = normalizeHostname(rawHostname);
+    const isDomainPattern = hostname.startsWith('.');
+    const normalizedHostname = isDomainPattern ? hostname.slice(1) : hostname;
+
+    return (targetHostname: string, targetPort: string) => {
+      if (port && port !== targetPort) {
+        return false;
+      }
+
+      if (hostname === '*') {
+        return true;
+      }
+
+      if (isDomainPattern) {
+        return (
+          targetHostname === normalizedHostname ||
+          targetHostname.endsWith(`.${normalizedHostname}`)
+        );
+      }
+
+      return (
+        targetHostname === normalizedHostname ||
+        targetHostname.endsWith(`.${normalizedHostname}`)
+      );
+    };
+  });
+
+  return (hostname: string, port: string) => {
+    return matchers.some((matcher) => matcher(hostname, port));
+  };
+};
+
+const defaultPorts: Record<string, string> = {
+  'http:': '80',
+  'https:': '443',
+};
+
+const noProxyMatcher = createNoProxyMatcher(
+  parseNoProxy(readEnv('NO_PROXY')),
+);
+
+const selectProxyUrl = (url: URL): string | undefined => {
+  const hostname = normalizeHostname(url.hostname);
+  const port = url.port || defaultPorts[url.protocol] || '';
+
+  if (noProxyMatcher(hostname, port)) {
+    return undefined;
+  }
+
+  if (url.protocol === 'http:') {
+    return readEnv('HTTP_PROXY');
+  }
+
+  if (url.protocol === 'https:') {
+    return readEnv('HTTPS_PROXY') ?? readEnv('HTTP_PROXY');
+  }
+
+  return undefined;
+};
+
+const createAgent = () =>
+  new Agent({
+    keepAliveTimeout: 10_000,
+    keepAliveMaxTimeout: 60_000,
+    ...(env.apiRequestTimeoutMs > 0
+      ? {
+          bodyTimeout: env.apiRequestTimeoutMs,
+          headersTimeout: env.apiRequestTimeoutMs,
+        }
+      : {}),
+  });
+
+const defaultAgent = createAgent();
+
+const proxyAgentCache = new Map<string, ProxyAgent>();
+
+const getProxyAgent = (proxyUrl: string): ProxyAgent => {
+  const existing = proxyAgentCache.get(proxyUrl);
+  if (existing) {
+    return existing;
+  }
+
+  const agent = new ProxyAgent({ uri: proxyUrl });
+  proxyAgentCache.set(proxyUrl, agent);
+  return agent;
+};
+
+const selectDispatcher = (url: URL): Dispatcher | undefined => {
+  const proxyUrl = selectProxyUrl(url);
+  if (proxyUrl) {
+    return getProxyAgent(proxyUrl);
+  }
+
+  return defaultAgent;
+};
 
 const buildTargetUrl = (request: NextRequest, path: string[]): URL => {
   const baseUrl = new URL(ensureTrailingSlash(env.apiBaseUrl));
@@ -205,12 +372,23 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
   const timeoutSignal =
     env.apiRequestTimeoutMs > 0 ? AbortSignal.timeout(env.apiRequestTimeoutMs) : undefined;
 
-  const response = await fetch(targetUrl, {
+  const dispatcher = selectDispatcher(targetUrl);
+
+  const requestInit: RequestInit & { dispatcher?: Dispatcher } = {
     method: request.method,
     headers,
     body,
-    ...(timeoutSignal ? { signal: timeoutSignal } : {}),
-  });
+  };
+
+  if (timeoutSignal) {
+    requestInit.signal = timeoutSignal;
+  }
+
+  if (dispatcher) {
+    requestInit.dispatcher = dispatcher;
+  }
+
+  const response = await fetch(targetUrl, requestInit);
 
   if (shouldLogProxyTraffic && requestId !== undefined) {
     const responseClone = response.clone();
