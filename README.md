@@ -1,4 +1,4 @@
-# Opencell CM2 Frontend
+# OCM Frontend
 
 Opencell CM2 is a production-ready Next.js application that provides a Keycloak-protected console for customer, account, invoice and tax management. The UI is generated from the `opencell.json` OpenAPI definition and follows the requirements from `DESC.txt`.
 
