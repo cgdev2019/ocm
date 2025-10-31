@@ -7,7 +7,7 @@
 
 ## Recap rapide
 - Node 22.20.0 via `nvm use 22.20.0` (voir README).
-- Scripts principaux: `npm run dev`, `npm run dev:real`, `npm run mock`, `npm run api:gen`.
+- Scripts principaux: `npm run dev`, `npm run mock`, `npm run api:gen`.
 - Derniere generation API: `lib/api/generated/schema.ts` (via openapi-typescript).
 
 ## Fait
@@ -31,7 +31,7 @@
 - [x] L'utilisateur doit s'authentifier via Keycloak avant d'accéder à l'application (utilise keycloak.js ou autre)
 
 ## Notes
-- `npm run dev` active désormais `MOCK=on` par défaut (MSW + authent mock). Utiliser `npm run dev:real` pour viser l'API distante.
+- `npm run dev` Utiliser pour viser l'API distante.
 - Les variables d'env Keycloak/API lisent désormais les variantes `NEXT_PUBLIC_*` pour fonctionner côté navigateur.
 - `npm run lint` → OK après le correctif d'auth (cf. Keycloak/API).
 - `i18n/request.ts` utilise l'alias `@/`; lint passe sans disable.

@@ -30,9 +30,8 @@ npm run api:gen   # regenerate typed OpenAPI client (required after spec changes
 ### Development
 
 ```bash
-npm run dev        # start app with MSW interceptors enabled (default)
-npm run dev:real   # start app against the live API
-npm run mock       # alias of `npm run dev`
+npm run dev        # start app against the live API
+npm run mock       # start app with MSW interceptors enabled (default)
 ```
 
 The console is served at [http://localhost:3000](http://localhost:3000). `npm run dev` enables MSW mocks and auto-logs with mock credentials; use `npm run dev:real` (without `MOCK`) to initiate the Keycloak SSO flow against the live backend.
@@ -52,9 +51,8 @@ Copiez `.env.example` vers `.env.local` puis ajustez si besoin :
 
 | Script | Description |
 | --- | --- |
-| `npm run dev` | Start Next.js in dev mode with MSW mocks (MOCK=on) |
-| `npm run dev:real` | Start Next.js in dev mode against the real API |
-| `npm run mock` | Alias of `npm run dev` |
+| `npm run mock` | Start Next.js in dev mode with MSW mocks (MOCK=on) |
+| `npm run dev` | Start Next.js in dev mode against the real API |
 | `npm run build` / `start` | Production build & serve |
 | `npm run lint` | ESLint (flat config) + Prettier validation |
 | `npm run typecheck` | TypeScript strict check |
