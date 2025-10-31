@@ -7,10 +7,14 @@ import type {
   ActionStatus,
   CustomerFormValues,
   CustomerListItem,
+  CustomersList,
+  CustomersListParams,
   CustomerDto,
   CustomersResponseDto,
   GetCustomerResponseDto,
 } from '@/features/customers/types';
+
+export const DEFAULT_CUSTOMERS_PAGE_SIZE = 20;
 
 const adaptCustomerList = (items: CustomerDto[] | undefined): CustomerListItem[] =>
   (items ?? []).map((item) => ({
@@ -58,18 +62,51 @@ const mapDtoToForm = (dto: CustomerDto): CustomerFormValues => ({
   country: dto.contactInformation?.address?.country ?? undefined,
 });
 
-export const useCustomersList = () => {
-  return useQuery({
-    queryKey: queryKeys.customers.list(),
+const normalizeParams = (params: CustomersListParams = {}) => ({
+  limit: params.limit ?? DEFAULT_CUSTOMERS_PAGE_SIZE,
+  offset: params.offset ?? 0,
+  sortBy: params.sortBy,
+  sortOrder: params.sortOrder,
+});
+
+export const useCustomersList = (params?: CustomersListParams) => {
+  const queryParams = normalizeParams(params);
+  const requestQuery = {
+    limit: queryParams.limit,
+    offset: queryParams.offset,
+    ...(queryParams.sortBy ? { sortBy: queryParams.sortBy } : {}),
+    ...(queryParams.sortOrder ? { sortOrder: queryParams.sortOrder } : {}),
+  } as const;
+
+  return useQuery<CustomersList>({
+    queryKey: queryKeys.customers.list(queryParams),
     queryFn: async () => {
       const apiClient = getApiClient();
-      const result = await apiClient.GET('/api/rest/account/customer/listGetAll');
+      const result = await apiClient.POST('/api/rest/account/customer/list47', {
+        params: { query: requestQuery },
+      });
       const payload = unwrapResponse<CustomersResponseDto>(
         { data: result.data, error: result.error },
         'Unable to load customers',
       );
       assertActionSuccess(payload.actionStatus, 'Customer list returned an error');
-      return adaptCustomerList(payload.customers?.customer);
+
+      const items = adaptCustomerList(payload.customers?.customer);
+      const paging = payload.paging ?? {};
+      const limit = paging.limit ?? queryParams.limit ?? DEFAULT_CUSTOMERS_PAGE_SIZE;
+      const offset = paging.offset ?? queryParams.offset ?? 0;
+      const totalRecords = paging.totalNumberOfRecords ?? items.length;
+
+      return {
+        items,
+        paging: {
+          totalRecords,
+          limit,
+          offset,
+          sortBy: paging.sortBy ?? queryParams.sortBy,
+          sortOrder: paging.sortOrder ?? queryParams.sortOrder,
+        },
+      } satisfies CustomersList;
     },
   });
 };

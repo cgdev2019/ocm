@@ -13,10 +13,11 @@ export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
 export const customersResponseFixture: CustomersResponseDto = {
   actionStatus: { status: 'SUCCESS', message: 'Jeu de données mock' },
   paging: {
-    page: 1,
-    pageSize: 20,
-    totalPages: 1,
-    totalRecords: 2,
+    offset: 0,
+    limit: 20,
+    sortBy: 'c.code',
+    sortOrder: 'ASCENDING',
+    totalNumberOfRecords: 2,
   },
   customers: {
     customer: [

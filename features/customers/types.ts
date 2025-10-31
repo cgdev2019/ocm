@@ -4,6 +4,7 @@ export type CustomerDto = components['schemas']['CustomerDto'];
 export type CustomersResponseDto = components['schemas']['CustomersResponseDto'];
 export type GetCustomerResponseDto = components['schemas']['GetCustomerResponseDto'];
 export type ActionStatus = components['schemas']['ActionStatus'];
+type PagingAndFiltering = components['schemas']['PagingAndFiltering'];
 
 export type CustomerListItem = {
   code: string;
@@ -29,4 +30,19 @@ export type CustomerFormValues = {
   address1?: string;
   city?: string;
   country?: string;
+};
+
+export type CustomersListParams = Pick<PagingAndFiltering, 'limit' | 'offset' | 'sortBy' | 'sortOrder'>;
+
+export type CustomersListPaging = {
+  totalRecords: number;
+  limit: number;
+  offset: number;
+  sortBy?: PagingAndFiltering['sortBy'];
+  sortOrder?: PagingAndFiltering['sortOrder'];
+};
+
+export type CustomersList = {
+  items: CustomerListItem[];
+  paging: CustomersListPaging;
 };
