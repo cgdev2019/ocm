@@ -25,7 +25,11 @@
     "invoiceTypes": "Types de facture",
     "languageIso": "Langues ISO",
     "languages": "Langues commerciales",
-    "massImport": "Import massif"
+    "massImport": "Import massif",
+    "occTemplates": "Modèles OCC",
+    "pdfInvoices": "Factures PDF",
+    "provider": "Opérateur",
+    "query": "Service Query"
   },
   "breadcrumbs": {
     "ariaLabel": "Fil d'Ariane",
@@ -276,6 +280,81 @@
       "description": "Description",
       "disabled": "Désactivé",
       "descriptions": "Descriptions localisées"
+    },
+    "occTemplate": {
+      "code": "Code",
+      "description": "Description",
+      "occCategory": "Catégorie",
+      "categories": {
+        "debit": "Débit",
+        "credit": "Crédit"
+      },
+      "accountingCode": "Code comptable",
+      "accountCode": "Compte comptable",
+      "accountCodeClientSide": "Compte comptable côté client",
+      "journalCode": "Code journal",
+      "accountingSchemeCode": "Code schéma comptable",
+      "contractAccountingCode": "Code comptable contrat",
+      "contraAccountingCode2": "Compte contrepartie 2",
+      "deleteConfirmation": "Supprimer ce modèle OCC le retirera d'Opencell."
+    },
+    "pdfInvoice": {
+      "invoiceNumber": "Numéro de facture",
+      "customerAccountCode": "Code compte client",
+      "resultsTitle": "PDF générés ({count})",
+      "download": "Télécharger",
+      "itemLabel": "PDF n°{index}",
+      "empty": "Aucun PDF pour cette recherche.",
+      "version": "Version du service : {version}"
+    },
+    "provider": {
+      "code": "Code",
+      "description": "Description",
+      "currency": "Devise",
+      "country": "Pays",
+      "language": "Langue",
+      "email": "Email de contact",
+      "discountAccountingCode": "Code comptable remise",
+      "rounding": "Arrondi",
+      "roundingMode": "Mode d'arrondi",
+      "invoiceRounding": "Arrondi facture",
+      "invoiceRoundingMode": "Mode d'arrondi facture",
+      "multiCurrency": "Multi-devises",
+      "multiCountry": "Multi-pays",
+      "multiLanguage": "Multi-langues",
+      "enterprise": "Opérateur entreprise",
+      "recognizeRevenue": "Reconnaître le revenu",
+      "tenantsTitle": "Locataires enregistrés",
+      "noTenants": "Aucun locataire enregistré.",
+      "customerConfiguration": "Configuration clients",
+      "customerBrands": "Marques clients",
+      "customerCategories": "Catégories clients",
+      "titles": "Civilités",
+      "configurationUnavailable": "Configuration indisponible",
+      "customerAccountConfiguration": "Configuration comptes clients",
+      "paymentMethods": "Moyens de paiement",
+      "creditCategories": "Catégories de crédit",
+      "invoicingConfiguration": "Configuration facturation",
+      "calendars": "Calendriers",
+      "taxes": "Taxes",
+      "invoiceCategories": "Catégories de facture",
+      "invoiceSubCategories": "Sous-catégories de facture",
+      "billingCycles": "Cycles de facturation",
+      "terminationReasons": "Motifs de résiliation",
+      "tradingConfiguration": "Configuration commerciale",
+      "countries": "Pays",
+      "currencies": "Devises",
+      "languages": "Langues",
+      "roundingModes": {
+        "nearest": "Au plus proche",
+        "down": "Arrondir à l'inférieur",
+        "up": "Arrondir au supérieur",
+        "halfEven": "Moitié pair"
+      }
+    },
+    "query": {
+      "latestResult": "Dernier résultat",
+      "empty": "Aucune donnée renvoyée par le service."
     }
   },
   "feedback": {

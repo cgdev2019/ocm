@@ -89,6 +89,24 @@ import type {
   TradingLanguagesResponseDto,
 } from '@/features/languages/types';
 import type { ImportFileTypeDto } from '@/features/mass-import/types';
+import type {
+  GetOccTemplateResponse,
+  GetOccTemplatesResponse,
+  OccTemplateFormValues,
+  OccTemplateListItem,
+} from '@/features/occ-templates/types';
+import type { PdfInvoiceResponse } from '@/features/pdf-invoices/types';
+import type {
+  GetCustomerAccountConfigurationResponseDto,
+  GetCustomerConfigurationResponseDto,
+  GetInvoicingConfigurationResponseDto,
+  GetProviderResponse,
+  GetTradingConfigurationResponseDto,
+  ProviderFormValues,
+  ProviderTenantListItem,
+  ProvidersResponse,
+} from '@/features/provider/types';
+import type { QueryResponse } from '@/features/query/types';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
@@ -740,4 +758,146 @@ export const languageDetailFixture: GetTradingLanguageResponse = {
 export const importFileTypeFixture: ImportFileTypeDto = {
   fileName: 'customers.csv',
   fileType: 'CUSTOMER',
+};
+
+const occTemplateDtoFixture = {
+  code: 'OCC_DEBIT',
+  description: 'Template débit',
+  accountingCode: '7010',
+  accountCode: 'ACC-01',
+  occCategory: 'DEBIT' as const,
+  accountCodeClientSide: 'ACC-CLIENT',
+  journalCode: 'JNL-1',
+  accountingScheme: { code: 'SCH-1', scriptCode: 'ACCOUNT-SCRIPT' },
+  contractAccountingCode: 'CONTRACT-01',
+  contraAccountingCode2: 'CONTRA-02',
+};
+
+export const occTemplatesResponseFixture: GetOccTemplatesResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'Liste OCC templates' },
+  occTemplates: {
+    occTemplate: [occTemplateDtoFixture],
+  },
+};
+
+export const occTemplateListFixture: OccTemplateListItem[] = [
+  {
+    code: 'OCC_DEBIT',
+    description: 'Template débit',
+    occCategory: 'DEBIT',
+    accountingCode: '7010',
+    accountCode: 'ACC-01',
+  },
+];
+
+export const occTemplateFormFixture: OccTemplateFormValues = {
+  code: 'OCC_DEBIT',
+  description: 'Template débit',
+  accountingCode: '7010',
+  accountCode: 'ACC-01',
+  occCategory: 'DEBIT',
+  accountCodeClientSide: 'ACC-CLIENT',
+  journalCode: 'JNL-1',
+  accountingSchemeCode: 'SCH-1',
+  contractAccountingCode: 'CONTRACT-01',
+  contraAccountingCode2: 'CONTRA-02',
+};
+
+export const occTemplateResponseFixture: GetOccTemplateResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'Détail OCC template' },
+  occTemplate: occTemplateDtoFixture,
+};
+
+export const pdfInvoiceResponseFixture: PdfInvoiceResponse = {
+  actionStatus: { status: 'SUCCESS', message: '2 documents' },
+  pdfInvoice: ['JVBERi0xLjQK', 'JVBERi0xLjMK'],
+};
+
+export const providerResponseFixture: GetProviderResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'Provider loaded' },
+  provider: {
+    code: 'OPENCELL',
+    description: 'Opencell France',
+    currency: 'EUR',
+    country: 'FR',
+    language: 'fr',
+    multiCurrency: true,
+    multiCountry: false,
+    multiLanguage: true,
+    enterprise: true,
+    rounding: 2,
+    roundingMode: 'HALF_EVEN',
+    invoiceRounding: 2,
+    invoiceRoundingMode: 'NEAREST',
+    discountAccountingCode: 'DISC-01',
+    email: 'billing@opencell.com',
+    recognizeRevenue: true,
+  },
+};
+
+export const providerFormFixture: ProviderFormValues = {
+  code: 'OPENCELL',
+  description: 'Opencell France',
+  currency: 'EUR',
+  country: 'FR',
+  language: 'fr',
+  multiCurrency: true,
+  multiCountry: false,
+  multiLanguage: true,
+  enterprise: true,
+  rounding: 2,
+  roundingMode: 'HALF_EVEN',
+  invoiceRounding: 2,
+  invoiceRoundingMode: 'NEAREST',
+  discountAccountingCode: 'DISC-01',
+  email: 'billing@opencell.com',
+  recognizeRevenue: true,
+};
+
+export const providerTenantsResponseFixture: ProvidersResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'Tenants' },
+  providers: [
+    { code: 'TENANT-A', description: 'Tenant A', currency: 'EUR', country: 'FR' },
+    { code: 'TENANT-B', description: 'Tenant B', currency: 'USD', country: 'US' },
+  ],
+};
+
+export const providerTenantsFixture: ProviderTenantListItem[] = [
+  { code: 'TENANT-A', description: 'Tenant A', currency: 'EUR', country: 'FR' },
+  { code: 'TENANT-B', description: 'Tenant B', currency: 'USD', country: 'US' },
+];
+
+export const providerCustomerConfigurationFixture: GetCustomerConfigurationResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Customer config' },
+  customerBrands: { customerBrand: [{ code: 'BR1', description: 'Brand 1' }] },
+  customerCategories: { customerCategory: [{ code: 'CAT1', description: 'Category 1', accountingCode: '7010' }] },
+  titles: { title: [{ code: 'MR', description: 'Monsieur', isCompany: false }] },
+};
+
+export const providerCustomerAccountConfigurationFixture: GetCustomerAccountConfigurationResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Customer account config' },
+  paymentMethods: ['CHECK', 'WIRETRANSFER'],
+  creditCategories: { creditCategory: [{ code: 'CRED1', description: 'Credit Cat' }] },
+};
+
+export const providerInvoicingConfigurationFixture: GetInvoicingConfigurationResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Invoicing config' },
+  calendars: { calendar: [{ code: 'CAL', description: 'Calendar' }] },
+  taxes: { tax: [{ code: 'VAT20', description: 'VAT 20%' }] },
+  invoiceCategories: { invoiceCategory: [{ code: 'INV', description: 'Invoice cat' }] },
+  invoiceSubCategories: { invoiceSubCategory: [{ code: 'SUB', description: 'Invoice sub' }] },
+  billingCycles: { billingCycle: [{ code: 'MONTHLY', description: 'Mensuel' }] },
+  terminationReasons: { terminationReason: [{ code: 'TERM', description: 'Termination' }] },
+};
+
+export const providerTradingConfigurationFixture: GetTradingConfigurationResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Trading config' },
+  countries: { country: [{ countryCode: 'FR', currencyCode: 'EUR' }] },
+  currencies: { currency: [{ code: 'EUR', description: 'Euro' }] },
+  languages: { language: [{ code: 'fr_FR', description: 'Français', disabled: false }] },
+};
+
+export const queryResponseFixture: QueryResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  result: '{"items":[]}',
 };

@@ -12,6 +12,7 @@ import type { LanguageIsoFormValues } from '@/features/language-iso/types';
 import type { LanguageFormValues } from '@/features/languages/types';
 import type { InvoiceDto } from '@/features/invoices/types';
 import type { TaxFormValues } from '@/features/taxes/types';
+import type { OccTemplateFormValues } from '@/features/occ-templates/types';
 import {
   customerAccountFormFixtures,
   customerFormFixtures,
@@ -29,6 +30,7 @@ import {
   languageListFixture,
   importFileTypeFixture,
   taxFormFixtures,
+  occTemplateFormFixture,
 } from '@/tests/fixtures/opencellDataset';
 
 export const customers: CustomerFormValues[] = customerFormFixtures;
@@ -70,6 +72,8 @@ export const invoiceSequencesData: InvoiceSequenceFormValues[] = [invoiceSequenc
 export const invoiceSubCategoriesData: InvoiceSubCategoryFormValues[] = [invoiceSubCategoryFormFixture];
 
 export const invoiceTypesData: InvoiceTypeFormValues[] = [invoiceTypeFormFixture];
+
+export const occTemplatesData: OccTemplateFormValues[] = [occTemplateFormFixture];
 
 export const languageIsosData: LanguageIsoFormValues[] = languageIsoListFixture.map(({ code, description }) => ({
   code,

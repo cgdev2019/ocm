@@ -17,6 +17,10 @@ import DescriptionIcon from '@mui/icons-material/DescriptionOutlined';
 import LanguageIcon from '@mui/icons-material/LanguageOutlined';
 import TranslateIcon from '@mui/icons-material/TranslateOutlined';
 import CloudUploadIcon from '@mui/icons-material/CloudUploadOutlined';
+import SchemaIcon from '@mui/icons-material/SchemaOutlined';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdfOutlined';
+import BusinessIcon from '@mui/icons-material/BusinessOutlined';
+import QueryStatsIcon from '@mui/icons-material/QueryStatsOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -37,6 +41,10 @@ const registry: Record<string, SvgIconComponent> = {
   languageIso: LanguageIcon,
   language: TranslateIcon,
   massImport: CloudUploadIcon,
+  occTemplate: SchemaIcon,
+  pdfInvoice: PictureAsPdfIcon,
+  provider: BusinessIcon,
+  query: QueryStatsIcon,
 };
 
 export const NavIcon = ({ name }: { name: string }) => {

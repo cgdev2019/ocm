@@ -70,10 +70,10 @@
 - [ ] Service LanguageIso — cf. `tasks/TASK014.md`
 - [ ] Service Language — cf. `tasks/TASK015.md`
 - [ ] Service MassImport — cf. `tasks/TASK016.md`
-- [ ] Service OccTemplate — cf. `tasks/TASK017.md`
-- [ ] Service PdfInvoice — cf. `tasks/TASK018.md`
-- [ ] Service Provider — cf. `tasks/TASK019.md`
-- [ ] Service Query — cf. `tasks/TASK020.md`
+- [x] Service OccTemplate — cf. `tasks/TASK017.md`
+- [x] Service PdfInvoice — cf. `tasks/TASK018.md`
+- [x] Service Provider — cf. `tasks/TASK019.md`
+- [x] Service Query — cf. `tasks/TASK020.md`
 - [ ] Service ScriptInstance — cf. `tasks/TASK021.md`
 - [ ] Service Seller — cf. `tasks/TASK022.md`
 - [ ] Service Tax — cf. `tasks/TASK023.md`
