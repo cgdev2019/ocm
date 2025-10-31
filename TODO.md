@@ -22,7 +22,8 @@
 - [x] Repasser `npm run typecheck`, `npm run lint`, `npm run test`, `npm run e2e` et archiver les resultats lorsque tout est vert.
 - [x] Nettoyer ou ignorer `test-results/` avant commit final (actuellement contient une capture d'echec).
 - [x] Migrer la convention `middleware` -> `proxy` (warning Next.js pendant `npm run e2e`).
-- [x] Prendre en compte le fichier ERROR.txt lors de l'exécution de `npm run dev` (nav locale & logo 404 corrigés)
+- [ ] Prendre en compte le fichier ERROR.txt lors de l'exécution de `npm run dev` (trace navigateur)
+- [ ] L'utilisateur doit s'authentifier via Keycloak avant d'accéder à l'application (utilise keycloak.js ou autre)
 
 ## Notes
 - Les variables d'env Keycloak/API lisent désormais les variantes `NEXT_PUBLIC_*` pour fonctionner côté navigateur.
