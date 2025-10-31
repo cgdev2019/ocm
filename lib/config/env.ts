@@ -84,7 +84,7 @@ export const env: AppEnv = {
   apiBaseUrl: required(
     pickEnvValue(process.env.NEXT_PUBLIC_API_BASE_URL, process.env.API_BASE_URL),
     'NEXT_PUBLIC_API_BASE_URL',
-    'https://siventeappvrec1.mediapost.fr:8444/opencell',
+    'https://siventeappvval2.mediapost.fr:6443/opencell',
     'API_BASE_URL',
   ),
   mockApi: flag(process.env.NEXT_PUBLIC_MOCK ?? process.env.MOCK),

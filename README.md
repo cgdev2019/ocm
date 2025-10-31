@@ -42,7 +42,7 @@ Copiez `.env.example` vers `.env.local` puis ajustez si besoin :
 
 | Variable | Description                                                                                   |
 | --- |-----------------------------------------------------------------------------------------------|
-| `API_BASE_URL` | URL de base du serveur REST (par défaut `https://siventeappvrec1.mediapost.fr:8444/opencell`) |
+| `API_BASE_URL` | URL de base du serveur REST (par défaut `https://siventeappvval2.mediapost.fr:6443/opencell`) |
 | `KEYCLOAK_APP_AUTH_URL`, `KEYCLOAK_REALM`, `KEYCLOAK_CLIENT_ID` | Paramètres Keycloak (client par défaut : `opencell-portal`)                                   |
 | `DEFAULT_LOCALE` | Locale initiale (`fr` ou `en`)                                                                |
 | `MOCK` | Mettre `on` pour activer MSW & l'auth mock (laisser vide pour le serveur réel)                |

@@ -1,9 +1,9 @@
  GET /fr/customers 200 in 940ms (compile: 160ms, proxy.ts: 14ms, render: 766ms)
 Waiting for the debugger to disconnect...
-📡 [OpenCell Proxy #3] → POST https://siventeappvrec1.mediapost.fr:8444/opencell/api/rest/account/customer/list47?limit=20&offset=0
+📡 [OpenCell Proxy #3] → POST https://siventeappvval2.mediapost.fr:6443/opencell/api/rest/account/customer/list47?limit=20&offset=0
 Debugger attached.
 Waiting for the debugger to disconnect...
-📡 [OpenCell Proxy #3] ← POST 500 https://siventeappvrec1.mediapost.fr:8444/opencell/api/rest/account/customer/list47?limit=20&offset=0 {
+📡 [OpenCell Proxy #3] ← POST 500 https://siventeappvval2.mediapost.fr:6443/opencell/api/rest/account/customer/list47?limit=20&offset=0 {
   payloadType: 'json',
   payload: {
     status: 'FAIL',
