@@ -11,6 +11,7 @@ type Crumb = {
   href: string;
   label?: string;
   labelKey?: string;
+  isDynamic?: boolean;
 };
 
 const NAVIGATION_LABEL_MAP = NAV_SECTIONS.reduce<Record<string, string>>((acc, section) => {
@@ -45,6 +46,7 @@ export const AppBreadcrumbs = () => {
     segments.forEach((segment, index) => {
       const href = `/${segments.slice(0, index + 1).join('/')}`;
       const labelKey = NAVIGATION_LABEL_MAP[href];
+      const isDynamicSegment = /^\[[^/]+\]$/.test(segment);
 
       if (labelKey) {
         crumbs.push({ href, labelKey });
@@ -53,6 +55,12 @@ export const AppBreadcrumbs = () => {
 
       if (segment === 'new') {
         crumbs.push({ href, labelKey: 'breadcrumbs.new' });
+        return;
+      }
+
+      if (isDynamicSegment) {
+        const label = decodeURIComponent(segment.slice(1, -1));
+        crumbs.push({ href, label, isDynamic: true });
         return;
       }
 
@@ -76,7 +84,9 @@ export const AppBreadcrumbs = () => {
         const isLast = index === items.length - 1;
         const label = item.labelKey ? t(item.labelKey) : item.label ?? '';
 
-        if (isLast) {
+        const isLink = !isLast && !item.isDynamic;
+
+        if (!isLink) {
           return (
             <Typography key={item.href} color="text.primary" variant="body2" fontWeight={600}>
               {label}
