@@ -50,6 +50,7 @@
 - Instructions de l'AGENTS.md relues; aucune tâche supplémentaire effectuée.
 - `npm run lint` (exécution courante) → OK après alignement du proxy et de `env.apiBaseUrl` sur https://siventeappvrec1.mediapost.fr:8444 (mode non mock par défaut).
 - `npm run lint` (exécution courante) → OK après ajout du préfixe `/opencell` côté proxy et valeur par défaut `API_BASE_URL`.
+- `npm test -- --runTestsByPath features/customers/__tests__/useCustomersList.test.tsx` (exécution courante) → OK.
 
 # Prompt — Build a Production‑Ready Frontend from OpenAPI (Next.js + MUI)
 

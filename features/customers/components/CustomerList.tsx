@@ -1,15 +1,20 @@
 'use client';
 
+import { useState } from 'react';
 import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
-import { useCustomersList } from '@/features/customers/api';
+import { DEFAULT_CUSTOMERS_PAGE_SIZE, useCustomersList } from '@/features/customers/api';
 import type { CustomerListItem } from '@/features/customers/types';
 
 export const CustomerList = () => {
-  const { data, isLoading, isError, refetch } = useCustomersList();
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: DEFAULT_CUSTOMERS_PAGE_SIZE });
+  const { data, isLoading, isError, isFetching, refetch } = useCustomersList({
+    limit: paginationModel.pageSize,
+    offset: paginationModel.page * paginationModel.pageSize,
+  });
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
@@ -43,12 +48,17 @@ export const CustomerList = () => {
       </Stack>
       <Box sx={{ height: 620, width: '100%' }}>
         <DataGrid
-          rows={(data ?? []).map((item) => ({ id: item.code, ...item }))}
+          rows={(data?.items ?? []).map((item) => ({ id: item.code, ...item }))}
           columns={columns}
-          loading={isLoading}
+          loading={isLoading || isFetching}
           slots={{ toolbar: GridToolbar }}
           disableRowSelectionOnClick
           onRowClick={(params) => router.push(`${pathname}/${params.id}`)}
+          paginationMode="server"
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={data?.paging.totalRecords ?? 0}
+          pageSizeOptions={[10, 20, 50]}
           localeText={{
             noRowsLabel: t('table.empty'),
             toolbarQuickFilterPlaceholder: t('actions.search'),
