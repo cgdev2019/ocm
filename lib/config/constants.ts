@@ -22,7 +22,11 @@ export const NAV_SECTIONS: Array<{
     | 'invoiceType'
     | 'languageIso'
     | 'language'
-    | 'massImport';
+    | 'massImport'
+    | 'occTemplate'
+    | 'pdfInvoice'
+    | 'provider'
+    | 'query';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
   { label: 'navigation.customers', path: '/customers', icon: 'customers' },
@@ -45,4 +49,8 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.languageIso', path: '/language-iso', icon: 'languageIso' },
   { label: 'navigation.languages', path: '/languages', icon: 'language' },
   { label: 'navigation.massImport', path: '/mass-import', icon: 'massImport' },
+  { label: 'navigation.occTemplates', path: '/occ-templates', icon: 'occTemplate' },
+  { label: 'navigation.pdfInvoices', path: '/pdf-invoices', icon: 'pdfInvoice' },
+  { label: 'navigation.provider', path: '/provider', icon: 'provider' },
+  { label: 'navigation.query', path: '/query', icon: 'query' },
 ];

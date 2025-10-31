@@ -84,4 +84,27 @@ export const queryKeys = {
     list: () => ['languages', 'list'] as const,
     detail: (code: string) => ['languages', 'detail', code] as const,
   },
+  occTemplates: {
+    list: () => ['occTemplates', 'list'] as const,
+    detail: (code: string) => ['occTemplates', 'detail', code] as const,
+    version: () => ['occTemplates', 'version'] as const,
+  },
+  pdfInvoices: {
+    search: (criteria?: { invoiceNumber?: string; customerAccountCode?: string }) =>
+      criteria
+        ? (['pdfInvoices', 'search', criteria] as const)
+        : (['pdfInvoices', 'search'] as const),
+    version: () => ['pdfInvoices', 'version'] as const,
+  },
+  provider: {
+    detail: () => ['provider', 'detail'] as const,
+    customerConfiguration: () => ['provider', 'customerConfiguration'] as const,
+    customerAccountConfiguration: () => ['provider', 'customerAccountConfiguration'] as const,
+    invoicingConfiguration: () => ['provider', 'invoicingConfiguration'] as const,
+    tradingConfiguration: () => ['provider', 'tradingConfiguration'] as const,
+    tenants: () => ['provider', 'tenants'] as const,
+  },
+  queryService: {
+    search: (query?: string) => (query ? (['queryService', 'search', query] as const) : (['queryService', 'search'] as const)),
+  },
 };

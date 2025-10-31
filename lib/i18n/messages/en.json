@@ -25,7 +25,11 @@
     "invoiceTypes": "Invoice types",
     "languageIso": "Languages ISO",
     "languages": "Trading languages",
-    "massImport": "Mass import"
+    "massImport": "Mass import",
+    "occTemplates": "OCC templates",
+    "pdfInvoices": "PDF invoices",
+    "provider": "Provider",
+    "query": "Query service"
   },
   "breadcrumbs": {
     "ariaLabel": "Breadcrumb",
@@ -276,6 +280,81 @@
       "description": "Description",
       "disabled": "Disabled",
       "descriptions": "Localized descriptions"
+    },
+    "occTemplate": {
+      "code": "Code",
+      "description": "Description",
+      "occCategory": "Category",
+      "categories": {
+        "debit": "Debit",
+        "credit": "Credit"
+      },
+      "accountingCode": "Accounting code",
+      "accountCode": "Account code",
+      "accountCodeClientSide": "Client-side account code",
+      "journalCode": "Journal code",
+      "accountingSchemeCode": "Accounting scheme code",
+      "contractAccountingCode": "Contract accounting code",
+      "contraAccountingCode2": "Contra accounting code 2",
+      "deleteConfirmation": "Deleting this OCC template will remove it from Opencell."
+    },
+    "pdfInvoice": {
+      "invoiceNumber": "Invoice number",
+      "customerAccountCode": "Customer account code",
+      "resultsTitle": "Generated PDFs ({count})",
+      "download": "Download",
+      "itemLabel": "PDF #{index}",
+      "empty": "No PDF available for this query.",
+      "version": "Service version: {version}"
+    },
+    "provider": {
+      "code": "Code",
+      "description": "Description",
+      "currency": "Currency",
+      "country": "Country",
+      "language": "Language",
+      "email": "Contact email",
+      "discountAccountingCode": "Discount accounting code",
+      "rounding": "Rounding",
+      "roundingMode": "Rounding mode",
+      "invoiceRounding": "Invoice rounding",
+      "invoiceRoundingMode": "Invoice rounding mode",
+      "multiCurrency": "Supports multiple currencies",
+      "multiCountry": "Supports multiple countries",
+      "multiLanguage": "Supports multiple languages",
+      "enterprise": "Enterprise provider",
+      "recognizeRevenue": "Recognize revenue",
+      "tenantsTitle": "Registered tenants",
+      "noTenants": "No tenant registered yet.",
+      "customerConfiguration": "Customer configuration",
+      "customerBrands": "Customer brands",
+      "customerCategories": "Customer categories",
+      "titles": "Titles",
+      "configurationUnavailable": "Configuration unavailable",
+      "customerAccountConfiguration": "Customer account configuration",
+      "paymentMethods": "Payment methods",
+      "creditCategories": "Credit categories",
+      "invoicingConfiguration": "Invoicing configuration",
+      "calendars": "Calendars",
+      "taxes": "Taxes",
+      "invoiceCategories": "Invoice categories",
+      "invoiceSubCategories": "Invoice sub-categories",
+      "billingCycles": "Billing cycles",
+      "terminationReasons": "Termination reasons",
+      "tradingConfiguration": "Trading configuration",
+      "countries": "Countries",
+      "currencies": "Currencies",
+      "languages": "Languages",
+      "roundingModes": {
+        "nearest": "Nearest",
+        "down": "Round down",
+        "up": "Round up",
+        "halfEven": "Half even"
+      }
+    },
+    "query": {
+      "latestResult": "Latest result",
+      "empty": "No data returned by the service."
     }
   },
   "feedback": {
