@@ -30,9 +30,7 @@ export const SellerEditForm = ({ code }: { code: string }) => {
     <SellerForm
       defaultValues={data}
       mode="edit"
-      onSuccess={(values) =>
-        router.replace({ pathname: '/sellers/[code]', params: { code: values.code } })
-      }
+      onSuccess={(values) => router.replace(`/sellers/${values.code}`)}
     />
   );
 };
