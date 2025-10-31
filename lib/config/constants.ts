@@ -29,7 +29,11 @@ export const NAV_SECTIONS: Array<{
     | 'query'
     | 'scriptInstance'
     | 'seller'
-    | 'terminationReason';
+    | 'terminationReason'
+    | 'usage'
+    | 'access'
+    | 'businessAccountModel'
+    | 'providerContact';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
   { label: 'navigation.customers', path: '/customers', icon: 'customers' },
@@ -39,6 +43,8 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.scriptInstances', path: '/script-instances', icon: 'scriptInstance' },
   { label: 'navigation.sellers', path: '/sellers', icon: 'seller' },
   { label: 'navigation.terminationReasons', path: '/termination-reasons', icon: 'terminationReason' },
+  { label: 'navigation.usage', path: '/usage', icon: 'usage' },
+  { label: 'navigation.accesses', path: '/access', icon: 'access' },
   { label: 'navigation.billingCycles', path: '/billing-cycles', icon: 'billing' },
   { label: 'navigation.calendars', path: '/calendars', icon: 'calendar' },
   { label: 'navigation.configuration', path: '/configuration', icon: 'settings' },
@@ -59,4 +65,6 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.pdfInvoices', path: '/pdf-invoices', icon: 'pdfInvoice' },
   { label: 'navigation.provider', path: '/provider', icon: 'provider' },
   { label: 'navigation.query', path: '/query', icon: 'query' },
+  { label: 'navigation.businessAccountModels', path: '/business-account-models', icon: 'businessAccountModel' },
+  { label: 'navigation.providerContacts', path: '/provider-contacts', icon: 'providerContact' },
 ];
