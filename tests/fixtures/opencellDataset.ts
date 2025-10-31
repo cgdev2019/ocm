@@ -5,7 +5,7 @@ import type {
   CustomersResponseDto,
 } from '@/features/customers/types';
 import type { InvoiceDto } from '@/features/invoices/types';
-import type { TaxFormValues } from '@/features/taxes/types';
+import type { GetTaxesResponse, TaxFormValues, TaxListItem } from '@/features/taxes/types';
 import type {
   BillingCycleFormValues,
   BillingCycleListItem,
@@ -97,6 +97,10 @@ import type {
 } from '@/features/occ-templates/types';
 import type { PdfInvoiceResponse } from '@/features/pdf-invoices/types';
 import type {
+  GetScriptInstanceResponseDto,
+  ScriptInstanceListItem,
+} from '@/features/script-instances/types';
+import type {
   GetCustomerAccountConfigurationResponseDto,
   GetCustomerConfigurationResponseDto,
   GetInvoicingConfigurationResponseDto,
@@ -107,6 +111,11 @@ import type {
   ProvidersResponse,
 } from '@/features/provider/types';
 import type { QueryResponse } from '@/features/query/types';
+import type { SellerListItem, SellerResponseDto } from '@/features/sellers/types';
+import type {
+  GetTerminationReasonResponse,
+  TerminationReasonListItem,
+} from '@/features/termination-reasons/types';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
@@ -285,6 +294,31 @@ export const taxFormFixtures: TaxFormValues[] = [
     percent: 5.5,
     accountingCode: '4456',
   },
+];
+
+export const taxesResponseFixture: GetTaxesResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'Taxes retrieved' },
+  taxesDto: {
+    tax: [
+      {
+        code: 'VAT-20',
+        description: 'TVA 20%',
+        percent: 20,
+        accountingCode: '4457',
+      },
+      {
+        code: 'VAT-5.5',
+        description: 'TVA réduite 5,5%',
+        percent: 5.5,
+        accountingCode: '4456',
+      },
+    ],
+  },
+};
+
+export const taxesListFixture: TaxListItem[] = [
+  { code: 'VAT-20', description: 'TVA 20%', percent: 20, accountingCode: '4457' },
+  { code: 'VAT-5.5', description: 'TVA réduite 5,5%', percent: 5.5, accountingCode: '4456' },
 ];
 
 export const billingCyclesResponseFixture: BillingCyclesResponseDto = {
@@ -749,8 +783,8 @@ export const languageDetailFixture: GetTradingLanguageResponse = {
     description: 'Français (France)',
     disabled: false,
     languageDescriptions: [
-      { language: 'en', description: 'French (France)' },
-      { language: 'fr', description: 'Français (France)' },
+      { languageCode: 'en', description: 'French (France)' },
+      { languageCode: 'fr', description: 'Français (France)' },
     ],
   },
 };
@@ -882,11 +916,43 @@ export const providerCustomerAccountConfigurationFixture: GetCustomerAccountConf
 
 export const providerInvoicingConfigurationFixture: GetInvoicingConfigurationResponseDto = {
   actionStatus: { status: 'SUCCESS', message: 'Invoicing config' },
-  calendars: { calendar: [{ code: 'CAL', description: 'Calendar' }] },
+  calendars: {
+    calendar: [
+      {
+        code: 'CAL',
+        description: 'Calendar',
+        calendarType: 'YEARLY',
+        periodUnit: 'MONTH',
+        periodLength: 1,
+        nbPeriods: 12,
+      },
+    ],
+  },
   taxes: { tax: [{ code: 'VAT20', description: 'VAT 20%' }] },
-  invoiceCategories: { invoiceCategory: [{ code: 'INV', description: 'Invoice cat' }] },
-  invoiceSubCategories: { invoiceSubCategory: [{ code: 'SUB', description: 'Invoice sub' }] },
-  billingCycles: { billingCycle: [{ code: 'MONTHLY', description: 'Mensuel' }] },
+  invoiceCategories: {
+    invoiceCategory: [{ code: 'INV', description: 'Invoice cat', occTemplateCode: 'OCC-INV' }],
+  },
+  invoiceSubCategories: {
+    invoiceSubCategory: [
+      {
+        code: 'SUB',
+        description: 'Invoice sub',
+        invoiceCategory: 'INV',
+        accountingCode: '7010',
+        occTemplateCode: 'OCC-SUB',
+      },
+    ],
+  },
+  billingCycles: {
+    billingCycle: [
+      {
+        code: 'MONTHLY',
+        description: 'Mensuel',
+        calendar: 'CAL',
+        invoiceDateDelayEL: '0',
+      },
+    ],
+  },
   terminationReasons: { terminationReason: [{ code: 'TERM', description: 'Termination' }] },
 };
 
@@ -896,6 +962,79 @@ export const providerTradingConfigurationFixture: GetTradingConfigurationRespons
   currencies: { currency: [{ code: 'EUR', description: 'Euro' }] },
   languages: { language: [{ code: 'fr_FR', description: 'Français', disabled: false }] },
 };
+
+export const scriptInstanceResponseFixture: GetScriptInstanceResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Script loaded' },
+  scriptInstance: {
+    code: 'SCRIPT-001',
+    description: 'Send notification',
+    type: 'JAVA',
+    reuse: true,
+    script: "return 'ok';",
+    disabled: false,
+    scriptInstanceCategoryCode: 'NOTIFY',
+    codeOnly: false,
+  },
+};
+
+export const scriptInstanceListFixture: ScriptInstanceListItem[] = [
+  {
+    code: 'SCRIPT-001',
+    description: 'Send notification',
+    type: 'JAVA',
+    disabled: false,
+  },
+];
+
+export const sellerResponseFixture: SellerResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Sellers' },
+  sellers: {
+    seller: [
+      {
+        code: 'SELLER-01',
+        description: 'Metropolitan sales',
+        currencyCode: 'EUR',
+        countryCode: 'FR',
+      },
+      {
+        code: 'SELLER-02',
+        description: 'International sales',
+        currencyCode: 'USD',
+        countryCode: 'US',
+      },
+    ],
+  },
+};
+
+export const sellerListFixture: SellerListItem[] = [
+  { code: 'SELLER-01', description: 'Metropolitan sales', currencyCode: 'EUR', countryCode: 'FR' },
+  { code: 'SELLER-02', description: 'International sales', currencyCode: 'USD', countryCode: 'US' },
+];
+
+export const terminationReasonResponseFixture: GetTerminationReasonResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'Termination reasons' },
+  terminationReason: [
+    {
+      code: 'TERM-GOODWILL',
+      description: 'Goodwill termination',
+      applyAgreement: true,
+      invoiceAgreementImmediately: false,
+      applyReimbursment: true,
+      applyTerminationCharges: false,
+      overrideProrata: 'PRORATA',
+      reimburseOneshots: true,
+    },
+  ],
+};
+
+export const terminationReasonListFixture: TerminationReasonListItem[] = [
+  {
+    code: 'TERM-GOODWILL',
+    description: 'Goodwill termination',
+    overrideProrata: 'PRORATA',
+    applyTerminationCharges: false,
+  },
+];
 
 export const queryResponseFixture: QueryResponse = {
   actionStatus: { status: 'SUCCESS', message: 'OK' },

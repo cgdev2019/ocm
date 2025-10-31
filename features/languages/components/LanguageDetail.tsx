@@ -117,8 +117,8 @@ export const LanguageDetail = ({ code }: { code: string }) => {
                 <Stack spacing={1.5}>
                   <Typography variant="h6">{t('forms.language.descriptions')}</Typography>
                   {data.languageDescriptions.map((item) => (
-                    <Stack key={`${item.language ?? ''}-${item.description ?? ''}`} spacing={0.5}>
-                      <Typography variant="subtitle2">{item.language ?? '—'}</Typography>
+                    <Stack key={`${item.languageCode ?? ''}-${item.description ?? ''}`} spacing={0.5}>
+                      <Typography variant="subtitle2">{item.languageCode ?? '—'}</Typography>
                       <Typography color="text.secondary">{item.description ?? '—'}</Typography>
                     </Stack>
                   ))}

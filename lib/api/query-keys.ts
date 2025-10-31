@@ -107,4 +107,20 @@ export const queryKeys = {
   queryService: {
     search: (query?: string) => (query ? (['queryService', 'search', query] as const) : (['queryService', 'search'] as const)),
   },
+  scriptInstances: {
+    list: (code?: string) =>
+      code ? (['scriptInstances', 'list', code] as const) : (['scriptInstances', 'list'] as const),
+    detail: (code: string) => ['scriptInstances', 'detail', code] as const,
+    version: () => ['scriptInstances', 'version'] as const,
+  },
+  sellers: {
+    list: () => ['sellers', 'list'] as const,
+    detail: (code: string) => ['sellers', 'detail', code] as const,
+    codes: () => ['sellers', 'codes'] as const,
+  },
+  terminationReasons: {
+    list: () => ['terminationReasons', 'list'] as const,
+    detail: (code: string) => ['terminationReasons', 'detail', code] as const,
+    version: () => ['terminationReasons', 'version'] as const,
+  },
 };
