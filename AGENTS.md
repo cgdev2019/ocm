@@ -13,6 +13,7 @@
 - Client Keycloak par défaut: `opencell-portal` (aligné sur l'API protégée).
 
 ## Fait
+- Fil d'Ariane: désactivation des liens sur segments dynamiques pour Next.js 16 (corrige l'erreur runtime).
 - Next.js 16 App Router scaffolding avec TypeScript strict et alias `@/`.
 - MUI theming complet: AppShell, sidebar, top bar, dark mode, switch langue, recherche.
 - Data layer: `openapi-typescript` + `openapi-fetch`, hooks React Query (TanStack Query) pour CRUD clients, comptes, factures, taxes.
@@ -22,6 +23,7 @@
 - Playwright dashboard spec corrigee (sélecteur heading `Clients`) et campagne e2e verte (`npm run e2e`).
 - Typecheck/lint/tests relances (`npm run typecheck`, `npm run lint`, `npm run test`, `npm run e2e`) => tout vert; `test-results/.last-run.json` mis à jour.
 - Services BillingCycle → Country : hooks TanStack Query, formulaires React Hook Form + Zod, pages App Router et navigation intégrées.
+- 2025-11-17 : Navigation édition vendeur — utilisation d'URL concrètes (`/sellers/${code}`) au lieu des segments dynamiques non résolus.
 - Vérifications automatiques relancées (`npm run lint`, `npm run typecheck`, `npm run test`) — tout vert (31/10/2025).
 - Synthèse OpenAPI automatique générée pour `tasks/*.md` via `scripts/generateTasks.mjs`.
 
@@ -48,6 +50,9 @@
 - 2025-11-14 : `npm run test -- --runTestsByPath features/script-instances/__tests__/useScriptInstances.test.tsx features/sellers/__tests__/useSellers.test.tsx features/termination-reasons/__tests__/useTerminationReasons.test.tsx features/taxes/__tests__/useTaxes.test.tsx` → ok (validation hooks incluant Tax).
 - 2025-11-15 : `npm run test -- --runTestsByPath features/usage/__tests__/useUsage.test.tsx features/access/__tests__/useAccesses.test.tsx features/business-account-model/__tests__/useBusinessAccountModels.test.tsx features/provider-contact/__tests__/useProviderContacts.test.tsx` → ok (services Usage/Access/BAM/ProviderContact).
 - 2025-11-16 : `npm run test -- --runTestsByPath features/usage/__tests__/useUsage.test.tsx features/access/__tests__/useAccesses.test.tsx features/business-account-model/__tests__/useBusinessAccountModels.test.tsx features/provider-contact/__tests__/useProviderContacts.test.tsx` → ok (revalidation Usage/Access/BAM/ProviderContact).
+- 2025-11-15 : `npm run typecheck` → ok (page CurrencyIso detail : résolution asynchrone de `params`).
+- 2025-11-15 : `npm run test -- --runTestsByPath features/sellers/__tests__/useSellers.test.tsx` → ok (correctif navigation édition vendeur).
+- 2025-11-16 : `npm run typecheck` → échec (`router.push`/`router.replace` n'acceptent plus `params` dans SellerDetail/SellerEditForm`).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.

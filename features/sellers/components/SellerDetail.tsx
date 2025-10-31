@@ -64,7 +64,11 @@ export const SellerDetail = ({ code }: { code: string }) => {
           <Button startIcon={<RefreshIcon />} variant="outlined" onClick={() => refetch()}>
             {t('actions.refresh')}
           </Button>
-          <Button startIcon={<EditIcon />} variant="contained" onClick={() => router.push('./edit')}>
+          <Button
+            startIcon={<EditIcon />}
+            variant="contained"
+            onClick={() => router.push(`/sellers/${code}/edit`)}
+          >
             {t('actions.edit')}
           </Button>
           <Button color="error" startIcon={<DeleteIcon />} onClick={handleDelete} disabled={remove.isPending}>

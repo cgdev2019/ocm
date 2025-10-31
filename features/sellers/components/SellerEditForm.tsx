@@ -30,7 +30,7 @@ export const SellerEditForm = ({ code }: { code: string }) => {
     <SellerForm
       defaultValues={data}
       mode="edit"
-      onSuccess={(values) => router.replace(`../${values.code}`)}
+      onSuccess={(values) => router.replace(`/sellers/${values.code}`)}
     />
   );
 };
