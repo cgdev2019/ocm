@@ -1,0 +1,113 @@
+{
+  "app": {
+    "title": "Console Opencell",
+    "tagline": "Pilotage clients & facturation"
+  },
+  "navigation": {
+    "dashboard": "Tableau de bord",
+    "customers": "Clients",
+    "customerAccounts": "Comptes clients",
+    "invoices": "Factures",
+    "taxes": "Taxes",
+    "settings": "Réglages"
+  },
+  "actions": {
+    "create": "Créer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "reset": "Réinitialiser",
+    "refresh": "Actualiser",
+    "retry": "Réessayer",
+    "add": "Ajouter"
+  },
+  "dashboard": {
+    "welcome": "Bon retour, {name} !",
+    "kpi": {
+      "activeCustomers": "Clients actifs",
+      "outstandingBalance": "Solde restant dû",
+      "invoicesDue": "Factures à échéance",
+      "paymentsToday": "Encaissements du jour"
+    },
+    "recentActivity": "Activité récente"
+  },
+  "table": {
+    "empty": "Aucune donnée pour le moment.",
+    "loading": "Chargement des données...",
+    "actions": "Actions"
+  },
+  "forms": {
+    "required": "Ce champ est obligatoire",
+    "invalidEmail": "Merci de saisir une adresse email valide",
+    "invalidNumber": "Merci de saisir un nombre valide",
+    "success": "Modifications enregistrées",
+    "error": "Une erreur est survenue",
+    "customer": {
+      "code": "Code",
+      "description": "Description",
+      "category": "Catégorie",
+      "brand": "Marque",
+      "seller": "Vendeur",
+      "vatNo": "Numéro de TVA",
+      "registrationNo": "Numéro d'immatriculation",
+      "email": "Email",
+      "phone": "Téléphone",
+      "street": "Rue",
+      "city": "Ville",
+      "country": "Pays"
+    },
+    "customerAccount": {
+      "code": "Code compte",
+      "description": "Description",
+      "customer": "Client",
+      "currency": "Devise",
+      "language": "Langue",
+      "paymentMethod": "Mode de paiement",
+      "creditLimit": "Limite de crédit"
+    },
+    "invoice": {
+      "number": "Numéro de facture",
+      "type": "Type",
+      "status": "Statut",
+      "amount": "Montant",
+      "dueDate": "Échéance",
+      "invoiceDate": "Date de facture",
+      "mode": "Mode",
+      "discount": "Remise",
+      "amountWithTax": "Montant TTC",
+      "amountWithoutTax": "Montant HT"
+    },
+    "tax": {
+      "code": "Code taxe",
+      "description": "Description",
+      "percent": "Pourcentage",
+      "accountingCode": "Code comptable"
+    }
+  },
+  "feedback": {
+    "saved": "Enregistrement réussi",
+    "deleted": "Suppression réussie",
+    "error": "Une erreur inattendue est survenue"
+  },
+  "filters": {
+    "customer": "Filtrer par client",
+    "status": "Statut",
+    "from": "Du",
+    "to": "Au"
+  },
+  "auth": {
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "sessionExpired": "Session expirée",
+    "loading": "Vérification de la session..."
+  },
+  "layout": {
+    "theme": "Thème",
+    "language": "Langue",
+    "searchPlaceholder": "Rechercher partout..."
+  }
+}

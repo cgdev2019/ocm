@@ -1,0 +1,113 @@
+{
+  "app": {
+    "title": "Opencell Console",
+    "tagline": "Customer & Billing cockpit"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "customers": "Customers",
+    "customerAccounts": "Customer accounts",
+    "invoices": "Invoices",
+    "taxes": "Taxes",
+    "settings": "Settings"
+  },
+  "actions": {
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "reset": "Reset",
+    "refresh": "Refresh",
+    "retry": "Retry",
+    "add": "Add"
+  },
+  "dashboard": {
+    "welcome": "Welcome back, {name}!",
+    "kpi": {
+      "activeCustomers": "Active customers",
+      "outstandingBalance": "Outstanding balance",
+      "invoicesDue": "Invoices due",
+      "paymentsToday": "Payments today"
+    },
+    "recentActivity": "Recent activity"
+  },
+  "table": {
+    "empty": "Nothing to display yet.",
+    "loading": "Loading data...",
+    "actions": "Actions"
+  },
+  "forms": {
+    "required": "This field is required",
+    "invalidEmail": "Please provide a valid email address",
+    "invalidNumber": "Please provide a valid number",
+    "success": "Changes saved",
+    "error": "Something went wrong",
+    "customer": {
+      "code": "Code",
+      "description": "Description",
+      "category": "Category",
+      "brand": "Brand",
+      "seller": "Seller",
+      "vatNo": "VAT number",
+      "registrationNo": "Registration number",
+      "email": "Email",
+      "phone": "Phone",
+      "street": "Street",
+      "city": "City",
+      "country": "Country"
+    },
+    "customerAccount": {
+      "code": "Account code",
+      "description": "Description",
+      "customer": "Customer",
+      "currency": "Currency",
+      "language": "Language",
+      "paymentMethod": "Payment method",
+      "creditLimit": "Credit limit"
+    },
+    "invoice": {
+      "number": "Invoice number",
+      "type": "Type",
+      "status": "Status",
+      "amount": "Amount",
+      "dueDate": "Due date",
+      "invoiceDate": "Invoice date",
+      "mode": "Mode",
+      "discount": "Discount",
+      "amountWithTax": "Amount (tax incl.)",
+      "amountWithoutTax": "Amount (tax excl.)"
+    },
+    "tax": {
+      "code": "Tax code",
+      "description": "Description",
+      "percent": "Percent",
+      "accountingCode": "Accounting code"
+    }
+  },
+  "feedback": {
+    "saved": "Saved successfully",
+    "deleted": "Deleted successfully",
+    "error": "An unexpected error occurred"
+  },
+  "filters": {
+    "customer": "Filter by customer",
+    "status": "Status",
+    "from": "From",
+    "to": "To"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "sessionExpired": "Session expired",
+    "loading": "Checking session..."
+  },
+  "layout": {
+    "theme": "Theme",
+    "language": "Language",
+    "searchPlaceholder": "Search everything..."
+  }
+}
