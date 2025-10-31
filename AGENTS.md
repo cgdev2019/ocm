@@ -63,6 +63,7 @@
 - 2025-11-22 : `npm run test -- --runTestsByPath features/subscriptions/__tests__/useSubscriptions.test.tsx` → ok (relecture rapide du module Subscription).
 - 2025-11-22 : `npm run typecheck` → échec (anomalies préexistantes BusinessAccountModel/LanguageIso/RatedTransactions toujours présentes).
 - 2025-11-21 : `npm run typecheck` → échec (incompatibilités existantes BusinessAccountModel/LanguageIso/RatedTransactions).
+- 2025-11-23 : Page Subscription detail — résolution asynchrone de `params` pour Next.js 16.
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
