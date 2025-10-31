@@ -43,4 +43,26 @@ export type SubscriptionListItem = {
   seller: string;
 };
 
+export type SubscriptionListPaging = {
+  totalRecords: number;
+  limit: number;
+  offset: number;
+  sortBy?: string;
+  sortOrder?: components['schemas']['PagingAndFiltering']['sortOrder'];
+};
+
+export type SubscriptionList = {
+  items: SubscriptionListItem[];
+  paging: SubscriptionListPaging;
+};
+
+export type SubscriptionListParams = {
+  limit?: number;
+  offset?: number;
+  sortBy?: string;
+  sortOrder?: components['schemas']['PagingAndFiltering']['sortOrder'];
+  userAccountCode?: string | null;
+  query?: string | null;
+};
+
 export type SubscriptionFormValues = SubscriptionFormSchema;

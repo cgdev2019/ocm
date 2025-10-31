@@ -26,7 +26,9 @@ import type {
   SubscriptionForCustomerRequestDto,
   SubscriptionForCustomerResponseDto,
   SubscriptionFormValues,
+  SubscriptionList,
   SubscriptionListItem,
+  SubscriptionListParams,
   SubscriptionPatchDto,
   SubscriptionsListResponseDto,
   TerminateSubscriptionRequestDto,
@@ -96,29 +98,37 @@ const invalidateSubscriptionQueries = (queryClient: ReturnType<typeof useQueryCl
 
 type PagingAndFiltering = components['schemas']['PagingAndFiltering'];
 
-type SubscriptionListFilters = {
-  userAccountCode?: string | null;
-  query?: string | null;
+const buildListQueryParams = (params: SubscriptionListParams = {}) => {
+  const limit = params.limit ?? DEFAULT_SUBSCRIPTIONS_PAGE_SIZE;
+  const offset = params.offset ?? 0;
+
+  return {
+    limit,
+    offset,
+    ...(params.sortBy ? { sortBy: params.sortBy } : {}),
+    ...(params.sortOrder ? { sortOrder: params.sortOrder } : {}),
+    ...(params.userAccountCode ? { userAccountCode: params.userAccountCode } : {}),
+    ...(params.query ? { query: params.query } : {}),
+  } satisfies {
+    limit: number;
+    offset: number;
+    sortBy?: string;
+    sortOrder?: SubscriptionListParams['sortOrder'];
+    userAccountCode?: string;
+    query?: string;
+  };
 };
 
-export const useSubscriptions = (filters?: SubscriptionListFilters) => {
-  const normalizedFilters = filters
-    ? {
-        userAccountCode: filters.userAccountCode ?? undefined,
-        query: filters.query ?? undefined,
-      }
-    : undefined;
+export const useSubscriptions = (params?: SubscriptionListParams) => {
+  const queryParams = buildListQueryParams(params);
 
-  return useQuery({
-    queryKey: queryKeys.subscriptions.list(normalizedFilters ?? null),
+  return useQuery<SubscriptionList>({
+    queryKey: queryKeys.subscriptions.list(queryParams),
     queryFn: async () => {
       const apiClient = getApiClient();
       const result = await apiClient.GET('/api/rest/billing/subscription/list', {
         params: {
-          query: {
-            userAccountCode: normalizedFilters?.userAccountCode,
-            query: normalizedFilters?.query,
-          },
+          query: queryParams,
         },
       });
       const payload = unwrapResponse<SubscriptionsListResponseDto>(
@@ -126,7 +136,24 @@ export const useSubscriptions = (filters?: SubscriptionListFilters) => {
         'Unable to load subscriptions',
       );
       assertActionSuccess(payload.actionStatus, 'Subscription list returned an error');
-      return adaptList(payload);
+
+      const items = adaptList(payload);
+      const paging = payload.paging ?? {};
+      const limit = paging.limit ?? queryParams.limit ?? DEFAULT_SUBSCRIPTIONS_PAGE_SIZE;
+      const offset = paging.offset ?? queryParams.offset ?? 0;
+      const totalRecords =
+        paging.totalNumberOfRecords ?? payload.subscriptions?.listSize ?? items.length;
+
+      return {
+        items,
+        paging: {
+          totalRecords,
+          limit,
+          offset,
+          sortBy: paging.sortBy ?? queryParams.sortBy,
+          sortOrder: paging.sortOrder ?? queryParams.sortOrder,
+        },
+      } satisfies SubscriptionList;
     },
   });
 };

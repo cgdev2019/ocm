@@ -152,9 +152,11 @@ import type {
 import type {
   GetSubscriptionResponseDto,
   SubscriptionDto,
+  SubscriptionList,
   SubscriptionListItem,
   SubscriptionsListResponseDto,
 } from '@/features/subscriptions/types';
+import { DEFAULT_SUBSCRIPTIONS_PAGE_SIZE } from '@/features/subscriptions/api';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
@@ -231,10 +233,17 @@ export const subscriptionDtoFixture: SubscriptionDto = {
 
 export const subscriptionListResponseFixture: SubscriptionsListResponseDto = {
   actionStatus: { status: 'SUCCESS', message: 'OK' },
+  paging: {
+    limit: DEFAULT_SUBSCRIPTIONS_PAGE_SIZE,
+    offset: 0,
+    sortBy: 'code',
+    sortOrder: 'ASCENDING',
+    totalNumberOfRecords: 1,
+  },
   subscriptions: { listSize: 1, subscription: [subscriptionDtoFixture] },
 };
 
-export const subscriptionListFixture: SubscriptionListItem[] = [
+export const subscriptionListItemsFixture: SubscriptionListItem[] = [
   {
     code: subscriptionDtoFixture.code,
     description: subscriptionDtoFixture.description,
@@ -246,6 +255,17 @@ export const subscriptionListFixture: SubscriptionListItem[] = [
     seller: subscriptionDtoFixture.seller,
   },
 ];
+
+export const subscriptionListFixture: SubscriptionList = {
+  items: subscriptionListItemsFixture,
+  paging: {
+    totalRecords: 1,
+    limit: DEFAULT_SUBSCRIPTIONS_PAGE_SIZE,
+    offset: 0,
+    sortBy: 'code',
+    sortOrder: 'ASCENDING',
+  },
+};
 
 export const subscriptionResponseFixture: GetSubscriptionResponseDto = {
   actionStatus: { status: 'SUCCESS', message: 'OK' },

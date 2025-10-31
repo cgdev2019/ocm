@@ -15,7 +15,10 @@ export const SubscriptionList = () => {
     page: 0,
     pageSize: DEFAULT_SUBSCRIPTIONS_PAGE_SIZE,
   });
-  const { data, isLoading, isFetching, isError, refetch, error } = useSubscriptions();
+  const { data, isLoading, isFetching, isError, refetch, error } = useSubscriptions({
+    limit: paginationModel.pageSize,
+    offset: paginationModel.page * paginationModel.pageSize,
+  });
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
@@ -58,7 +61,7 @@ export const SubscriptionList = () => {
       </Stack>
       <Box sx={{ height: 560 }}>
         <DataGrid
-          rows={(data ?? []).map((item) => ({ id: item.code, ...item }))}
+          rows={(data?.items ?? []).map((item) => ({ id: item.code, ...item }))}
           columns={columns}
           loading={isLoading || isFetching}
           disableRowSelectionOnClick
@@ -66,7 +69,8 @@ export const SubscriptionList = () => {
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[10, 20, 50]}
-          paginationMode="client"
+          paginationMode="server"
+          rowCount={data?.paging.totalRecords ?? 0}
           localeText={{ noRowsLabel: t('table.empty') }}
         />
       </Box>

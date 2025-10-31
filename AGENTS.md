@@ -61,6 +61,7 @@
 - 2025-11-20 : `npm run test -- --runTestsByPath features/titles/__tests__/useTitles.test.tsx features/audit/__tests__/useAudit.test.tsx features/file-formats/__tests__/useFileFormats.test.tsx features/files/__tests__/useFiles.test.tsx` → ok (revalidation après intégration des services Title/Audit/FileFormat/Files).
 - 2025-11-21 : `npm run test -- --runTestsByPath features/subscriptions/__tests__/useSubscriptions.test.tsx` → ok (hooks Subscription).
 - 2025-11-22 : `npm run test -- --runTestsByPath features/subscriptions/__tests__/useSubscriptions.test.tsx` → ok (relecture rapide du module Subscription).
+- 2025-11-23 : `npm run test -- --runTestsByPath features/subscriptions/__tests__/useSubscriptions.test.tsx` → ok (pagination Abonnements).
 - 2025-11-22 : `npm run typecheck` → échec (anomalies préexistantes BusinessAccountModel/LanguageIso/RatedTransactions toujours présentes).
 - 2025-11-21 : `npm run typecheck` → échec (incompatibilités existantes BusinessAccountModel/LanguageIso/RatedTransactions).
 - 2025-11-23 : Page Subscription detail — résolution asynchrone de `params` pour Next.js 16.
