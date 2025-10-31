@@ -13,6 +13,7 @@
 - Client Keycloak par défaut: `opencell-portal` (aligné sur l'API protégée).
 
 ## Fait
+- Fil d'Ariane: désactivation des liens sur segments dynamiques pour Next.js 16 (corrige l'erreur runtime).
 - Next.js 16 App Router scaffolding avec TypeScript strict et alias `@/`.
 - MUI theming complet: AppShell, sidebar, top bar, dark mode, switch langue, recherche.
 - Data layer: `openapi-typescript` + `openapi-fetch`, hooks React Query (TanStack Query) pour CRUD clients, comptes, factures, taxes.
