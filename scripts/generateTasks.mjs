@@ -481,7 +481,7 @@ function buildTaskContent(tag, index) {
   if (meta && meta.description) {
     headerLines.push(`- Description OpenAPI : ${meta.description}`);
   }
-  headerLines.push('- S’appuyer sur `DESC.txt` pour prioriser l’expérience utilisateur et documenter toute hypothèse complémentaire dans le README si besoin.');
+  headerLines.push('- S’appuyer sur `AGENTS.md` pour prioriser l’expérience utilisateur et documenter toute hypothèse complémentaire dans le README si besoin.');
   headerLines.push('- Chaque schéma listé ci-dessous doit être couvert par une modélisation TypeScript, des helpers de mapping et, le cas échéant, des formulaires MUI.');
   if (meta && meta.externalDocs) {
     headerLines.push(`- Documentation externe : ${meta.externalDocs.url}`);

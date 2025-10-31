@@ -187,13 +187,13 @@ You are a senior full‑stack engineer and solution architect. You will generate
 1. `opencell.json` — OpenAPI 3.x specification for the REST API.
 2. `DESC.txt` — short product description: target users, main use cases, priorities, non‑functional constraints.
 
-> Treat the OpenAPI spec as the **single source of truth** for endpoints, parameters, request/response schemas, and error models. Use `DESC.txt` to prioritize features, naming, and UX flows.
+> Treat the OpenAPI spec as the **single source of truth** for endpoints, parameters, request/response schemas, and error models.
 
 ## High‑Level Objectives
 
 * Scaffold a **Next.js App Router** project in **TypeScript**, styled with **MUI** and responsive by default.
 * Auto‑generate a strongly‑typed API client and models from `opencell.json`.
-* Build end‑to‑end UI flows for the key entities and journeys implied by the spec and `DESC.txt` (dashboard, list/detail, create/edit, authentication if present, etc.).
+* Build end‑to‑end UI flows for the key entities and journeys implied by the spec (dashboard, list/detail, create/edit, authentication if present, etc.).
 * Implement robust **data fetching, caching, mutations, and optimistic updates** for all CRUD operations.
 * Provide **form validation** inferred from the schemas (client‑side + server error surfacing).
 * Ship with **tests, docs, CI hints, and local mocks** so the app runs without a live backend.
@@ -249,7 +249,7 @@ You are a senior full‑stack engineer and solution architect. You will generate
 1. **Navigation & Layout**
 
    * AppBar with brand, search, language switch (EN/FR), theme toggle, user menu.
-   * Left sidebar (per `DESC.txt` priorities) with active route highlighting.
+   * Left sidebar with active route highlighting.
 2. **Home/Dashboard**
 
    * Show KPIs and recent activity derived from relevant endpoints.
@@ -263,7 +263,7 @@ You are a senior full‑stack engineer and solution architect. You will generate
 
    * Faceted filters mapped to query params; persist state in URL.
 5. **Files/Media** (if present in API): upload UI with progress, retry, drag & drop; link to entities.
-6. **Business-specific flows** from `DESC.txt` (e.g., validation workflows, approvals, billing cycles, etc.).
+6. **Business-specific flows** (e.g., validation workflows, approvals, billing cycles, etc.).
 
 ## Environment & Config
 
@@ -308,7 +308,7 @@ You are a senior full‑stack engineer and solution architect. You will generate
 * Consistent **MUI theme** with primary/secondary palette, typography scale, and components override for buttons, tables, forms.
 * Tables use MUI Data Grid (or MUI Table + your helpers) with virtualization if large.
 * Use **skeleton loaders** and **progress indicators**.
-* Empty/error states with friendly copy based on `DESC.txt` tone.
+* Empty/error states with friendly copy.
 
 ## Assumptions & Gaps
 
@@ -318,9 +318,9 @@ You are a senior full‑stack engineer and solution architect. You will generate
 ## Output Format
 
 * Provide the **proposed file tree**.
-* Then include the **key source files** inline (one block per file), sufficient to run `npm install && npm run dev` after placing `opencell.json` and `DESC.txt`.
+* Then include the **key source files** inline (one block per file), sufficient to run `npm install && npm run dev` after placing `opencell.json`.
 * Include the `README.md` content and the `api:gen` configuration.
 
 ---
 
-**Begin now. Ask for clarifications only if a critical blocker is found in `opencell.json` or `DESC.txt`. Otherwise proceed with best-effort defaults.**
+**Begin now. Ask for clarifications only if a critical blocker is found in `opencell.json`. Otherwise proceed with best-effort defaults.**

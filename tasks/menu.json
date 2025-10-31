@@ -1,0 +1,283 @@
+[
+  {
+    "label": "Configuration",
+    "children": [
+      { "label": "Application configuration", "children": [] },
+      { "label": "Contacts", "children": [] },
+      {
+        "label": "Security",
+        "children": [
+          { "label": "Utilisateurs", "children": [] },
+          { "label": "Roles", "children": [] },
+          { "label": "API security", "children": [] }
+        ]
+      },
+      { "label": "Vendeurs", "children": [] },
+      {
+        "label": "Comptes",
+        "children": [
+          { "label": "Qualités", "children": [] },
+          { "label": "Marques", "children": [] },
+          { "label": "Catégories client", "children": [] },
+          { "label": "Catégories de crédit", "children": [] },
+          { "label": "Types des opérations de compte", "children": [] }
+        ]
+      },
+      {
+        "label": "Paramètres internationaux",
+        "children": [
+          { "label": "Langues", "children": [] },
+          { "label": "Devises", "children": [] },
+          { "label": "Pays de commercialisation", "children": [] },
+          { "label": "Translations", "children": [] },
+          { "label": "Templates de mail", "children": [] }
+        ]
+      },
+      { "label": "Calendriers", "children": [] },
+      {
+        "label": "Facturation (configuration)",
+        "children": [
+          { "label": "Cycles de facturation", "children": [] },
+          {
+            "label": "Taxes",
+            "children": [
+              { "label": "Account tax categories", "children": [] },
+              { "label": "Charge tax classes", "children": [] },
+              { "label": "Tax assignment", "children": [] },
+              { "label": "Tax rates", "children": [] }
+            ]
+          },
+          { "label": "Rubriques de facture", "children": [] },
+          { "label": "Sous-rubriques de facture", "children": [] },
+          { "label": "Type factures", "children": [] },
+          { "label": "Séquences de facture", "children": [] }
+        ]
+      },
+      { "label": "Motifs de résiliation", "children": [] },
+      { "label": "Devises", "children": [] },
+      { "label": "Langues", "children": [] },
+      { "label": "Pays", "children": [] },
+      { "label": "Propriétés", "children": [] },
+      { "label": "Canaux", "children": [] },
+      { "label": "Unités de mesures", "children": [] },
+      { "label": "Configuration issues", "children": [] }
+    ]
+  },
+  {
+    "label": "Catalogue",
+    "children": [
+      {
+        "label": "Gestion des offres",
+        "children": [
+          { "label": "Offres", "children": [] },
+          { "label": "Catégories d'offre", "children": [] }
+        ]
+      },
+      {
+        "label": "Gestion des services",
+        "children": [
+          { "label": "Services", "children": [] },
+          {
+            "label": "Charges",
+            "children": [
+              { "label": "Tous", "children": [] },
+              { "label": "Récurrentes", "children": [] },
+              { "label": "Ponctuelles", "children": [] },
+              { "label": "Usages", "children": [] }
+            ]
+          },
+          { "label": "Compteurs", "children": [] }
+        ]
+      },
+      {
+        "label": "Gestion des produits",
+        "children": [
+          { "label": "Produits", "children": [] },
+          { "label": "Charges Produits", "children": [] },
+          { "label": "Bundles", "children": [] }
+        ]
+      },
+      { "label": "EDR déclenchés", "children": [] },
+      { "label": "Comptes Prépayés", "children": [] },
+      {
+        "label": "Modèles",
+        "children": [
+          { "label": "Modèles d'offre", "children": [] },
+          { "label": "Modèles services", "children": [] },
+          { "label": "Modèles produit", "children": [] }
+        ]
+      },
+      {
+        "label": "Grilles tarifaires",
+        "children": [
+          { "label": "Grilles tarifaires", "children": [] },
+          { "label": "Grilles promotions", "children": [] }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Comptes (CRM)",
+    "children": [
+      { "label": "Recherche générale", "children": [] },
+      { "label": "Clients", "children": [] },
+      { "label": "Comptes client", "children": [] },
+      { "label": "Comptes de facturation", "children": [] },
+      { "label": "Comptes utilisateurs", "children": [] },
+      { "label": "Comptes CRM", "children": [] },
+      { "label": "Souscriptions", "children": [] },
+      { "label": "Points d'accès", "children": [] },
+      { "label": "Modèles de comptes", "children": [] }
+    ]
+  },
+  {
+    "label": "Devis & Commandes",
+    "children": [
+      { "label": "Devis", "children": [] },
+      { "label": "Commandes", "children": [] }
+    ]
+  },
+  {
+    "label": "Mediation",
+    "children": [
+      { "label": "Call detail records", "children": [] },
+      { "label": "Event Detail Records", "children": [] },
+      { "label": "Fichiers transféré", "children": [] }
+    ]
+  },
+  {
+    "label": "Facturation",
+    "children": [
+      {
+        "label": "Valorisation",
+        "children": [
+          { "label": "Opérations valorisées", "children": [] },
+          { "label": "Transactions facturées", "children": [] }
+        ]
+      },
+      {
+        "label": "Run de facturation",
+        "children": [
+          { "label": "Runs de facturation", "children": [] },
+          { "label": "Lancement run global", "children": [] },
+          { "label": "Facturation exceptionnelle", "children": [] }
+        ]
+      },
+      {
+        "label": "Facture",
+        "children": [
+          { "label": "Factures", "children": [] },
+          { "label": "Créer une facture agrégée", "children": [] },
+          { "label": "Créer une facture détaillée", "children": [] },
+          { "label": "Create detailed invoice with services", "children": [] }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Paiements",
+    "children": [
+      {
+        "label": "Prélèvement SEPA",
+        "children": [
+          { "label": "Prélèvement en masse SEPA", "children": [] },
+          { "label": "État de la demande SEPA", "children": [] },
+          { "label": "Lot de demande SEPA", "children": [] }
+        ]
+      },
+      { "label": "PSP", "children": [] },
+      { "label": "Echéancier de paiements", "children": [] }
+    ]
+  },
+  {
+    "label": "Workflows",
+    "children": [
+      { "label": "Workflows générique", "children": [] },
+      { "label": "Historique workflow générique", "children": [] }
+    ]
+  },
+  {
+    "label": "Finance",
+    "children": [
+      { "label": "Plan Comptable", "children": [] },
+      { "label": "Grand livres", "children": [] },
+      { "label": "Règles recon. revenu", "children": [] },
+      { "label": "Calendrier recon. revenu", "children": [] },
+      { "label": "Génération de rapports", "children": [] },
+      { "label": "Historique des rapports générés", "children": [] },
+      { "label": "Ecritures comptables", "children": [] }
+    ]
+  },
+  {
+    "label": "Reporting",
+    "children": [
+      { "label": "Quantitées mesurables", "children": [] },
+      { "label": "Valeurs mesurées", "children": [] },
+      { "label": "Graphiques", "children": [] },
+      { "label": "Data Collectors", "children": [] }
+    ]
+  },
+  {
+    "label": "Entités",
+    "children": [
+      { "label": "CT Paiement lettrage historique", "children": [] }
+    ]
+  },
+  {
+    "label": "Administration",
+    "children": [
+      {
+        "label": "Jobs",
+        "children": [
+          { "label": "Instances de jobs", "children": [] },
+          { "label": "Timers", "children": [] },
+          {
+            "label": "Error management",
+            "children": [
+              { "label": "Rating", "children": [] },
+              { "label": "Invoice related", "children": [] }
+            ]
+          }
+        ]
+      },
+      { "label": "Instances Opencell", "children": [] },
+      { "label": "Modules", "children": [] },
+      { "label": "Personnalisation des entités", "children": [] },
+      {
+        "label": "Script",
+        "children": [
+          { "label": "Catégorie de script", "children": [] },
+          { "label": "Scripts", "children": [] }
+        ]
+      },
+      { "label": "Filtres", "children": [] },
+      {
+        "label": "Notifications",
+        "children": [
+          { "label": "Notifications", "children": [] },
+          { "label": "Webhooks", "children": [] },
+          { "label": "Email notifications", "children": [] },
+          { "label": "Job notifications", "children": [] },
+          { "label": "Historique des notifications", "children": [] },
+          { "label": "Demandes entrantes", "children": [] }
+        ]
+      },
+      {
+        "label": "Import/Export",
+        "children": [
+          { "label": "Import", "children": [] },
+          { "label": "Export", "children": [] }
+        ]
+      },
+      { "label": "Explorateur de fichiers", "children": [] },
+      {
+        "label": "Journal d'audit",
+        "children": [
+          { "label": "Configuration d'audit", "children": [] },
+          { "label": "Journaux d'audit", "children": [] }
+        ]
+      },
+      { "label": "Information cache", "children": [] }
+    ]
+  }
+]

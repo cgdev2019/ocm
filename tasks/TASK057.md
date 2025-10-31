@@ -11,7 +11,7 @@ Le service « UnitOfMeasure » est défini par le tag OpenAPI du même nom dans 
 
 ## Notes
 - Description OpenAPI : @%UnitOfMeasure
-- S’appuyer sur `DESC.txt` pour prioriser l’expérience utilisateur et documenter toute hypothèse complémentaire dans le README si besoin.
+- S’appuyer sur AGENTS.md et documenter toute hypothèse complémentaire dans le README si besoin.
 - Chaque schéma listé ci-dessous doit être couvert par une modélisation TypeScript, des helpers de mapping et, le cas échéant, des formulaires MUI.
 
 ## Détails OpenAPI
