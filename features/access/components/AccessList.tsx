@@ -13,9 +13,9 @@ import {
   Typography,
 } from '@mui/material';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import dayjs from 'dayjs';
+import { format, parseISO } from 'date-fns';
 import { useTranslations } from 'next-intl';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { DEFAULT_ACCESS_PAGE_SIZE, useAccesses, useAccessVersion } from '@/features/access/api';
 import type { AccessListItem } from '@/features/access/types';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
@@ -31,6 +31,24 @@ export const AccessList = () => {
 
   const accessQuery = useAccesses(appliedFilter ? { subscriptionCode: appliedFilter } : undefined);
 
+  const formatDateTime = useCallback((value?: string) => {
+    if (!value) {
+      return '—';
+    }
+
+    try {
+      const parsed = parseISO(value);
+
+      if (Number.isNaN(parsed.getTime())) {
+        return value;
+      }
+
+      return format(parsed, 'yyyy-MM-dd HH:mm');
+    } catch (error) {
+      return value;
+    }
+  }, []);
+
   const columns: GridColDef<AccessListItem>[] = useMemo(
     () => [
       { field: 'code', headerName: t('forms.access.code'), flex: 1, minWidth: 160 },
@@ -40,14 +58,14 @@ export const AccessList = () => {
         headerName: t('forms.access.startDate'),
         flex: 1,
         minWidth: 160,
-        valueFormatter: ({ value }) => (value ? dayjs(value).format('YYYY-MM-DD HH:mm') : '—'),
+        valueFormatter: ({ value }) => formatDateTime(value),
       },
       {
         field: 'endDate',
         headerName: t('forms.access.endDate'),
         flex: 1,
         minWidth: 160,
-        valueFormatter: ({ value }) => (value ? dayjs(value).format('YYYY-MM-DD HH:mm') : '—'),
+        valueFormatter: ({ value }) => formatDateTime(value),
       },
       {
         field: 'disabled',
@@ -57,7 +75,7 @@ export const AccessList = () => {
         valueFormatter: ({ value }) => (value ? t('common.yes') : t('common.no')),
       },
     ],
-    [t],
+    [t, formatDateTime],
   );
 
   const rows = (accessQuery.data ?? []).map((item) => ({
