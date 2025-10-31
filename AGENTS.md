@@ -20,6 +20,8 @@
 - Tests installes: Jest (sample hook test vert), Playwright e2e scaffolding, MSW handlers, README et `.env.example`.
 - Playwright dashboard spec corrigee (sélecteur heading `Clients`) et campagne e2e verte (`npm run e2e`).
 - Typecheck/lint/tests relances (`npm run typecheck`, `npm run lint`, `npm run test`, `npm run e2e`) => tout vert; `test-results/.last-run.json` mis à jour.
+- Services BillingCycle → Country : hooks TanStack Query, formulaires React Hook Form + Zod, pages App Router et navigation intégrées.
+- Vérifications automatiques relancées (`npm run lint`, `npm run typecheck`, `npm run test`) — tout vert (31/10/2025).
 - Synthèse OpenAPI automatique générée pour `tasks/*.md` via `scripts/generateTasks.mjs`.
 
 ## A faire rapidement
@@ -31,13 +33,14 @@
 - [x] Migrer la convention `middleware` -> `proxy` (warning Next.js pendant `npm run e2e`).
 - [x] Prendre en compte le fichier ERROR.txt lors de l'exécution de `npm run dev` (trace navigateur)
 - [x] L'utilisateur doit s'authentifier via Keycloak avant d'accéder à l'application (utilise keycloak.js ou autre)
+- [x] Vérifications automatiques du 2025-10-31 : `npm run lint`, `npm run typecheck`, `npm run test` tous passés.
 
 ## Tâches services à implémenter
-- [ ] Service BillingCycle — cf. `tasks/TASK001.md`
-- [ ] Service Calendar — cf. `tasks/TASK002.md`
-- [ ] Service Configuration — cf. `tasks/TASK003.md`
-- [ ] Service CountryIso — cf. `tasks/TASK004.md`
-- [ ] Service Country — cf. `tasks/TASK005.md`
+- [x] Service BillingCycle — cf. `tasks/TASK001.md` (démarré)
+- [x] Service Calendar — cf. `tasks/TASK002.md` (démarré)
+- [x] Service Configuration — cf. `tasks/TASK003.md` (démarré)
+- [x] Service CountryIso — cf. `tasks/TASK004.md` (démarré)
+- [x] Service Country — cf. `tasks/TASK005.md` (démarré)
 - [ ] Service CurrencyIso — cf. `tasks/TASK006.md`
 - [ ] Service Currency — cf. `tasks/TASK007.md`
 - [ ] Service Filter — cf. `tasks/TASK008.md`

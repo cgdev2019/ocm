@@ -9,7 +9,12 @@
     "customerAccounts": "Comptes clients",
     "invoices": "Factures",
     "taxes": "Taxes",
-    "settings": "Réglages"
+    "settings": "Réglages",
+    "billingCycles": "Cycles de facturation",
+    "calendars": "Calendriers",
+    "configuration": "Configuration",
+    "countryIso": "Pays ISO",
+    "countries": "Pays commercialisés"
   },
   "actions": {
     "create": "Créer",
@@ -39,6 +44,10 @@
     "empty": "Aucune donnée pour le moment.",
     "loading": "Chargement des données...",
     "actions": "Actions"
+  },
+  "common": {
+    "yes": "Oui",
+    "no": "Non"
   },
   "forms": {
     "required": "Ce champ est obligatoire",
@@ -86,6 +95,81 @@
       "description": "Description",
       "percent": "Pourcentage",
       "accountingCode": "Code comptable"
+    },
+    "billingCycle": {
+      "code": "Code",
+      "description": "Description",
+      "calendar": "Calendrier",
+      "invoiceDateDelayEL": "EL délai date de facture",
+      "invoiceDateDelay": "Délai date de facture",
+      "dueDateDelay": "Délai échéance",
+      "dueDateDelayEL": "EL délai échéance",
+      "type": "Type",
+      "referenceDate": "Date de référence",
+      "invoicingThreshold": "Seuil de facturation",
+      "computeDatesAtValidation": "Calculer les dates à la validation",
+      "types": {
+        "billingAccount": "Compte de facturation",
+        "subscription": "Abonnement",
+        "order": "Commande"
+      },
+      "referenceDates": {
+        "today": "Aujourd'hui",
+        "nextInvoiceDate": "Prochaine date de facture",
+        "lastTransactionDate": "Dernière transaction",
+        "endDate": "Date de fin"
+      },
+      "deleteConfirmation": "Supprimer ce cycle de facturation le retirera d'Opencell."
+    },
+    "calendar": {
+      "code": "Code",
+      "description": "Description",
+      "calendarType": "Type de calendrier",
+      "periodLength": "Durée de période",
+      "periodUnit": "Unité de période",
+      "nbPeriods": "Nombre de périodes",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "initDateEL": "EL date d'initialisation",
+      "types": {
+        "yearly": "Annuel",
+        "daily": "Quotidien",
+        "period": "Période",
+        "interval": "Intervalle",
+        "intersect": "Intersection",
+        "union": "Union",
+        "append": "Concaténation",
+        "banking": "Bancaire",
+        "fixed": "Fixe"
+      },
+      "periodUnits": {
+        "month": "Mois",
+        "dayOfMonth": "Jour du mois",
+        "hourOfDay": "Heure",
+        "minute": "Minute",
+        "second": "Seconde"
+      },
+      "deleteConfirmation": "Supprimer ce calendrier le retirera d'Opencell."
+    },
+    "configuration": {
+      "key": "Clé",
+      "value": "Valeur",
+      "notFound": "Entrée de configuration introuvable"
+    },
+    "countryIso": {
+      "countryCode": "Code pays",
+      "description": "Description",
+      "currencyCode": "Code devise",
+      "languageCode": "Code langue",
+      "deleteConfirmation": "Supprimer cet ISO retirera la définition du pays commercial."
+    },
+    "country": {
+      "countryCode": "Code pays",
+      "name": "Nom",
+      "currencyCode": "Code devise",
+      "languageCode": "Code langue",
+      "disabled": "Désactivé",
+      "deleteConfirmation": "Supprimer ce pays commercial le retirera d'Opencell."
     }
   },
   "feedback": {

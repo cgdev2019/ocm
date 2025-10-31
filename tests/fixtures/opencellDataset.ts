@@ -6,6 +6,30 @@ import type {
 } from '@/features/customers/types';
 import type { InvoiceDto } from '@/features/invoices/types';
 import type { TaxFormValues } from '@/features/taxes/types';
+import type {
+  BillingCycleFormValues,
+  BillingCycleListItem,
+  BillingCyclesResponseDto,
+} from '@/features/billing-cycles/types';
+import type {
+  CalendarFormValues,
+  CalendarListItem,
+  ListCalendarResponse,
+} from '@/features/calendars/types';
+import type {
+  ConfigurationListItem,
+  GetConfigurationResponse,
+} from '@/features/configuration/types';
+import type {
+  CountryIsoFormValues,
+  CountryIsoListItem,
+  GetCountriesIsoResponse,
+} from '@/features/country-iso/types';
+import type {
+  CountryFormValues,
+  CountryListItem,
+  TradingCountriesResponseDto,
+} from '@/features/countries/types';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
@@ -185,3 +209,130 @@ export const taxFormFixtures: TaxFormValues[] = [
     accountingCode: '4456',
   },
 ];
+
+export const billingCyclesResponseFixture: BillingCyclesResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  billingCycles: {
+    billingCycle: [
+      {
+        code: 'BC-MONTHLY',
+        description: 'Cycle mensuel',
+        calendar: 'CAL-MONTH',
+        invoiceDateDelayEL: '0',
+        type: 'BILLINGACCOUNT',
+        referenceDate: 'NEXT_INVOICE_DATE',
+      },
+    ],
+  },
+};
+
+export const billingCycleListItemsFixture: BillingCycleListItem[] = [
+  {
+    code: 'BC-MONTHLY',
+    description: 'Cycle mensuel',
+    calendar: 'CAL-MONTH',
+    type: 'BILLINGACCOUNT',
+  },
+];
+
+export const billingCycleFormFixture: BillingCycleFormValues = {
+  code: 'BC-MONTHLY',
+  description: 'Cycle mensuel',
+  calendar: 'CAL-MONTH',
+  invoiceDateDelayEL: '0',
+  referenceDate: 'NEXT_INVOICE_DATE',
+};
+
+export const calendarResponseFixture: ListCalendarResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  calendars: {
+    calendar: [
+      {
+        code: 'CAL-MONTH',
+        description: 'Calendrier mensuel',
+        calendarType: 'PERIOD',
+        periodLength: 1,
+        periodUnit: 'MONTH',
+      },
+    ],
+  },
+};
+
+export const calendarListItemsFixture: CalendarListItem[] = [
+  {
+    code: 'CAL-MONTH',
+    description: 'Calendrier mensuel',
+    calendarType: 'PERIOD',
+    periodLength: 1,
+    periodUnit: 'MONTH',
+  },
+];
+
+export const calendarFormFixture: CalendarFormValues = {
+  code: 'CAL-MONTH',
+  calendarType: 'PERIOD',
+  periodLength: 1,
+  periodUnit: 'MONTH',
+};
+
+export const configurationResponseFixture: GetConfigurationResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  properties: [
+    { key: 'billing.threshold', value: '150' },
+    { key: 'ui.locale', value: 'fr-FR' },
+  ],
+};
+
+export const configurationListFixture: ConfigurationListItem[] = [
+  { key: 'billing.threshold', value: '150' },
+  { key: 'ui.locale', value: 'fr-FR' },
+];
+
+export const countryIsoResponseFixture: GetCountriesIsoResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  countries: [
+    {
+      countryCode: 'FR',
+      description: 'France',
+      currencyCode: 'EUR',
+      languageCode: 'fr',
+    },
+  ],
+};
+
+export const countryIsoListFixture: CountryIsoListItem[] = [
+  { countryCode: 'FR', description: 'France', currencyCode: 'EUR', languageCode: 'fr' },
+];
+
+export const countryIsoFormFixture: CountryIsoFormValues = {
+  countryCode: 'FR',
+  description: 'France',
+  currencyCode: 'EUR',
+  languageCode: 'fr',
+};
+
+export const countriesResponseFixture: TradingCountriesResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  tradingCountries: {
+    country: [
+      {
+        countryCode: 'FR',
+        description: 'France',
+        currencyCode: 'EUR',
+        languageCode: 'fr',
+      },
+    ],
+  },
+};
+
+export const countryListFixture: CountryListItem[] = [
+  { countryCode: 'FR', name: 'France', currencyCode: 'EUR', languageCode: 'fr', disabled: false },
+];
+
+export const countryFormFixture: CountryFormValues = {
+  countryCode: 'FR',
+  name: 'France',
+  currencyCode: 'EUR',
+  languageCode: 'fr',
+  disabled: false,
+};
