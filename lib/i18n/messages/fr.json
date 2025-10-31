@@ -21,7 +21,11 @@
     "genericCodes": "Codes génériques",
     "invoiceCategories": "Catégories de facture",
     "invoiceSequences": "Séquences de facture",
-    "invoiceSubCategories": "Sous-catégories de facture"
+    "invoiceSubCategories": "Sous-catégories de facture",
+    "invoiceTypes": "Types de facture",
+    "languageIso": "Langues ISO",
+    "languages": "Langues commerciales",
+    "massImport": "Import massif"
   },
   "actions": {
     "create": "Créer",
@@ -245,6 +249,29 @@
       "occTemplateCode": "Code modèle OCC",
       "occTemplateNegativeCode": "Code OCC négatif",
       "sortIndex": "Ordre d'affichage"
+    },
+    "invoiceType": {
+      "code": "Code",
+      "description": "Description",
+      "occTemplateCode": "Code modèle OCC",
+      "occTemplateNegativeCode": "Code OCC négatif",
+      "invoiceValidationScriptCode": "Code script de validation",
+      "customInvoiceXmlScriptInstanceCode": "Script XML personnalisé",
+      "billingTemplateName": "Nom du template de facturation",
+      "emailTemplateCode": "Code template email",
+      "matchingAuto": "Rapprochement automatique",
+      "invoiceAccountable": "Comptabilisé en facture",
+      "useSelfSequence": "Utiliser une séquence dédiée"
+    },
+    "languageIso": {
+      "code": "Code langue",
+      "description": "Description"
+    },
+    "language": {
+      "code": "Code langue",
+      "description": "Description",
+      "disabled": "Désactivé",
+      "descriptions": "Descriptions localisées"
     }
   },
   "feedback": {
@@ -258,6 +285,19 @@
     "status": "Statut",
     "from": "Du",
     "to": "Au"
+  },
+  "massImport": {
+    "title": "Import massif",
+    "description": "Téléversez un fichier pour détecter automatiquement son type avant import.",
+    "selectFile": "Sélectionner un fichier",
+    "changeFile": "Changer de fichier",
+    "upload": "Téléverser et détecter",
+    "uploading": "Téléversement...",
+    "processing": "Détection du type en cours...",
+    "uploadError": "Le téléversement a échoué. Merci de réessayer.",
+    "resultTitle": "Type détecté",
+    "fileName": "Nom du fichier",
+    "fileType": "Type détecté"
   },
   "auth": {
     "signIn": "Se connecter",

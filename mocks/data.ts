@@ -7,6 +7,9 @@ import type { GenericCodeFormValues } from '@/features/generic-code/types';
 import type { InvoiceCategoryFormValues } from '@/features/invoice-categories/types';
 import type { InvoiceSequenceFormValues } from '@/features/invoice-sequences/types';
 import type { InvoiceSubCategoryFormValues } from '@/features/invoice-sub-categories/types';
+import type { InvoiceTypeFormValues } from '@/features/invoice-types/types';
+import type { LanguageIsoFormValues } from '@/features/language-iso/types';
+import type { LanguageFormValues } from '@/features/languages/types';
 import type { InvoiceDto } from '@/features/invoices/types';
 import type { TaxFormValues } from '@/features/taxes/types';
 import {
@@ -21,6 +24,10 @@ import {
   invoiceCategoryFormFixture,
   invoiceSequenceFormFixture,
   invoiceSubCategoryFormFixture,
+  invoiceTypeFormFixture,
+  languageIsoListFixture,
+  languageListFixture,
+  importFileTypeFixture,
   taxFormFixtures,
 } from '@/tests/fixtures/opencellDataset';
 
@@ -61,3 +68,18 @@ export const invoiceCategoriesData: InvoiceCategoryFormValues[] = [invoiceCatego
 export const invoiceSequencesData: InvoiceSequenceFormValues[] = [invoiceSequenceFormFixture];
 
 export const invoiceSubCategoriesData: InvoiceSubCategoryFormValues[] = [invoiceSubCategoryFormFixture];
+
+export const invoiceTypesData: InvoiceTypeFormValues[] = [invoiceTypeFormFixture];
+
+export const languageIsosData: LanguageIsoFormValues[] = languageIsoListFixture.map(({ code, description }) => ({
+  code,
+  description,
+}));
+
+export const languagesData: LanguageFormValues[] = languageListFixture.map(({ code, description, disabled }) => ({
+  code,
+  description,
+  disabled,
+}));
+
+export const massImportDetection = importFileTypeFixture;

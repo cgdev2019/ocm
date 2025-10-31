@@ -69,6 +69,26 @@ import type {
   InvoiceSubCategoryListItem,
   InvoiceSubCategoryResponseDto,
 } from '@/features/invoice-sub-categories/types';
+import type {
+  GetInvoiceTypeResponse,
+  GetInvoiceTypesResponse,
+  InvoiceTypeFormValues,
+  InvoiceTypeListItem,
+} from '@/features/invoice-types/types';
+import type {
+  GetLanguageIsoResponse,
+  GetLanguagesIsoResponse,
+  LanguageIsoFormValues,
+  LanguageIsoListItem,
+} from '@/features/language-iso/types';
+import type {
+  GetTradingLanguageResponse,
+  LanguageDetailValues,
+  LanguageFormValues,
+  LanguageListItem,
+  TradingLanguagesResponseDto,
+} from '@/features/languages/types';
+import type { ImportFileTypeDto } from '@/features/mass-import/types';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
@@ -596,4 +616,128 @@ export const invoiceSubCategoryResponseFixture: InvoiceSubCategoryResponseDto = 
 export const invoiceSubCategoryDetailFixture: GetInvoiceSubCategoryResponse = {
   actionStatus: { status: 'SUCCESS', message: 'OK' },
   invoiceSubCategory: invoiceSubCategoryFormFixture,
+};
+
+export const invoiceTypeFormFixture: InvoiceTypeFormValues = {
+  code: 'INV-TYPE-STD',
+  description: 'Facture standard',
+  occTemplateCode: 'OCC-INVOICE',
+  occTemplateNegativeCode: 'OCC-INVOICE-NEG',
+  invoiceValidationScriptCode: 'VALIDATE_INVOICE',
+  customInvoiceXmlScriptInstanceCode: 'XML_SCRIPT',
+  billingTemplateName: 'default-billing',
+  emailTemplateCode: 'invoice-email',
+  matchingAuto: true,
+  invoiceAccountable: true,
+  useSelfSequence: false,
+};
+
+export const invoiceTypeListFixture: InvoiceTypeListItem[] = [
+  {
+    code: 'INV-TYPE-STD',
+    description: 'Facture standard',
+    occTemplateCode: 'OCC-INVOICE',
+    occTemplateNegativeCode: 'OCC-INVOICE-NEG',
+    matchingAuto: true,
+    invoiceAccountable: true,
+    useSelfSequence: false,
+  },
+];
+
+export const invoiceTypesResponseFixture: GetInvoiceTypesResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  invoiceTypesDto: {
+    invoiceTypes: [
+      {
+        code: 'INV-TYPE-STD',
+        description: 'Facture standard',
+        occTemplateCode: 'OCC-INVOICE',
+        occTemplateNegativeCode: 'OCC-INVOICE-NEG',
+        invoiceValidationScriptCode: 'VALIDATE_INVOICE',
+        customInvoiceXmlScriptInstanceCode: 'XML_SCRIPT',
+        billingTemplateName: 'default-billing',
+        emailTemplateCode: 'invoice-email',
+        matchingAuto: true,
+        invoiceAccountable: true,
+        useSelfSequence: false,
+      },
+    ],
+  },
+};
+
+export const invoiceTypeDetailFixture: GetInvoiceTypeResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  invoiceTypeDto: {
+    code: 'INV-TYPE-STD',
+    description: 'Facture standard',
+    occTemplateCode: 'OCC-INVOICE',
+    occTemplateNegativeCode: 'OCC-INVOICE-NEG',
+    invoiceValidationScriptCode: 'VALIDATE_INVOICE',
+    customInvoiceXmlScriptInstanceCode: 'XML_SCRIPT',
+    billingTemplateName: 'default-billing',
+    emailTemplateCode: 'invoice-email',
+    matchingAuto: true,
+    invoiceAccountable: true,
+    useSelfSequence: false,
+  },
+};
+
+export const languageIsoFormFixture: LanguageIsoFormValues = {
+  code: 'fr',
+  description: 'Français',
+};
+
+export const languageIsoListFixture: LanguageIsoListItem[] = [
+  { code: 'fr', description: 'Français' },
+  { code: 'en', description: 'Anglais' },
+];
+
+export const languagesIsoResponseFixture: GetLanguagesIsoResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  languages: languageIsoListFixture.map(({ code, description }) => ({ code, description })),
+};
+
+export const languageIsoDetailFixture: GetLanguageIsoResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  language: { code: 'fr', description: 'Français' },
+};
+
+export const languageFormFixture: LanguageFormValues = {
+  code: 'fr_FR',
+  description: 'Français (France)',
+  disabled: false,
+};
+
+export const languageListFixture: LanguageListItem[] = [
+  { code: 'fr_FR', description: 'Français (France)', disabled: false },
+  { code: 'en_GB', description: 'Anglais (UK)', disabled: true },
+];
+
+export const languagesResponseFixture: TradingLanguagesResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  tradingLanguages: {
+    language: languageListFixture.map((item) => ({
+      code: item.code,
+      description: item.description,
+      disabled: item.disabled,
+    })),
+  },
+};
+
+export const languageDetailFixture: GetTradingLanguageResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  language: {
+    code: 'fr_FR',
+    description: 'Français (France)',
+    disabled: false,
+    languageDescriptions: [
+      { language: 'en', description: 'French (France)' },
+      { language: 'fr', description: 'Français (France)' },
+    ],
+  },
+};
+
+export const importFileTypeFixture: ImportFileTypeDto = {
+  fileName: 'customers.csv',
+  fileType: 'CUSTOMER',
 };

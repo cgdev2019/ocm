@@ -13,6 +13,10 @@ import CodeIcon from '@mui/icons-material/CodeOutlined';
 import CategoryIcon from '@mui/icons-material/CategoryOutlined';
 import NumbersIcon from '@mui/icons-material/FormatListNumberedOutlined';
 import LabelIcon from '@mui/icons-material/LabelOutlined';
+import DescriptionIcon from '@mui/icons-material/DescriptionOutlined';
+import LanguageIcon from '@mui/icons-material/LanguageOutlined';
+import TranslateIcon from '@mui/icons-material/TranslateOutlined';
+import CloudUploadIcon from '@mui/icons-material/CloudUploadOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -29,6 +33,10 @@ const registry: Record<string, SvgIconComponent> = {
   invoiceCategory: CategoryIcon,
   invoiceSequence: NumbersIcon,
   invoiceSubCategory: LabelIcon,
+  invoiceType: DescriptionIcon,
+  languageIso: LanguageIcon,
+  language: TranslateIcon,
+  massImport: CloudUploadIcon,
 };
 
 export const NavIcon = ({ name }: { name: string }) => {

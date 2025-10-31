@@ -18,7 +18,11 @@ export const NAV_SECTIONS: Array<{
     | 'genericCode'
     | 'invoiceCategory'
     | 'invoiceSequence'
-    | 'invoiceSubCategory';
+    | 'invoiceSubCategory'
+    | 'invoiceType'
+    | 'languageIso'
+    | 'language'
+    | 'massImport';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
   { label: 'navigation.customers', path: '/customers', icon: 'customers' },
@@ -37,4 +41,8 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.invoiceCategories', path: '/invoice-categories', icon: 'invoiceCategory' },
   { label: 'navigation.invoiceSequences', path: '/invoice-sequences', icon: 'invoiceSequence' },
   { label: 'navigation.invoiceSubCategories', path: '/invoice-sub-categories', icon: 'invoiceSubCategory' },
+  { label: 'navigation.invoiceTypes', path: '/invoice-types', icon: 'invoiceType' },
+  { label: 'navigation.languageIso', path: '/language-iso', icon: 'languageIso' },
+  { label: 'navigation.languages', path: '/languages', icon: 'language' },
+  { label: 'navigation.massImport', path: '/mass-import', icon: 'massImport' },
 ];

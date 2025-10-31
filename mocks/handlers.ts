@@ -12,6 +12,10 @@ import {
   invoiceCategoriesData,
   invoiceSequencesData,
   invoiceSubCategoriesData,
+  invoiceTypesData,
+  languageIsosData,
+  languagesData,
+  massImportDetection,
   invoices,
   taxes,
 } from '@/mocks/data';
@@ -27,6 +31,9 @@ const genericCodesStore = [...genericCodes];
 const invoiceCategoriesStore = [...invoiceCategoriesData];
 const invoiceSequencesStore = [...invoiceSequencesData];
 const invoiceSubCategoriesStore = [...invoiceSubCategoriesData];
+const invoiceTypesStore = [...invoiceTypesData];
+const languageIsosStore = [...languageIsosData];
+const languagesStore = [...languagesData];
 
 const success = (message = 'OK') => ({ status: 'SUCCESS', message });
 
@@ -43,6 +50,9 @@ const findInvoiceCategory = (code: string) =>
 const findInvoiceSequence = (code: string) => invoiceSequencesStore.find((item) => item.code === code);
 const findInvoiceSubCategory = (code: string) =>
   invoiceSubCategoriesStore.find((item) => item.code === code);
+const findInvoiceType = (code: string) => invoiceTypesStore.find((item) => item.code === code);
+const findLanguageIso = (code: string) => languageIsosStore.find((item) => item.code === code);
+const findLanguage = (code: string) => languagesStore.find((item) => item.code === code);
 
 export const handlers = [
   http.get('*/api/rest/account/customer/listGetAll', () =>
@@ -427,6 +437,171 @@ export const handlers = [
     return HttpResponse.json(success());
   }),
 
+  http.get('*/api/rest/invoiceType/list', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      invoiceTypesDto: { invoiceTypes: invoiceTypesStore },
+    }),
+  ),
+  http.get('*/api/rest/invoiceType', ({ request }) => {
+    const url = new URL(request.url);
+    const code = url.searchParams.get('invoiceTypeCode');
+    const item = code ? findInvoiceType(code) : undefined;
+    if (!item) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), invoiceTypeDto: item });
+  }),
+  http.post('*/api/rest/invoiceType', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceTypesStore)[number];
+    if (findInvoiceType(payload.code)) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Already exists' } }, { status: 400 });
+    }
+    invoiceTypesStore.push(payload);
+    return HttpResponse.json(success());
+  }),
+  http.put('*/api/rest/invoiceType', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceTypesStore)[number];
+    const index = invoiceTypesStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoiceTypesStore[index] = { ...invoiceTypesStore[index], ...payload };
+    }
+    return HttpResponse.json(success());
+  }),
+  http.post('*/api/rest/invoiceType/createOrUpdate', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceTypesStore)[number];
+    const index = invoiceTypesStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoiceTypesStore[index] = { ...invoiceTypesStore[index], ...payload };
+    } else {
+      invoiceTypesStore.push(payload);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.delete('*/api/rest/invoiceType/{invoiceTypeCode}', ({ params }) => {
+    const index = invoiceTypesStore.findIndex((item) => item.code === params.invoiceTypeCode);
+    if (index >= 0) {
+      invoiceTypesStore.splice(index, 1);
+    }
+    return HttpResponse.json(success());
+  }),
+
+  http.get('*/api/rest/languageIso/listGetAll', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      languages: languageIsosStore,
+    }),
+  ),
+  http.get('*/api/rest/languageIso', ({ request }) => {
+    const url = new URL(request.url);
+    const code = url.searchParams.get('languageCode');
+    const item = code ? findLanguageIso(code) : undefined;
+    if (!item) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), language: item });
+  }),
+  http.post('*/api/rest/languageIso', async ({ request }) => {
+    const payload = (await request.json()) as (typeof languageIsosStore)[number];
+    if (payload.code && findLanguageIso(payload.code)) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Already exists' } }, { status: 400 });
+    }
+    languageIsosStore.push(payload);
+    return HttpResponse.json(success());
+  }),
+  http.put('*/api/rest/languageIso', async ({ request }) => {
+    const payload = (await request.json()) as (typeof languageIsosStore)[number];
+    const index = payload.code ? languageIsosStore.findIndex((item) => item.code === payload.code) : -1;
+    if (index >= 0) {
+      languageIsosStore[index] = { ...languageIsosStore[index], ...payload };
+    } else if (payload.code) {
+      languageIsosStore.push(payload);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.post('*/api/rest/languageIso/createOrUpdate', async ({ request }) => {
+    const payload = (await request.json()) as (typeof languageIsosStore)[number];
+    const index = payload.code ? languageIsosStore.findIndex((item) => item.code === payload.code) : -1;
+    if (index >= 0) {
+      languageIsosStore[index] = { ...languageIsosStore[index], ...payload };
+    } else if (payload.code) {
+      languageIsosStore.push(payload);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.delete('*/api/rest/languageIso/{languageCode}', ({ params }) => {
+    const index = languageIsosStore.findIndex((item) => item.code === params.languageCode);
+    if (index >= 0) {
+      languageIsosStore.splice(index, 1);
+    }
+    return HttpResponse.json(success());
+  }),
+
+  http.get('*/api/rest/language/list', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      tradingLanguages: { language: languagesStore },
+    }),
+  ),
+  http.get('*/api/rest/language', ({ request }) => {
+    const url = new URL(request.url);
+    const code = url.searchParams.get('languageCode');
+    const item = code ? findLanguage(code) : undefined;
+    if (!item) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), language: item });
+  }),
+  http.post('*/api/rest/language', async ({ request }) => {
+    const payload = (await request.json()) as (typeof languagesStore)[number];
+    if (payload.code && findLanguage(payload.code)) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Already exists' } }, { status: 400 });
+    }
+    languagesStore.push(payload);
+    return HttpResponse.json(success());
+  }),
+  http.put('*/api/rest/language', async ({ request }) => {
+    const payload = (await request.json()) as (typeof languagesStore)[number];
+    const index = payload.code ? languagesStore.findIndex((item) => item.code === payload.code) : -1;
+    if (index >= 0) {
+      languagesStore[index] = { ...languagesStore[index], ...payload };
+    } else if (payload.code) {
+      languagesStore.push(payload);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.post('*/api/rest/language/createOrUpdate', async ({ request }) => {
+    const payload = (await request.json()) as (typeof languagesStore)[number];
+    const index = payload.code ? languagesStore.findIndex((item) => item.code === payload.code) : -1;
+    if (index >= 0) {
+      languagesStore[index] = { ...languagesStore[index], ...payload };
+    } else if (payload.code) {
+      languagesStore.push(payload);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.delete('*/api/rest/language/{languageCode}', ({ params }) => {
+    const index = languagesStore.findIndex((item) => item.code === params.languageCode);
+    if (index >= 0) {
+      languagesStore.splice(index, 1);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.post('*/api/rest/language/{code}/enable', ({ params }) => {
+    const item = findLanguage(String(params.code));
+    if (item) {
+      item.disabled = false;
+    }
+    return HttpResponse.json(success());
+  }),
+  http.post('*/api/rest/language/{code}/disable', ({ params }) => {
+    const item = findLanguage(String(params.code));
+    if (item) {
+      item.disabled = true;
+    }
+    return HttpResponse.json(success());
+  }),
+
   http.get('*/api/rest/currency/list', () =>
     HttpResponse.json({
       actionStatus: success(),
@@ -531,5 +706,11 @@ export const handlers = [
       filter.disabled = true;
     }
     return HttpResponse.json(success());
+  }),
+
+  http.post('*/api/rest/massImport/uploadAndImport', async ({ request }) => {
+    const payload = (await request.json()) as { filename?: string };
+    const fileName = typeof payload?.filename === 'string' ? payload.filename : massImportDetection.fileName;
+    return HttpResponse.json({ ...massImportDetection, fileName });
   }),
 ];
