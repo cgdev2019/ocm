@@ -17,7 +17,11 @@
     "currency": "Devises",
     "countryIso": "Pays ISO",
     "countries": "Pays commercialisés",
-    "filters": "Filtres"
+    "filters": "Filtres",
+    "genericCodes": "Codes génériques",
+    "invoiceCategories": "Catégories de facture",
+    "invoiceSequences": "Séquences de facture",
+    "invoiceSubCategories": "Sous-catégories de facture"
   },
   "actions": {
     "create": "Créer",
@@ -33,7 +37,8 @@
     "retry": "Réessayer",
     "add": "Ajouter",
     "enable": "Activer",
-    "disable": "Désactiver"
+    "disable": "Désactiver",
+    "generateCode": "Générer un code"
   },
   "dashboard": {
     "welcome": "Bon retour, {name} !",
@@ -199,6 +204,47 @@
       "shared": "Partagé",
       "disabled": "Désactivé",
       "deleteConfirmation": "Supprimer ce filtre le retirera d'Opencell."
+    },
+    "genericCode": {
+      "entityClass": "Classe d'entité",
+      "entityClassPlaceholder": "Ex: org.meveo.model.Account",
+      "formatEL": "Expression format (EL)",
+      "prefixOverride": "Préfixe personnalisé",
+      "sequenceSection": "Séquence associée",
+      "version": "Version du service : {version}",
+      "generatedCode": "Code généré : {code}"
+    },
+    "sequence": {
+      "invoiceSequenceCode": "Code séquence facture",
+      "sequenceType": "Type de séquence",
+      "sequencePattern": "Motif de séquence",
+      "sequenceSize": "Taille",
+      "currentInvoiceNb": "Numéro courant",
+      "prefixEL": "Préfixe (EL)"
+    },
+    "invoiceCategory": {
+      "code": "Code",
+      "description": "Description",
+      "occTemplateCode": "Code modèle OCC",
+      "occTemplateNegativeCode": "Code OCC négatif",
+      "sortIndex": "Ordre d'affichage"
+    },
+    "invoiceSequence": {
+      "code": "Code",
+      "description": "Description",
+      "sequencePattern": "Motif",
+      "sequenceType": "Type",
+      "sequenceSize": "Taille",
+      "currentInvoiceNb": "Numéro courant"
+    },
+    "invoiceSubCategory": {
+      "code": "Code",
+      "description": "Description",
+      "invoiceCategory": "Catégorie de facture",
+      "accountingCode": "Code comptable",
+      "occTemplateCode": "Code modèle OCC",
+      "occTemplateNegativeCode": "Code OCC négatif",
+      "sortIndex": "Ordre d'affichage"
     }
   },
   "feedback": {

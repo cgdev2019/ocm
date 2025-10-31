@@ -2,7 +2,19 @@ import { http, HttpResponse } from 'msw';
 import type { CurrencyIsoFormValues } from '@/features/currency-iso/types';
 import type { CurrencyFormValues } from '@/features/currency/types';
 import type { FilterFormValues } from '@/features/filter/types';
-import { customers, customerAccounts, currencies, currencyIsos, filtersData, invoices, taxes } from '@/mocks/data';
+import {
+  customers,
+  customerAccounts,
+  currencies,
+  currencyIsos,
+  filtersData,
+  genericCodes,
+  invoiceCategoriesData,
+  invoiceSequencesData,
+  invoiceSubCategoriesData,
+  invoices,
+  taxes,
+} from '@/mocks/data';
 
 const customersStore = [...customers];
 const customerAccountsStore = [...customerAccounts];
@@ -11,6 +23,10 @@ const taxesStore = [...taxes];
 const currencyIsoStore = [...currencyIsos];
 const currenciesStore = [...currencies];
 const filtersStore = [...filtersData];
+const genericCodesStore = [...genericCodes];
+const invoiceCategoriesStore = [...invoiceCategoriesData];
+const invoiceSequencesStore = [...invoiceSequencesData];
+const invoiceSubCategoriesStore = [...invoiceSubCategoriesData];
 
 const success = (message = 'OK') => ({ status: 'SUCCESS', message });
 
@@ -20,6 +36,13 @@ const findTax = (code: string) => taxesStore.find((t) => t.code === code);
 const findCurrencyIso = (code: string) => currencyIsoStore.find((item) => item.code === code);
 const findCurrency = (code: string) => currenciesStore.find((item) => item.code === code);
 const findFilter = (code: string) => filtersStore.find((item) => item.code === code);
+const findGenericCode = (entityClass: string) =>
+  genericCodesStore.find((item) => item.entityClass === entityClass);
+const findInvoiceCategory = (code: string) =>
+  invoiceCategoriesStore.find((item) => item.code === code);
+const findInvoiceSequence = (code: string) => invoiceSequencesStore.find((item) => item.code === code);
+const findInvoiceSubCategory = (code: string) =>
+  invoiceSubCategoriesStore.find((item) => item.code === code);
 
 export const handlers = [
   http.get('*/api/rest/account/customer/listGetAll', () =>
@@ -212,6 +235,194 @@ export const handlers = [
     const index = currencyIsoStore.findIndex((item) => item.code === params.currencyCode);
     if (index >= 0) {
       currencyIsoStore.splice(index, 1);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.get('*/api/rest/genericCode', ({ request }) => {
+    const url = new URL(request.url);
+    const entityClass = url.searchParams.get('entityClass');
+    const item = entityClass ? findGenericCode(entityClass) : genericCodesStore[0];
+    if (!item) {
+      return HttpResponse.json({ genericCodeDto: null }, { status: 404 });
+    }
+    return HttpResponse.json({ genericCodeDto: item });
+  }),
+  http.post('*/api/rest/genericCode', async ({ request }) => {
+    const payload = (await request.json()) as (typeof genericCodesStore)[number];
+    if (findGenericCode(payload.entityClass)) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Already exists' } }, { status: 400 });
+    }
+    genericCodesStore.push(payload);
+    return HttpResponse.json(success());
+  }),
+  http.put('*/api/rest/genericCode', async ({ request }) => {
+    const payload = (await request.json()) as (typeof genericCodesStore)[number];
+    const index = genericCodesStore.findIndex((item) => item.entityClass === payload.entityClass);
+    if (index >= 0) {
+      genericCodesStore[index] = { ...genericCodesStore[index], ...payload };
+    }
+    return HttpResponse.json(success());
+  }),
+  http.post('*/api/rest/genericCode/generateCode', async ({ request }) => {
+    const payload = (await request.json()) as (typeof genericCodesStore)[number];
+    const item = findGenericCode(payload.entityClass) ?? payload;
+    const current = item.sequence?.currentInvoiceNb ?? 0;
+    const generated = `${item.prefixOverride ?? ''}${String(current + 1).padStart(item.sequence?.sequenceSize ?? 4, '0')}`;
+    if (item.sequence) {
+      item.sequence.currentInvoiceNb = current + 1;
+    }
+    return HttpResponse.json({
+      actionStatus: success(),
+      generatedCode: generated,
+      sequenceType: item.sequence?.sequenceType,
+      pattern: item.sequence?.sequencePattern,
+    });
+  }),
+  http.post('*/api/rest/genericCode/sequence', async ({ request }) => {
+    const payload = (await request.json()) as Partial<(typeof genericCodesStore)[number]['sequence']>;
+    const target = genericCodesStore[0];
+    if (target) {
+      target.sequence = { ...target.sequence, ...payload };
+    }
+    return HttpResponse.json(success());
+  }),
+  http.get('*/api/rest/genericCode/version', () =>
+    HttpResponse.json({ actionStatus: success('1.0.0') }),
+  ),
+  http.get('*/api/rest/invoiceCategory/list', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      invoiceCategories: { invoiceCategory: invoiceCategoriesStore },
+    }),
+  ),
+  http.get('*/api/rest/invoiceCategory', ({ request }) => {
+    const url = new URL(request.url);
+    const code = url.searchParams.get('invoiceCategoryCode');
+    const item = code ? findInvoiceCategory(code) : undefined;
+    if (!item) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), invoiceCategory: item });
+  }),
+  http.post('*/api/rest/invoiceCategory', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceCategoriesStore)[number];
+    if (findInvoiceCategory(payload.code)) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Already exists' } }, { status: 400 });
+    }
+    invoiceCategoriesStore.push(payload);
+    return HttpResponse.json(success());
+  }),
+  http.put('*/api/rest/invoiceCategory', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceCategoriesStore)[number];
+    const index = invoiceCategoriesStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoiceCategoriesStore[index] = { ...invoiceCategoriesStore[index], ...payload };
+    }
+    return HttpResponse.json(success());
+  }),
+  http.post('*/api/rest/invoiceCategory/createOrUpdate', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceCategoriesStore)[number];
+    const index = invoiceCategoriesStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoiceCategoriesStore[index] = { ...invoiceCategoriesStore[index], ...payload };
+    } else {
+      invoiceCategoriesStore.push(payload);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.delete('*/api/rest/invoiceCategory/{invoiceCategoryCode}', ({ params }) => {
+    const index = invoiceCategoriesStore.findIndex((item) => item.code === params.invoiceCategoryCode);
+    if (index >= 0) {
+      invoiceCategoriesStore.splice(index, 1);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.get('*/api/rest/invoiceSequence/list', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      invoiceSequencesDto: { invoiceSequences: invoiceSequencesStore },
+    }),
+  ),
+  http.get('*/api/rest/invoiceSequence', ({ request }) => {
+    const url = new URL(request.url);
+    const code = url.searchParams.get('invoiceSequenceCode');
+    const item = code ? findInvoiceSequence(code) : undefined;
+    if (!item) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), invoiceSequenceDto: item });
+  }),
+  http.post('*/api/rest/invoiceSequence', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceSequencesStore)[number];
+    if (findInvoiceSequence(payload.code)) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Already exists' } }, { status: 400 });
+    }
+    invoiceSequencesStore.push(payload);
+    return HttpResponse.json(success());
+  }),
+  http.put('*/api/rest/invoiceSequence', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceSequencesStore)[number];
+    const index = invoiceSequencesStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoiceSequencesStore[index] = { ...invoiceSequencesStore[index], ...payload };
+    }
+    return HttpResponse.json(success());
+  }),
+  http.post('*/api/rest/invoiceSequence/createOrUpdate', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceSequencesStore)[number];
+    const index = invoiceSequencesStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoiceSequencesStore[index] = { ...invoiceSequencesStore[index], ...payload };
+    } else {
+      invoiceSequencesStore.push(payload);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.get('*/api/rest/invoiceSubCategory/list', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      invoiceSubCategories: { invoiceSubCategory: invoiceSubCategoriesStore },
+    }),
+  ),
+  http.get('*/api/rest/invoiceSubCategory', ({ request }) => {
+    const url = new URL(request.url);
+    const code = url.searchParams.get('invoiceSubCategoryCode');
+    const item = code ? findInvoiceSubCategory(code) : undefined;
+    if (!item) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), invoiceSubCategory: item });
+  }),
+  http.post('*/api/rest/invoiceSubCategory', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceSubCategoriesStore)[number];
+    if (findInvoiceSubCategory(payload.code)) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Already exists' } }, { status: 400 });
+    }
+    invoiceSubCategoriesStore.push(payload);
+    return HttpResponse.json(success());
+  }),
+  http.put('*/api/rest/invoiceSubCategory', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceSubCategoriesStore)[number];
+    const index = invoiceSubCategoriesStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoiceSubCategoriesStore[index] = { ...invoiceSubCategoriesStore[index], ...payload };
+    }
+    return HttpResponse.json(success());
+  }),
+  http.post('*/api/rest/invoiceSubCategory/createOrUpdate', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoiceSubCategoriesStore)[number];
+    const index = invoiceSubCategoriesStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoiceSubCategoriesStore[index] = { ...invoiceSubCategoriesStore[index], ...payload };
+    } else {
+      invoiceSubCategoriesStore.push(payload);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.delete('*/api/rest/invoiceSubCategory/{invoiceSubCategoryCode}', ({ params }) => {
+    const index = invoiceSubCategoriesStore.findIndex((item) => item.code === params.invoiceSubCategoryCode);
+    if (index >= 0) {
+      invoiceSubCategoriesStore.splice(index, 1);
     }
     return HttpResponse.json(success());
   }),

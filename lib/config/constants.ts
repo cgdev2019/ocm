@@ -4,7 +4,21 @@ export const DASHBOARD_ROUTE = '/';
 export const NAV_SECTIONS: Array<{
   label: string;
   path: string;
-  icon: 'dashboard' | 'customers' | 'accounts' | 'invoices' | 'taxes' | 'jobs' | 'billing' | 'calendar' | 'settings' | 'globe';
+  icon:
+    | 'dashboard'
+    | 'customers'
+    | 'accounts'
+    | 'invoices'
+    | 'taxes'
+    | 'jobs'
+    | 'billing'
+    | 'calendar'
+    | 'settings'
+    | 'globe'
+    | 'genericCode'
+    | 'invoiceCategory'
+    | 'invoiceSequence'
+    | 'invoiceSubCategory';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
   { label: 'navigation.customers', path: '/customers', icon: 'customers' },
@@ -19,4 +33,8 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.countryIso', path: '/country-iso', icon: 'globe' },
   { label: 'navigation.countries', path: '/countries', icon: 'globe' },
   { label: 'navigation.filters', path: '/filters', icon: 'settings' },
+  { label: 'navigation.genericCodes', path: '/generic-codes', icon: 'genericCode' },
+  { label: 'navigation.invoiceCategories', path: '/invoice-categories', icon: 'invoiceCategory' },
+  { label: 'navigation.invoiceSequences', path: '/invoice-sequences', icon: 'invoiceSequence' },
+  { label: 'navigation.invoiceSubCategories', path: '/invoice-sub-categories', icon: 'invoiceSubCategory' },
 ];

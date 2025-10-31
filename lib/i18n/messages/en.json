@@ -17,7 +17,11 @@
     "currency": "Currencies",
     "countryIso": "Countries ISO",
     "countries": "Trading countries",
-    "filters": "Filters"
+    "filters": "Filters",
+    "genericCodes": "Generic codes",
+    "invoiceCategories": "Invoice categories",
+    "invoiceSequences": "Invoice sequences",
+    "invoiceSubCategories": "Invoice sub-categories"
   },
   "actions": {
     "create": "Create",
@@ -33,7 +37,8 @@
     "retry": "Retry",
     "add": "Add",
     "enable": "Enable",
-    "disable": "Disable"
+    "disable": "Disable",
+    "generateCode": "Generate code"
   },
   "dashboard": {
     "welcome": "Welcome back, {name}!",
@@ -199,6 +204,47 @@
       "shared": "Shared",
       "disabled": "Disabled",
       "deleteConfirmation": "Deleting this filter will remove it from Opencell."
+    },
+    "genericCode": {
+      "entityClass": "Entity class",
+      "entityClassPlaceholder": "Ex: org.meveo.model.Account",
+      "formatEL": "Format expression (EL)",
+      "prefixOverride": "Custom prefix",
+      "sequenceSection": "Linked sequence",
+      "version": "Service version: {version}",
+      "generatedCode": "Generated code: {code}"
+    },
+    "sequence": {
+      "invoiceSequenceCode": "Invoice sequence code",
+      "sequenceType": "Sequence type",
+      "sequencePattern": "Sequence pattern",
+      "sequenceSize": "Length",
+      "currentInvoiceNb": "Current number",
+      "prefixEL": "Prefix (EL)"
+    },
+    "invoiceCategory": {
+      "code": "Code",
+      "description": "Description",
+      "occTemplateCode": "OCC template code",
+      "occTemplateNegativeCode": "Negative OCC template",
+      "sortIndex": "Display order"
+    },
+    "invoiceSequence": {
+      "code": "Code",
+      "description": "Description",
+      "sequencePattern": "Pattern",
+      "sequenceType": "Type",
+      "sequenceSize": "Length",
+      "currentInvoiceNb": "Current number"
+    },
+    "invoiceSubCategory": {
+      "code": "Code",
+      "description": "Description",
+      "invoiceCategory": "Invoice category",
+      "accountingCode": "Accounting code",
+      "occTemplateCode": "OCC template code",
+      "occTemplateNegativeCode": "Negative OCC template",
+      "sortIndex": "Display order"
     }
   },
   "feedback": {

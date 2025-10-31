@@ -9,6 +9,10 @@ import AutorenewIcon from '@mui/icons-material/AutorenewOutlined';
 import EventNoteIcon from '@mui/icons-material/EventNoteOutlined';
 import TuneIcon from '@mui/icons-material/TuneOutlined';
 import PublicIcon from '@mui/icons-material/PublicOutlined';
+import CodeIcon from '@mui/icons-material/CodeOutlined';
+import CategoryIcon from '@mui/icons-material/CategoryOutlined';
+import NumbersIcon from '@mui/icons-material/FormatListNumberedOutlined';
+import LabelIcon from '@mui/icons-material/LabelOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -21,6 +25,10 @@ const registry: Record<string, SvgIconComponent> = {
   calendar: EventNoteIcon,
   settings: TuneIcon,
   globe: PublicIcon,
+  genericCode: CodeIcon,
+  invoiceCategory: CategoryIcon,
+  invoiceSequence: NumbersIcon,
+  invoiceSubCategory: LabelIcon,
 };
 
 export const NavIcon = ({ name }: { name: string }) => {
