@@ -1,36 +1,14 @@
- GET /fr/customers/new 200 in 2.3s (compile: 2.3s, proxy.ts: 13ms, render: 54ms)
+ GET /fr/customers 200 in 940ms (compile: 160ms, proxy.ts: 14ms, render: 766ms)
+Waiting for the debugger to disconnect...
+📡 [OpenCell Proxy #3] → POST https://siventeappvrec1.mediapost.fr:8444/opencell/api/rest/account/customer/list47?limit=20&offset=0
 Debugger attached.
-📡 [OpenCell Proxy #1] → POST https://siventeappvrec1.mediapost.fr:8444/opencell/api/rest/account/customer/createOrUpdate {
+Waiting for the debugger to disconnect...
+📡 [OpenCell Proxy #3] ← POST 500 https://siventeappvrec1.mediapost.fr:8444/opencell/api/rest/account/customer/list47?limit=20&offset=0 {
   payloadType: 'json',
   payload: {
-    code: 'sdf',
-    description: 'sdf',
-    customerCategory: 'sdf',
-    customerBrand: 'sdf',
-    seller: 'sdf',
-    vatNo: 'sdf',
-    registrationNo: 'sdf',
-    contactInformation: { email: 'test@test.com', phone: 'sdf', address: [Object] }
+    status: 'FAIL',
+    errorCode: 'GENERIC_API_EXCEPTION',
+    message: "org.hibernate.QueryException: could not resolve property: c of: org.meveo.model.crm.Customer [from org.meveo.model.crm.Customer a where (lower(a.code) IN (select lower(s.entityCode) from org.meveo.model.admin.SecuredEntity s where s.searchId IN ('Customer_71449', 'Customer_71644', 'Customer_71564', 'Customer_71643', 'Customer_71645', 'Customer_71647', 'Customer_71646', 'Customer_71649', 'Customer_71648', 'Customer_71651', 'Customer_71650', 'Customer_71653', 'Customer_71652', 'Customer_37303', 'Customer_71655', 'Customer_71654', 'Customer_71619', 'Customer_71618', 'Customer_71620', 'Customer_55553', 'Customer_71626', 'Customer_71625', 'Customer_71624', 'Customer_71628', 'Customer_71627', 'Customer_71633', 'Customer_71629', 'Customer_71635', 'Customer_71634', 'Customer_71636', 'Customer_71638', 'Customer_71637', 'Customer_71640', 'Customer_71639', 'Customer_71642', 'Customer_71641', 'Customer_71596', 'Customer_71595', 'Customer_71598', 'Customer_71597', 'Customer_71600', 'Customer_71599', 'Customer_71601', 'Customer_71603', 'Customer_71602', 'Customer_71605', 'Customer_71604', 'Customer_19941', 'Customer_71607', 'Customer_71606', 'Customer_71609', 'Customer_71608', 'Customer_71611', 'Customer_71610', 'Customer_71612', 'Customer_71615', 'Customer_71613', 'Customer_DEROGATION_UTILISATEURS_MDP', 'Customer_71616', 'Customer_71580', 'Customer_20261', 'Customer_71581', 'Customer_71583', 'Customer_71582', 'Customer_71585', 'Customer_71584', 'Customer_71587', 'Customer_71586', 'Customer_71589', 'Customer_71588', 'Customer_71591', 'Customer_71590', 'Customer_19955', 'Customer_71592', 'Customer_71594', 'Customer_71593', 'Customer_VALERIE.VACHER'))) ORDER BY a.c.code ASC ]"
   }
 }
-Waiting for the debugger to disconnect...
-Failed to proxy request to OpenCell API TypeError: fetch failed
-    at async forwardRequest (app\api\opencell\[...opencellPath]\route.ts:126:20)
-    at async handle (app\api\opencell\[...opencellPath]\route.ts:165:12)
-  124 |   }
-  125 |
-> 126 |   const response = await fetch(targetUrl, {
-      |                    ^
-  127 |     method: request.method,
-  128 |     headers,
-  129 |     body, {
-  [cause]: Error: connect ECONNREFUSED 172.18.120.51:8444
-      at <unknown> (Error: connect ECONNREFUSED 172.18.120.51:8444) {
-    errno: -4078,
-    code: 'ECONNREFUSED',
-    syscall: 'connect',
-    address: '172.18.120.51',
-    port: 8444
-  }
-}
- POST /api/opencell/api/rest/account/customer/createOrUpdate 502 in 3.5s
+ POST /api/opencell/api/rest/account/customer/list47?limit=20&offset=0 500
