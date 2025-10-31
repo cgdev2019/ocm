@@ -22,7 +22,7 @@
 - [x] Repasser `npm run typecheck`, `npm run lint`, `npm run test`, `npm run e2e` et archiver les resultats lorsque tout est vert.
 - [x] Nettoyer ou ignorer `test-results/` avant commit final (actuellement contient une capture d'echec).
 - [x] Migrer la convention `middleware` -> `proxy` (warning Next.js pendant `npm run e2e`).
-- [x] Prendre en compte le fichier ERROR.txt lors de l'exécution de npm run dev (le proxy ignore désormais les assets _next/static)
+- [ ] Prendre en compte le fichier ERROR.txt lors de l'exécution de npm run dev
 
 ## Notes
 - `i18n/request.ts` utilise l'alias `@/`; lint passe sans disable.
