@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { env } from '@/lib/config/env';
 
+const shouldLogProxyTraffic = env.opencellProxyLogs;
+
 const hopByHopHeaders = new Set([
   'connection',
   'keep-alive',
@@ -36,15 +38,16 @@ const sanitizeBodyPreview = (body: string, maxLength = 2_000) => {
 };
 
 const forwardRequest = async (request: NextRequest, path: string[]) => {
-  const requestId = ++proxyRequestCounter;
-  const targetUrl = buildTargetUrl(request, path);
-  const headers = stripHopByHopHeaders(new Headers(request.headers));
-  headers.delete('host');
-  headers.set('accept', headers.get('accept') ?? 'application/json');
+const requestId = shouldLogProxyTraffic ? ++proxyRequestCounter : undefined;
+const targetUrl = buildTargetUrl(request, path);
+const headers = stripHopByHopHeaders(new Headers(request.headers));
+headers.delete('host');
+headers.set('accept', headers.get('accept') ?? 'application/json');
 
-  const isBodylessMethod = request.method === 'GET' || request.method === 'HEAD';
-  const body = isBodylessMethod ? undefined : await request.arrayBuffer();
+const isBodylessMethod = request.method === 'GET' || request.method === 'HEAD';
+const body = isBodylessMethod ? undefined : await request.arrayBuffer();
 
+if (shouldLogProxyTraffic && requestId !== undefined) {
   const bodyPreview =
     body === undefined
       ? undefined
@@ -57,13 +60,15 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
   } else {
     console.warn(`📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`);
   }
+}
 
-  const response = await fetch(targetUrl, {
-    method: request.method,
-    headers,
-    body,
-  });
+const response = await fetch(targetUrl, {
+  method: request.method,
+  headers,
+  body,
+});
 
+if (shouldLogProxyTraffic && requestId !== undefined) {
   const responseClone = response.clone();
   let responsePreview: string | undefined;
   try {
@@ -83,6 +88,7 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
   } else {
     console.warn(`📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`);
   }
+}
 
   const responseHeaders = stripHopByHopHeaders(new Headers(response.headers));
   responseHeaders.delete('content-encoding');
