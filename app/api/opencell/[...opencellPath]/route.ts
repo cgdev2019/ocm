@@ -163,14 +163,36 @@ type UndiciModule = {
   ProxyAgent: new (options: { uri: string }) => Dispatcher;
 };
 
-type UndiciLoadError = Error & { code?: string };
+type UndiciLoadError = Error & { code?: string; cause?: unknown };
+
+const isUnknownBuiltinUndiciError = (error: unknown): boolean => {
+  if (!error || typeof error !== 'object') {
+    return false;
+  }
+
+  const typed = error as Partial<UndiciLoadError> & { message?: unknown };
+  if (typed.code === 'ERR_UNKNOWN_BUILTIN_MODULE') {
+    return true;
+  }
+
+  if (typed.cause && isUnknownBuiltinUndiciError(typed.cause)) {
+    return true;
+  }
+
+  if (typeof typed.message === 'string') {
+    return typed.message.includes('Failed to load external module node:undici');
+  }
+
+  return false;
+};
 
 let undiciModulePromise: Promise<UndiciModule | undefined> | undefined;
 
 const loadUndiciModule = () => {
   if (!undiciModulePromise) {
     undiciModulePromise = (async () => {
-      const attemptedSpecifiers = ['node:undici', 'undici'] as const;
+      const builtinSpecifier = ['node', 'undici'].join(':');
+      const attemptedSpecifiers = [builtinSpecifier, 'undici'] as const;
 
       for (const specifier of attemptedSpecifiers) {
         try {
@@ -179,7 +201,7 @@ const loadUndiciModule = () => {
         } catch (error: unknown) {
           const typedError = error as UndiciLoadError & { code?: string };
 
-          if (specifier === 'node:undici' && typedError?.code === 'ERR_UNKNOWN_BUILTIN_MODULE') {
+          if (specifier === builtinSpecifier && isUnknownBuiltinUndiciError(typedError)) {
             console.warn(
               'Le module intégré "node:undici" est indisponible dans cet environnement. Tentative de repli sur le paquet "undici".',
             );
