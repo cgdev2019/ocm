@@ -160,6 +160,12 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
   const body = isBodylessMethod ? undefined : await request.arrayBuffer();
   const requestBodyText =
     body === undefined ? undefined : textDecoder.decode(body);
+  const sanitizedHeaders = buildSanitizedHeaderEntries(headers).reduce<
+    Record<string, string>
+  >((acc, [name, value]) => {
+    acc[name] = value;
+    return acc;
+  }, {});
   const requestLogDetails = buildLogDetails(
     parseBodyForLogging(requestBodyText, headers.get('content-type')),
   );
@@ -167,10 +173,22 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
   if (shouldLogProxyTraffic && requestId !== undefined) {
     const message = `📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`;
 
-    if (requestLogDetails) {
-      console.warn(message, requestLogDetails);
-    } else {
-      console.warn(message);
+    console.warn(message, {
+      headers: sanitizedHeaders,
+      ...(requestLogDetails ?? {}),
+    });
+
+    const { command: curlCommand, truncatedBody } = buildCurlCommand(
+      request.method,
+      targetUrl,
+      headers,
+      requestBodyText,
+    );
+    console.warn(`📡 [OpenCell Proxy #${requestId}] ↳ ${curlCommand}`);
+    if (truncatedBody) {
+      console.warn(
+        `📡 [OpenCell Proxy #${requestId}] ↳ Corps tronqué de ${truncatedBody} caractères pour les logs`,
+      );
     }
 
     const { command: curlCommand, truncatedBody } = buildCurlCommand(
