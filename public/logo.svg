@@ -1,0 +1,16 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Opencell Logo</title>
+  <desc id="desc">Stylised O lettermark with accent</desc>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1976d2" />
+      <stop offset="100%" stop-color="#42a5f5" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0d1b2a" />
+  <path
+    d="M32 14c-9.941 0-18 8.059-18 18s8.059 18 18 18c4.41 0 8.45-1.6 11.57-4.24l-5.47-5.47A10 10 0 0 1 32 46c-6.075 0-11-4.925-11-11s4.925-11 11-11c2.884 0 5.502 1.12 7.46 2.94l5.44-5.44C41.69 17.05 37.09 14 32 14Z"
+    fill="url(#grad)"
+  />
+  <circle cx="46" cy="18" r="6" fill="#ffb300" />
+</svg>

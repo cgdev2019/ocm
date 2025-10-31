@@ -19,7 +19,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { GlobalSearch } from '@/components/layout/GlobalSearch';
 import { LocaleSwitcher } from '@/components/layout/LocaleSwitcher';
 import { NavIcon } from '@/components/layout/NavIcon';
@@ -27,7 +27,7 @@ import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { UserMenu } from '@/components/layout/UserMenu';
 import { NAV_SECTIONS } from '@/lib/config/constants';
 import { useAuth } from '@/lib/auth/context';
-import { usePathname, useRouter } from '@/lib/i18n/navigation';
+import { Link, usePathname } from '@/lib/i18n/navigation';
 
 const drawerWidth = 280;
 
@@ -35,9 +35,9 @@ export const AppShell = ({ children }: PropsWithChildren) => {
   const [open, setOpen] = useState(false);
   const t = useTranslations('navigation');
   const pathname = usePathname();
-  const locale = useLocale();
   const { user } = useAuth();
-  const router = useRouter();
+
+  const normalizedPath = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
 
   const drawer = (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -57,16 +57,18 @@ export const AppShell = ({ children }: PropsWithChildren) => {
       <Divider />
       <List sx={{ flex: 1 }}>
         {NAV_SECTIONS.map((item) => {
-          const href = `/${locale}${item.path}`;
-          const selected = pathname?.startsWith(`/${locale}${item.path}`);
+          const isRoot = item.path === '/';
+          const isSelected = isRoot
+            ? normalizedPath === '/'
+            : normalizedPath === item.path || normalizedPath.startsWith(`${item.path}/`);
+
           return (
             <ListItemButton
               key={item.path}
-              selected={Boolean(selected)}
-              onClick={() => {
-                router.push(href);
-                setOpen(false);
-              }}
+              component={Link}
+              href={item.path}
+              selected={isSelected}
+              onClick={() => setOpen(false)}
             >
               <ListItemIcon>
                 <NavIcon name={item.icon} />
