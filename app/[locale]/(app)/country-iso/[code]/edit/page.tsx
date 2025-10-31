@@ -4,8 +4,9 @@ type Props = {
   params: Promise<{ code: string }>;
 };
 
-export default async function CountryIsoEditPage({ params }: Props) {
-  const { code } = await params;
+export default async function CountryIsoEditPage(props: Props) {
+  const params = await props.params;
+  const { code } = params;
 
   return <CountryIsoEditForm countryCode={code} />;
 }

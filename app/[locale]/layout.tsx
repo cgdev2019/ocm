@@ -13,8 +13,10 @@ type Props = {
   params: Promise<{ locale: string }> | { locale: string };
 };
 
-export default async function LocaleLayout({ children, params }: Props) {
-  const { locale } = await params;
+export default async function LocaleLayout(props: Props) {
+  const { children } = props;
+  const params = await props.params;
+  const { locale } = params;
   if (!locales.includes(locale as Locale)) {
     notFound();
   }

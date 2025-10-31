@@ -4,8 +4,9 @@ type Props = {
   params: Promise<{ code: string }>;
 };
 
-export default async function CountryDetailPage({ params }: Props) {
-  const { code } = await params;
+export default async function CountryDetailPage(props: Props) {
+  const params = await props.params;
+  const { code } = params;
 
   return <CountryDetail countryCode={code} />;
 }

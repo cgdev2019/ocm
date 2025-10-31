@@ -4,6 +4,8 @@ import { Agent, ProxyAgent } from 'node:undici';
 
 import { env } from '@/lib/config/env';
 
+export const runtime = 'nodejs';
+
 const shouldLogProxyTraffic = env.opencellProxyLogs;
 const textDecoder = new TextDecoder();
 
@@ -485,8 +487,6 @@ const handle = async (request: NextRequest, path: string[]) => {
     return NextResponse.json(proxyError.body, { status: proxyError.status });
   }
 };
-
-export const runtime = 'nodejs';
 
 type RouteParams =
   | { opencellPath?: string[] }

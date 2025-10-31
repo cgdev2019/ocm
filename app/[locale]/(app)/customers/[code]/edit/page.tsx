@@ -4,8 +4,9 @@ type Props = {
   params: Promise<{ code: string }>;
 };
 
-export default async function CustomerEditPage({ params }: Props) {
-  const { code } = await params;
+export default async function CustomerEditPage(props: Props) {
+  const params = await props.params;
+  const { code } = params;
 
   return <CustomerEditForm code={code} />;
 }

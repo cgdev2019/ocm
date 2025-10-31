@@ -36,7 +36,7 @@ export const CurrencyList = () => {
         headerName: t('forms.currency.decimalPlaces'),
         flex: 0.6,
         minWidth: 120,
-        valueFormatter: (params) => (params.value ?? '—'),
+        valueFormatter: (_value: never, row) => row.decimalPlaces ?? '—',
       },
       {
         field: 'disabled',
