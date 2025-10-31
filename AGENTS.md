@@ -29,6 +29,8 @@
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
 - 2025-10-31 : `npm run lint` → échec (`scripts/generateTasks.mjs` bloque toujours `no-irregular-whitespace`, `no-useless-escape`).
 - 2025-11-02 : `npm run typecheck` → ok (correction de `params` asynchrone pour la page TaxDetail).
+- 2025-11-03 : `npm run lint` → échec (`scripts/generateTasks.mjs` toujours en défaut `no-irregular-whitespace`, `no-useless-escape`).
+- 2025-11-03 : `npm run test -- --runTestsByPath features/currency/__tests__/useCurrencies.test.tsx features/currency-iso/__tests__/useCurrencyIsos.test.tsx features/filter/__tests__/useFilterSearch.test.tsx` → ok.
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
@@ -45,9 +47,9 @@
 - [x] Service Configuration — cf. `tasks/TASK003.md` (démarré)
 - [x] Service CountryIso — cf. `tasks/TASK004.md` (démarré)
 - [x] Service Country — cf. `tasks/TASK005.md` (démarré)
-- [ ] Service CurrencyIso — cf. `tasks/TASK006.md`
-- [ ] Service Currency — cf. `tasks/TASK007.md`
-- [ ] Service Filter — cf. `tasks/TASK008.md`
+- [x] Service CurrencyIso — cf. `tasks/TASK006.md`
+- [x] Service Currency — cf. `tasks/TASK007.md`
+- [x] Service Filter — cf. `tasks/TASK008.md`
 - [ ] Service GenericCode — cf. `tasks/TASK009.md`
 - [ ] Service InvoiceCategory — cf. `tasks/TASK010.md`
 - [ ] Service InvoiceSequence — cf. `tasks/TASK011.md`

@@ -14,6 +14,9 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.billingCycles', path: '/billing-cycles', icon: 'billing' },
   { label: 'navigation.calendars', path: '/calendars', icon: 'calendar' },
   { label: 'navigation.configuration', path: '/configuration', icon: 'settings' },
+  { label: 'navigation.currencyIso', path: '/currency-iso', icon: 'globe' },
+  { label: 'navigation.currency', path: '/currency', icon: 'billing' },
   { label: 'navigation.countryIso', path: '/country-iso', icon: 'globe' },
   { label: 'navigation.countries', path: '/countries', icon: 'globe' },
+  { label: 'navigation.filters', path: '/filters', icon: 'settings' },
 ];
