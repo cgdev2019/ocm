@@ -20,7 +20,7 @@ import {
   Typography,
 } from '@mui/material';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import dayjs from 'dayjs';
+import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -80,7 +80,13 @@ export const UsageExplorer = () => {
       {
         field: 'dateEvent',
         headerName: t('forms.usage.fromDate'),
-        valueFormatter: ({ value }) => (value ? dayjs(value).format('YYYY-MM-DD HH:mm') : '—'),
+        valueFormatter: ({ value }) => {
+          if (!value) {
+            return '—';
+          }
+          const parsed = new Date(value);
+          return Number.isNaN(parsed.getTime()) ? '—' : format(parsed, 'yyyy-MM-dd HH:mm');
+        },
         minWidth: 200,
         flex: 1.1,
       },
