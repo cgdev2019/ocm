@@ -1,7 +1,8 @@
-﻿export type AppEnv = {
+export type AppEnv = {
   apiBaseUrl: string;
   mockApi: boolean;
   defaultLocale: string;
+  opencellProxyLogs: boolean;
   keycloak: {
     url: string;
     realm: string;
@@ -37,9 +38,22 @@ const required = (
   throw new Error(`Missing required environment variable: ${name}`);
 };
 
-const flag = (value: string | undefined): boolean => {
-  const normalized = (value ?? '').trim().toLowerCase();
-  return normalized === 'on' || normalized === 'true' || normalized === '1';
+const flag = (value: string | undefined, defaultValue = false): boolean => {
+  if (value === undefined || value.length === 0) {
+    return defaultValue;
+  }
+
+  const normalized = value.trim().toLowerCase();
+
+  if (normalized === 'on' || normalized === 'true' || normalized === '1' || normalized === 'yes') {
+    return true;
+  }
+
+  if (normalized === 'off' || normalized === 'false' || normalized === '0' || normalized === 'no') {
+    return false;
+  }
+
+  return defaultValue;
 };
 
 export const env: AppEnv = {
@@ -51,6 +65,7 @@ export const env: AppEnv = {
   ),
   mockApi: flag(process.env.NEXT_PUBLIC_MOCK ?? process.env.MOCK),
   defaultLocale: required(process.env.DEFAULT_LOCALE, 'DEFAULT_LOCALE', 'fr'),
+  opencellProxyLogs: flag(process.env.OPENCELL_PROXY_LOGS, true),
   keycloak: {
     url: required(
       pickEnvValue(process.env.NEXT_PUBLIC_KEYCLOAK_APP_AUTH_URL, process.env.KEYCLOAK_APP_AUTH_URL),
