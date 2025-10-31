@@ -1,8 +1,0 @@
-L'pplication utilise Keycloak pour l'authentification. Ex de user valerie.vacher avec le le mot de passe recette.
-
-KEycloak :
-	KEYCLOAK_APP_AUTH_URL: 'https://siventeappvrec1.mediapost.fr:8483/auth'
-
-L'API :
-	SERVER_URL: 'https://siventeappvrec1.mediapost.fr:8444'
-  
