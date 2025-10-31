@@ -24,7 +24,7 @@ export const LocaleSwitcher = () => {
       return;
     }
 
-    router.replace({ pathname }, { locale: targetLocale });
+    router.replace(pathname, { locale: targetLocale });
   };
 
   return (
