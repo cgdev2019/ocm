@@ -1,9 +1,11 @@
 import { SubscriptionDetail } from '@/features/subscriptions/components/SubscriptionDetail';
 
 type SubscriptionDetailPageProps = {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 };
 
-export default function SubscriptionDetailPage({ params }: SubscriptionDetailPageProps) {
-  return <SubscriptionDetail code={params.code} />;
+export default async function SubscriptionDetailPage({ params }: SubscriptionDetailPageProps) {
+  const resolvedParams = await params;
+
+  return <SubscriptionDetail code={resolvedParams.code} />;
 }
