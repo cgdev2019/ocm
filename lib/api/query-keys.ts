@@ -72,4 +72,16 @@ export const queryKeys = {
     list: () => ['invoiceSubCategories', 'list'] as const,
     detail: (code: string) => ['invoiceSubCategories', 'detail', code] as const,
   },
+  invoiceTypes: {
+    list: () => ['invoiceTypes', 'list'] as const,
+    detail: (code: string) => ['invoiceTypes', 'detail', code] as const,
+  },
+  languageIso: {
+    list: () => ['languageIso', 'list'] as const,
+    detail: (code: string) => ['languageIso', 'detail', code] as const,
+  },
+  languages: {
+    list: () => ['languages', 'list'] as const,
+    detail: (code: string) => ['languages', 'detail', code] as const,
+  },
 };

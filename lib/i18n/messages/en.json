@@ -21,7 +21,11 @@
     "genericCodes": "Generic codes",
     "invoiceCategories": "Invoice categories",
     "invoiceSequences": "Invoice sequences",
-    "invoiceSubCategories": "Invoice sub-categories"
+    "invoiceSubCategories": "Invoice sub-categories",
+    "invoiceTypes": "Invoice types",
+    "languageIso": "Languages ISO",
+    "languages": "Trading languages",
+    "massImport": "Mass import"
   },
   "actions": {
     "create": "Create",
@@ -245,6 +249,29 @@
       "occTemplateCode": "OCC template code",
       "occTemplateNegativeCode": "Negative OCC template",
       "sortIndex": "Display order"
+    },
+    "invoiceType": {
+      "code": "Code",
+      "description": "Description",
+      "occTemplateCode": "OCC template code",
+      "occTemplateNegativeCode": "Negative OCC template",
+      "invoiceValidationScriptCode": "Validation script code",
+      "customInvoiceXmlScriptInstanceCode": "Custom XML script",
+      "billingTemplateName": "Billing template name",
+      "emailTemplateCode": "Email template code",
+      "matchingAuto": "Automatic matching",
+      "invoiceAccountable": "Invoice accountable",
+      "useSelfSequence": "Use self sequence"
+    },
+    "languageIso": {
+      "code": "Language code",
+      "description": "Description"
+    },
+    "language": {
+      "code": "Language code",
+      "description": "Description",
+      "disabled": "Disabled",
+      "descriptions": "Localized descriptions"
     }
   },
   "feedback": {
@@ -258,6 +285,19 @@
     "status": "Status",
     "from": "From",
     "to": "To"
+  },
+  "massImport": {
+    "title": "Mass import",
+    "description": "Upload a file to detect its content type before importing.",
+    "selectFile": "Select a file",
+    "changeFile": "Change file",
+    "upload": "Upload & detect",
+    "uploading": "Uploading...",
+    "processing": "Detecting file type...",
+    "uploadError": "Upload failed. Please try again.",
+    "resultTitle": "Detected file type",
+    "fileName": "File name",
+    "fileType": "Detected type"
   },
   "auth": {
     "signIn": "Sign in",
