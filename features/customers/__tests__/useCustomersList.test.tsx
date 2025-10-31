@@ -3,13 +3,15 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useCustomersList } from '@/features/customers/api';
 import type { CustomersResponseDto } from '@/features/customers/types';
-import { apiClient } from '@/lib/api/client';
+import { getApiClient, type ApiClient } from '@/lib/api/client';
 
-jest.mock('@/lib/api/client', () => ({
-  apiClient: {
-    GET: jest.fn(),
-  },
-}));
+jest.mock('@/lib/api/client');
+
+const mockedGetApiClient = getApiClient as jest.MockedFunction<typeof getApiClient>;
+
+beforeEach(() => {
+  jest.resetAllMocks();
+});
 
 describe('useCustomersList', () => {
   it('returns mapped customers from API response', async () => {
@@ -40,6 +42,8 @@ describe('useCustomersList', () => {
       },
     };
 
+    const apiClient = { GET: jest.fn() } as Partial<ApiClient>;
+    mockedGetApiClient.mockReturnValue(apiClient as ApiClient);
     (apiClient.GET as jest.Mock).mockResolvedValue({ data: payload });
 
     const { result } = renderHook(() => useCustomersList(), { wrapper });

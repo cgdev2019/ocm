@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { apiClient } from '@/lib/api/client';
+import { getApiClient } from '@/lib/api/client';
 import { assertActionSuccess, unwrapResponse } from '@/lib/api/helpers';
 import { queryKeys } from '@/lib/api/query-keys';
 import type { ActionStatus } from '@/features/customers/types';
@@ -26,6 +26,7 @@ export const useTaxes = () =>
   useQuery({
     queryKey: queryKeys.taxes.list(),
     queryFn: async () => {
+      const apiClient = getApiClient();
       const result = await apiClient.GET('/api/rest/tax/listGetAll');
       const payload = unwrapResponse<GetTaxesResponse>(
         { data: result.data, error: result.error },
@@ -41,6 +42,7 @@ export const useTax = (code: string | null) =>
     queryKey: queryKeys.taxes.detail(code ?? 'unknown'),
     enabled: Boolean(code),
     queryFn: async () => {
+      const apiClient = getApiClient();
       const result = await apiClient.GET('/api/rest/tax', {
         params: { query: { taxCode: code ?? '' } },
       });
@@ -58,6 +60,7 @@ export const useTaxMutations = () => {
 
   const upsert = useMutation({
     mutationFn: async (values: TaxFormValues) => {
+      const apiClient = getApiClient();
       const dto = mapToDto(values);
       const result = await apiClient.PUT('/api/rest/tax', { body: dto });
       const payload = unwrapResponse<ActionStatus>(
@@ -75,6 +78,7 @@ export const useTaxMutations = () => {
 
   const create = useMutation({
     mutationFn: async (values: TaxFormValues) => {
+      const apiClient = getApiClient();
       const dto = mapToDto(values);
       const result = await apiClient.POST('/api/rest/tax', { body: dto });
       const payload = unwrapResponse<ActionStatus>(
@@ -92,6 +96,7 @@ export const useTaxMutations = () => {
 
   const remove = useMutation({
     mutationFn: async (code: string) => {
+      const apiClient = getApiClient();
       const result = await apiClient.DELETE('/api/rest/tax/{taxCode}', {
         params: { path: { taxCode: code } },
       });
