@@ -207,7 +207,10 @@ const loadUndiciModule = () => {
       }
 
       try {
-        const module = await import('undici');
+        const optionalUndiciModuleSpecifier = 'undici';
+        const module = await import(
+          /* webpackIgnore: true */ optionalUndiciModuleSpecifier
+        );
         return module as unknown as UndiciModule;
       } catch (error: unknown) {
         const typedError = error as UndiciLoadError & { code?: string };
