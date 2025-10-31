@@ -16,7 +16,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import dayjs from 'dayjs';
+import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useAccessDetail, useAccessMutations, useAccessVersion } from '@/features/access/api';
@@ -143,7 +143,16 @@ export const AccessDetail = ({ code, subscriptionCode }: { code: string; subscri
   );
 };
 
-const formatDate = (value?: string) => (value ? dayjs(value).format('YYYY-MM-DD HH:mm') : '—');
+const formatDate = (value?: string) => {
+  if (!value) {
+    return '—';
+  }
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    return '—';
+  }
+  return format(parsed, 'yyyy-MM-dd HH:mm');
+};
 
 const DetailRow = ({ label, value }: { label: string; value?: string | null }) => (
   <Stack direction="row" spacing={1} alignItems="baseline">
