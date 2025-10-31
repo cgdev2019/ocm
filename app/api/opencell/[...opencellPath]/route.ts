@@ -191,41 +191,39 @@ let undiciModulePromise: Promise<UndiciModule | undefined> | undefined;
 const loadUndiciModule = () => {
   if (!undiciModulePromise) {
     undiciModulePromise = (async () => {
-      const builtinSpecifier = ['node', 'undici'].join(':');
-      const attemptedSpecifiers = [builtinSpecifier, 'undici'] as const;
+      try {
+        const module = await import('node:undici');
+        return module as unknown as UndiciModule;
+      } catch (error: unknown) {
+        const typedError = error as UndiciLoadError & { code?: string };
 
-      for (const specifier of attemptedSpecifiers) {
-        try {
-          const module = await import(specifier);
-          return module as unknown as UndiciModule;
-        } catch (error: unknown) {
-          const typedError = error as UndiciLoadError & { code?: string };
-
-          if (specifier === builtinSpecifier && isUnknownBuiltinUndiciError(typedError)) {
-            console.warn(
-              'Le module intégré "node:undici" est indisponible dans cet environnement. Tentative de repli sur le paquet "undici".',
-            );
-            continue;
-          }
-
-          if (
-            specifier === 'undici' &&
-            (typedError?.code === 'ERR_MODULE_NOT_FOUND' || typedError?.code === 'MODULE_NOT_FOUND')
-          ) {
-            console.warn(
-              'Le paquet "undici" n\'est pas installé. Le proxy OpenCell fonctionnera sans configuration avancée des agents.',
-            );
-            return undefined;
-          }
-
+        if (!isUnknownBuiltinUndiciError(typedError)) {
           throw error;
         }
+
+        console.warn(
+          'Le module intégré "node:undici" est indisponible dans cet environnement. Tentative de repli sur le paquet "undici".',
+        );
       }
 
-      console.warn(
-        'Aucun module "undici" n\'est disponible. Le proxy OpenCell fonctionnera sans optimisation d\'agents HTTP(S).',
-      );
-      return undefined;
+      try {
+        const module = await import('undici');
+        return module as unknown as UndiciModule;
+      } catch (error: unknown) {
+        const typedError = error as UndiciLoadError & { code?: string };
+
+        if (typedError?.code === 'ERR_MODULE_NOT_FOUND' || typedError?.code === 'MODULE_NOT_FOUND') {
+          console.warn(
+            'Le paquet "undici" n\'est pas installé. Le proxy OpenCell fonctionnera sans configuration avancée des agents.',
+          );
+          console.warn(
+            'Aucun module "undici" n\'est disponible. Le proxy OpenCell fonctionnera sans optimisation d\'agents HTTP(S).',
+          );
+          return undefined;
+        }
+
+        throw error;
+      }
     })();
   }
   return undiciModulePromise;
