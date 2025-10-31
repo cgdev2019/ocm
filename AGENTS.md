@@ -66,10 +66,10 @@
 - [x] Service InvoiceCategory — cf. `tasks/TASK010.md`
 - [x] Service InvoiceSequence — cf. `tasks/TASK011.md`
 - [x] Service InvoiceSubCategory — cf. `tasks/TASK012.md`
-- [ ] Service InvoiceType — cf. `tasks/TASK013.md`
-- [ ] Service LanguageIso — cf. `tasks/TASK014.md`
-- [ ] Service Language — cf. `tasks/TASK015.md`
-- [ ] Service MassImport — cf. `tasks/TASK016.md`
+- [x] Service InvoiceType — cf. `tasks/TASK013.md`
+- [x] Service LanguageIso — cf. `tasks/TASK014.md`
+- [x] Service Language — cf. `tasks/TASK015.md`
+- [x] Service MassImport — cf. `tasks/TASK016.md`
 - [x] Service OccTemplate — cf. `tasks/TASK017.md`
 - [x] Service PdfInvoice — cf. `tasks/TASK018.md`
 - [x] Service Provider — cf. `tasks/TASK019.md`
