@@ -59,6 +59,10 @@
 - 2025-11-20 : `npm run typecheck` → échec (dépendance `dayjs` absente et enums BusinessAccountModel).
 - 2025-11-20 : `npm run test -- --runTestsByPath features/titles/__tests__/useTitles.test.tsx features/audit/__tests__/useAudit.test.tsx features/file-formats/__tests__/useFileFormats.test.tsx features/files/__tests__/useFiles.test.tsx` → ok (nouvelles suites Title/Audit/FileFormat/Files).
 - 2025-11-20 : `npm run test -- --runTestsByPath features/titles/__tests__/useTitles.test.tsx features/audit/__tests__/useAudit.test.tsx features/file-formats/__tests__/useFileFormats.test.tsx features/files/__tests__/useFiles.test.tsx` → ok (revalidation après intégration des services Title/Audit/FileFormat/Files).
+- 2025-11-21 : `npm run test -- --runTestsByPath features/subscriptions/__tests__/useSubscriptions.test.tsx` → ok (hooks Subscription).
+- 2025-11-22 : `npm run test -- --runTestsByPath features/subscriptions/__tests__/useSubscriptions.test.tsx` → ok (relecture rapide du module Subscription).
+- 2025-11-22 : `npm run typecheck` → échec (anomalies préexistantes BusinessAccountModel/LanguageIso/RatedTransactions toujours présentes).
+- 2025-11-21 : `npm run typecheck` → échec (incompatibilités existantes BusinessAccountModel/LanguageIso/RatedTransactions).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
@@ -108,7 +112,7 @@
 - [ ] Service Invoicing — cf. `tasks/TASK036.md`
 - [ ] Service Mediation — cf. `tasks/TASK037.md`
 - [x] Service RatedTransaction — cf. `tasks/TASK038.md`
-- [ ] Service Subscription — cf. `tasks/TASK039.md`
+- [x] Service Subscription — cf. `tasks/TASK039.md`
 - [ ] Service Wallet — cf. `tasks/TASK040.md`
 - [ ] Service BundleTemplate — cf. `tasks/TASK041.md`
 - [ ] Service BusinessOfferModel — cf. `tasks/TASK042.md`

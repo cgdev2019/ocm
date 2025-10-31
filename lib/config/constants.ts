@@ -43,6 +43,7 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.customers', path: '/customers', icon: 'customers' },
   { label: 'navigation.customerAccounts', path: '/customer-accounts', icon: 'accounts' },
   { label: 'navigation.invoices', path: '/invoices', icon: 'invoices' },
+  { label: 'navigation.subscriptions', path: '/subscriptions', icon: 'billing' },
   { label: 'navigation.taxes', path: '/taxes', icon: 'taxes' },
   { label: 'navigation.scriptInstances', path: '/script-instances', icon: 'scriptInstance' },
   { label: 'navigation.sellers', path: '/sellers', icon: 'seller' },
