@@ -30,7 +30,7 @@ export const SubscriptionEditForm = ({ code }: { code: string }) => {
     <SubscriptionForm
       defaultValues={data}
       mode="edit"
-      onSuccess={(values) => router.replace(`../${values.code}`)}
+      onSuccess={() => router.replace('../')}
     />
   );
 };
