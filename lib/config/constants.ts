@@ -22,10 +22,14 @@ export const NAV_SECTIONS: Array<{
     | 'invoiceType'
     | 'languageIso'
     | 'language'
+    | 'title'
     | 'massImport'
     | 'occTemplate'
     | 'pdfInvoice'
     | 'provider'
+    | 'audit'
+    | 'fileFormat'
+    | 'files'
     | 'query'
     | 'scriptInstance'
     | 'seller'
@@ -48,6 +52,10 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.billingCycles', path: '/billing-cycles', icon: 'billing' },
   { label: 'navigation.calendars', path: '/calendars', icon: 'calendar' },
   { label: 'navigation.configuration', path: '/configuration', icon: 'settings' },
+  { label: 'navigation.audit', path: '/audit', icon: 'audit' },
+  { label: 'navigation.titles', path: '/titles', icon: 'title' },
+  { label: 'navigation.fileFormats', path: '/file-formats', icon: 'fileFormat' },
+  { label: 'navigation.files', path: '/files', icon: 'files' },
   { label: 'navigation.currencyIso', path: '/currency-iso', icon: 'globe' },
   { label: 'navigation.currency', path: '/currency', icon: 'billing' },
   { label: 'navigation.countryIso', path: '/country-iso', icon: 'globe' },

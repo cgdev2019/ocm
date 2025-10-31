@@ -55,6 +55,9 @@
 - 2025-11-16 : `npm run typecheck` → échec (`router.push`/`router.replace` n'acceptent plus `params` dans SellerDetail/SellerEditForm`).
 - 2025-11-19 : `npm run typecheck` → échec (mêmes erreurs `router.push`/`router.replace` sur SellerDetail/SellerEditForm).
 - 2025-11-20 : `npm run test -- --runTestsByPath features/occ-templates/__tests__/useOccTemplates.test.tsx` → ok (remontée d'erreur OCC Templates validée).
+- 2025-11-20 : `npm run typecheck` → échec (dépendance `dayjs` absente et enums BusinessAccountModel).
+- 2025-11-20 : `npm run test -- --runTestsByPath features/titles/__tests__/useTitles.test.tsx features/audit/__tests__/useAudit.test.tsx features/file-formats/__tests__/useFileFormats.test.tsx features/files/__tests__/useFiles.test.tsx` → ok (nouvelles suites Title/Audit/FileFormat/Files).
+- 2025-11-20 : `npm run test -- --runTestsByPath features/titles/__tests__/useTitles.test.tsx features/audit/__tests__/useAudit.test.tsx features/file-formats/__tests__/useFileFormats.test.tsx features/files/__tests__/useFiles.test.tsx` → ok (revalidation après intégration des services Title/Audit/FileFormat/Files).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
@@ -94,10 +97,10 @@
 - [x] Service Access — cf. `tasks/TASK026.md`
 - [x] Service BusinessAccountModel — cf. `tasks/TASK027.md`
 - [x] Service ProviderContact — cf. `tasks/TASK028.md`
-- [ ] Service Title — cf. `tasks/TASK029.md`
-- [ ] Service Audit — cf. `tasks/TASK030.md`
-- [ ] Service FileFormat — cf. `tasks/TASK031.md`
-- [ ] Service Files — cf. `tasks/TASK032.md`
+- [x] Service Title — cf. `tasks/TASK029.md`
+- [x] Service Audit — cf. `tasks/TASK030.md`
+- [x] Service FileFormat — cf. `tasks/TASK031.md`
+- [x] Service Files — cf. `tasks/TASK032.md`
 - [ ] Service AccountingCode — cf. `tasks/TASK033.md`
 - [ ] Service InvoicingPlanItem — cf. `tasks/TASK034.md`
 - [ ] Service InvoicingPlan — cf. `tasks/TASK035.md`

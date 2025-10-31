@@ -7,6 +7,7 @@ import {
   Button,
   Card,
   CardContent,
+  Chip,
   CircularProgress,
   Dialog,
   DialogActions,
@@ -19,12 +20,12 @@ import {
 import Grid from '@mui/material/Grid2';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import { useLanguageIso, useLanguageIsoMutations } from '@/features/language-iso/api';
+import { useTitle, useTitleMutations } from '@/features/titles/api';
 import { useRouter } from '@/lib/i18n/navigation';
 
-export const LanguageIsoDetail = ({ code }: { code: string }) => {
-  const { data, isLoading, isError } = useLanguageIso(code);
-  const { remove } = useLanguageIsoMutations();
+export const TitleDetail = ({ code }: { code: string }) => {
+  const { data, isLoading, isError } = useTitle(code);
+  const { remove } = useTitleMutations();
   const t = useTranslations();
   const router = useRouter();
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -46,11 +47,7 @@ export const LanguageIsoDetail = ({ code }: { code: string }) => {
 
   const handleDelete = async () => {
     await remove.mutateAsync(code);
-    router.replace({ pathname: '/language-iso' });
-  };
-
-  const handleEdit = () => {
-    router.push({ pathname: '/language-iso/[code]/edit', params: { code } });
+    router.replace('../');
   };
 
   return (
@@ -58,7 +55,7 @@ export const LanguageIsoDetail = ({ code }: { code: string }) => {
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="h4">{data.code}</Typography>
         <Stack direction="row" spacing={1}>
-          <Button startIcon={<EditIcon />} variant="outlined" onClick={handleEdit}>
+          <Button startIcon={<EditIcon />} variant="outlined" onClick={() => router.push('./edit')}>
             {t('actions.edit')}
           </Button>
           <Button
@@ -75,17 +72,45 @@ export const LanguageIsoDetail = ({ code }: { code: string }) => {
         <Grid size={{ xs: 12, md: 6 }}>
           <Card>
             <CardContent>
-              <Stack spacing={1}>
-                <Row label={t('forms.languageIso.description')} value={data.description} />
+              <Stack spacing={1.5}>
+                <Row label={t('forms.title.description')} value={data.description} />
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <Typography width={200} color="text.secondary">
+                    {t('forms.title.isCompany')}
+                  </Typography>
+                  <Chip
+                    label={data.isCompany ? t('common.yes') : t('common.no')}
+                    color={data.isCompany ? 'primary' : 'default'}
+                    variant={data.isCompany ? 'filled' : 'outlined'}
+                    size="small"
+                  />
+                </Stack>
               </Stack>
             </CardContent>
           </Card>
         </Grid>
+        {data.languageDescriptions && data.languageDescriptions.length > 0 ? (
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Card>
+              <CardContent>
+                <Stack spacing={1.5}>
+                  <Typography variant="h6">{t('forms.title.languageDescriptions')}</Typography>
+                  {data.languageDescriptions?.map((item) => (
+                    <Stack key={`${item.languageCode ?? ''}-${item.description ?? ''}`} spacing={0.5}>
+                      <Typography variant="subtitle2">{item.languageCode ?? '—'}</Typography>
+                      <Typography color="text.secondary">{item.description ?? '—'}</Typography>
+                    </Stack>
+                  ))}
+                </Stack>
+              </CardContent>
+            </Card>
+          </Grid>
+        ) : null}
       </Grid>
       <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)}>
         <DialogTitle>{t('actions.delete')}</DialogTitle>
         <DialogContent>
-          <DialogContentText>{t('feedback.deleted')}</DialogContentText>
+          <DialogContentText>{t('forms.confirmDeletion')}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setConfirmOpen(false)}>{t('actions.cancel')}</Button>

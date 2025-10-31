@@ -30,6 +30,10 @@
     "invoiceTypes": "Invoice types",
     "languageIso": "Languages ISO",
     "languages": "Trading languages",
+    "audit": "Audit logging",
+    "titles": "Titles",
+    "fileFormats": "File formats",
+    "files": "Files",
     "massImport": "Mass import",
     "occTemplates": "OCC templates",
     "pdfInvoices": "PDF invoices",
@@ -398,6 +402,12 @@
       "disabled": "Disabled",
       "descriptions": "Localized descriptions"
     },
+    "title": {
+      "code": "Title code",
+      "description": "Description",
+      "isCompany": "Company title",
+      "languageDescriptions": "Localized descriptions"
+    },
     "occTemplate": {
       "code": "Code",
       "description": "Description",
@@ -469,6 +479,21 @@
         "halfEven": "Half even"
       }
     },
+    "fileFormat": {
+      "code": "Format code",
+      "description": "Description",
+      "fileNamePattern": "File name pattern",
+      "fileNameUniqueness": "Unique file names",
+      "fileTypes": "File types",
+      "fileTypesHelper": "Comma-separated list of file types",
+      "configurationTemplate": "Configuration template",
+      "recordName": "Record name",
+      "inputDirectory": "Input directory",
+      "outputDirectory": "Output directory",
+      "rejectDirectory": "Reject directory",
+      "archiveDirectory": "Archive directory",
+      "jobCode": "Job code"
+    },
     "query": {
       "latestResult": "Latest result",
       "empty": "No data returned by the service."
@@ -485,6 +510,48 @@
     "status": "Status",
     "from": "From",
     "to": "To"
+  },
+  "audit": {
+    "loggingTitle": "Audit logging",
+    "loggingSubtitle": "Enable or disable backend audit logging.",
+    "versionLabel": "Service version",
+    "enableLogging": "Enable logging",
+    "disableLogging": "Disable logging"
+  },
+  "files": {
+    "name": "Name",
+    "type": "Type",
+    "directory": "Directory",
+    "file": "File",
+    "lastModified": "Last modified",
+    "currentDirectory": "Current directory",
+    "rootDirectory": "Root directory",
+    "pathInput": "Navigate to",
+    "pathPlaceholder": "e.g. imports/2025",
+    "summaryTitle": "Service information",
+    "summarySubtitle": "Latest version and aggregated counters",
+    "version": "Service version",
+    "totalFiles": "Indexed files",
+    "createDirectoryTitle": "Create directory",
+    "cleanupTitle": "Cleanup operations",
+    "directoryPath": "Directory path",
+    "removeDirectory": "Remove directory",
+    "filePath": "File path",
+    "removeFile": "Remove file",
+    "downloadFile": "Download",
+    "uploadTitle": "Upload operations",
+    "filename": "File name",
+    "fileFormat": "File format",
+    "selectFile": "Select a file",
+    "uploadJson": "Upload (JSON)",
+    "uploadBase64": "Upload as Base64",
+    "uploadZippedBase64": "Upload zipped Base64",
+    "selectArchive": "Select an archive",
+    "archiveDirectoryTitle": "Archive directory",
+    "archiveDirectory": "Create archive",
+    "archiveFileTitle": "Archive file",
+    "archiveFile": "Create archive",
+    "goUp": "Go up"
   },
   "massImport": {
     "title": "Mass import",

@@ -30,6 +30,10 @@
     "invoiceTypes": "Types de facture",
     "languageIso": "Langues ISO",
     "languages": "Langues commerciales",
+    "audit": "Journal d'audit",
+    "titles": "Titres civils",
+    "fileFormats": "Formats de fichier",
+    "files": "Fichiers",
     "massImport": "Import massif",
     "occTemplates": "Modèles OCC",
     "pdfInvoices": "Factures PDF",
@@ -398,6 +402,12 @@
       "disabled": "Désactivé",
       "descriptions": "Descriptions localisées"
     },
+    "title": {
+      "code": "Code du titre",
+      "description": "Description",
+      "isCompany": "Titre entreprise",
+      "languageDescriptions": "Descriptions localisées"
+    },
     "occTemplate": {
       "code": "Code",
       "description": "Description",
@@ -469,6 +479,21 @@
         "halfEven": "Moitié pair"
       }
     },
+    "fileFormat": {
+      "code": "Code du format",
+      "description": "Description",
+      "fileNamePattern": "Patron de nom de fichier",
+      "fileNameUniqueness": "Nom de fichier unique",
+      "fileTypes": "Types de fichier",
+      "fileTypesHelper": "Liste séparée par des virgules",
+      "configurationTemplate": "Modèle de configuration",
+      "recordName": "Nom d'enregistrement",
+      "inputDirectory": "Répertoire d'entrée",
+      "outputDirectory": "Répertoire de sortie",
+      "rejectDirectory": "Répertoire de rejet",
+      "archiveDirectory": "Répertoire d'archive",
+      "jobCode": "Code job"
+    },
     "query": {
       "latestResult": "Dernier résultat",
       "empty": "Aucune donnée renvoyée par le service."
@@ -485,6 +510,48 @@
     "status": "Statut",
     "from": "Du",
     "to": "Au"
+  },
+  "audit": {
+    "loggingTitle": "Journal d'audit",
+    "loggingSubtitle": "Activez ou désactivez la journalisation côté serveur.",
+    "versionLabel": "Version du service",
+    "enableLogging": "Activer le journal",
+    "disableLogging": "Désactiver le journal"
+  },
+  "files": {
+    "name": "Nom",
+    "type": "Type",
+    "directory": "Dossier",
+    "file": "Fichier",
+    "lastModified": "Dernière modification",
+    "currentDirectory": "Dossier courant",
+    "rootDirectory": "Racine",
+    "pathInput": "Aller vers",
+    "pathPlaceholder": "ex. imports/2025",
+    "summaryTitle": "Informations service",
+    "summarySubtitle": "Version et compteurs agrégés",
+    "version": "Version du service",
+    "totalFiles": "Fichiers indexés",
+    "createDirectoryTitle": "Créer un dossier",
+    "cleanupTitle": "Nettoyage",
+    "directoryPath": "Chemin du dossier",
+    "removeDirectory": "Supprimer le dossier",
+    "filePath": "Chemin du fichier",
+    "removeFile": "Supprimer le fichier",
+    "downloadFile": "Télécharger",
+    "uploadTitle": "Téléversements",
+    "filename": "Nom du fichier",
+    "fileFormat": "Format du fichier",
+    "selectFile": "Choisir un fichier",
+    "uploadJson": "Téléverser (JSON)",
+    "uploadBase64": "Téléverser en Base64",
+    "uploadZippedBase64": "Téléverser archive Base64",
+    "selectArchive": "Choisir une archive",
+    "archiveDirectoryTitle": "Archiver un dossier",
+    "archiveDirectory": "Créer l'archive",
+    "archiveFileTitle": "Archiver un fichier",
+    "archiveFile": "Créer l'archive",
+    "goUp": "Remonter"
   },
   "massImport": {
     "title": "Import massif",

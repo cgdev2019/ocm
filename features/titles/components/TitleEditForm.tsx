@@ -2,12 +2,12 @@
 
 import { Alert, CircularProgress, Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { LanguageIsoForm } from '@/features/language-iso/components/LanguageIsoForm';
-import { useLanguageIso } from '@/features/language-iso/api';
+import { TitleForm } from '@/features/titles/components/TitleForm';
+import { useTitle } from '@/features/titles/api';
 import { useRouter } from '@/lib/i18n/navigation';
 
-export const LanguageIsoEditForm = ({ code }: { code: string }) => {
-  const { data, isLoading, isError } = useLanguageIso(code);
+export const TitleEditForm = ({ code }: { code: string }) => {
+  const { data, isLoading, isError } = useTitle(code);
   const t = useTranslations();
   const router = useRouter();
 
@@ -27,12 +27,10 @@ export const LanguageIsoEditForm = ({ code }: { code: string }) => {
   }
 
   return (
-    <LanguageIsoForm
+    <TitleForm
       defaultValues={data}
       mode="edit"
-      onSuccess={(values) =>
-        router.replace({ pathname: '/language-iso/[code]', params: { code: values.code } })
-      }
+      onSuccess={(values) => router.replace(`../${values.code}`)}
     />
   );
 };
