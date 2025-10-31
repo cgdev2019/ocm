@@ -30,7 +30,9 @@ export const LanguageIsoEditForm = ({ code }: { code: string }) => {
     <LanguageIsoForm
       defaultValues={data}
       mode="edit"
-      onSuccess={(values) => router.replace(`../${values.code}`)}
+      onSuccess={(values) =>
+        router.replace({ pathname: '/language-iso/[code]', params: { code: values.code } })
+      }
     />
   );
 };

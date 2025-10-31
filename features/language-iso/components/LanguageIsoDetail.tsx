@@ -46,7 +46,11 @@ export const LanguageIsoDetail = ({ code }: { code: string }) => {
 
   const handleDelete = async () => {
     await remove.mutateAsync(code);
-    router.replace('../');
+    router.replace({ pathname: '/language-iso' });
+  };
+
+  const handleEdit = () => {
+    router.push({ pathname: '/language-iso/[code]/edit', params: { code } });
   };
 
   return (
@@ -54,7 +58,7 @@ export const LanguageIsoDetail = ({ code }: { code: string }) => {
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="h4">{data.code}</Typography>
         <Stack direction="row" spacing={1}>
-          <Button startIcon={<EditIcon />} variant="outlined" onClick={() => router.push('./edit')}>
+          <Button startIcon={<EditIcon />} variant="outlined" onClick={handleEdit}>
             {t('actions.edit')}
           </Button>
           <Button
