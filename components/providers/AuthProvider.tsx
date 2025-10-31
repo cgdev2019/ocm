@@ -8,6 +8,7 @@ import { setAccessToken, setRefreshToken } from '@/lib/auth/token-store';
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const keycloakRef = useRef<KeycloakInstance | null>(null);
+  const mockToken = env.mockApi ? 'mock-token' : null;
   const mockUser: AuthUser | null = env.mockApi
     ? {
         username: 'mock.user',
@@ -17,9 +18,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         roles: ['admin'],
       }
     : null;
-  const mockToken = env.mockApi ? 'mock-token' : null;
 
-  const [token, setToken] = useState<string | null>(() => mockToken);
+  const [token, setToken] = useState<string | null>(() => {
+    if (mockToken) {
+      setAccessToken(mockToken);
+      setRefreshToken(mockToken);
+    }
+    return mockToken;
+  });
   const [user, setUser] = useState<AuthUser | null>(() => mockUser);
   const [status, setStatus] = useState<'loading' | 'authenticated' | 'unauthenticated' | 'error'>(
     env.mockApi ? 'authenticated' : 'loading',
@@ -27,8 +33,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (env.mockApi) {
-      setAccessToken(mockToken);
-      setRefreshToken(mockToken);
       return;
     }
 
