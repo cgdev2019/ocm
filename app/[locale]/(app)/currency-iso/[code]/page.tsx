@@ -1,9 +1,12 @@
 import { CurrencyIsoDetail } from '@/features/currency-iso/components/CurrencyIsoDetail';
 
 type Props = {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 };
 
-export default function CurrencyIsoDetailPage({ params }: Props) {
-  return <CurrencyIsoDetail currencyCode={params.code} />;
+export default async function CurrencyIsoDetailPage(props: Props) {
+  const params = await props.params;
+  const { code } = params;
+
+  return <CurrencyIsoDetail currencyCode={code} />;
 }

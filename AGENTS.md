@@ -47,6 +47,7 @@
 - 2025-11-13 : `npm run test -- --runTestsByPath features/script-instances/__tests__/useScriptInstances.test.tsx features/sellers/__tests__/useSellers.test.tsx features/termination-reasons/__tests__/useTerminationReasons.test.tsx` → ok (nouveaux hooks services ScriptInstance/Seller/TerminationReason).
 - 2025-11-14 : `npm run test -- --runTestsByPath features/script-instances/__tests__/useScriptInstances.test.tsx features/sellers/__tests__/useSellers.test.tsx features/termination-reasons/__tests__/useTerminationReasons.test.tsx features/taxes/__tests__/useTaxes.test.tsx` → ok (validation hooks incluant Tax).
 - 2025-11-15 : `npm run test -- --runTestsByPath features/sellers/__tests__/useSellers.test.tsx` → ok (correctif navigation édition vendeur).
+- 2025-11-16 : `npm run typecheck` → échec (`router.push`/`router.replace` n'acceptent plus `params` dans SellerDetail/SellerEditForm`).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
