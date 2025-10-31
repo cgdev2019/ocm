@@ -42,7 +42,7 @@ Copy `.env.example` to `.env.local` and adjust if needed:
 
 | Variable | Description |
 | --- | --- |
-| `API_BASE_URL` | REST API base URL (from `DESC.txt`) |
+| `API_BASE_URL` | REST API base URL (must include `/opencell`) |
 | `KEYCLOAK_APP_AUTH_URL`, `KEYCLOAK_REALM`, `KEYCLOAK_CLIENT_ID` | Keycloak configuration |
 | `DEFAULT_LOCALE` | Initial locale (`fr` or `en`) |
 | `MOCK` | Set to `on` to enable MSW mocks & mock auth |
