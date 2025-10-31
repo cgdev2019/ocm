@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { env } from '@/lib/config/env';
 
 const shouldLogProxyTraffic = env.opencellProxyLogs;
+const textDecoder = new TextDecoder();
 
 const hopByHopHeaders = new Set([
   'connection',
@@ -48,6 +49,55 @@ const sanitizeBodyPreview = (body: string, maxLength = 2_000) => {
   return `${body.slice(0, maxLength)}… (truncated ${body.length - maxLength} chars)`;
 };
 
+type ParsedBodyForLog =
+  | { kind: 'json'; value: unknown; preview?: string }
+  | { kind: 'text'; preview: string };
+
+const parseBodyForLogging = (
+  bodyText: string | undefined,
+  contentType?: string | null,
+): ParsedBodyForLog | undefined => {
+  if (!bodyText) {
+    return undefined;
+  }
+
+  const preview = sanitizeBodyPreview(bodyText);
+
+  if (contentType?.includes('application/json')) {
+    try {
+      const parsed = JSON.parse(bodyText);
+      return preview !== bodyText
+        ? { kind: 'json', value: parsed, preview }
+        : { kind: 'json', value: parsed };
+    } catch {
+      return { kind: 'text', preview };
+    }
+  }
+
+  return { kind: 'text', preview };
+};
+
+const buildLogDetails = (
+  parsed: ParsedBodyForLog | undefined,
+): Record<string, unknown> | undefined => {
+  if (!parsed) {
+    return undefined;
+  }
+
+  if (parsed.kind === 'json') {
+    return {
+      payloadType: 'json',
+      payload: parsed.value,
+      ...(parsed.preview ? { payloadPreview: parsed.preview } : {}),
+    };
+  }
+
+  return {
+    payloadType: 'text',
+    payload: parsed.preview,
+  };
+};
+
 const forwardRequest = async (request: NextRequest, path: string[]) => {
   const requestId = shouldLogProxyTraffic ? ++proxyRequestCounter : undefined;
   const targetUrl = buildTargetUrl(request, path);
@@ -57,19 +107,18 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
 
   const isBodylessMethod = request.method === 'GET' || request.method === 'HEAD';
   const body = isBodylessMethod ? undefined : await request.arrayBuffer();
+  const requestBodyText =
+    body === undefined ? undefined : textDecoder.decode(body);
+  const requestLogDetails = buildLogDetails(
+    parseBodyForLogging(requestBodyText, headers.get('content-type')),
+  );
 
   if (shouldLogProxyTraffic && requestId !== undefined) {
-    const bodyPreview =
-      body === undefined
-        ? undefined
-        : sanitizeBodyPreview(new TextDecoder().decode(body));
+    const message = `📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`;
 
-    if (bodyPreview) {
-      console.warn(`📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`, {
-        body: bodyPreview,
-      });
-    } else {
-      console.warn(`📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`);
+    console.warn(message);
+    if (requestLogDetails) {
+      console.warn(`   ↳ Détails requête`, requestLogDetails);
     }
   }
 
@@ -81,23 +130,21 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
 
   if (shouldLogProxyTraffic && requestId !== undefined) {
     const responseClone = response.clone();
-    let responsePreview: string | undefined;
+    let responseText: string | undefined;
     try {
-      const responseText = await responseClone.text();
-      if (responseText) {
-        responsePreview = sanitizeBodyPreview(responseText);
-      }
+      responseText = await responseClone.text();
     } catch (error) {
       console.warn(`📡 [OpenCell Proxy #${requestId}] Impossible de lire la réponse`, error);
     }
 
-    if (responsePreview) {
-      console.warn(
-        `📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`,
-        { body: responsePreview },
-      );
-    } else {
-      console.warn(`📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`);
+    const responseLogDetails = buildLogDetails(
+      parseBodyForLogging(responseText, response.headers.get('content-type')),
+    );
+    const message = `📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`;
+
+    console.warn(message);
+    if (responseLogDetails) {
+      console.warn(`   ↳ Détails réponse`, responseLogDetails);
     }
   }
 
