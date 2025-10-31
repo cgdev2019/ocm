@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { PropsWithChildren } from 'react';
 import { useAuth } from '@/lib/auth/context';
@@ -22,13 +22,29 @@ export const AuthGuard = ({ children }: PropsWithChildren) => {
 
   if (status === 'unauthenticated') {
     return (
-      <Box textAlign="center" sx={{ py: 10 }}>
-        <Typography variant="h6" gutterBottom>
-          {t('sessionExpired')}
+      <Stack spacing={3} textAlign="center" alignItems="center" sx={{ py: 10 }}>
+        <Typography variant="h6">{t('sessionExpired')}</Typography>
+        <Typography variant="body2" color="text.secondary">
+          {t('sessionExpiredDescription')}
         </Typography>
         <Button variant="contained" color="primary" onClick={login}>
           {t('signIn')}
         </Button>
+      </Stack>
+    );
+  }
+
+  if (status === 'error') {
+    return (
+      <Box sx={{ py: 10 }}>
+        <Stack spacing={3} alignItems="center" textAlign="center">
+          <Alert severity="error" sx={{ width: '100%', maxWidth: 420 }}>
+            {t('error')}
+          </Alert>
+          <Button variant="contained" color="primary" onClick={login}>
+            {t('retry')}
+          </Button>
+        </Stack>
       </Box>
     );
   }

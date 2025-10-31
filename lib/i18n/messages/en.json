@@ -103,7 +103,10 @@
     "signIn": "Sign in",
     "signOut": "Sign out",
     "sessionExpired": "Session expired",
-    "loading": "Checking session..."
+    "sessionExpiredDescription": "Your session has ended. Please sign in to continue.",
+    "loading": "Checking session...",
+    "error": "Unable to reach the authentication service. Please try again.",
+    "retry": "Try again"
   },
   "layout": {
     "theme": "Theme",
