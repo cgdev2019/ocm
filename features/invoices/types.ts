@@ -1,5 +1,7 @@
 import type { components } from '@/lib/api/generated/schema';
 
+type PagingAndFiltering = components['schemas']['PagingAndFiltering'];
+
 export type InvoiceDto = components['schemas']['InvoiceDto'];
 export type InvoicesDto = components['schemas']['InvoicesDto'];
 export type GetInvoiceResponseDto = components['schemas']['GetInvoiceResponseDto'];
@@ -28,4 +30,21 @@ export type InvoiceFormValues = {
   discountAmount: number;
   amountWithTax?: number;
   amountWithoutTax?: number;
+};
+
+export type InvoicesListParams = {
+  query?: string;
+} & Pick<PagingAndFiltering, 'limit' | 'offset' | 'sortBy' | 'sortOrder'>;
+
+export type InvoicesListPaging = {
+  totalRecords: number;
+  limit: number;
+  offset: number;
+  sortBy?: PagingAndFiltering['sortBy'];
+  sortOrder?: PagingAndFiltering['sortOrder'];
+};
+
+export type InvoicesList = {
+  items: InvoiceListItem[];
+  paging: InvoicesListPaging;
 };

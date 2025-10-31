@@ -1,15 +1,20 @@
 'use client';
 
+import { useState } from 'react';
 import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
-import { useCustomerAccounts } from '@/features/customer-accounts/api';
+import { DEFAULT_CUSTOMER_ACCOUNTS_PAGE_SIZE, useCustomerAccounts } from '@/features/customer-accounts/api';
 import type { CustomerAccountListItem } from '@/features/customer-accounts/types';
 
 export const CustomerAccountList = () => {
-  const { data, isLoading, isError, refetch } = useCustomerAccounts();
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: DEFAULT_CUSTOMER_ACCOUNTS_PAGE_SIZE,
+  });
+  const { data, isLoading, isFetching, isError, refetch } = useCustomerAccounts();
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
@@ -41,10 +46,15 @@ export const CustomerAccountList = () => {
         <DataGrid
           rows={(data ?? []).map((item) => ({ id: item.code, ...item }))}
           columns={columns}
-          loading={isLoading}
+          loading={isLoading || isFetching}
           slots={{ toolbar: GridToolbar }}
           disableRowSelectionOnClick
           onRowClick={(params) => router.push(`${pathname}/${params.id}`)}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          pageSizeOptions={[10, 20, 50]}
+          paginationMode="client"
+          rowCount={data?.length ?? 0}
           localeText={{
             noRowsLabel: t('table.empty'),
             toolbarQuickFilterPlaceholder: t('actions.search'),

@@ -1,15 +1,20 @@
 'use client';
 
+import { useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslations } from 'next-intl';
-import { useTaxes } from '@/features/taxes/api';
+import { DEFAULT_TAXES_PAGE_SIZE, useTaxes } from '@/features/taxes/api';
 import type { TaxListItem } from '@/features/taxes/types';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
 
 export const TaxList = () => {
-  const { data, isLoading } = useTaxes();
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: DEFAULT_TAXES_PAGE_SIZE,
+  });
+  const { data, isLoading, isFetching } = useTaxes();
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
@@ -37,9 +42,14 @@ export const TaxList = () => {
         <DataGrid
           rows={(data ?? []).map((item) => ({ id: item.code, ...item }))}
           columns={columns}
-          loading={isLoading}
+          loading={isLoading || isFetching}
           disableRowSelectionOnClick
           onRowClick={(params) => router.push(`${pathname}/${params.id}`)}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          pageSizeOptions={[10, 20, 50]}
+          paginationMode="client"
+          rowCount={data?.length ?? 0}
           localeText={{ noRowsLabel: t('table.empty') }}
         />
       </Box>

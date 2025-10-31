@@ -25,8 +25,8 @@ export const DashboardPage = () => {
 
   const totalAmount = useMemo(
     () =>
-      (invoices.data ?? []).reduce((acc, invoice) => acc + (invoice.amountWithTax ?? 0), 0),
-    [invoices.data],
+      (invoices.data?.items ?? []).reduce((acc, invoice) => acc + (invoice.amountWithTax ?? 0), 0),
+    [invoices.data?.items],
   );
 
   return (
@@ -51,7 +51,7 @@ export const DashboardPage = () => {
           <StatCard
             title={t('dashboard.kpi.outstandingBalance')}
             value={formatCurrency(totalAmount, 'EUR', locale as never)}
-            loading={invoices.isLoading}
+            loading={invoices.isLoading || invoices.isFetching}
           />
         </Grid>
       </Grid>
@@ -82,7 +82,7 @@ export const DashboardPage = () => {
                 {t('navigation.invoices')}
               </Typography>
               <Stack spacing={1}>
-                {(invoices.data ?? []).slice(0, 5).map((item) => (
+                {(invoices.data?.items ?? []).slice(0, 5).map((item) => (
                   <Box key={item.id}>
                     <Typography fontWeight={600}>{item.invoiceNumber ?? item.id}</Typography>
                     <Typography variant="body2" color="text.secondary">
