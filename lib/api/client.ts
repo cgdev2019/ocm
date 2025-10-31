@@ -18,8 +18,10 @@ const authMiddleware: Middleware = {
   },
 };
 
+const isBrowser = typeof window !== 'undefined';
+
 export const apiClient = createClient<paths>({
-  baseUrl: env.apiBaseUrl,
+  baseUrl: isBrowser ? '/api/opencell' : env.apiBaseUrl,
   fetch: async (input: RequestInfo, init?: RequestInit) => {
     const request = new Request(input, init);
     request.headers.set('Accept', 'application/json');

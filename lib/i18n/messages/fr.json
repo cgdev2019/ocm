@@ -103,7 +103,10 @@
     "signIn": "Se connecter",
     "signOut": "Se déconnecter",
     "sessionExpired": "Session expirée",
-    "loading": "Vérification de la session..."
+    "sessionExpiredDescription": "Votre session est terminée. Merci de vous reconnecter pour continuer.",
+    "loading": "Vérification de la session...",
+    "error": "Impossible de joindre le service d'authentification. Merci de réessayer.",
+    "retry": "Réessayer"
   },
   "layout": {
     "theme": "Thème",
