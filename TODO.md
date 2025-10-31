@@ -21,9 +21,14 @@
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
 - [x] Repasser `npm run typecheck`, `npm run lint`, `npm run test`, `npm run e2e` et archiver les resultats lorsque tout est vert.
 - [x] Nettoyer ou ignorer `test-results/` avant commit final (actuellement contient une capture d'echec).
-- [ ] Migrer la convention `middleware` -> `proxy` (warning Next.js pendant `npm run e2e`).
+- [x] Migrer la convention `middleware` -> `proxy` (warning Next.js pendant `npm run e2e`).
+- [ ] Retenter `npx playwright install` avec un mirroir ou un proxy réseau lorsque disponible.
 
 ## Notes
 - `i18n/request.ts` utilise l'alias `@/`; lint passe sans disable.
 - `npm run test -- --runTestsByPath` passe mais Jest signale une config `ts-jest` a moderniser.
 - `test-results/` est maintenant ignore dans `.gitignore`.
+- `proxy.ts` remplace `middleware.ts` (Next.js 16 attend désormais la convention `proxy`).
+- Tests relances (`npm run typecheck`, `npm run lint`, `npm run test`) => tout vert.
+- `npm run e2e` échoue toujours faute de navigateurs Playwright; `npx playwright install` ne parvient pas à télécharger Chromium (403 Forbidden).
+- Pas de push Git possible depuis l'environnement actuel (aucun accès au remote).
