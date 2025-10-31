@@ -50,7 +50,7 @@ export const LanguageIsoDetail = ({ code }: { code: string }) => {
   };
 
   const handleEdit = () => {
-    router.push({ pathname: '/language-iso/[code]/edit', params: { code } });
+    router.push({ pathname: '/language-iso/[code]/edit', query: { code } });
   };
 
   return (
