@@ -38,9 +38,22 @@ const required = (
   throw new Error(`Missing required environment variable: ${name}`);
 };
 
-const flag = (value: string | undefined): boolean => {
-  const normalized = (value ?? '').trim().toLowerCase();
-  return normalized === 'on' || normalized === 'true' || normalized === '1';
+const flag = (value: string | undefined, defaultValue = false): boolean => {
+  if (value === undefined || value.length === 0) {
+    return defaultValue;
+  }
+
+  const normalized = value.trim().toLowerCase();
+
+  if (normalized === 'on' || normalized === 'true' || normalized === '1' || normalized === 'yes') {
+    return true;
+  }
+
+  if (normalized === 'off' || normalized === 'false' || normalized === '0' || normalized === 'no') {
+    return false;
+  }
+
+  return defaultValue;
 };
 
 export const env: AppEnv = {

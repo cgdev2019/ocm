@@ -90,6 +90,28 @@ if (shouldLogProxyTraffic && requestId !== undefined) {
   }
 }
 
+  if (shouldLogProxyTraffic && requestId !== undefined) {
+    const responseClone = response.clone();
+    let responsePreview: string | undefined;
+    try {
+      const responseText = await responseClone.text();
+      if (responseText) {
+        responsePreview = sanitizeBodyPreview(responseText);
+      }
+    } catch (error) {
+      console.warn(`📡 [OpenCell Proxy #${requestId}] Impossible de lire la réponse`, error);
+    }
+
+    if (responsePreview) {
+      console.warn(
+        `📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`,
+        { body: responsePreview },
+      );
+    } else {
+      console.warn(`📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`);
+    }
+  }
+
   const responseHeaders = stripHopByHopHeaders(new Headers(response.headers));
   responseHeaders.delete('content-encoding');
   responseHeaders.delete('content-length');
