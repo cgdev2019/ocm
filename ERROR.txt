@@ -1,0 +1,46 @@
+$ npm run dev
+
+> opencell_cm2@0.1.0 dev
+> next dev
+
+   ▲ Next.js 16.0.1 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://10.172.128.34:3000
+
+ ✓ Starting...
+ ✓ Ready in 4.5s
+ ○ Compiling /[locale] ...
+ GET /fr 200 in 12.1s (compile: 11.5s, proxy.ts: 13ms, render: 553ms)
+ GET /fr/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js 404 in 1324ms (compile: 959ms, proxy.ts: 22ms, render: 344ms)
+ GET /fr/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_9212ccad._.js 404 in 1323ms (compile: 967ms, proxy.ts: 31ms, render: 325ms)
+ GET /fr/_next/static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_d62d378a._.js 404 in 1330ms (compile: 1015ms, proxy.ts: 19ms, render: 297ms)
+ GET /fr/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_1dd7fb59.js 404 in 1322ms (compile: 1005ms, proxy.ts: 36ms, render: 280ms)
+ GET /fr/_next/static/chunks/[root-of-the-server]__36b083e1._.css 404 in 1385ms (compile: 1071ms, proxy.ts: 51ms, render: 263ms)
+ GET /fr/_next/static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2 404 in 1390ms (compile: 1238ms, proxy.ts: 51ms, render: 101ms)
+ GET /fr/_next/static/chunks/node_modules_next_dist_compiled_a0e4c7b4._.js 404 in 460ms (compile: 89ms, proxy.ts: 23ms, render: 348ms)
+ GET /fr/_next/static/chunks/node_modules_next_dist_client_a6ce9b62._.js 404 in 449ms (compile: 132ms, proxy.ts: 38ms, render: 279ms)
+ GET /fr/_next/static/chunks/node_modules_%40swc_helpers_cjs_d80fb378._.js 404 in 461ms (compile: 118ms, proxy.ts: 33ms, render: 310ms)
+ GET /fr/_next/static/chunks/node_modules_next_dist_4b2403f5._.js 404 in 457ms (compile: 153ms, proxy.ts: 36ms, render: 268ms)
+ GET /fr/_next/static/chunks/turbopack-_376339a9._.js 404 in 453ms (compile: 241ms, proxy.ts: 39ms, render: 173ms)
+ GET /fr/_next/static/chunks/_a0ff3932._.js 404 in 449ms (compile: 245ms, proxy.ts: 41ms, render: 163ms)
+ GET /fr/_next/static/chunks/app_global-error_tsx_3873bb71._.js 404 in 397ms (compile: 60ms, proxy.ts: 26ms, render: 311ms)
+ GET /fr/_next/static/chunks/node_modules_a0ca1872._.js 404 in 387ms (compile: 71ms, proxy.ts: 23ms, render: 293ms)
+ GET /fr/_next/static/chunks/app_global-error_tsx_29b32c6b._.js 404 in 386ms (compile: 135ms, proxy.ts: 23ms, render: 228ms)
+ GET /fr/_next/static/chunks/_f9c8324e._.js 404 in 385ms (compile: 142ms, proxy.ts: 28ms, render: 214ms)
+ GET /fr/_next/static/chunks/node_modules_5e2f3a43._.js 404 in 382ms (compile: 202ms, proxy.ts: 32ms, render: 148ms)
+ GET /fr/_next/static/chunks/_59f4c8e1._.js 404 in 378ms (compile: 214ms, proxy.ts: 36ms, render: 128ms)
+ GET /fr/_next/static/chunks/app_layout_tsx_3873bb71._.js 404 in 390ms (compile: 42ms, proxy.ts: 18ms, render: 330ms)
+ GET /fr/_next/static/chunks/app_not-found_tsx_802d4caa._.js 404 in 390ms (compile: 55ms, proxy.ts: 21ms, render: 314ms)
+ GET /fr/_next/static/chunks/node_modules_e4934bd8._.js 404 in 395ms (compile: 73ms, proxy.ts: 20ms, render: 303ms)
+ GET /fr/_next/static/chunks/app_not-found_tsx_92166579._.js 404 in 397ms (compile: 168ms, proxy.ts: 24ms, render: 205ms)
+ GET /fr/_next/static/chunks/node_modules_a35e6558._.js 404 in 397ms (compile: 222ms, proxy.ts: 26ms, render: 149ms)
+ GET /fr/_next/static/chunks/app_[locale]_layout_tsx_92166579._.js 404 in 408ms (compile: 235ms, proxy.ts: 25ms, render: 148ms)
+ GET /fr/_next/static/chunks/node_modules_%40popperjs_core_lib_ce7e5cb7._.js 404 in 360ms (compile: 65ms, proxy.ts: 34ms, render: 261ms)
+ GET /fr/_next/static/chunks/node_modules_%40mui_material_65ac7d2a._.js 404 in 366ms (compile: 60ms, proxy.ts: 28ms, render: 277ms)
+ GET /fr/_next/static/chunks/_db59053e._.js 404 in 352ms (compile: 132ms, proxy.ts: 32ms, render: 187ms)
+ GET /fr/_next/static/chunks/node_modules_d49b08ba._.js 404 in 361ms (compile: 123ms, proxy.ts: 34ms, render: 204ms)
+ GET /fr/_next/static/chunks/app_[locale]_(app)_layout_tsx_63eb83ea._.js 404 in 356ms (compile: 192ms, proxy.ts: 37ms, render: 128ms)
+ GET /fr/_next/static/chunks/node_modules_edf97443._.js 404 in 340ms (compile: 234ms, proxy.ts: 29ms, render: 77ms)
+ GET /fr/_next/static/chunks/_625fa43a._.js 404 in 136ms (compile: 21ms, proxy.ts: 10ms, render: 104ms)
+ GET /fr/_next/static/chunks/app_[locale]_(app)_page_tsx_a656f325._.js 404 in 133ms (compile: 67ms, proxy.ts: 15ms, render: 51ms)
+ GET /fr/favicon.ico 404 in 83ms (compile: 13ms, proxy.ts: 8ms, render: 62ms)
