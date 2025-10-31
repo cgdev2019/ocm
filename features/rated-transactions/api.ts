@@ -14,6 +14,32 @@ import type {
 
 export const DEFAULT_RATED_TRANSACTIONS_PAGE_SIZE = 20;
 
+const buildFiltersPayload = (
+  filters?: RatedTransactionFilters | null,
+): NonNullable<PagingAndFiltering['filters']> | undefined => {
+  if (!filters) {
+    return undefined;
+  }
+
+  const payload: Record<string, string> = {};
+
+  if (filters.status) {
+    payload.status = filters.status;
+  }
+
+  if (filters.userAccountCode) {
+    payload.userAccountCode = filters.userAccountCode;
+  }
+
+  if (filters.query) {
+    payload.code = filters.query;
+  }
+
+  return Object.keys(payload).length > 0
+    ? (payload as unknown as NonNullable<PagingAndFiltering['filters']>)
+    : undefined;
+};
+
 const buildPagingPayload = (options: {
   filters?: RatedTransactionFilters | null;
   page: number;
@@ -21,20 +47,6 @@ const buildPagingPayload = (options: {
   sortBy?: string;
   sortOrder?: 'ASCENDING' | 'DESCENDING';
 }): PagingAndFiltering => {
-  const filters: Record<string, unknown> = {};
-
-  if (options.filters?.status) {
-    filters.status = options.filters.status;
-  }
-
-  if (options.filters?.userAccountCode) {
-    filters.userAccountCode = options.filters.userAccountCode;
-  }
-
-  if (options.filters?.query) {
-    filters.code = options.filters.query;
-  }
-
   const payload: PagingAndFiltering = {
     offset: options.page * options.pageSize,
     limit: options.pageSize,
@@ -42,8 +54,10 @@ const buildPagingPayload = (options: {
     sortOrder: options.sortOrder ?? 'DESCENDING',
   };
 
-  if (Object.keys(filters).length > 0) {
-    payload.filters = filters;
+  const filtersPayload = buildFiltersPayload(options.filters);
+
+  if (filtersPayload) {
+    payload.filters = filtersPayload;
   }
 
   return payload;
@@ -125,13 +139,14 @@ export const useRatedTransactionDetail = (code: string | null) =>
       }
 
       const apiClient = getApiClient();
-      const result = await apiClient.POST('/api/rest/billing/ratedTransaction/list', {
-        body: {
-          limit: 1,
-          offset: 0,
-          filters: { code },
-        },
-      });
+      const body: PagingAndFiltering = { limit: 1, offset: 0 };
+      const filtersPayload = buildFiltersPayload({ query: code });
+
+      if (filtersPayload) {
+        body.filters = filtersPayload;
+      }
+
+      const result = await apiClient.POST('/api/rest/billing/ratedTransaction/list', { body });
       const payload = unwrapResponse<RatedTransactionListResponseDto>(
         { data: result.data, error: result.error },
         'Unable to load rated transaction detail',
@@ -162,18 +177,11 @@ export const useCancelRatedTransactions = () => {
   return useMutation({
     mutationFn: async (filters: RatedTransactionFilters | null | undefined) => {
       const apiClient = getApiClient();
-      const body: PagingAndFiltering = {
-        filters: {},
-      };
+      const body: PagingAndFiltering = {};
+      const filtersPayload = buildFiltersPayload(filters);
 
-      if (filters?.status) {
-        body.filters = { ...body.filters, status: filters.status };
-      }
-      if (filters?.userAccountCode) {
-        body.filters = { ...body.filters, userAccountCode: filters.userAccountCode };
-      }
-      if (filters?.query) {
-        body.filters = { ...body.filters, code: filters.query };
+      if (filtersPayload) {
+        body.filters = filtersPayload;
       }
 
       const result = await apiClient.POST('/api/rest/billing/ratedTransaction/cancelRatedTransactions', { body });
