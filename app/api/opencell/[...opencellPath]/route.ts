@@ -116,9 +116,10 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
   if (shouldLogProxyTraffic && requestId !== undefined) {
     const message = `📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`;
 
-    console.warn(message);
     if (requestLogDetails) {
-      console.warn(`   ↳ Détails requête`, requestLogDetails);
+      console.warn(message, requestLogDetails);
+    } else {
+      console.warn(message);
     }
   }
 
@@ -142,9 +143,10 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
     );
     const message = `📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`;
 
-    console.warn(message);
     if (responseLogDetails) {
-      console.warn(`   ↳ Détails réponse`, responseLogDetails);
+      console.warn(message, responseLogDetails);
+    } else {
+      console.warn(message);
     }
   }
 
