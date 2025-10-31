@@ -64,6 +64,11 @@ const redactHeaderValue = (name: string, value: string) => {
   return value;
 };
 
+const buildSanitizedHeaderEntries = (headers: Headers): Array<[string, string]> =>
+  Array.from(headers.entries())
+    .map<[string, string]>(([name, value]) => [name, redactHeaderValue(name, value)])
+    .sort(([a], [b]) => a.localeCompare(b));
+
 const buildCurlCommand = (
   method: string,
   url: URL,
