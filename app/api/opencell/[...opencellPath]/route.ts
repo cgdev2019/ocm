@@ -202,10 +202,14 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
     }
   }
 
+  const timeoutSignal =
+    env.apiRequestTimeoutMs > 0 ? AbortSignal.timeout(env.apiRequestTimeoutMs) : undefined;
+
   const response = await fetch(targetUrl, {
     method: request.method,
     headers,
     body,
+    ...(timeoutSignal ? { signal: timeoutSignal } : {}),
   });
 
   if (shouldLogProxyTraffic && requestId !== undefined) {
@@ -239,18 +243,68 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
   });
 };
 
+const hasErrorCode = (value: unknown): value is { code?: unknown } => {
+  return typeof value === 'object' && value !== null && 'code' in value;
+};
+
+const readErrorCode = (value: unknown): string | undefined => {
+  if (!value) {
+    return undefined;
+  }
+
+  if (hasErrorCode(value)) {
+    const { code } = value;
+    return typeof code === 'string' ? code : undefined;
+  }
+
+  return undefined;
+};
+
+const isTimeoutError = (error: unknown): boolean => {
+  if (error instanceof DOMException) {
+    return error.name === 'TimeoutError' || error.name === 'AbortError';
+  }
+
+  if (error instanceof Error) {
+    if (readErrorCode(error) === 'UND_ERR_CONNECT_TIMEOUT') {
+      return true;
+    }
+
+    if (readErrorCode(error.cause) === 'UND_ERR_CONNECT_TIMEOUT') {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+const createProxyErrorResponse = (error: unknown) => {
+  if (isTimeoutError(error)) {
+    return {
+      status: 504,
+      body: {
+        error: 'proxy_timeout',
+        message: "Délai d'attente dépassé lors de l'appel de l'API OpenCell.",
+      },
+    } as const;
+  }
+
+  return {
+    status: 502,
+    body: {
+      error: 'proxy_error',
+      message: "Impossible d'atteindre l'API OpenCell.",
+    },
+  } as const;
+};
+
 const handle = async (request: NextRequest, path: string[]) => {
   try {
     return await forwardRequest(request, path);
   } catch (error) {
     console.error('Failed to proxy request to OpenCell API', error);
-    return NextResponse.json(
-      {
-        error: 'proxy_error',
-        message: "Impossible d'atteindre l'API OpenCell.",
-      },
-      { status: 502 },
-    );
+    const proxyError = createProxyErrorResponse(error);
+    return NextResponse.json(proxyError.body, { status: proxyError.status });
   }
 };
 
