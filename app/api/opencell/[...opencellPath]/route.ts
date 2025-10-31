@@ -49,6 +49,57 @@ const sanitizeBodyPreview = (body: string, maxLength = 2_000) => {
   return `${body.slice(0, maxLength)}… (truncated ${body.length - maxLength} chars)`;
 };
 
+const MAX_CURL_BODY_LENGTH = 10_000;
+
+const escapeShellArg = (value: string) => `'${value.replace(/'/g, `'"'"'`)}'`;
+
+const redactHeaderValue = (name: string, value: string) => {
+  const lowerCaseName = name.toLowerCase();
+  if (lowerCaseName === 'authorization') {
+    return 'Bearer <redacted>';
+  }
+  if (lowerCaseName === 'cookie') {
+    return '<redacted>';
+  }
+  return value;
+};
+
+const buildCurlCommand = (
+  method: string,
+  url: URL,
+  headers: Headers,
+  bodyText: string | undefined,
+): { command: string; truncatedBody?: number } => {
+  const commandParts: string[] = ['curl'];
+  if (method !== 'GET') {
+    commandParts.push('-X', escapeShellArg(method));
+  }
+
+  const headerEntries = Array.from(headers.entries()).sort(([a], [b]) =>
+    a.localeCompare(b),
+  );
+  headerEntries.forEach(([name, value]) => {
+    commandParts.push('-H', escapeShellArg(`${name}: ${redactHeaderValue(name, value)}`));
+  });
+
+  let truncatedBody: number | undefined;
+  if (bodyText && bodyText.length > 0) {
+    let bodyForCommand = bodyText;
+    if (bodyText.length > MAX_CURL_BODY_LENGTH) {
+      truncatedBody = bodyText.length - MAX_CURL_BODY_LENGTH;
+      bodyForCommand = bodyText.slice(0, MAX_CURL_BODY_LENGTH);
+    }
+    commandParts.push('--data-raw', escapeShellArg(bodyForCommand));
+  }
+
+  commandParts.push(escapeShellArg(url.toString()));
+
+  return {
+    command: commandParts.join(' '),
+    truncatedBody,
+  };
+};
+
 type ParsedBodyForLog =
   | { kind: 'json'; value: unknown; preview?: string }
   | { kind: 'text'; preview: string };
@@ -120,6 +171,19 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
       console.warn(message, requestLogDetails);
     } else {
       console.warn(message);
+    }
+
+    const { command: curlCommand, truncatedBody } = buildCurlCommand(
+      request.method,
+      targetUrl,
+      headers,
+      requestBodyText,
+    );
+    console.warn(`📡 [OpenCell Proxy #${requestId}] ↳ ${curlCommand}`);
+    if (truncatedBody) {
+      console.warn(
+        `📡 [OpenCell Proxy #${requestId}] ↳ Corps tronqué de ${truncatedBody} caractères pour les logs`,
+      );
     }
   }
 
