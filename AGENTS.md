@@ -45,6 +45,7 @@
 - `npm run lint` → OK (auth obligatoire Keycloak, garde mise à jour).
 - `npm run typecheck` → OK (auth obligatoire Keycloak).
 - Mise en place d'un proxy Next.js `/api/opencell` pour router les appels API et éviter le CORS côté navigateur.
+- `npm run lint` (06/02) → OK après correctif de dépliage `params` dans le proxy `/api/opencell`.
 - Instructions de l'AGENTS.md relues; aucune tâche supplémentaire effectuée.
 
 # Prompt — Build a Production‑Ready Frontend from OpenAPI (Next.js + MUI)

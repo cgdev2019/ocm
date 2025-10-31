@@ -68,44 +68,53 @@ const handle = async (request: NextRequest, path: string[]) => {
 
 export const runtime = 'nodejs';
 
+type RouteParams =
+  | { opencellPath?: string[] }
+  | Promise<{ opencellPath?: string[] }>;
+
+const resolvePathSegments = async (params: RouteParams): Promise<string[]> => {
+  const resolvedParams = await params;
+  return resolvedParams?.opencellPath ?? [];
+};
+
 export async function GET(
   request: NextRequest,
-  context: { params: { opencellPath: string[] } },
+  context: { params: RouteParams },
 ) {
-  return handle(request, context.params.opencellPath ?? []);
+  return handle(request, await resolvePathSegments(context.params));
 }
 
 export async function POST(
   request: NextRequest,
-  context: { params: { opencellPath: string[] } },
+  context: { params: RouteParams },
 ) {
-  return handle(request, context.params.opencellPath ?? []);
+  return handle(request, await resolvePathSegments(context.params));
 }
 
 export async function PUT(
   request: NextRequest,
-  context: { params: { opencellPath: string[] } },
+  context: { params: RouteParams },
 ) {
-  return handle(request, context.params.opencellPath ?? []);
+  return handle(request, await resolvePathSegments(context.params));
 }
 
 export async function PATCH(
   request: NextRequest,
-  context: { params: { opencellPath: string[] } },
+  context: { params: RouteParams },
 ) {
-  return handle(request, context.params.opencellPath ?? []);
+  return handle(request, await resolvePathSegments(context.params));
 }
 
 export async function DELETE(
   request: NextRequest,
-  context: { params: { opencellPath: string[] } },
+  context: { params: RouteParams },
 ) {
-  return handle(request, context.params.opencellPath ?? []);
+  return handle(request, await resolvePathSegments(context.params));
 }
 
 export async function OPTIONS(
   request: NextRequest,
-  context: { params: { opencellPath: string[] } },
+  context: { params: RouteParams },
 ) {
-  return handle(request, context.params.opencellPath ?? []);
+  return handle(request, await resolvePathSegments(context.params));
 }
