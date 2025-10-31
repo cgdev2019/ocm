@@ -13,6 +13,7 @@ import type { LanguageFormValues } from '@/features/languages/types';
 import type { InvoiceDto } from '@/features/invoices/types';
 import type { TaxFormValues } from '@/features/taxes/types';
 import type { OccTemplateFormValues } from '@/features/occ-templates/types';
+import type { RatedTransactionDto } from '@/features/rated-transactions/types';
 import {
   customerAccountFormFixtures,
   customerFormFixtures,
@@ -31,6 +32,7 @@ import {
   importFileTypeFixture,
   taxFormFixtures,
   occTemplateFormFixture,
+  ratedTransactionsFixture,
 } from '@/tests/fixtures/opencellDataset';
 
 export const customers: CustomerFormValues[] = customerFormFixtures;
@@ -87,3 +89,5 @@ export const languagesData: LanguageFormValues[] = languageListFixture.map(({ co
 }));
 
 export const massImportDetection = importFileTypeFixture;
+
+export const ratedTransactionsData: RatedTransactionDto[] = ratedTransactionsFixture;

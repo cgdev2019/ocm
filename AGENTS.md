@@ -26,6 +26,7 @@
 - 2025-11-17 : Navigation édition vendeur — utilisation d'URL concrètes (`/sellers/${code}`) au lieu des segments dynamiques non résolus.
 - Vérifications automatiques relancées (`npm run lint`, `npm run typecheck`, `npm run test`) — tout vert (31/10/2025).
 - Synthèse OpenAPI automatique générée pour `tasks/*.md` via `scripts/generateTasks.mjs`.
+- 2025-11-20 : Espace de travail Rated Transactions ajouté (hooks TanStack Query, liste paginée, tiroir de détail et flux d'annulation) + fixtures, handlers MSW et tests ciblés.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
@@ -106,7 +107,7 @@
 - [ ] Service InvoicingPlan — cf. `tasks/TASK035.md`
 - [ ] Service Invoicing — cf. `tasks/TASK036.md`
 - [ ] Service Mediation — cf. `tasks/TASK037.md`
-- [ ] Service RatedTransaction — cf. `tasks/TASK038.md`
+- [x] Service RatedTransaction — cf. `tasks/TASK038.md`
 - [ ] Service Subscription — cf. `tasks/TASK039.md`
 - [ ] Service Wallet — cf. `tasks/TASK040.md`
 - [ ] Service BundleTemplate — cf. `tasks/TASK041.md`

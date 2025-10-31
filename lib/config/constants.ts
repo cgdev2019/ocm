@@ -48,6 +48,7 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.sellers', path: '/sellers', icon: 'seller' },
   { label: 'navigation.terminationReasons', path: '/termination-reasons', icon: 'terminationReason' },
   { label: 'navigation.usage', path: '/usage', icon: 'usage' },
+  { label: 'navigation.ratedTransactions', path: '/rated-transactions', icon: 'billing' },
   { label: 'navigation.accesses', path: '/access', icon: 'access' },
   { label: 'navigation.billingCycles', path: '/billing-cycles', icon: 'billing' },
   { label: 'navigation.calendars', path: '/calendars', icon: 'calendar' },
