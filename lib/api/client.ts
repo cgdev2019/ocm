@@ -2,6 +2,7 @@ import createClient, { type Middleware } from 'openapi-fetch';
 import type { paths } from '@/lib/api/generated/schema';
 import { env } from '@/lib/config/env';
 import { getAccessToken } from '@/lib/auth/token-store';
+import { ApiTimeoutError } from '@/lib/api/errors';
 
 const authMiddleware: Middleware = {
   onRequest: async ({ request }) => {
@@ -22,9 +23,48 @@ const createApiClient = (baseUrl: string) => {
   const client = createClient<paths>({
     baseUrl,
     fetch: async (input: RequestInfo, init?: RequestInit) => {
-      const request = new Request(input, init);
-      request.headers.set('Accept', 'application/json');
-      return fetch(request);
+      const headers = new Headers(init?.headers);
+      if (!headers.has('Accept')) {
+        headers.set('Accept', 'application/json');
+      }
+
+      const controller = new AbortController();
+      const originalSignal = init?.signal;
+
+      if (originalSignal?.aborted) {
+        controller.abort();
+      }
+
+      const abortListener = () => controller.abort();
+      if (originalSignal) {
+        originalSignal.addEventListener('abort', abortListener);
+      }
+
+      const timeoutId = setTimeout(() => controller.abort(), env.apiRequestTimeoutMs);
+
+      try {
+        return await fetch(input, {
+          ...init,
+          headers,
+          signal: controller.signal,
+        });
+      } catch (error) {
+        if (
+          (error instanceof DOMException && error.name === 'AbortError') ||
+          (error instanceof Error && error.name === 'AbortError')
+        ) {
+          if (!originalSignal || !originalSignal.aborted) {
+            throw new ApiTimeoutError();
+          }
+        }
+
+        throw error;
+      } finally {
+        clearTimeout(timeoutId);
+        if (originalSignal) {
+          originalSignal.removeEventListener('abort', abortListener);
+        }
+      }
     },
   });
 

@@ -91,7 +91,8 @@
   "feedback": {
     "saved": "Enregistrement réussi",
     "deleted": "Suppression réussie",
-    "error": "Une erreur inattendue est survenue"
+    "error": "Une erreur inattendue est survenue",
+    "timeout": "Le délai de réponse de l'API est dépassé. Merci de réessayer."
   },
   "filters": {
     "customer": "Filtrer par client",

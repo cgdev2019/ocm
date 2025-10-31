@@ -91,7 +91,8 @@
   "feedback": {
     "saved": "Saved successfully",
     "deleted": "Deleted successfully",
-    "error": "An unexpected error occurred"
+    "error": "An unexpected error occurred",
+    "timeout": "The API took too long to respond. Please try again."
   },
   "filters": {
     "customer": "Filter by customer",

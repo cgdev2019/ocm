@@ -25,6 +25,10 @@ export const unwrapResponse = <T>(
   fallbackMessage: string,
 ): T => {
   if (result.error) {
+    if (result.error instanceof Error) {
+      throw result.error;
+    }
+
     if (typeof result.error === 'object' && result.error !== null) {
       const message =
         // @ts-expect-error – best effort extraction
