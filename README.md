@@ -93,6 +93,7 @@ npm run e2e             # Playwright e2e scenarios
 - `mocks/handlers.ts` contains MSW REST handlers backed by fixture data in `mocks/data.ts`.
 - In development, enabling `MOCK=on` spins up the worker automatically (`AppProviders`).
 - For production, leave `MOCK` unset to target the real API + Keycloak.
+- Les données MSW et Jest proviennent désormais de `tests/fixtures/opencellDataset.ts` afin de garantir un jeu d'essai unique et stable.
 
 ## Directory Layout
 
