@@ -107,6 +107,35 @@ export const queryKeys = {
   queryService: {
     search: (query?: string) => (query ? (['queryService', 'search', query] as const) : (['queryService', 'search'] as const)),
   },
+  usage: {
+    search: (criteria?: { userAccountCode?: string | null; fromDate?: string | null; toDate?: string | null }) =>
+      criteria
+        ? (['usage', 'search', criteria] as const)
+        : (['usage', 'search'] as const),
+    chargeAggregate: (criteria?: { userAccountCode?: string | null; fromDate?: string | null; toDate?: string | null }) =>
+      criteria
+        ? (['usage', 'chargeAggregate', criteria] as const)
+        : (['usage', 'chargeAggregate'] as const),
+    version: () => ['usage', 'version'] as const,
+  },
+  access: {
+    list: (filters?: { subscriptionCode?: string | null }) =>
+      filters ? (['access', 'list', filters] as const) : (['access', 'list'] as const),
+    detail: (params: { accessCode: string; subscriptionCode?: string | null }) =>
+      ['access', 'detail', params] as const,
+    version: () => ['access', 'version'] as const,
+  },
+  businessAccountModels: {
+    list: () => ['businessAccountModels', 'list'] as const,
+    detail: (code: string) => ['businessAccountModels', 'detail', code] as const,
+    parents: (code: string) => ['businessAccountModels', 'parents', code] as const,
+    version: () => ['businessAccountModels', 'version'] as const,
+  },
+  providerContacts: {
+    list: () => ['providerContacts', 'list'] as const,
+    detail: (code: string) => ['providerContacts', 'detail', code] as const,
+    version: () => ['providerContacts', 'version'] as const,
+  },
   scriptInstances: {
     list: (code?: string) =>
       code ? (['scriptInstances', 'list', code] as const) : (['scriptInstances', 'list'] as const),

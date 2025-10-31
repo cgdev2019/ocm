@@ -46,6 +46,8 @@
 - 2025-11-13 : `npm run typecheck` → ok (services ScriptInstance/Seller/TerminationReason).
 - 2025-11-13 : `npm run test -- --runTestsByPath features/script-instances/__tests__/useScriptInstances.test.tsx features/sellers/__tests__/useSellers.test.tsx features/termination-reasons/__tests__/useTerminationReasons.test.tsx` → ok (nouveaux hooks services ScriptInstance/Seller/TerminationReason).
 - 2025-11-14 : `npm run test -- --runTestsByPath features/script-instances/__tests__/useScriptInstances.test.tsx features/sellers/__tests__/useSellers.test.tsx features/termination-reasons/__tests__/useTerminationReasons.test.tsx features/taxes/__tests__/useTaxes.test.tsx` → ok (validation hooks incluant Tax).
+- 2025-11-15 : `npm run test -- --runTestsByPath features/usage/__tests__/useUsage.test.tsx features/access/__tests__/useAccesses.test.tsx features/business-account-model/__tests__/useBusinessAccountModels.test.tsx features/provider-contact/__tests__/useProviderContacts.test.tsx` → ok (services Usage/Access/BAM/ProviderContact).
+- 2025-11-16 : `npm run test -- --runTestsByPath features/usage/__tests__/useUsage.test.tsx features/access/__tests__/useAccesses.test.tsx features/business-account-model/__tests__/useBusinessAccountModels.test.tsx features/provider-contact/__tests__/useProviderContacts.test.tsx` → ok (revalidation Usage/Access/BAM/ProviderContact).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
@@ -81,10 +83,10 @@
 - [x] Service Seller — cf. `tasks/TASK022.md`
 - [x] Service Tax — cf. `tasks/TASK023.md`
 - [x] Service TerminationReason — cf. `tasks/TASK024.md`
-- [ ] Service Usage — cf. `tasks/TASK025.md`
-- [ ] Service Access — cf. `tasks/TASK026.md`
-- [ ] Service BusinessAccountModel — cf. `tasks/TASK027.md`
-- [ ] Service ProviderContact — cf. `tasks/TASK028.md`
+- [x] Service Usage — cf. `tasks/TASK025.md`
+- [x] Service Access — cf. `tasks/TASK026.md`
+- [x] Service BusinessAccountModel — cf. `tasks/TASK027.md`
+- [x] Service ProviderContact — cf. `tasks/TASK028.md`
 - [ ] Service Title — cf. `tasks/TASK029.md`
 - [ ] Service Audit — cf. `tasks/TASK030.md`
 - [ ] Service FileFormat — cf. `tasks/TASK031.md`

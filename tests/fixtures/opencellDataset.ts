@@ -116,6 +116,21 @@ import type {
   GetTerminationReasonResponse,
   TerminationReasonListItem,
 } from '@/features/termination-reasons/types';
+import type { AccessesResponseDto, AccessListItem } from '@/features/access/types';
+import type {
+  BusinessAccountModelListItem,
+  MeveoModuleDtosResponse,
+} from '@/features/business-account-model/types';
+import type {
+  ProviderContactListItem,
+  ProviderContactsResponseDto,
+} from '@/features/provider-contact/types';
+import type {
+  UsageChargeAggregateListItem,
+  UsageChargeAggregateResponseDto,
+  UsageListItem,
+  UsageResponseDto,
+} from '@/features/usage/types';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
@@ -1033,6 +1048,174 @@ export const terminationReasonListFixture: TerminationReasonListItem[] = [
     description: 'Goodwill termination',
     overrideProrata: 'PRORATA',
     applyTerminationCharges: false,
+  },
+];
+
+export const usageResponseFixture: UsageResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Usage sample' },
+  listCatUsage: [
+    {
+      code: 'VOICE',
+      description: 'Voice services',
+      listSubCatUsage: [
+        {
+          code: 'OUT',
+          description: 'Outgoing calls',
+          listUsage: [
+            {
+              dateEvent: '2024-06-01T10:00:00.000Z',
+              code: 'CALL-001',
+              description: 'International call',
+              unityDescription: 'minute',
+              unitAmountWithoutTax: 0.12,
+              quantity: 10,
+              amountWithoutTax: 1.2,
+              parameter1: 'FR',
+              parameter2: 'US',
+              offerCode: 'VOICE-PACK',
+              priceplanCode: 'STANDARD',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+export const usageListFixture: UsageListItem[] = [
+  {
+    id: 'VOICE::OUT::CALL-001::2024-06-01T10:00:00.000Z',
+    categoryCode: 'VOICE',
+    categoryDescription: 'Voice services',
+    subCategoryCode: 'OUT',
+    subCategoryDescription: 'Outgoing calls',
+    dateEvent: '2024-06-01T10:00:00.000Z',
+    code: 'CALL-001',
+    description: 'International call',
+    unityDescription: 'minute',
+    unitAmountWithoutTax: 0.12,
+    quantity: 10,
+    amountWithoutTax: 1.2,
+    parameter1: 'FR',
+    parameter2: 'US',
+    offerCode: 'VOICE-PACK',
+    priceplanCode: 'STANDARD',
+  },
+];
+
+export const usageChargeAggregateResponseFixture: UsageChargeAggregateResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Aggregates' },
+  listChargeAggregate: [
+    { description: 'Outgoing calls', quantity: '10', amount: '1.2' },
+    { description: 'Data usage', quantity: '500', amount: '5.0' },
+  ],
+};
+
+export const usageAggregateListFixture: UsageChargeAggregateListItem[] = [
+  { id: 'Outgoing calls-0', description: 'Outgoing calls', quantity: '10', amount: '1.2' },
+  { id: 'Data usage-1', description: 'Data usage', quantity: '500', amount: '5.0' },
+];
+
+export const accessesResponseFixture: AccessesResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Access list' },
+  paging: { offset: 0, limit: 20, totalNumberOfRecords: 1 },
+  accesses: {
+    access: [
+      {
+        code: 'ACC-ACCESS',
+        subscription: 'SUB-001',
+        startDate: '2024-01-01T00:00:00.000Z',
+        endDate: '2024-12-31T23:59:59.000Z',
+        disabled: false,
+      },
+    ],
+  },
+};
+
+export const accessListFixture: AccessListItem[] = [
+  {
+    code: 'ACC-ACCESS',
+    subscription: 'SUB-001',
+    startDate: '2024-01-01T00:00:00.000Z',
+    endDate: '2024-12-31T23:59:59.000Z',
+    disabled: false,
+  },
+];
+
+export const businessAccountModelsResponseFixture: MeveoModuleDtosResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'Modules' },
+  paging: { offset: 0, limit: 20, totalNumberOfRecords: 1 },
+  modules: [
+    {
+      code: 'BAM-STD',
+      description: 'Standard business account model',
+      license: 'MIT',
+      disabled: false,
+      moduleItems: [],
+      script: {
+        code: 'BAM_SCRIPT',
+        description: 'Installer script',
+        updatedCode: undefined,
+        disabled: false,
+        type: 'JAVA',
+        reuse: false,
+        script: '// script',
+        executionRoles: [],
+        sourcingRoles: [],
+        languageDescriptions: [],
+        scriptParameters: [],
+        codeOnly: false,
+      },
+    },
+  ],
+};
+
+export const businessAccountModelListFixture: BusinessAccountModelListItem[] = [
+  {
+    code: 'BAM-STD',
+    description: 'Standard business account model',
+    hierarchyType: undefined,
+    license: 'MIT',
+    disabled: false,
+  },
+];
+
+export const providerContactsResponseFixture: ProviderContactsResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Contacts' },
+  providerContacts: [
+    {
+      code: 'PC-001',
+      description: 'Primary contact',
+      firstName: 'Alice',
+      lastName: 'Martin',
+      email: 'alice@example.com',
+      phone: '+33102030405',
+      mobile: '+33612345678',
+      fax: '+33102030406',
+      genericMail: 'support@example.com',
+      addressDto: {
+        address1: '10 rue Victor Hugo',
+        address2: 'Bâtiment B',
+        address3: undefined,
+        address4: undefined,
+        address5: undefined,
+        zipCode: '75001',
+        city: 'Paris',
+        country: 'FR',
+        state: 'IDF',
+      },
+    },
+  ],
+};
+
+export const providerContactListFixture: ProviderContactListItem[] = [
+  {
+    code: 'PC-001',
+    description: 'Primary contact',
+    firstName: 'Alice',
+    lastName: 'Martin',
+    email: 'alice@example.com',
+    phone: '+33102030405',
   },
 ];
 

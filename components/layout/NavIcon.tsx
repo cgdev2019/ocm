@@ -24,6 +24,10 @@ import QueryStatsIcon from '@mui/icons-material/QueryStatsOutlined';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructionsOutlined';
 import StorefrontIcon from '@mui/icons-material/StorefrontOutlined';
 import HighlightOffIcon from '@mui/icons-material/HighlightOffOutlined';
+import BoltIcon from '@mui/icons-material/BoltOutlined';
+import VpnKeyIcon from '@mui/icons-material/VpnKeyOutlined';
+import AccountTreeIcon from '@mui/icons-material/AccountTreeOutlined';
+import ContactsIcon from '@mui/icons-material/ContactsOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -51,6 +55,10 @@ const registry: Record<string, SvgIconComponent> = {
   scriptInstance: IntegrationInstructionsIcon,
   seller: StorefrontIcon,
   terminationReason: HighlightOffIcon,
+  usage: BoltIcon,
+  access: VpnKeyIcon,
+  businessAccountModel: AccountTreeIcon,
+  providerContact: ContactsIcon,
 };
 
 export const NavIcon = ({ name }: { name: string }) => {
