@@ -1,9 +1,11 @@
 import { CalendarDetail } from '@/features/calendars/components/CalendarDetail';
 
 type Props = {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 };
 
-export default function CalendarDetailPage({ params }: Props) {
-  return <CalendarDetail code={params.code} />;
+export default async function CalendarDetailPage({ params }: Props) {
+  const { code } = await params;
+
+  return <CalendarDetail code={code} />;
 }

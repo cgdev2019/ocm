@@ -1,9 +1,11 @@
 import { CountryIsoEditForm } from '@/features/country-iso/components/CountryIsoEditForm';
 
 type Props = {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 };
 
-export default function CountryIsoEditPage({ params }: Props) {
-  return <CountryIsoEditForm countryCode={params.code} />;
+export default async function CountryIsoEditPage({ params }: Props) {
+  const { code } = await params;
+
+  return <CountryIsoEditForm countryCode={code} />;
 }

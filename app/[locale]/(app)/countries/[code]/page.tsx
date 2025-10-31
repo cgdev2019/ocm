@@ -1,9 +1,11 @@
 import { CountryDetail } from '@/features/countries/components/CountryDetail';
 
 type Props = {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 };
 
-export default function CountryDetailPage({ params }: Props) {
-  return <CountryDetail countryCode={params.code} />;
+export default async function CountryDetailPage({ params }: Props) {
+  const { code } = await params;
+
+  return <CountryDetail countryCode={code} />;
 }

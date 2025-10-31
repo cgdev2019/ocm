@@ -1,9 +1,11 @@
 import { CustomerAccountDetail } from '@/features/customer-accounts/components/CustomerAccountDetail';
 
 type Props = {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 };
 
-export default function CustomerAccountDetailPage({ params }: Props) {
-  return <CustomerAccountDetail code={params.code} />;
+export default async function CustomerAccountDetailPage({ params }: Props) {
+  const { code } = await params;
+
+  return <CustomerAccountDetail code={code} />;
 }

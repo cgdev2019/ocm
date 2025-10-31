@@ -1,9 +1,11 @@
 import { CountryEditForm } from '@/features/countries/components/CountryEditForm';
 
 type Props = {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 };
 
-export default function CountryEditPage({ params }: Props) {
-  return <CountryEditForm countryCode={params.code} />;
+export default async function CountryEditPage({ params }: Props) {
+  const { code } = await params;
+
+  return <CountryEditForm countryCode={code} />;
 }
