@@ -25,6 +25,8 @@
 - [x] Prendre en compte le fichier ERROR.txt lors de l'exécution de `npm run dev` (nav locale & logo 404 corrigés)
 
 ## Notes
+- Les variables d'env Keycloak/API lisent désormais les variantes `NEXT_PUBLIC_*` pour fonctionner côté navigateur.
+- `npm run lint` → OK après le correctif d'auth (cf. Keycloak/API).
 - `i18n/request.ts` utilise l'alias `@/`; lint passe sans disable.
 - `npm run test -- --runTestsByPath` passe mais Jest signale une config `ts-jest` a moderniser.
 - `test-results/` est maintenant ignore dans `.gitignore`.
