@@ -57,14 +57,24 @@ const flag = (value: string | undefined, defaultValue = false): boolean => {
   return defaultValue;
 };
 
-const numberValue = (value: string | undefined, defaultValue: number): number => {
+const numberValue = (
+  value: string | undefined,
+  defaultValue: number,
+  { allowZero = false }: { allowZero?: boolean } = {},
+): number => {
   if (value === undefined || value.length === 0) {
     return defaultValue;
   }
 
   const parsed = Number(value);
-  if (Number.isFinite(parsed) && parsed > 0) {
-    return parsed;
+  if (Number.isFinite(parsed)) {
+    if (parsed > 0) {
+      return parsed;
+    }
+
+    if (allowZero && parsed === 0) {
+      return 0;
+    }
   }
 
   return defaultValue;
@@ -82,7 +92,8 @@ export const env: AppEnv = {
   opencellProxyLogs: flag(process.env.OPENCELL_PROXY_LOGS),
   apiRequestTimeoutMs: numberValue(
     pickEnvValue(process.env.NEXT_PUBLIC_API_TIMEOUT_MS, process.env.API_TIMEOUT_MS),
-    10000,
+    30000,
+    { allowZero: true },
   ),
   keycloak: {
     url: required(
