@@ -2,22 +2,29 @@
 
 import { useState } from 'react';
 import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
 import { DEFAULT_CUSTOMERS_PAGE_SIZE, useCustomersList } from '@/features/customers/api';
 import type { CustomerListItem } from '@/features/customers/types';
+import { ApiTimeoutError } from '@/lib/api/errors';
 
 export const CustomerList = () => {
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: DEFAULT_CUSTOMERS_PAGE_SIZE });
-  const { data, isLoading, isError, isFetching, refetch } = useCustomersList({
+  const { data, isLoading, isError, isFetching, refetch, error } = useCustomersList({
     limit: paginationModel.pageSize,
     offset: paginationModel.page * paginationModel.pageSize,
   });
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+
+  const errorMessage = error instanceof ApiTimeoutError
+    ? t('feedback.timeout')
+    : error instanceof Error
+      ? error.message
+      : t('feedback.error');
 
   const columns: GridColDef<CustomerListItem>[] = [
     { field: 'code', headerName: t('forms.customer.code'), flex: 1, minWidth: 160 },
@@ -66,9 +73,17 @@ export const CustomerList = () => {
         />
       </Box>
       {isError ? (
-        <Button variant="outlined" onClick={() => refetch()} sx={{ alignSelf: 'flex-start' }}>
-          {t('actions.retry')}
-        </Button>
+        <Alert
+          severity="error"
+          action={
+            <Button color="inherit" size="small" onClick={() => refetch()}>
+              {t('actions.retry')}
+            </Button>
+          }
+          sx={{ alignSelf: 'flex-start', width: 'fit-content' }}
+        >
+          {errorMessage}
+        </Alert>
       ) : null}
     </Stack>
   );

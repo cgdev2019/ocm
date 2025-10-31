@@ -3,6 +3,7 @@ export type AppEnv = {
   mockApi: boolean;
   defaultLocale: string;
   opencellProxyLogs: boolean;
+  apiRequestTimeoutMs: number;
   keycloak: {
     url: string;
     realm: string;
@@ -56,6 +57,19 @@ const flag = (value: string | undefined, defaultValue = false): boolean => {
   return defaultValue;
 };
 
+const numberValue = (value: string | undefined, defaultValue: number): number => {
+  if (value === undefined || value.length === 0) {
+    return defaultValue;
+  }
+
+  const parsed = Number(value);
+  if (Number.isFinite(parsed) && parsed > 0) {
+    return parsed;
+  }
+
+  return defaultValue;
+};
+
 export const env: AppEnv = {
   apiBaseUrl: required(
     pickEnvValue(process.env.NEXT_PUBLIC_API_BASE_URL, process.env.API_BASE_URL),
@@ -66,6 +80,10 @@ export const env: AppEnv = {
   mockApi: flag(process.env.NEXT_PUBLIC_MOCK ?? process.env.MOCK),
   defaultLocale: required(process.env.DEFAULT_LOCALE, 'DEFAULT_LOCALE', 'fr'),
   opencellProxyLogs: flag(process.env.OPENCELL_PROXY_LOGS),
+  apiRequestTimeoutMs: numberValue(
+    pickEnvValue(process.env.NEXT_PUBLIC_API_TIMEOUT_MS, process.env.API_TIMEOUT_MS),
+    10000,
+  ),
   keycloak: {
     url: required(
       pickEnvValue(process.env.NEXT_PUBLIC_KEYCLOAK_APP_AUTH_URL, process.env.KEYCLOAK_APP_AUTH_URL),
