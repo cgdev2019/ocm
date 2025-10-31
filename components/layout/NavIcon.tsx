@@ -21,6 +21,9 @@ import SchemaIcon from '@mui/icons-material/SchemaOutlined';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import BusinessIcon from '@mui/icons-material/BusinessOutlined';
 import QueryStatsIcon from '@mui/icons-material/QueryStatsOutlined';
+import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructionsOutlined';
+import StorefrontIcon from '@mui/icons-material/StorefrontOutlined';
+import HighlightOffIcon from '@mui/icons-material/HighlightOffOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -45,6 +48,9 @@ const registry: Record<string, SvgIconComponent> = {
   pdfInvoice: PictureAsPdfIcon,
   provider: BusinessIcon,
   query: QueryStatsIcon,
+  scriptInstance: IntegrationInstructionsIcon,
+  seller: StorefrontIcon,
+  terminationReason: HighlightOffIcon,
 };
 
 export const NavIcon = ({ name }: { name: string }) => {

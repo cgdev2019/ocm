@@ -26,13 +26,19 @@ export const NAV_SECTIONS: Array<{
     | 'occTemplate'
     | 'pdfInvoice'
     | 'provider'
-    | 'query';
+    | 'query'
+    | 'scriptInstance'
+    | 'seller'
+    | 'terminationReason';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
   { label: 'navigation.customers', path: '/customers', icon: 'customers' },
   { label: 'navigation.customerAccounts', path: '/customer-accounts', icon: 'accounts' },
   { label: 'navigation.invoices', path: '/invoices', icon: 'invoices' },
   { label: 'navigation.taxes', path: '/taxes', icon: 'taxes' },
+  { label: 'navigation.scriptInstances', path: '/script-instances', icon: 'scriptInstance' },
+  { label: 'navigation.sellers', path: '/sellers', icon: 'seller' },
+  { label: 'navigation.terminationReasons', path: '/termination-reasons', icon: 'terminationReason' },
   { label: 'navigation.billingCycles', path: '/billing-cycles', icon: 'billing' },
   { label: 'navigation.calendars', path: '/calendars', icon: 'calendar' },
   { label: 'navigation.configuration', path: '/configuration', icon: 'settings' },

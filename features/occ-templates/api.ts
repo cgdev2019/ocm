@@ -47,6 +47,7 @@ const mapFormToDto = (values: OccTemplateFormValues): OccTemplateDto => ({
   accountingScheme: values.accountingSchemeCode
     ? {
         code: values.accountingSchemeCode,
+        scriptCode: values.accountingSchemeCode,
       }
     : undefined,
   contractAccountingCode: values.contractAccountingCode,

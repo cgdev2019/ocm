@@ -35,7 +35,7 @@ export const AppBreadcrumbs = () => {
   const items = useMemo<Crumb[]>(() => {
     const segments = pathname.split('/').filter(Boolean);
 
-    const crumbs = [
+    const crumbs: Crumb[] = [
       {
         href: '/',
         labelKey: ROOT_LABEL_KEY,

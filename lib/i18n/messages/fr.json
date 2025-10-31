@@ -9,6 +9,9 @@
     "customerAccounts": "Comptes clients",
     "invoices": "Factures",
     "taxes": "Taxes",
+    "scriptInstances": "Instances de script",
+    "sellers": "Vendeurs",
+    "terminationReasons": "Motifs de résiliation",
     "settings": "Réglages",
     "billingCycles": "Cycles de facturation",
     "calendars": "Calendriers",
@@ -65,6 +68,8 @@
   "table": {
     "empty": "Aucune donnée pour le moment.",
     "loading": "Chargement des données...",
+    "noResult": "Aucun résultat pour votre recherche.",
+    "startSearch": "Saisissez un code pour lancer la recherche.",
     "actions": "Actions"
   },
   "common": {
@@ -75,6 +80,7 @@
     "required": "Ce champ est obligatoire",
     "invalidEmail": "Merci de saisir une adresse email valide",
     "invalidNumber": "Merci de saisir un nombre valide",
+    "confirmDeletion": "Confirmez-vous la suppression ?",
     "success": "Modifications enregistrées",
     "error": "Une erreur est survenue",
     "customer": {
@@ -117,6 +123,53 @@
       "description": "Description",
       "percent": "Pourcentage",
       "accountingCode": "Code comptable"
+    },
+    "scriptInstance": {
+      "code": "Code du script",
+      "description": "Description",
+      "type": "Type d'exécution",
+      "disabled": "Désactivé",
+      "searchPlaceholder": "Rechercher par code script",
+      "category": "Catégorie",
+      "reuse": "Réutiliser le contexte",
+      "codeOnly": "Code uniquement",
+      "script": "Contenu du script",
+      "enabled": "Instance de script activée",
+      "disabledMessage": "Instance de script désactivée",
+      "execute": "Exécuter",
+      "version": "Version {version}"
+    },
+    "seller": {
+      "code": "Code vendeur",
+      "description": "Description",
+      "currencyCode": "Devise",
+      "countryCode": "Pays",
+      "languageCode": "Langue",
+      "parentSeller": "Vendeur parent",
+      "vatNo": "Numéro de TVA",
+      "registrationNo": "Numéro d'immatriculation",
+      "legalType": "Forme juridique",
+      "legalText": "Mentions légales",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "address1": "Adresse ligne 1",
+      "address2": "Adresse ligne 2",
+      "city": "Ville",
+      "zipCode": "Code postal",
+      "state": "Région",
+      "addressCountry": "Pays de l'adresse",
+      "noDescription": "Aucune description fournie"
+    },
+    "terminationReason": {
+      "code": "Code de résiliation",
+      "description": "Description",
+      "overrideProrata": "Prorata",
+      "applyAgreement": "Appliquer l'accord",
+      "invoiceAgreementImmediately": "Facturer l'accord immédiatement",
+      "applyReimbursment": "Appliquer le remboursement",
+      "applyTerminationCharges": "Appliquer les frais de résiliation",
+      "reimburseOneshots": "Rembourser les one-shots",
+      "version": "Version {version}"
     },
     "billingCycle": {
       "code": "Code",
