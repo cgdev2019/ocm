@@ -27,6 +27,10 @@
     "languages": "Trading languages",
     "massImport": "Mass import"
   },
+  "breadcrumbs": {
+    "ariaLabel": "Breadcrumb",
+    "new": "New"
+  },
   "actions": {
     "create": "Create",
     "edit": "Edit",

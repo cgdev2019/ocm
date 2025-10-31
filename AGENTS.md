@@ -234,6 +234,11 @@ You are a senior full‑stack engineer and solution architect. You will generate
   * `lib/test/`
   * `styles/`
   * `mocks/` (MSW)
+* **Fil d'Ariane** : le composant `components/layout/AppBreadcrumbs` construit les segments à partir du `pathname` courant.
+  * Déclarez chaque entrée navigable dans `NAV_SECTIONS` (`lib/config/constants.ts`) avec sa clé de traduction (`label`).
+  * Ajoutez les messages correspondants dans `lib/i18n/messages/{locale}.json` (clés `navigation.*` ou dédiées).
+  * Les segments "new" utilisent automatiquement `breadcrumbs.new`; créez d'autres clés spécifiques si nécessaire.
+  * Pour des segments dynamiques (ID, slug), préférez exposer un titre traduit via la page/detail et remonter l'information au layout si le fil d'Ariane doit être enrichi.
 * **Data layer**: generate **per-operation typed hooks** (e.g., `useListInvoices`, `useCreateInvoice`) wrapping TanStack Query. Include key factories, pagination helpers, and optimistic updates where safe.
 * **Error handling**: centralize API error normalization; surface MUI `Alert`/`Snackbar`; map OpenAPI error schemas to field errors on forms.
 * **Auth**: If the spec defines auth (e.g., OAuth2, bearer), implement a minimal flow: token storage, refresh, axios/fetch interceptors, protected routes, and a `withAuth` layout.

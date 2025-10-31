@@ -27,6 +27,10 @@
     "languages": "Langues commerciales",
     "massImport": "Import massif"
   },
+  "breadcrumbs": {
+    "ariaLabel": "Fil d'Ariane",
+    "new": "Nouveau"
+  },
   "actions": {
     "create": "Créer",
     "edit": "Modifier",
