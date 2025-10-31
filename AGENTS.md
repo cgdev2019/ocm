@@ -47,6 +47,8 @@
 - Mise en place d'un proxy Next.js `/api/opencell` pour router les appels API et éviter le CORS côté navigateur.
 - `npm run lint` (06/02) → OK après correctif de dépliage `params` dans le proxy `/api/opencell`.
 - Instructions de l'AGENTS.md relues; aucune tâche supplémentaire effectuée.
+- `npm run lint` (exécution courante) → OK après alignement du proxy et de `env.apiBaseUrl` sur https://siventeappvrec1.mediapost.fr:8444 (mode non mock par défaut).
+- `npm run lint` (exécution courante) → OK après ajout du préfixe `/opencell` côté proxy et valeur par défaut `API_BASE_URL`.
 
 # Prompt — Build a Production‑Ready Frontend from OpenAPI (Next.js + MUI)
 

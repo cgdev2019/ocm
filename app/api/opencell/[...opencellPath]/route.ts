@@ -22,9 +22,20 @@ const stripHopByHopHeaders = (headers: Headers) => {
   return headers;
 };
 
+const ensureTrailingSlash = (value: string) => (value.endsWith('/') ? value : `${value}/`);
+
 const buildTargetUrl = (request: NextRequest, path: string[]): URL => {
-  const pathname = `/${path.join('/')}`;
-  const targetUrl = new URL(pathname + request.nextUrl.search, env.apiBaseUrl);
+  const baseUrl = new URL(ensureTrailingSlash(env.apiBaseUrl));
+  const relativePath = path.join('/');
+  const basePathname = baseUrl.pathname.replace(/\/$/, '');
+  const normalizedPath =
+    relativePath.startsWith('opencell/') || basePathname.endsWith('/opencell')
+      ? relativePath
+      : `opencell/${relativePath}`;
+  const targetUrl = new URL(normalizedPath, baseUrl);
+  if (request.nextUrl.search) {
+    targetUrl.search = request.nextUrl.search;
+  }
   return targetUrl;
 };
 
@@ -38,57 +49,35 @@ const sanitizeBodyPreview = (body: string, maxLength = 2_000) => {
 };
 
 const forwardRequest = async (request: NextRequest, path: string[]) => {
-const requestId = shouldLogProxyTraffic ? ++proxyRequestCounter : undefined;
-const targetUrl = buildTargetUrl(request, path);
-const headers = stripHopByHopHeaders(new Headers(request.headers));
-headers.delete('host');
-headers.set('accept', headers.get('accept') ?? 'application/json');
+  const requestId = shouldLogProxyTraffic ? ++proxyRequestCounter : undefined;
+  const targetUrl = buildTargetUrl(request, path);
+  const headers = stripHopByHopHeaders(new Headers(request.headers));
+  headers.delete('host');
+  headers.set('accept', headers.get('accept') ?? 'application/json');
 
-const isBodylessMethod = request.method === 'GET' || request.method === 'HEAD';
-const body = isBodylessMethod ? undefined : await request.arrayBuffer();
+  const isBodylessMethod = request.method === 'GET' || request.method === 'HEAD';
+  const body = isBodylessMethod ? undefined : await request.arrayBuffer();
 
-if (shouldLogProxyTraffic && requestId !== undefined) {
-  const bodyPreview =
-    body === undefined
-      ? undefined
-      : sanitizeBodyPreview(new TextDecoder().decode(body));
+  if (shouldLogProxyTraffic && requestId !== undefined) {
+    const bodyPreview =
+      body === undefined
+        ? undefined
+        : sanitizeBodyPreview(new TextDecoder().decode(body));
 
-  if (bodyPreview) {
-    console.warn(`📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`, {
-      body: bodyPreview,
-    });
-  } else {
-    console.warn(`📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`);
-  }
-}
-
-const response = await fetch(targetUrl, {
-  method: request.method,
-  headers,
-  body,
-});
-
-if (shouldLogProxyTraffic && requestId !== undefined) {
-  const responseClone = response.clone();
-  let responsePreview: string | undefined;
-  try {
-    const responseText = await responseClone.text();
-    if (responseText) {
-      responsePreview = sanitizeBodyPreview(responseText);
+    if (bodyPreview) {
+      console.warn(`📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`, {
+        body: bodyPreview,
+      });
+    } else {
+      console.warn(`📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`);
     }
-  } catch (error) {
-    console.warn(`📡 [OpenCell Proxy #${requestId}] Impossible de lire la réponse`, error);
   }
 
-  if (responsePreview) {
-    console.warn(
-      `📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`,
-      { body: responsePreview },
-    );
-  } else {
-    console.warn(`📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`);
-  }
-}
+  const response = await fetch(targetUrl, {
+    method: request.method,
+    headers,
+    body,
+  });
 
   if (shouldLogProxyTraffic && requestId !== undefined) {
     const responseClone = response.clone();

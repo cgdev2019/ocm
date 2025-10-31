@@ -36,16 +36,16 @@ npm run mock       # start app with MSW interceptors enabled (uses fixtures)
 
 The console is served at [http://localhost:3000](http://localhost:3000). When `MOCK=on`, the app auto-logs with mock credentials; otherwise Keycloak SSO is initiated.
 
-### Environment Variables
+### Variables d'environnement
 
-Copy `.env.example` to `.env.local` and adjust if needed:
+Copiez `.env.example` vers `.env.local` puis ajustez si besoin :
 
 | Variable | Description |
 | --- | --- |
-| `API_BASE_URL` | REST API base URL (must include `/opencell`) |
-| `KEYCLOAK_APP_AUTH_URL`, `KEYCLOAK_REALM`, `KEYCLOAK_CLIENT_ID` | Keycloak configuration |
-| `DEFAULT_LOCALE` | Initial locale (`fr` or `en`) |
-| `MOCK` | Set to `on` to enable MSW mocks & mock auth |
+| `API_BASE_URL` | URL de base du serveur REST (par défaut `https://siventeappvrec1.mediapost.fr:8444/opencell`) |
+| `KEYCLOAK_APP_AUTH_URL`, `KEYCLOAK_REALM`, `KEYCLOAK_CLIENT_ID` | Paramètres Keycloak |
+| `DEFAULT_LOCALE` | Locale initiale (`fr` ou `en`) |
+| `MOCK` | Mettre `on` pour activer MSW & l'auth mock (laisser vide pour le serveur réel) |
 
 ## npm Scripts
 
