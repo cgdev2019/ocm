@@ -7,6 +7,8 @@ import type { ActionStatus } from '@/features/customers/types';
 import type {
   BusinessAccountModelDto,
   BusinessAccountModelFormValues,
+  BusinessAccountModelHierarchyType,
+  BusinessAccountModelLicense,
   BusinessAccountModelListItem,
   BusinessAccountModelResponseDto,
   MeveoModuleDtosResponse,
@@ -20,8 +22,10 @@ const adaptList = (payload: MeveoModuleDtosResponse | null | undefined): Busines
   payload?.modules?.map((module) => ({
     code: module?.code ?? '',
     description: module?.description ?? undefined,
-    hierarchyType: module?.script?.scriptInstanceCategoryCode ?? undefined,
-    license: module?.license ?? undefined,
+    hierarchyType: module?.script?.scriptInstanceCategoryCode as
+      | BusinessAccountModelHierarchyType
+      | undefined,
+    license: module?.license as BusinessAccountModelLicense | undefined,
     disabled: module?.disabled ?? undefined,
   })) ?? [];
 
