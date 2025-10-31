@@ -22,7 +22,7 @@
 - [x] Repasser `npm run typecheck`, `npm run lint`, `npm run test`, `npm run e2e` et archiver les resultats lorsque tout est vert.
 - [x] Nettoyer ou ignorer `test-results/` avant commit final (actuellement contient une capture d'echec).
 - [x] Migrer la convention `middleware` -> `proxy` (warning Next.js pendant `npm run e2e`).
-- [ ] Prendre en compte le fichier ERROR.txt lors de l'exécution de npm run dev
+- [x] Prendre en compte le fichier ERROR.txt lors de l'exécution de npm run dev (le proxy ignore désormais les assets _next/static)
 
 ## Notes
 - `i18n/request.ts` utilise l'alias `@/`; lint passe sans disable.
@@ -32,3 +32,4 @@
 - Tests relances (`npm run typecheck`, `npm run lint`, `npm run test`) => tout vert.
 - `npm run e2e` échoue toujours faute de navigateurs Playwright; `npx playwright install` ne parvient pas à télécharger Chromium (403 Forbidden).
 - Pas de push Git possible depuis l'environnement actuel (aucun accès au remote).
+- Relance locale : `npm run typecheck`, `npm run lint`, `npm run test` → OK.
