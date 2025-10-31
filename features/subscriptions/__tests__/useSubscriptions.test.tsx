@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
-import { useSubscriptions } from '@/features/subscriptions/api';
+import { DEFAULT_SUBSCRIPTIONS_PAGE_SIZE, useSubscriptions } from '@/features/subscriptions/api';
 import {
   subscriptionListFixture,
   subscriptionListResponseFixture,
@@ -31,7 +31,7 @@ describe('useSubscriptions', () => {
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(apiClient.GET).toHaveBeenCalledWith('/api/rest/billing/subscription/list', {
-      params: { query: { userAccountCode: undefined, query: undefined } },
+      params: { query: { limit: DEFAULT_SUBSCRIPTIONS_PAGE_SIZE, offset: 0 } },
     });
     expect(result.current.data).toEqual(subscriptionListFixture);
   });
