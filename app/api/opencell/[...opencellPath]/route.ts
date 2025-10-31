@@ -190,19 +190,6 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
         `📡 [OpenCell Proxy #${requestId}] ↳ Corps tronqué de ${truncatedBody} caractères pour les logs`,
       );
     }
-
-    const { command: curlCommand, truncatedBody } = buildCurlCommand(
-      request.method,
-      targetUrl,
-      headers,
-      requestBodyText,
-    );
-    console.warn(`📡 [OpenCell Proxy #${requestId}] ↳ ${curlCommand}`);
-    if (truncatedBody) {
-      console.warn(
-        `📡 [OpenCell Proxy #${requestId}] ↳ Corps tronqué de ${truncatedBody} caractères pour les logs`,
-      );
-    }
   }
 
   const response = await fetch(targetUrl, {
