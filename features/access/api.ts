@@ -31,7 +31,7 @@ const mapDtoToForm = (dto: AccessDto): AccessFormValues => ({
   subscriptionValidityDate: dto.subscriptionValidityDate ?? undefined,
   startDate: dto.startDate ?? undefined,
   endDate: dto.endDate ?? undefined,
-  usageDate: undefined,
+  usageDate: dto.usageDate ?? undefined,
   disabled: dto.disabled ?? undefined,
 });
 
@@ -41,6 +41,7 @@ const mapFormToDto = (values: AccessFormValues): AccessDto => ({
   subscriptionValidityDate: values.subscriptionValidityDate,
   startDate: values.startDate,
   endDate: values.endDate,
+  usageDate: values.usageDate,
   disabled: values.disabled,
   customFields: undefined,
 });
