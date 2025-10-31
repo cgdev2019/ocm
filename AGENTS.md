@@ -10,7 +10,7 @@
 - Scripts principaux: `npm run dev`, `npm run mock`, `npm run api:gen`.
 - Derniere generation API: `lib/api/generated/schema.ts` (via openapi-typescript).
 - Pagination des tableaux harmonisée avec la vue Clients (customer accounts, invoices, taxes) et rappel ajouté dans `tasks/*.md`.
-- Client Keycloak par défaut: `opencell-web` (aligné sur l'API protégée).
+- Client Keycloak par défaut: `opencell-portal` (aligné sur l'API protégée).
 
 ## Fait
 - Next.js 16 App Router scaffolding avec TypeScript strict et alias `@/`.
