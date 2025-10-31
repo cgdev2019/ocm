@@ -67,7 +67,7 @@ export const SellerDetail = ({ code }: { code: string }) => {
           <Button
             startIcon={<EditIcon />}
             variant="contained"
-            onClick={() => router.push({ pathname: '/sellers/[code]/edit', params: { code } })}
+            onClick={() => router.push(`/sellers/${code}/edit`)}
           >
             {t('actions.edit')}
           </Button>

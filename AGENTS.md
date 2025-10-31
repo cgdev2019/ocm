@@ -23,6 +23,7 @@
 - Playwright dashboard spec corrigee (sélecteur heading `Clients`) et campagne e2e verte (`npm run e2e`).
 - Typecheck/lint/tests relances (`npm run typecheck`, `npm run lint`, `npm run test`, `npm run e2e`) => tout vert; `test-results/.last-run.json` mis à jour.
 - Services BillingCycle → Country : hooks TanStack Query, formulaires React Hook Form + Zod, pages App Router et navigation intégrées.
+- 2025-11-17 : Navigation édition vendeur — utilisation d'URL concrètes (`/sellers/${code}`) au lieu des segments dynamiques non résolus.
 - Vérifications automatiques relancées (`npm run lint`, `npm run typecheck`, `npm run test`) — tout vert (31/10/2025).
 - Synthèse OpenAPI automatique générée pour `tasks/*.md` via `scripts/generateTasks.mjs`.
 
