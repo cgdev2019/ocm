@@ -17,7 +17,7 @@ import { useInvoices } from '@/features/invoices/api';
 import { formatCurrency } from '@/lib/utils/format';
 
 export const DashboardPage = () => {
-  const customers = useCustomersList();
+  const customers = useCustomersList({ limit: 5, offset: 0 });
   const accounts = useCustomerAccounts();
   const invoices = useInvoices({ limit: 10, offset: 0 });
   const t = useTranslations();
@@ -36,7 +36,7 @@ export const DashboardPage = () => {
         <Grid size={{ xs: 12, md: 4 }}>
           <StatCard
             title={t('dashboard.kpi.activeCustomers')}
-            value={customers.data?.length.toString() ?? '—'}
+            value={(customers.data?.paging.totalRecords ?? customers.data?.items.length ?? 0).toString()}
             loading={customers.isLoading}
           />
         </Grid>
@@ -63,7 +63,7 @@ export const DashboardPage = () => {
                 {t('navigation.customers')}
               </Typography>
               <Stack spacing={1}>
-                {(customers.data ?? []).slice(0, 5).map((item) => (
+                {(customers.data?.items ?? []).map((item) => (
                   <Box key={item.code}>
                     <Typography fontWeight={600}>{item.code}</Typography>
                     <Typography variant="body2" color="text.secondary">
