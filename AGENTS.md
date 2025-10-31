@@ -54,6 +54,7 @@
 - 2025-11-15 : `npm run test -- --runTestsByPath features/sellers/__tests__/useSellers.test.tsx` → ok (correctif navigation édition vendeur).
 - 2025-11-16 : `npm run typecheck` → échec (`router.push`/`router.replace` n'acceptent plus `params` dans SellerDetail/SellerEditForm`).
 - 2025-11-19 : `npm run typecheck` → échec (mêmes erreurs `router.push`/`router.replace` sur SellerDetail/SellerEditForm).
+- 2025-11-20 : `npm run test -- --runTestsByPath features/occ-templates/__tests__/useOccTemplates.test.tsx` → ok (remontée d'erreur OCC Templates validée).
 - 2025-11-20 : `npm run typecheck` → échec (dépendance `dayjs` absente et enums BusinessAccountModel).
 - 2025-11-20 : `npm run test -- --runTestsByPath features/titles/__tests__/useTitles.test.tsx features/audit/__tests__/useAudit.test.tsx features/file-formats/__tests__/useFileFormats.test.tsx features/files/__tests__/useFiles.test.tsx` → ok (nouvelles suites Title/Audit/FileFormat/Files).
 - 2025-11-20 : `npm run test -- --runTestsByPath features/titles/__tests__/useTitles.test.tsx features/audit/__tests__/useAudit.test.tsx features/file-formats/__tests__/useFileFormats.test.tsx features/files/__tests__/useFiles.test.tsx` → ok (revalidation après intégration des services Title/Audit/FileFormat/Files).
