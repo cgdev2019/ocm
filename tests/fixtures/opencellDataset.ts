@@ -30,6 +30,21 @@ import type {
   CountryListItem,
   TradingCountriesResponseDto,
 } from '@/features/countries/types';
+import type {
+  CurrencyIsoFormValues,
+  CurrencyIsoListItem,
+  GetCurrenciesIsoResponse,
+} from '@/features/currency-iso/types';
+import type {
+  CurrencyFormValues,
+  CurrencyListItem,
+  TradingCurrenciesResponseDto as CurrencyTradingResponse,
+} from '@/features/currency/types';
+import type {
+  FilterFormValues,
+  FilterListItem,
+  GetFilterResponseDto,
+} from '@/features/filter/types';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
@@ -334,5 +349,89 @@ export const countryFormFixture: CountryFormValues = {
   name: 'France',
   currencyCode: 'EUR',
   languageCode: 'fr',
+  disabled: false,
+};
+
+export const currencyIsoResponseFixture: GetCurrenciesIsoResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  currencies: [
+    { code: 'EUR', description: 'Euro' },
+    { code: 'USD', description: 'US Dollar' },
+  ],
+};
+
+export const currencyIsoListFixture: CurrencyIsoListItem[] = [
+  { code: 'EUR', description: 'Euro' },
+  { code: 'USD', description: 'US Dollar' },
+];
+
+export const currencyIsoFormFixture: CurrencyIsoFormValues = { code: 'EUR', description: 'Euro' };
+
+export const currencyResponseFixture: CurrencyTradingResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  tradingCurrencies: {
+    currency: [
+      {
+        code: 'EUR',
+        description: 'Euro',
+        symbol: '€',
+        decimalPlaces: 2,
+        disabled: false,
+      },
+      {
+        code: 'USD',
+        description: 'US Dollar',
+        symbol: '$',
+        decimalPlaces: 2,
+        disabled: true,
+      },
+    ],
+  },
+};
+
+export const currencyListFixture: CurrencyListItem[] = [
+  { code: 'EUR', description: 'Euro', symbol: '€', decimalPlaces: 2, disabled: false },
+  { code: 'USD', description: 'US Dollar', symbol: '$', decimalPlaces: 2, disabled: true },
+];
+
+export const currencyFormFixture: CurrencyFormValues = {
+  code: 'EUR',
+  description: 'Euro',
+  symbol: '€',
+  decimalPlaces: 2,
+  prCurrencyToThis: 1,
+  disabled: false,
+};
+
+export const filterResponseFixture: GetFilterResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  filter: {
+    code: 'TEST_FILTER',
+    description: 'Filtre de test',
+    entityClass: 'org.meveo.model.billing.Invoice',
+    shared: true,
+    disabled: false,
+    inputXml: '<filter></filter>',
+    pollingQuery: 'SELECT * FROM invoices',
+  },
+};
+
+export const filterListFixture: FilterListItem[] = [
+  {
+    code: 'TEST_FILTER',
+    description: 'Filtre de test',
+    entityClass: 'org.meveo.model.billing.Invoice',
+    shared: true,
+    disabled: false,
+  },
+];
+
+export const filterFormFixture: FilterFormValues = {
+  code: 'TEST_FILTER',
+  description: 'Filtre de test',
+  entityClass: 'org.meveo.model.billing.Invoice',
+  inputXml: '<filter></filter>',
+  pollingQuery: 'SELECT * FROM invoices',
+  shared: true,
   disabled: false,
 };

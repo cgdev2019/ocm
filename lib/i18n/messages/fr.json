@@ -13,8 +13,11 @@
     "billingCycles": "Cycles de facturation",
     "calendars": "Calendriers",
     "configuration": "Configuration",
+    "currencyIso": "Devises ISO",
+    "currency": "Devises",
     "countryIso": "Pays ISO",
-    "countries": "Pays commercialisés"
+    "countries": "Pays commercialisés",
+    "filters": "Filtres"
   },
   "actions": {
     "create": "Créer",
@@ -28,7 +31,9 @@
     "reset": "Réinitialiser",
     "refresh": "Actualiser",
     "retry": "Réessayer",
-    "add": "Ajouter"
+    "add": "Ajouter",
+    "enable": "Activer",
+    "disable": "Désactiver"
   },
   "dashboard": {
     "welcome": "Bon retour, {name} !",
@@ -156,6 +161,20 @@
       "value": "Valeur",
       "notFound": "Entrée de configuration introuvable"
     },
+    "currencyIso": {
+      "code": "Code devise",
+      "description": "Description",
+      "deleteConfirmation": "Supprimer cette devise ISO la retirera d'Opencell."
+    },
+    "currency": {
+      "code": "Code devise",
+      "description": "Description",
+      "symbol": "Symbole",
+      "decimalPlaces": "Décimales",
+      "prCurrencyToThis": "Taux de conversion",
+      "disabled": "Désactivée",
+      "deleteConfirmation": "Supprimer cette devise la retirera d'Opencell."
+    },
     "countryIso": {
       "countryCode": "Code pays",
       "description": "Description",
@@ -170,6 +189,16 @@
       "languageCode": "Code langue",
       "disabled": "Désactivé",
       "deleteConfirmation": "Supprimer ce pays commercial le retirera d'Opencell."
+    },
+    "filter": {
+      "code": "Code filtre",
+      "description": "Description",
+      "entityClass": "Classe d'entité",
+      "inputXml": "XML d'entrée",
+      "pollingQuery": "Requête de polling",
+      "shared": "Partagé",
+      "disabled": "Désactivé",
+      "deleteConfirmation": "Supprimer ce filtre le retirera d'Opencell."
     }
   },
   "feedback": {

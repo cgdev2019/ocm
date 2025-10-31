@@ -40,4 +40,16 @@ export const queryKeys = {
     list: () => ['countries', 'list'] as const,
     detail: (code: string) => ['countries', 'detail', code] as const,
   },
+  currencyIso: {
+    list: () => ['currencyIso', 'list'] as const,
+    detail: (code: string) => ['currencyIso', 'detail', code] as const,
+  },
+  currency: {
+    list: () => ['currency', 'list'] as const,
+    detail: (code: string) => ['currency', 'detail', code] as const,
+  },
+  filters: {
+    list: (code: string) => ['filters', 'list', code] as const,
+    detail: (code: string) => ['filters', 'detail', code] as const,
+  },
 };
