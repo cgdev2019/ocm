@@ -18,6 +18,7 @@ import {
   massImportDetection,
   invoices,
   taxes,
+  ratedTransactionsData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
@@ -34,6 +35,7 @@ const invoiceSubCategoriesStore = [...invoiceSubCategoriesData];
 const invoiceTypesStore = [...invoiceTypesData];
 const languageIsosStore = [...languageIsosData];
 const languagesStore = [...languagesData];
+const ratedTransactionsStore = [...ratedTransactionsData];
 
 const success = (message = 'OK') => ({ status: 'SUCCESS', message });
 
@@ -53,6 +55,29 @@ const findInvoiceSubCategory = (code: string) =>
 const findInvoiceType = (code: string) => invoiceTypesStore.find((item) => item.code === code);
 const findLanguageIso = (code: string) => languageIsosStore.find((item) => item.code === code);
 const findLanguage = (code: string) => languagesStore.find((item) => item.code === code);
+
+const filterRatedTransactions = (filters: Record<string, unknown> | undefined) => {
+  if (!filters || Object.keys(filters).length === 0) {
+    return ratedTransactionsStore;
+  }
+
+  const code = typeof filters.code === 'string' ? filters.code : undefined;
+  const status = typeof filters.status === 'string' ? filters.status : undefined;
+  const userAccountCode = typeof filters.userAccountCode === 'string' ? filters.userAccountCode : undefined;
+
+  return ratedTransactionsStore.filter((transaction) => {
+    if (code && transaction.code !== code) {
+      return false;
+    }
+    if (status && transaction.status !== status) {
+      return false;
+    }
+    if (userAccountCode && transaction.userAccountCode !== userAccountCode) {
+      return false;
+    }
+    return true;
+  });
+};
 
 export const handlers = [
   http.get('*/api/rest/account/customer/listGetAll', () =>
@@ -168,6 +193,56 @@ export const handlers = [
     invoicesStore.push(invoice);
     return HttpResponse.json({ actionStatus: success(), invoiceId, invoiceNumber: invoice.invoiceNumber });
   }),
+
+  http.post('*/api/rest/billing/ratedTransaction/list', async ({ request }) => {
+    const payload = (await request.json()) as {
+      filters?: Record<string, unknown>;
+      offset?: number;
+      limit?: number;
+    };
+    const filtered = filterRatedTransactions(payload?.filters);
+    const offset = payload?.offset ?? 0;
+    const limit = payload?.limit ?? filtered.length;
+    const paginated = filtered.slice(offset, offset + limit);
+    return HttpResponse.json({
+      actionStatus: success(),
+      paging: {
+        offset,
+        limit,
+        totalNumberOfRecords: filtered.length,
+      },
+      ratedTransactions: paginated,
+    });
+  }),
+
+  http.get('*/api/rest/billing/ratedTransaction/listGetAll', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      paging: {
+        offset: 0,
+        limit: ratedTransactionsStore.length,
+        totalNumberOfRecords: ratedTransactionsStore.length,
+      },
+      ratedTransactions: ratedTransactionsStore,
+    }),
+  ),
+
+  http.post('*/api/rest/billing/ratedTransaction/cancelRatedTransactions', async ({ request }) => {
+    const payload = (await request.json()) as { filters?: Record<string, unknown> };
+    const filteredCodes = new Set(filterRatedTransactions(payload?.filters).map((item) => item.code));
+    let affected = 0;
+    ratedTransactionsStore.forEach((transaction, index) => {
+      if (transaction.code && filteredCodes.has(transaction.code)) {
+        ratedTransactionsStore[index] = { ...transaction, status: 'CANCELED' };
+        affected += 1;
+      }
+    });
+    return HttpResponse.json({ status: 'SUCCESS', message: `Cancelled ${affected} transactions`, nrAffected: affected });
+  }),
+
+  http.get('*/api/rest/billing/ratedTransaction/version', () =>
+    HttpResponse.json({ status: 'SUCCESS', message: '5.2.1' }),
+  ),
 
   http.get('*/api/rest/tax/listGetAll', () =>
     HttpResponse.json({

@@ -144,9 +144,97 @@ import type {
   UsageListItem,
   UsageResponseDto,
 } from '@/features/usage/types';
+import type {
+  RatedTransactionDto,
+  RatedTransactionListItem,
+  RatedTransactionListResponseDto,
+} from '@/features/rated-transactions/types';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
+
+export const ratedTransactionsFixture: RatedTransactionDto[] = [
+  {
+    code: 'TRX-001',
+    usageDate: '2024-05-20T09:30:00.000Z',
+    unitAmountWithoutTax: 12.5,
+    unitAmountWithTax: 15,
+    unitAmountTax: 2.5,
+    quantity: 2,
+    inputQuantity: 2,
+    rawAmountWithoutTax: 25,
+    rawAmountWithTax: 30,
+    amountWithoutTax: 25,
+    amountWithTax: 30,
+    amountTax: 5,
+    status: 'OPEN',
+    description: 'VoIP minutes',
+    unityDescription: 'Minute',
+    priceplanCode: 'PLAN-VOICE',
+    userAccountCode: 'UA-001',
+    invoiceSubCategoryCode: 'VOICE',
+    sellerCode: 'SELLER-01',
+    billingAccountCode: 'ACC-001',
+    taxCode: 'VAT-20',
+    taxPercent: 20,
+    doNotTriggerInvoicing: false,
+  },
+  {
+    code: 'TRX-002',
+    usageDate: '2024-05-21T11:15:00.000Z',
+    unitAmountWithoutTax: 5,
+    unitAmountWithTax: 6,
+    unitAmountTax: 1,
+    quantity: 10,
+    inputQuantity: 10,
+    rawAmountWithoutTax: 50,
+    rawAmountWithTax: 60,
+    amountWithoutTax: 50,
+    amountWithTax: 60,
+    amountTax: 10,
+    status: 'BILLED',
+    description: 'SMS bundle',
+    unityDescription: 'SMS',
+    priceplanCode: 'PLAN-SMS',
+    userAccountCode: 'UA-002',
+    invoiceSubCategoryCode: 'SMS',
+    sellerCode: 'SELLER-01',
+    billingAccountCode: 'ACC-002',
+    taxCode: 'VAT-20',
+    taxPercent: 20,
+    doNotTriggerInvoicing: false,
+  },
+];
+
+export const ratedTransactionsListFixture: RatedTransactionListItem[] = ratedTransactionsFixture.map((transaction, index) => ({
+  id: transaction.code ? `${transaction.code}-${transaction.usageDate ?? index}` : `transaction-${index}`,
+  code: transaction.code ?? '—',
+  usageDate: transaction.usageDate ?? '',
+  status: transaction.status ?? undefined,
+  description: transaction.description ?? undefined,
+  unityDescription: transaction.unityDescription ?? undefined,
+  quantity: transaction.quantity ?? undefined,
+  unitAmountWithoutTax: transaction.unitAmountWithoutTax ?? undefined,
+  unitAmountWithTax: transaction.unitAmountWithTax ?? undefined,
+  amountWithoutTax: transaction.amountWithoutTax ?? undefined,
+  amountWithTax: transaction.amountWithTax ?? undefined,
+  amountTax: transaction.amountTax ?? undefined,
+  priceplanCode: transaction.priceplanCode ?? undefined,
+  userAccountCode: transaction.userAccountCode ?? undefined,
+  invoiceSubCategoryCode: transaction.invoiceSubCategoryCode ?? undefined,
+  sellerCode: transaction.sellerCode ?? undefined,
+  billingAccountCode: transaction.billingAccountCode ?? undefined,
+}));
+
+export const ratedTransactionsResponseFixture: RatedTransactionListResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Rated transactions loaded' },
+  paging: {
+    offset: 0,
+    limit: 20,
+    totalNumberOfRecords: ratedTransactionsFixture.length,
+  },
+  ratedTransactions: ratedTransactionsFixture,
+};
 
 export const customersResponseFixture: CustomersResponseDto = {
   actionStatus: { status: 'SUCCESS', message: 'Jeu de données mock' },

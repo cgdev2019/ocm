@@ -175,4 +175,17 @@ export const queryKeys = {
     all: () => ['files', 'all'] as const,
     version: () => ['files', 'version'] as const,
   },
+  ratedTransactions: {
+    root: ['ratedTransactions'] as const,
+    list: (params: {
+      filters: { query: string | null; status: string | null; userAccountCode: string | null } | null;
+      page: number;
+      pageSize: number;
+      sortBy: string | null;
+      sortOrder: 'ASCENDING' | 'DESCENDING' | null;
+    }) => ['ratedTransactions', 'list', params] as const,
+    detail: (code: string) => ['ratedTransactions', 'detail', code] as const,
+    export: () => ['ratedTransactions', 'export'] as const,
+    version: () => ['ratedTransactions', 'version'] as const,
+  },
 };
