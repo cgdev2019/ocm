@@ -2,22 +2,29 @@
 
 import { useState } from 'react';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslations } from 'next-intl';
 import { DEFAULT_CALENDARS_PAGE_SIZE, useCalendars } from '@/features/calendars/api';
 import type { CalendarListItem } from '@/features/calendars/types';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
+import { ApiTimeoutError } from '@/lib/api/errors';
 
 export const CalendarList = () => {
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: DEFAULT_CALENDARS_PAGE_SIZE,
   });
-  const { data, isLoading, isFetching } = useCalendars();
+  const { data, isLoading, isFetching, isError, refetch, error } = useCalendars();
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+
+  const errorMessage = error instanceof ApiTimeoutError
+    ? t('feedback.timeout')
+    : error instanceof Error
+      ? error.message
+      : t('feedback.error');
 
   const columns: GridColDef<CalendarListItem>[] = [
     { field: 'code', headerName: t('forms.calendar.code'), flex: 1, minWidth: 160 },
@@ -60,6 +67,19 @@ export const CalendarList = () => {
           localeText={{ noRowsLabel: t('table.empty') }}
         />
       </Box>
+      {isError ? (
+        <Alert
+          severity="error"
+          action={
+            <Button color="inherit" size="small" onClick={() => refetch()}>
+              {t('actions.retry')}
+            </Button>
+          }
+          sx={{ alignSelf: 'flex-start', width: 'fit-content' }}
+        >
+          {errorMessage}
+        </Alert>
+      ) : null}
     </Stack>
   );
 };

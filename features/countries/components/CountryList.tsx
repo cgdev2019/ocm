@@ -2,22 +2,29 @@
 
 import { useState } from 'react';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import { Box, Button, Chip, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Chip, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslations } from 'next-intl';
 import { DEFAULT_COUNTRIES_PAGE_SIZE, useCountries } from '@/features/countries/api';
 import type { CountryListItem } from '@/features/countries/types';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
+import { ApiTimeoutError } from '@/lib/api/errors';
 
 export const CountryList = () => {
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: DEFAULT_COUNTRIES_PAGE_SIZE,
   });
-  const { data, isLoading, isFetching } = useCountries();
+  const { data, isLoading, isFetching, isError, refetch, error } = useCountries();
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+
+  const errorMessage = error instanceof ApiTimeoutError
+    ? t('feedback.timeout')
+    : error instanceof Error
+      ? error.message
+      : t('feedback.error');
 
   const columns: GridColDef<CountryListItem>[] = [
     { field: 'countryCode', headerName: t('forms.country.countryCode'), flex: 1, minWidth: 150 },
@@ -60,6 +67,19 @@ export const CountryList = () => {
           localeText={{ noRowsLabel: t('table.empty') }}
         />
       </Box>
+      {isError ? (
+        <Alert
+          severity="error"
+          action={
+            <Button color="inherit" size="small" onClick={() => refetch()}>
+              {t('actions.retry')}
+            </Button>
+          }
+          sx={{ alignSelf: 'flex-start', width: 'fit-content' }}
+        >
+          {errorMessage}
+        </Alert>
+      ) : null}
     </Stack>
   );
 };
