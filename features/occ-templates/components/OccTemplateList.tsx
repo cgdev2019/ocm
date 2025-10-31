@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import { Box, Button, Chip, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Chip, Stack, Typography } from '@mui/material';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
 import { useTranslations } from 'next-intl';
 import {
@@ -17,10 +17,12 @@ export const OccTemplateList = () => {
     page: 0,
     pageSize: DEFAULT_OCC_TEMPLATE_PAGE_SIZE,
   });
-  const { data, isLoading, isFetching } = useOccTemplates();
+  const { data, isLoading, isFetching, error } = useOccTemplates();
   const t = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
+
+  const errorMessage = error instanceof Error && error.message.length > 0 ? error.message : null;
 
   const columns: GridColDef<OccTemplateListItem>[] = [
     { field: 'code', headerName: t('forms.occTemplate.code'), flex: 1, minWidth: 160 },
@@ -50,6 +52,11 @@ export const OccTemplateList = () => {
           {t('actions.create')}
         </Button>
       </Stack>
+      {error ? (
+        <Alert severity="error">
+          {errorMessage ? `${t('forms.error')}: ${errorMessage}` : t('forms.error')}
+        </Alert>
+      ) : null}
       <Box sx={{ height: 520 }}>
         <DataGrid
           rows={(data ?? []).map((item) => ({ id: item.code, ...item }))}
