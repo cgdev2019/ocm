@@ -169,18 +169,42 @@ let undiciModulePromise: Promise<UndiciModule | undefined> | undefined;
 
 const loadUndiciModule = () => {
   if (!undiciModulePromise) {
-    undiciModulePromise = import('node:undici')
-      .then((module) => module as unknown as UndiciModule)
-      .catch((error: unknown) => {
-        const typedError = error as UndiciLoadError;
-        if (typedError?.code === 'ERR_UNKNOWN_BUILTIN_MODULE') {
-          console.warn(
-            'Le module intégré "node:undici" est indisponible dans cet environnement. Le proxy OpenCell fonctionnera sans configuration avancée des agents.',
-          );
-          return undefined;
+    undiciModulePromise = (async () => {
+      const attemptedSpecifiers = ['node:undici', 'undici'] as const;
+
+      for (const specifier of attemptedSpecifiers) {
+        try {
+          const module = await import(specifier);
+          return module as unknown as UndiciModule;
+        } catch (error: unknown) {
+          const typedError = error as UndiciLoadError & { code?: string };
+
+          if (specifier === 'node:undici' && typedError?.code === 'ERR_UNKNOWN_BUILTIN_MODULE') {
+            console.warn(
+              'Le module intégré "node:undici" est indisponible dans cet environnement. Tentative de repli sur le paquet "undici".',
+            );
+            continue;
+          }
+
+          if (
+            specifier === 'undici' &&
+            (typedError?.code === 'ERR_MODULE_NOT_FOUND' || typedError?.code === 'MODULE_NOT_FOUND')
+          ) {
+            console.warn(
+              'Le paquet "undici" n\'est pas installé. Le proxy OpenCell fonctionnera sans configuration avancée des agents.',
+            );
+            return undefined;
+          }
+
+          throw error;
         }
-        throw error;
-      });
+      }
+
+      console.warn(
+        'Aucun module "undici" n\'est disponible. Le proxy OpenCell fonctionnera sans optimisation d\'agents HTTP(S).',
+      );
+      return undefined;
+    })();
   }
   return undiciModulePromise;
 };
