@@ -84,6 +84,23 @@ export const queryKeys = {
     list: () => ['languages', 'list'] as const,
     detail: (code: string) => ['languages', 'detail', code] as const,
   },
+  titles: {
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['titles', 'list', filters] as const) : (['titles', 'list'] as const),
+    all: () => ['titles', 'all'] as const,
+    detail: (code: string) => ['titles', 'detail', code] as const,
+    version: () => ['titles', 'version'] as const,
+  },
+  audit: {
+    version: () => ['audit', 'version'] as const,
+  },
+  fileFormats: {
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['fileFormats', 'list', filters] as const) : (['fileFormats', 'list'] as const),
+    all: () => ['fileFormats', 'all'] as const,
+    detail: (code: string) => ['fileFormats', 'detail', code] as const,
+    version: () => ['fileFormats', 'version'] as const,
+  },
   occTemplates: {
     list: () => ['occTemplates', 'list'] as const,
     detail: (code: string) => ['occTemplates', 'detail', code] as const,
@@ -151,5 +168,11 @@ export const queryKeys = {
     list: () => ['terminationReasons', 'list'] as const,
     detail: (code: string) => ['terminationReasons', 'detail', code] as const,
     version: () => ['terminationReasons', 'version'] as const,
+  },
+  files: {
+    list: (path?: string | null) =>
+      path ? (['files', 'list', path] as const) : (['files', 'list'] as const),
+    all: () => ['files', 'all'] as const,
+    version: () => ['files', 'version'] as const,
   },
 };

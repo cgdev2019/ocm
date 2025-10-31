@@ -28,6 +28,10 @@ import BoltIcon from '@mui/icons-material/BoltOutlined';
 import VpnKeyIcon from '@mui/icons-material/VpnKeyOutlined';
 import AccountTreeIcon from '@mui/icons-material/AccountTreeOutlined';
 import ContactsIcon from '@mui/icons-material/ContactsOutlined';
+import BadgeIcon from '@mui/icons-material/BadgeOutlined';
+import PolicyIcon from '@mui/icons-material/PolicyOutlined';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import FolderCopyIcon from '@mui/icons-material/FolderCopyOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -47,10 +51,14 @@ const registry: Record<string, SvgIconComponent> = {
   invoiceType: DescriptionIcon,
   languageIso: LanguageIcon,
   language: TranslateIcon,
+  title: BadgeIcon,
   massImport: CloudUploadIcon,
   occTemplate: SchemaIcon,
   pdfInvoice: PictureAsPdfIcon,
   provider: BusinessIcon,
+  audit: PolicyIcon,
+  fileFormat: InsertDriveFileIcon,
+  files: FolderCopyIcon,
   query: QueryStatsIcon,
   scriptInstance: IntegrationInstructionsIcon,
   seller: StorefrontIcon,

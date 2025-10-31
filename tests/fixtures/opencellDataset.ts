@@ -101,6 +101,19 @@ import type {
   ScriptInstanceListItem,
 } from '@/features/script-instances/types';
 import type {
+  FileFormatFormValues,
+  FileFormatListItem,
+  FileFormatListResponseDto,
+  FileFormatResponseDto,
+} from '@/features/file-formats/types';
+import type {
+  TitleDetailValues,
+  TitleListItem,
+  TitleResponseDto,
+  TitlesResponseDto,
+} from '@/features/titles/types';
+import type { FileListItem, GetFilesResponseDto } from '@/features/files/types';
+import type {
   GetCustomerAccountConfigurationResponseDto,
   GetCustomerConfigurationResponseDto,
   GetInvoicingConfigurationResponseDto,
@@ -923,6 +936,27 @@ export const providerCustomerConfigurationFixture: GetCustomerConfigurationRespo
   titles: { title: [{ code: 'MR', description: 'Monsieur', isCompany: false }] },
 };
 
+export const titleListResponseFixture: TitlesResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Titles loaded' },
+  titles: { title: [{ code: 'MR', description: 'Mister', isCompany: false }] },
+};
+
+export const titleListFixture: TitleListItem[] = [
+  { code: 'MR', description: 'Mister', isCompany: false },
+];
+
+export const titleResponseFixture: TitleResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Title loaded' },
+  titleDto: { code: 'MR', description: 'Mister', isCompany: false },
+};
+
+export const titleDetailFixture: TitleDetailValues = {
+  code: 'MR',
+  description: 'Mister',
+  isCompany: false,
+  languageDescriptions: undefined,
+};
+
 export const providerCustomerAccountConfigurationFixture: GetCustomerAccountConfigurationResponseDto = {
   actionStatus: { status: 'SUCCESS', message: 'Customer account config' },
   paymentMethods: ['CHECK', 'WIRETRANSFER'],
@@ -991,6 +1025,72 @@ export const scriptInstanceResponseFixture: GetScriptInstanceResponseDto = {
     codeOnly: false,
   },
 };
+
+export const fileFormatListResponseFixture: FileFormatListResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'File formats loaded' },
+  dtos: [
+    {
+      code: 'CSV_IMPORT',
+      description: 'CSV import format',
+      fileNamePattern: 'import_*.csv',
+      fileNameUniqueness: true,
+      fileTypes: ['CSV'],
+      configurationTemplate: 'csv-template',
+      recordName: 'importRecord',
+      inputDirectory: '/data/in',
+      outputDirectory: '/data/out',
+      rejectDirectory: '/data/reject',
+      archiveDirectory: '/data/archive',
+      jobCode: 'JOB_CSV_IMPORT',
+    },
+  ],
+};
+
+export const fileFormatListFixture: FileFormatListItem[] = [
+  {
+    code: 'CSV_IMPORT',
+    description: 'CSV import format',
+    fileNamePattern: 'import_*.csv',
+    jobCode: 'JOB_CSV_IMPORT',
+    fileTypes: ['CSV'],
+    fileNameUniqueness: true,
+  },
+];
+
+export const fileFormatResponseFixture: FileFormatResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'File format loaded' },
+  dto: fileFormatListResponseFixture.dtos?.[0],
+};
+
+export const fileFormatDetailFixture: FileFormatFormValues = {
+  code: 'CSV_IMPORT',
+  description: 'CSV import format',
+  fileNamePattern: 'import_*.csv',
+  fileNameUniqueness: true,
+  fileTypes: ['CSV'],
+  configurationTemplate: 'csv-template',
+  recordName: 'importRecord',
+  inputDirectory: '/data/in',
+  outputDirectory: '/data/out',
+  rejectDirectory: '/data/reject',
+  archiveDirectory: '/data/archive',
+  jobCode: 'JOB_CSV_IMPORT',
+};
+
+export const filesResponseFixture: GetFilesResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Files loaded' },
+  files: [
+    { name: 'imports', directory: true, lastModified: '2025-01-01T10:00:00.000Z' },
+    { name: 'report.csv', directory: false, lastModified: '2025-01-15T08:30:00.000Z' },
+  ],
+};
+
+export const filesListFixture: FileListItem[] = [
+  { name: 'imports', directory: true, lastModified: '2025-01-01T10:00:00.000Z' },
+  { name: 'report.csv', directory: false, lastModified: '2025-01-15T08:30:00.000Z' },
+];
+
+export const auditVersionResponseFixture = { status: 'SUCCESS', message: '1.2.3' } as const;
 
 export const scriptInstanceListFixture: ScriptInstanceListItem[] = [
   {
