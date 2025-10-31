@@ -4,8 +4,9 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-export default async function InvoiceDetailPage({ params }: Props) {
-  const { id } = await params;
+export default async function InvoiceDetailPage(props: Props) {
+  const params = await props.params;
+  const { id } = params;
 
   return <InvoiceDetail id={id} />;
 }

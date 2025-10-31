@@ -5,7 +5,8 @@ type Props = {
 };
 
 export default async function TaxEditPage(props: Props) {
-  const { code } = await props.params;
+  const params = await props.params;
+  const { code } = params;
 
   return <TaxEditForm code={code} />;
 }
