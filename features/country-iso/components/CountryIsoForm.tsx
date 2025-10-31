@@ -2,12 +2,17 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import SaveIcon from '@mui/icons-material/SaveOutlined';
+import Autocomplete from '@mui/material/Autocomplete';
 import { Alert, Box, Button, Card, CardContent, Snackbar, Stack, TextField } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useCountryIsoMutations } from '@/features/country-iso/api';
+import { useCurrencyIsos } from '@/features/currency-iso/api';
+import type { CurrencyIsoListItem } from '@/features/currency-iso/types';
+import { useLanguageIsos } from '@/features/language-iso/api';
+import type { LanguageIsoListItem } from '@/features/language-iso/types';
 import { countryIsoFormSchema, type CountryIsoFormSchema } from '@/features/country-iso/schema';
 import type { CountryIsoFormValues } from '@/features/country-iso/types';
 
@@ -23,6 +28,16 @@ export const CountryIsoForm = ({
   const t = useTranslations();
   const { create, upsert } = useCountryIsoMutations();
   const [openSnack, setOpenSnack] = useState(false);
+  const {
+    data: currencyOptions,
+    isLoading: isLoadingCurrencies,
+    isError: isCurrencyError,
+  } = useCurrencyIsos();
+  const {
+    data: languageOptions,
+    isLoading: isLoadingLanguages,
+    isError: isLanguageError,
+  } = useLanguageIsos();
 
   const {
     control,
@@ -86,32 +101,126 @@ export const CountryIsoForm = ({
               <Controller
                 control={control}
                 name="currencyCode"
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label={t('forms.countryIso.currencyCode')}
-                    required
-                    fullWidth
-                    error={Boolean(errors.currencyCode)}
-                    helperText={errors.currencyCode ? t(errors.currencyCode.message ?? 'forms.required') : undefined}
-                  />
-                )}
+                render={({ field: { onChange, value, onBlur, ref } }) => {
+                  const options = currencyOptions ?? [];
+                  const selectedOption = options.find((option) => option.code === value);
+
+                  return (
+                    <Autocomplete<CurrencyIsoListItem, false, false, true>
+                      options={options}
+                      loading={isLoadingCurrencies}
+                      freeSolo
+                      value={selectedOption ?? (value ? value : null)}
+                      onChange={(_event, newValue) => {
+                        if (typeof newValue === 'string') {
+                          onChange(newValue);
+                        } else {
+                          onChange(newValue?.code ?? '');
+                        }
+                      }}
+                      onInputChange={(_event, newInputValue, reason) => {
+                        if (reason === 'input') {
+                          onChange(newInputValue);
+                        } else if (reason === 'clear') {
+                          onChange('');
+                        }
+                      }}
+                      onBlur={onBlur}
+                      getOptionLabel={(option) => {
+                        if (typeof option === 'string') {
+                          return option;
+                        }
+                        return option.description ? `${option.code} — ${option.description}` : option.code;
+                      }}
+                      isOptionEqualToValue={(option, currentValue) => {
+                        if (typeof currentValue === 'string') {
+                          return option.code === currentValue;
+                        }
+                        return option.code === currentValue.code;
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          inputRef={ref}
+                          label={t('forms.countryIso.currencyCode')}
+                          required
+                          fullWidth
+                          error={Boolean(errors.currencyCode)}
+                          helperText={
+                            errors.currencyCode
+                              ? t(errors.currencyCode.message ?? 'forms.required')
+                              : isCurrencyError
+                                ? t('forms.error')
+                                : undefined
+                          }
+                        />
+                      )}
+                    />
+                  );
+                }}
               />
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
               <Controller
                 control={control}
                 name="languageCode"
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label={t('forms.countryIso.languageCode')}
-                    required
-                    fullWidth
-                    error={Boolean(errors.languageCode)}
-                    helperText={errors.languageCode ? t(errors.languageCode.message ?? 'forms.required') : undefined}
-                  />
-                )}
+                render={({ field: { onChange, value, onBlur, ref } }) => {
+                  const options = languageOptions ?? [];
+                  const selectedOption = options.find((option) => option.code === value);
+
+                  return (
+                    <Autocomplete<LanguageIsoListItem, false, false, true>
+                      options={options}
+                      loading={isLoadingLanguages}
+                      freeSolo
+                      value={selectedOption ?? (value ? value : null)}
+                      onChange={(_event, newValue) => {
+                        if (typeof newValue === 'string') {
+                          onChange(newValue);
+                        } else {
+                          onChange(newValue?.code ?? '');
+                        }
+                      }}
+                      onInputChange={(_event, newInputValue, reason) => {
+                        if (reason === 'input') {
+                          onChange(newInputValue);
+                        } else if (reason === 'clear') {
+                          onChange('');
+                        }
+                      }}
+                      onBlur={onBlur}
+                      getOptionLabel={(option) => {
+                        if (typeof option === 'string') {
+                          return option;
+                        }
+                        return option.description ? `${option.code} — ${option.description}` : option.code;
+                      }}
+                      isOptionEqualToValue={(option, currentValue) => {
+                        if (typeof currentValue === 'string') {
+                          return option.code === currentValue;
+                        }
+                        return option.code === currentValue.code;
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          inputRef={ref}
+                          label={t('forms.countryIso.languageCode')}
+                          required
+                          fullWidth
+                          error={Boolean(errors.languageCode)}
+                          helperText={
+                            errors.languageCode
+                              ? t(errors.languageCode.message ?? 'forms.required')
+                              : isLanguageError
+                                ? t('forms.error')
+                                : undefined
+                          }
+                        />
+                      )}
+                    />
+                  );
+                }}
               />
             </Grid>
           </Grid>

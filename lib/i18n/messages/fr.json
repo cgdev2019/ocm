@@ -188,7 +188,7 @@
       "countryCode": "Code pays",
       "description": "Description",
       "currencyCode": "Code devise",
-      "languageCode": "Code langue",
+      "languageCode": "Langues ISO",
       "deleteConfirmation": "Supprimer cet ISO retirera la définition du pays commercial."
     },
     "country": {
