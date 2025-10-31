@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { apiClient } from '@/lib/api/client';
+import { getApiClient } from '@/lib/api/client';
 import { assertActionSuccess, unwrapResponse } from '@/lib/api/helpers';
 import { queryKeys } from '@/lib/api/query-keys';
 import type {
@@ -62,6 +62,7 @@ export const useCustomersList = () => {
   return useQuery({
     queryKey: queryKeys.customers.list(),
     queryFn: async () => {
+      const apiClient = getApiClient();
       const result = await apiClient.GET('/api/rest/account/customer/listGetAll');
       const payload = unwrapResponse<CustomersResponseDto>(
         { data: result.data, error: result.error },
@@ -78,6 +79,7 @@ export const useCustomer = (code: string | null) => {
     queryKey: queryKeys.customers.detail(code ?? 'unknown'),
     enabled: Boolean(code),
     queryFn: async () => {
+      const apiClient = getApiClient();
       const result = await apiClient.GET('/api/rest/account/customer/{customerCode}', {
         params: { path: { customerCode: code ?? '' } },
       });
@@ -96,6 +98,7 @@ export const useCustomerMutations = () => {
 
   const upsert = useMutation({
     mutationFn: async (values: CustomerFormValues) => {
+      const apiClient = getApiClient();
       const dto = mapFormToDto(values);
       const result = await apiClient.POST('/api/rest/account/customer/createOrUpdate', {
         body: dto,
@@ -112,6 +115,7 @@ export const useCustomerMutations = () => {
 
   const remove = useMutation({
     mutationFn: async (code: string) => {
+      const apiClient = getApiClient();
       const result = await apiClient.DELETE('/api/rest/account/customer/{customerCode}', {
         params: { path: { customerCode: code } },
       });

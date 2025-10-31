@@ -18,17 +18,37 @@ const authMiddleware: Middleware = {
   },
 };
 
-const isBrowser = typeof window !== 'undefined';
+const createApiClient = (baseUrl: string) => {
+  const client = createClient<paths>({
+    baseUrl,
+    fetch: async (input: RequestInfo, init?: RequestInit) => {
+      const request = new Request(input, init);
+      request.headers.set('Accept', 'application/json');
+      return fetch(request);
+    },
+  });
 
-export const apiClient = createClient<paths>({
-  baseUrl: isBrowser ? '/api/opencell' : env.apiBaseUrl,
-  fetch: async (input: RequestInfo, init?: RequestInit) => {
-    const request = new Request(input, init);
-    request.headers.set('Accept', 'application/json');
-    return fetch(request);
-  },
-});
+  client.use(authMiddleware);
 
-apiClient.use(authMiddleware);
+  return client;
+};
 
-export type ApiClient = typeof apiClient;
+let browserClient: ReturnType<typeof createApiClient> | null = null;
+let serverClient: ReturnType<typeof createApiClient> | null = null;
+
+export const getApiClient = () => {
+  if (typeof window === 'undefined') {
+    if (!serverClient) {
+      serverClient = createApiClient(env.apiBaseUrl);
+    }
+    return serverClient;
+  }
+
+  if (!browserClient) {
+    browserClient = createApiClient('/api/opencell');
+  }
+
+  return browserClient;
+};
+
+export type ApiClient = ReturnType<typeof createApiClient>;

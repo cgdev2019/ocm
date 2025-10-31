@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { apiClient } from '@/lib/api/client';
+import { getApiClient } from '@/lib/api/client';
 import { assertActionSuccess, unwrapResponse } from '@/lib/api/helpers';
 import { queryKeys } from '@/lib/api/query-keys';
 import type {
@@ -53,6 +53,7 @@ export const useInvoices = (filters: InvoiceFilters) =>
   useQuery({
     queryKey: queryKeys.invoices.list(filters),
     queryFn: async () => {
+      const apiClient = getApiClient();
       const result = await apiClient.GET('/api/rest/invoice/list', {
         params: {
           query: {
@@ -76,6 +77,7 @@ export const useInvoice = (id: number | string | null) =>
     queryKey: queryKeys.invoices.detail(id ?? 'unknown'),
     enabled: Boolean(id),
     queryFn: async () => {
+      const apiClient = getApiClient();
       const numericId = typeof id === 'string' ? Number(id) : id ?? undefined;
       const result = await apiClient.GET('/api/rest/invoice', {
         params: { query: { id: numericId } },
@@ -94,6 +96,7 @@ export const useInvoiceMutations = () => {
 
   const create = useMutation({
     mutationFn: async (values: InvoiceFormValues) => {
+      const apiClient = getApiClient();
       const dto = toDto(values);
       const result = await apiClient.POST('/api/rest/invoice', {
         body: dto,
