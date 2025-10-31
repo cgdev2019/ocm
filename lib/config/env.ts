@@ -92,7 +92,7 @@ export const env: AppEnv = {
   opencellProxyLogs: flag(process.env.OPENCELL_PROXY_LOGS),
   apiRequestTimeoutMs: numberValue(
     pickEnvValue(process.env.NEXT_PUBLIC_API_TIMEOUT_MS, process.env.API_TIMEOUT_MS),
-    30000,
+    60000,
     { allowZero: true },
   ),
   keycloak: {
