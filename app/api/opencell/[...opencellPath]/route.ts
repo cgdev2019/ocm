@@ -64,15 +64,22 @@ const redactHeaderValue = (name: string, value: string) => {
   return value;
 };
 
+const toHeaderCase = (value: string) =>
+  value
+    .split('-')
+    .filter((segment) => segment.length > 0)
+    .map((segment) => segment[0].toUpperCase() + segment.slice(1).toLowerCase())
+    .join('-');
+
 const buildSanitizedHeaderEntries = (headers: Headers): Array<[string, string]> =>
   Array.from(headers.entries())
-    .map<[string, string]>(([name, value]) => [name, redactHeaderValue(name, value)])
+    .map<[string, string]>(([name, value]) => [toHeaderCase(name), redactHeaderValue(name, value)])
     .sort(([a], [b]) => a.localeCompare(b));
 
 const buildCurlCommand = (
   method: string,
   url: URL,
-  headers: Headers,
+  headers: Array<[string, string]>,
   bodyText: string | undefined,
 ): { command: string; truncatedBody?: number } => {
   const commandParts: string[] = ['curl'];
@@ -80,10 +87,7 @@ const buildCurlCommand = (
     commandParts.push('-X', escapeShellArg(method));
   }
 
-  const headerEntries = Array.from(headers.entries()).sort(([a], [b]) =>
-    a.localeCompare(b),
-  );
-  headerEntries.forEach(([name, value]) => {
+  headers.forEach(([name, value]) => {
     commandParts.push('-H', escapeShellArg(`${name}: ${redactHeaderValue(name, value)}`));
   });
 
@@ -165,7 +169,8 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
   const body = isBodylessMethod ? undefined : await request.arrayBuffer();
   const requestBodyText =
     body === undefined ? undefined : textDecoder.decode(body);
-  const sanitizedHeaders = buildSanitizedHeaderEntries(headers).reduce<
+  const sanitizedHeaderEntries = buildSanitizedHeaderEntries(headers);
+  const sanitizedHeaders = sanitizedHeaderEntries.reduce<
     Record<string, string>
   >((acc, [name, value]) => {
     acc[name] = value;
@@ -186,7 +191,7 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
     const { command: curlCommand, truncatedBody } = buildCurlCommand(
       request.method,
       targetUrl,
-      headers,
+      sanitizedHeaderEntries,
       requestBodyText,
     );
     console.warn(`📡 [OpenCell Proxy #${requestId}] ↳ ${curlCommand}`);

@@ -23,7 +23,16 @@ const createApiClient = (baseUrl: string) => {
   const client = createClient<paths>({
     baseUrl,
     fetch: async (input: RequestInfo, init?: RequestInit) => {
-      const headers = new Headers(init?.headers);
+      const baseHeaders =
+        input instanceof Request
+          ? new Headers(input.headers)
+          : undefined;
+      const headers = new Headers(baseHeaders);
+      if (init?.headers) {
+        new Headers(init.headers).forEach((value, key) => {
+          headers.set(key, value);
+        });
+      }
       if (!headers.has('Accept')) {
         headers.set('Accept', 'application/json');
       }
