@@ -20,6 +20,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { AppBreadcrumbs } from '@/components/layout/AppBreadcrumbs';
 import { GlobalSearch } from '@/components/layout/GlobalSearch';
 import { LocaleSwitcher } from '@/components/layout/LocaleSwitcher';
 import { NavIcon } from '@/components/layout/NavIcon';
@@ -149,6 +150,7 @@ export const AppShell = ({ children }: PropsWithChildren) => {
       </Box>
       <Box component="main" sx={{ flexGrow: 1, p: 3, width: { md: `calc(100% - ${drawerWidth}px)` } }}>
         <Toolbar />
+        <AppBreadcrumbs />
         {children}
       </Box>
     </Box>
