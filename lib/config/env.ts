@@ -67,7 +67,7 @@ export const env: AppEnv = {
     clientId: required(
       pickEnvValue(process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID, process.env.KEYCLOAK_CLIENT_ID),
       'NEXT_PUBLIC_KEYCLOAK_CLIENT_ID',
-      'opencell-frontend',
+      'opencell-portal',
       'KEYCLOAK_CLIENT_ID',
     ),
   },
