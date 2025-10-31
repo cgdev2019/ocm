@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { env } from '@/lib/config/env';
 
+const shouldLogProxyTraffic = env.opencellProxyLogs;
+
 const hopByHopHeaders = new Set([
   'connection',
   'keep-alive',
@@ -26,7 +28,17 @@ const buildTargetUrl = (request: NextRequest, path: string[]): URL => {
   return targetUrl;
 };
 
+let proxyRequestCounter = 0;
+
+const sanitizeBodyPreview = (body: string, maxLength = 2_000) => {
+  if (body.length <= maxLength) {
+    return body;
+  }
+  return `${body.slice(0, maxLength)}… (truncated ${body.length - maxLength} chars)`;
+};
+
 const forwardRequest = async (request: NextRequest, path: string[]) => {
+  const requestId = shouldLogProxyTraffic ? ++proxyRequestCounter : undefined;
   const targetUrl = buildTargetUrl(request, path);
   const headers = stripHopByHopHeaders(new Headers(request.headers));
   headers.delete('host');
@@ -35,11 +47,48 @@ const forwardRequest = async (request: NextRequest, path: string[]) => {
   const isBodylessMethod = request.method === 'GET' || request.method === 'HEAD';
   const body = isBodylessMethod ? undefined : await request.arrayBuffer();
 
+  if (shouldLogProxyTraffic && requestId !== undefined) {
+    const bodyPreview =
+      body === undefined
+        ? undefined
+        : sanitizeBodyPreview(new TextDecoder().decode(body));
+
+    if (bodyPreview) {
+      console.warn(`📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`, {
+        body: bodyPreview,
+      });
+    } else {
+      console.warn(`📡 [OpenCell Proxy #${requestId}] → ${request.method} ${targetUrl.toString()}`);
+    }
+  }
+
   const response = await fetch(targetUrl, {
     method: request.method,
     headers,
     body,
   });
+
+  if (shouldLogProxyTraffic && requestId !== undefined) {
+    const responseClone = response.clone();
+    let responsePreview: string | undefined;
+    try {
+      const responseText = await responseClone.text();
+      if (responseText) {
+        responsePreview = sanitizeBodyPreview(responseText);
+      }
+    } catch (error) {
+      console.warn(`📡 [OpenCell Proxy #${requestId}] Impossible de lire la réponse`, error);
+    }
+
+    if (responsePreview) {
+      console.warn(
+        `📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`,
+        { body: responsePreview },
+      );
+    } else {
+      console.warn(`📡 [OpenCell Proxy #${requestId}] ← ${request.method} ${response.status} ${targetUrl.toString()}`);
+    }
+  }
 
   const responseHeaders = stripHopByHopHeaders(new Headers(response.headers));
   responseHeaders.delete('content-encoding');

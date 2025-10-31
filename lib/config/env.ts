@@ -1,7 +1,8 @@
-﻿export type AppEnv = {
+export type AppEnv = {
   apiBaseUrl: string;
   mockApi: boolean;
   defaultLocale: string;
+  opencellProxyLogs: boolean;
   keycloak: {
     url: string;
     realm: string;
@@ -51,6 +52,7 @@ export const env: AppEnv = {
   ),
   mockApi: flag(process.env.NEXT_PUBLIC_MOCK ?? process.env.MOCK),
   defaultLocale: required(process.env.DEFAULT_LOCALE, 'DEFAULT_LOCALE', 'fr'),
+  opencellProxyLogs: flag(process.env.OPENCELL_PROXY_LOGS),
   keycloak: {
     url: required(
       pickEnvValue(process.env.NEXT_PUBLIC_KEYCLOAK_APP_AUTH_URL, process.env.KEYCLOAK_APP_AUTH_URL),
