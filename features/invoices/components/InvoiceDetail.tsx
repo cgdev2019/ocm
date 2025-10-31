@@ -24,7 +24,7 @@ export const InvoiceDetail = ({ id }: { id: string }) => {
       <Stack spacing={2} alignItems="center" py={6}>
         <CircularProgress size={32} />
         <Typography variant="body2" color="text.secondary">
-          {t('layout.searchPlaceholder')}
+          {t('table.loading')}
         </Typography>
       </Stack>
     );

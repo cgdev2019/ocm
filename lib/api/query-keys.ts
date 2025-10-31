@@ -20,4 +20,24 @@ export const queryKeys = {
     list: () => ['taxes', 'list'] as const,
     detail: (code: string) => ['taxes', 'detail', code] as const,
   },
+  billingCycles: {
+    list: () => ['billingCycles', 'list'] as const,
+    detail: (code: string) => ['billingCycles', 'detail', code] as const,
+  },
+  calendars: {
+    list: () => ['calendars', 'list'] as const,
+    detail: (code: string) => ['calendars', 'detail', code] as const,
+  },
+  configuration: {
+    list: () => ['configuration', 'list'] as const,
+    detail: (key: string) => ['configuration', 'detail', key] as const,
+  },
+  countryIso: {
+    list: () => ['countryIso', 'list'] as const,
+    detail: (code: string) => ['countryIso', 'detail', code] as const,
+  },
+  countries: {
+    list: () => ['countries', 'list'] as const,
+    detail: (code: string) => ['countries', 'detail', code] as const,
+  },
 };
