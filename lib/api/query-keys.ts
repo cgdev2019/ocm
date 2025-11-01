@@ -47,9 +47,11 @@ export const queryKeys = {
     list: (params?: Record<string, unknown>) =>
       params ? (['accountingPeriods', 'list', params] as const) : (['accountingPeriods', 'list'] as const),
     detail: (fiscalYear: string) => ['accountingPeriods', 'detail', fiscalYear] as const,
+  },
   accountingCodeMappings: {
     detail: (accountingArticleCode: string) =>
       ['accountingCodeMappings', 'detail', accountingArticleCode] as const,
+  },
   accountingArticles: {
     root: ['accountingArticles'] as const,
     list: (params?: Record<string, unknown>) =>

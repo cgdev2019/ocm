@@ -52,6 +52,7 @@
 - [x] Prendre en compte le fichier ERROR.txt lors de l'exécution de `npm run dev` (trace navigateur)
 - [x] L'utilisateur doit s'authentifier via Keycloak avant d'accéder à l'application (utilise keycloak.js ou autre)
 - [x] Vérifications automatiques du 2025-10-31 : `npm run lint`, `npm run typecheck`, `npm run test` tous passés.
+- [ ] `npm run build` échoue (TypeScript) : `AccountingArticleDto['languageDescriptions']` manquant dans `features/accounting-articles/api.ts`.
 
 ## Tâches services à implémenter
 - [x] API V2 AccountingArticle — cf. `tasks/v2/TASK001.md` (tests: `npm run lint` ⚠️, `npm run test -- --runTestsByPath features/accounting-articles/__tests__/useAccountingArticles.test.tsx` ✅)
