@@ -37,6 +37,7 @@ export const NAV_SECTIONS: Array<{
     | 'usage'
     | 'access'
     | 'businessAccountModel'
+    | 'businessOfferModel'
     | 'providerContact';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
@@ -53,6 +54,9 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.terminationReasons', path: '/termination-reasons', icon: 'terminationReason' },
   { label: 'navigation.usage', path: '/usage', icon: 'usage' },
   { label: 'navigation.ratedTransactions', path: '/rated-transactions', icon: 'billing' },
+  { label: 'navigation.wallet', path: '/wallet', icon: 'billing' },
+  { label: 'navigation.bundleTemplates', path: '/bundle-templates', icon: 'billing' },
+  { label: 'navigation.businessOfferModels', path: '/business-offer-models', icon: 'businessOfferModel' },
   { label: 'navigation.accesses', path: '/access', icon: 'access' },
   { label: 'navigation.billingCycles', path: '/billing-cycles', icon: 'billing' },
   { label: 'navigation.calendars', path: '/calendars', icon: 'calendar' },

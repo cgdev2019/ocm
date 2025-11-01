@@ -240,4 +240,28 @@ export const queryKeys = {
   mediation: {
     root: ['mediation'] as const,
   },
+  wallet: {
+    root: ['wallet'] as const,
+    operations: (params: {
+      filters: Record<string, unknown> | null;
+      page: number;
+      pageSize: number;
+      sortBy: string | null;
+      sortOrder: 'ASCENDING' | 'DESCENDING' | null;
+    }) => ['wallet', 'operations', params] as const,
+    detail: (code: string) => ['wallet', 'operation', code] as const,
+    templateDetail: (code: string) => ['wallet', 'template', code] as const,
+    version: () => ['wallet', 'version'] as const,
+  },
+  bundleTemplates: {
+    list: () => ['bundleTemplates', 'list'] as const,
+    detail: (code: string) => ['bundleTemplates', 'detail', code] as const,
+    version: () => ['bundleTemplates', 'version'] as const,
+  },
+  businessOfferModels: {
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['businessOfferModels', 'list', filters] as const) : (['businessOfferModels', 'list'] as const),
+    detail: (code: string) => ['businessOfferModels', 'detail', code] as const,
+    version: () => ['businessOfferModels', 'version'] as const,
+  },
 };
