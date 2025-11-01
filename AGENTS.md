@@ -34,6 +34,7 @@
 - 2025-11-22 : Services Wallet / Bundle Template / Business Offer Model finalisés (UI, traductions, tests unitaires ciblés `npm run test -- --runTestsByPath features/wallet/__tests__/useWalletApi.test.tsx features/bundle-templates/__tests__/useBundleTemplateMutations.test.tsx features/business-offer-models/__tests__/useBusinessOfferModelApi.test.tsx` ✅).
 - 2025-11-23 : Tests ciblés BusinessProductModel / BusinessServiceModel / Channel — `npm run test -- --runTestsByPath features/business-product-models/__tests__/useBusinessProductModelApi.test.tsx features/business-service-models/__tests__/useBusinessServiceModelApi.test.tsx features/channels/__tests__/useChannelApi.test.tsx` ✅.
 - 2025-11-23 : Services ChannelsAndSegments / ChargeTemplate / CounterTemplate finalisés (UI + hooks + tests ciblés `npm run test -- --runTestsByPath features/channels-and-segments/__tests__/useChannelsAndSegmentsApi.test.tsx features/charge-templates/__tests__/useChargeTemplateApi.test.tsx features/counter-templates/__tests__/useCounterTemplateApi.test.tsx` ) ✅.
+- 2025-11-23 : Service OfferTemplateCategory livré (UI + hooks + tests ciblés `npm run test -- --runTestsByPath features/offer-template-categories/__tests__/useOfferTemplateCategoryApi.test.tsx` ) ✅.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
@@ -98,7 +99,7 @@
 - [x] Service CounterTemplate — cf. `tasks/TASK048.md`
 - [ ] Service DiscountPlanItem — cf. `tasks/TASK049.md`
 - [ ] Service DiscountPlan — cf. `tasks/TASK050.md`
-- [ ] Service OfferTemplateCategory — cf. `tasks/TASK051.md`
+- [x] Service OfferTemplateCategory — cf. `tasks/TASK051.md`
 - [ ] Service OfferTemplate — cf. `tasks/TASK052.md`
 - [ ] Service OneShotChargeTemplate — cf. `tasks/TASK053.md`
 - [ ] Service RecurringChargeTemplate — cf. `tasks/TASK054.md`

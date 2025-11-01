@@ -41,6 +41,7 @@ import ShareIcon from '@mui/icons-material/ShareOutlined';
 import HubIcon from '@mui/icons-material/HubOutlined';
 import PriceChangeIcon from '@mui/icons-material/PriceChangeOutlined';
 import CountertopsIcon from '@mui/icons-material/CountertopsOutlined';
+import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmarkOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -80,6 +81,7 @@ const registry: Record<string, SvgIconComponent> = {
   businessOfferModel: WidgetsIcon,
   businessProductModel: PrecisionManufacturingIcon,
   businessServiceModel: DesignServicesIcon,
+  offerTemplateCategory: CollectionsBookmarkIcon,
   channel: ShareIcon,
   channelsAndSegments: HubIcon,
   chargeTemplate: PriceChangeIcon,

@@ -20,6 +20,7 @@
     "ratedTransactions": "Rated transactions",
     "wallet": "Wallet",
     "bundleTemplates": "Bundle templates",
+    "offerTemplateCategories": "Offer template categories",
     "businessOfferModels": "Business offer models",
     "businessProductModels": "Business product models",
     "businessServiceModels": "Business service models",
@@ -929,6 +930,24 @@
       "channelsTitle": "Channels",
       "segmentsTitle": "Segments",
       "onlyActive": "Show active channels only"
+    },
+    "offerTemplateCategory": {
+      "title": "Offer template category",
+      "version": "Service version {version}",
+      "code": "Code",
+      "name": "Name",
+      "description": "Description",
+      "parentId": "Parent ID",
+      "parentIdHelper": "Numeric identifier of the parent category",
+      "active": "Active",
+      "disabled": "Disabled",
+      "create": "Create",
+      "update": "Update",
+      "createOrUpdate": "Create or update",
+      "enable": "Enable",
+      "disable": "Disable",
+      "enabledMessage": "Offer template category enabled",
+      "disabledMessage": "Offer template category disabled"
     },
     "chargeTemplate": {
       "title": "Charge template",
