@@ -98,8 +98,8 @@ const mapFormToDto = (values: DiscountPlanFormValues): DiscountPlanDto => {
     applicableOnContractPrice: values.applicableOnContractPrice,
     applicableOnOverriddenPrice: values.applicableOnOverriddenPrice,
     discountPlanItems: undefined,
-    incompatibleDiscountPlans: [],
-    applicableEntities: [],
+    incompatibleDiscountPlans: undefined,
+    applicableEntities: undefined,
     customFields: undefined,
   } as DiscountPlanDto;
 };
