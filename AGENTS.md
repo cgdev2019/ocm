@@ -46,6 +46,7 @@
 - 2025-11-23 : Tests ciblés AllowedParents — `npm run test -- --runTestsByPath features/allowed-parents/__tests__/useAllowedParents.test.tsx` ✅.
 - 2025-11-23 : Tests ciblés articleMapping — `npm run test -- --runTestsByPath features/article-mappings/__tests__/useArticleMapping.test.tsx` ✅.
 - 2025-11-23 : API V2 articleMappingLine — hooks TanStack Query, mutations et fixtures ; test ciblé `npm run test -- --runTestsByPath features/article-mapping-lines/__tests__/useArticleMappingLineApi.test.tsx` ✅.
+- 2025-11-24 : API V2 AuxiliaryCode — hook TanStack Query, fixtures MSW et test ciblé `npm run test -- --runTestsByPath features/auxiliary-codes/__tests__/useAuxiliaryAccount.test.tsx` ✅.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté le 23/11/2025, toujours présent).
@@ -69,7 +70,7 @@
 - [x] API V2 AllowedParents — cf. `tasks/v2/TASK006.md`
 - [x] API V2 articleMapping — cf. `tasks/v2/TASK007.md`
 - [ ] API V2 articleMappingLine — cf. `tasks/v2/TASK008.md`
-- [ ] API V2 AuxiliaryCode — cf. `tasks/v2/TASK009.md`
+- [x] API V2 AuxiliaryCode — cf. `tasks/v2/TASK009.md`
 - [ ] API V2 BillingRule — cf. `tasks/v2/TASK010.md`
 - [ ] API V2 CDR — cf. `tasks/v2/TASK011.md`
 - [ ] API V2 Collection Plan — cf. `tasks/v2/TASK012.md`
