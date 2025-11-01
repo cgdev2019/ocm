@@ -26,5 +26,5 @@ export default function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [String.raw`/((?!api|_next|.*\..*).*)`],
+  matcher: ['/((?!api|_next|.*\\..*).*)'],
 };

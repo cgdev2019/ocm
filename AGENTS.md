@@ -27,6 +27,7 @@
 - Vérifications automatiques relancées (`npm run lint`, `npm run typecheck`, `npm run test`) — tout vert (31/10/2025).
 - Synthèse OpenAPI automatique générée pour `tasks/*.md` via `scripts/generateTasks.mjs`.
 - 2025-11-20 : Espace de travail Rated Transactions ajouté (hooks TanStack Query, liste paginée, tiroir de détail et flux d'annulation) + fixtures, handlers MSW et tests ciblés.
+- 2025-11-21 : `npm run build` repasse au vert (suppression de `next/font` externe et matcher proxy statique pour Next 16).
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
