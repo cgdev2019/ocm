@@ -159,7 +159,7 @@ export const useAccountingArticles = (params: AccountingArticleListParams) => {
     queryKey: queryKeys.accountingArticles.list(queryParams),
     keepPreviousData: true,
     queryFn: async (): Promise<AccountingArticleList> => {
-      const result = await getFromApi<AccountingArticleListResponseDto>('/articles', {
+      const result = await getFromApi<AccountingArticleListResponseDto>('/api/rest/v2/articles', {
         params: { query: queryParams },
       });
       const payload = unwrapResponse<AccountingArticleListResponseDto>(
@@ -242,7 +242,7 @@ export const useAccountingArticleMutations = () => {
         throw new Error('Missing accounting article identifier for update');
       }
       const dto = mapFormToDto(values);
-      const result = await putToApi<ActionStatus>('/articles/{id}', {
+      const result = await putToApi<ActionStatus>('/api/rest/v2/articles/{id}', {
         params: { path: { id: values.id } },
         body: dto,
       });
@@ -261,7 +261,7 @@ export const useAccountingArticleMutations = () => {
 
   const remove = useMutation({
     mutationFn: async (code: string) => {
-      const result = await deleteFromApi<ActionStatus>('/articles/{accountingArticleCode}', {
+      const result = await deleteFromApi<ActionStatus>('/api/rest/v2/articles/{accountingArticleCode}', {
         params: { path: { accountingArticleCode: code } },
       });
       const payload = unwrapResponse<ActionStatus>(
@@ -324,7 +324,7 @@ export const useAccountingArticlesByProduct = (
 export const useArticleMappingCreation = () =>
   useMutation({
     mutationFn: async (mapping: ArticleMappingDto) => {
-      const result = await postToApi<ActionStatus>('/articleMapping', { body: mapping });
+      const result = await postToApi<ActionStatus>('/api/rest/v2/articleMapping', { body: mapping });
       const payload = unwrapResponse<ActionStatus>(
         { data: result.data, error: result.error },
         'Unable to create article mapping',

@@ -69,7 +69,7 @@ export const useAccountingCodeMappingMutations = () => {
     mutationFn: async (values: AccountingCodeMappingFormValues) => {
       const apiClient = getApiClient();
       const body = mapAccountingCodeMappingFormToDto(values);
-      const result = await apiClient.POST('/v2/articles/accountingCodeMapping', { body });
+      const result = await apiClient.POST('/api/rest/v2/articles/accountingCodeMapping', { body });
       return unwrapResponse<AccountingCodeMappingMutationResult>(
         { data: result.data, error: result.error },
         'Unable to create accounting code mapping',
@@ -82,7 +82,7 @@ export const useAccountingCodeMappingMutations = () => {
     mutationFn: async (values: AccountingCodeMappingFormValues) => {
       const apiClient = getApiClient();
       const body = mapAccountingCodeMappingFormToDto(values);
-      const result = await apiClient.PUT('/v2/articles/{accountingArticleCode}/accountingCodeMapping', {
+      const result = await apiClient.PUT('/api/rest/v2/articles/{accountingArticleCode}/accountingCodeMapping', {
         params: { path: { accountingArticleCode: values.accountingArticleCode } },
         body,
       });

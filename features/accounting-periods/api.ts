@@ -222,7 +222,7 @@ export const useAccountingPeriods = (params: UseAccountingPeriodsParams) => {
       const apiClient = getApiClient();
       const body = buildListRequest(params);
       const result = await apiClient.POST(
-        '/v2/generic/all/{entityName}' as never,
+        '/api/rest/v2/generic/all/{entityName}' as never,
         {
           params: { path: { entityName: ENTITY_NAME } },
           body,
@@ -259,7 +259,7 @@ export const useAccountingPeriod = (fiscalYear: string | null) =>
         filters: { fiscalYear },
       };
       const result = await apiClient.POST(
-        '/v2/generic/all/{entityName}' as never,
+        '/api/rest/v2/generic/all/{entityName}' as never,
         {
           params: { path: { entityName: ENTITY_NAME } },
           body,
@@ -292,7 +292,7 @@ export const useAccountingPeriodMutations = () => {
       const apiClient = getApiClient();
       const dto = mapFormToDto(values);
       const result = await apiClient.POST(
-        '/v2/accountingPeriodManagement/accountingPeriods' as never,
+        '/api/rest/v2/accountingPeriodManagement/accountingPeriods' as never,
         { body: dto } as never,
       );
       const payload = unwrapResponse<ActionStatus | GenerateNextAccountingPeriodResponse | null>(
@@ -314,7 +314,7 @@ export const useAccountingPeriodMutations = () => {
       const apiClient = getApiClient();
       const dto = mapFormToDto(values);
       const result = await apiClient.PUT(
-        '/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}' as never,
+        '/api/rest/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}' as never,
         {
           params: { path: { fiscalYear: values.fiscalYear } },
           body: dto,
@@ -349,7 +349,7 @@ export const useAccountingPeriodStatusMutations = () => {
     mutationFn: async ({ fiscalYear, status }: AccountingPeriodStatusUpdateInput) => {
       const apiClient = getApiClient();
       const result = await apiClient.PUT(
-        '/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}/{status}' as never,
+        '/api/rest/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}/{status}' as never,
         { params: { path: { fiscalYear, status } } } as never,
       );
       const payload = unwrapResponse<ActionStatus | null>(
@@ -367,7 +367,7 @@ export const useAccountingPeriodStatusMutations = () => {
     mutationFn: async ({ fiscalYear, number, status, reason }: AccountingSubPeriodStatusInput) => {
       const apiClient = getApiClient();
       const result = await apiClient.PUT(
-        '/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}/subAccountingPeriods/{number}/allUsersStatus/{status}' as never,
+        '/api/rest/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}/subAccountingPeriods/{number}/allUsersStatus/{status}' as never,
         {
           params: {
             path: { fiscalYear, number, status },
@@ -390,7 +390,7 @@ export const useAccountingPeriodStatusMutations = () => {
     mutationFn: async ({ fiscalYear, number, status, reason }: AccountingSubPeriodStatusInput) => {
       const apiClient = getApiClient();
       const result = await apiClient.PUT(
-        '/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}/subAccountingPeriods/{number}/regularUsersStatus/{status}' as never,
+        '/api/rest/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}/subAccountingPeriods/{number}/regularUsersStatus/{status}' as never,
         {
           params: {
             path: { fiscalYear, number, status },
@@ -422,7 +422,7 @@ export const useGenerateNextAccountingPeriod = () => {
     mutationFn: async () => {
       const apiClient = getApiClient();
       const result = await apiClient.POST(
-        '/v2/accountingPeriodManagement/accountingPeriods/generateNextAP' as never,
+        '/api/rest/v2/accountingPeriodManagement/accountingPeriods/generateNextAP' as never,
         {} as never,
       );
       const payload = unwrapResponse<GenerateNextAccountingPeriodResponse | null>(
