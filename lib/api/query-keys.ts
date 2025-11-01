@@ -264,4 +264,42 @@ export const queryKeys = {
     detail: (code: string) => ['businessOfferModels', 'detail', code] as const,
     version: () => ['businessOfferModels', 'version'] as const,
   },
+  businessProductModels: {
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['businessProductModels', 'list', filters] as const) : (['businessProductModels', 'list'] as const),
+    detail: (code: string) => ['businessProductModels', 'detail', code] as const,
+    version: () => ['businessProductModels', 'version'] as const,
+  },
+  businessServiceModels: {
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['businessServiceModels', 'list', filters] as const) : (['businessServiceModels', 'list'] as const),
+    detail: (code: string) => ['businessServiceModels', 'detail', code] as const,
+    version: () => ['businessServiceModels', 'version'] as const,
+  },
+  channelsAndSegments: {
+    list: (filters?: Record<string, unknown>) =>
+      filters
+        ? (['channelsAndSegments', 'list', filters] as const)
+        : (['channelsAndSegments', 'list'] as const),
+    version: () => ['channelsAndSegments', 'version'] as const,
+  },
+  chargeTemplates: {
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['chargeTemplates', 'list', filters] as const) : (['chargeTemplates', 'list'] as const),
+    detail: (code: string) => ['chargeTemplates', 'detail', code] as const,
+    version: () => ['chargeTemplates', 'version'] as const,
+  },
+  counterTemplates: {
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['counterTemplates', 'list', filters] as const) : (['counterTemplates', 'list'] as const),
+    listAll: () => ['counterTemplates', 'listAll'] as const,
+    detail: (code: string) => ['counterTemplates', 'detail', code] as const,
+    version: () => ['counterTemplates', 'version'] as const,
+  },
+  channels: {
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['channels', 'list', filters] as const) : (['channels', 'list'] as const),
+    detail: (code: string) => ['channels', 'detail', code] as const,
+    version: () => ['channels', 'version'] as const,
+  },
 };

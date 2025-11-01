@@ -32,6 +32,8 @@
 - 2025-11-21 : Pagination Invoicing* alignée sur `PagingAndFiltering` + fixtures mises à jour ; `npm run typecheck` ✅.
 - 2025-11-22 : Tests ciblés AccountingCode & Mediation — `npm run test -- --runTestsByPath features/accounting-codes/__tests__/useAccountingCodes.test.tsx features/mediation/__tests__/useMediationOperations.test.tsx` ✅.
 - 2025-11-22 : Services Wallet / Bundle Template / Business Offer Model finalisés (UI, traductions, tests unitaires ciblés `npm run test -- --runTestsByPath features/wallet/__tests__/useWalletApi.test.tsx features/bundle-templates/__tests__/useBundleTemplateMutations.test.tsx features/business-offer-models/__tests__/useBusinessOfferModelApi.test.tsx` ✅).
+- 2025-11-23 : Tests ciblés BusinessProductModel / BusinessServiceModel / Channel — `npm run test -- --runTestsByPath features/business-product-models/__tests__/useBusinessProductModelApi.test.tsx features/business-service-models/__tests__/useBusinessServiceModelApi.test.tsx features/channels/__tests__/useChannelApi.test.tsx` ✅.
+- 2025-11-23 : Services ChannelsAndSegments / ChargeTemplate / CounterTemplate finalisés (UI + hooks + tests ciblés `npm run test -- --runTestsByPath features/channels-and-segments/__tests__/useChannelsAndSegmentsApi.test.tsx features/charge-templates/__tests__/useChargeTemplateApi.test.tsx features/counter-templates/__tests__/useCounterTemplateApi.test.tsx` ) ✅.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
@@ -88,12 +90,12 @@
 - [x] Service Wallet — cf. `tasks/TASK040.md`
 - [x] Service BundleTemplate — cf. `tasks/TASK041.md`
 - [x] Service BusinessOfferModel — cf. `tasks/TASK042.md`
-- [ ] Service BusinessProductModel — cf. `tasks/TASK043.md`
-- [ ] Service BusinessServiceModel — cf. `tasks/TASK044.md`
-- [ ] Service Channel — cf. `tasks/TASK045.md`
-- [ ] Service ChannelsAndSegments — cf. `tasks/TASK046.md`
-- [ ] Service ChargeTemplate — cf. `tasks/TASK047.md`
-- [ ] Service CounterTemplate — cf. `tasks/TASK048.md`
+- [x] Service BusinessProductModel — cf. `tasks/TASK043.md`
+- [x] Service BusinessServiceModel — cf. `tasks/TASK044.md`
+- [x] Service Channel — cf. `tasks/TASK045.md`
+- [x] Service ChannelsAndSegments — cf. `tasks/TASK046.md`
+- [x] Service ChargeTemplate — cf. `tasks/TASK047.md`
+- [x] Service CounterTemplate — cf. `tasks/TASK048.md`
 - [ ] Service DiscountPlanItem — cf. `tasks/TASK049.md`
 - [ ] Service DiscountPlan — cf. `tasks/TASK050.md`
 - [ ] Service OfferTemplateCategory — cf. `tasks/TASK051.md`

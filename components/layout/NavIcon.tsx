@@ -35,6 +35,12 @@ import FolderCopyIcon from '@mui/icons-material/FolderCopyOutlined';
 import CalculateIcon from '@mui/icons-material/CalculateOutlined';
 import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponentOutlined';
 import WidgetsIcon from '@mui/icons-material/WidgetsOutlined';
+import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturingOutlined';
+import DesignServicesIcon from '@mui/icons-material/DesignServicesOutlined';
+import ShareIcon from '@mui/icons-material/ShareOutlined';
+import HubIcon from '@mui/icons-material/HubOutlined';
+import PriceChangeIcon from '@mui/icons-material/PriceChangeOutlined';
+import CountertopsIcon from '@mui/icons-material/CountertopsOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -72,6 +78,12 @@ const registry: Record<string, SvgIconComponent> = {
   access: VpnKeyIcon,
   businessAccountModel: AccountTreeIcon,
   businessOfferModel: WidgetsIcon,
+  businessProductModel: PrecisionManufacturingIcon,
+  businessServiceModel: DesignServicesIcon,
+  channel: ShareIcon,
+  channelsAndSegments: HubIcon,
+  chargeTemplate: PriceChangeIcon,
+  counterTemplate: CountertopsIcon,
   providerContact: ContactsIcon,
 };
 
