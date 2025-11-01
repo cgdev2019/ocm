@@ -51,105 +51,77 @@
 - [x] Vérifications automatiques du 2025-10-31 : `npm run lint`, `npm run typecheck`, `npm run test` tous passés.
 
 ## Tâches services à implémenter
-- [x] Service BillingCycle — cf. `tasks/TASK001.md` (démarré)
-- [x] Service Calendar — cf. `tasks/TASK002.md` (démarré)
-- [x] Service Configuration — cf. `tasks/TASK003.md` (démarré)
-- [x] Service CountryIso — cf. `tasks/TASK004.md` (démarré)
-- [x] Service Country — cf. `tasks/TASK005.md` (démarré)
-- [x] Service CurrencyIso — cf. `tasks/TASK006.md`
-- [x] Service Currency — cf. `tasks/TASK007.md`
-- [x] Service Filter — cf. `tasks/TASK008.md`
-- [x] Service GenericCode — cf. `tasks/TASK009.md`
-- [x] Service InvoiceCategory — cf. `tasks/TASK010.md`
-- [x] Service InvoiceSequence — cf. `tasks/TASK011.md`
-- [x] Service InvoiceSubCategory — cf. `tasks/TASK012.md`
-- [x] Service InvoiceType — cf. `tasks/TASK013.md`
-- [x] Service LanguageIso — cf. `tasks/TASK014.md`
-- [x] Service Language — cf. `tasks/TASK015.md`
-- [x] Service MassImport — cf. `tasks/TASK016.md`
-- [x] Service OccTemplate — cf. `tasks/TASK017.md`
-- [x] Service PdfInvoice — cf. `tasks/TASK018.md`
-- [x] Service Provider — cf. `tasks/TASK019.md`
-- [x] Service Query — cf. `tasks/TASK020.md`
-- [x] Service ScriptInstance — cf. `tasks/TASK021.md`
-- [x] Service Seller — cf. `tasks/TASK022.md`
-- [x] Service Tax — cf. `tasks/TASK023.md`
-- [x] Service TerminationReason — cf. `tasks/TASK024.md`
-- [x] Service Usage — cf. `tasks/TASK025.md`
-- [x] Service Access — cf. `tasks/TASK026.md`
-- [x] Service BusinessAccountModel — cf. `tasks/TASK027.md`
-- [x] Service ProviderContact — cf. `tasks/TASK028.md`
-- [x] Service Title — cf. `tasks/TASK029.md`
-- [x] Service Audit — cf. `tasks/TASK030.md`
-- [x] Service FileFormat — cf. `tasks/TASK031.md`
-- [x] Service Files — cf. `tasks/TASK032.md`
-- [x] Service AccountingCode — cf. `tasks/TASK033.md`
-- [x] Service InvoicingPlanItem — cf. `tasks/TASK034.md`
-- [x] Service InvoicingPlan — cf. `tasks/TASK035.md`
-- [x] Service Invoicing — cf. `tasks/TASK036.md`
-- [x] Service Mediation — cf. `tasks/TASK037.md`
-- [x] Service RatedTransaction — cf. `tasks/TASK038.md`
-- [x] Service Subscription — cf. `tasks/TASK039.md`
-- [x] Service Wallet — cf. `tasks/TASK040.md`
-- [x] Service BundleTemplate — cf. `tasks/TASK041.md`
-- [x] Service BusinessOfferModel — cf. `tasks/TASK042.md`
-- [x] Service BusinessProductModel — cf. `tasks/TASK043.md`
-- [x] Service BusinessServiceModel — cf. `tasks/TASK044.md`
-- [x] Service Channel — cf. `tasks/TASK045.md`
-- [x] Service ChannelsAndSegments — cf. `tasks/TASK046.md`
-- [x] Service ChargeTemplate — cf. `tasks/TASK047.md`
-- [x] Service CounterTemplate — cf. `tasks/TASK048.md`51.md`
-- [x] Service DiscountPlanItem — cf. `tasks/TASK049.md`
-- [x] Service DiscountPlan — cf. `tasks/TASK050.md`
-- [x] Service OfferTemplateCategory — cf. `tasks/TASK051.md`
-- [ ] Service OfferTemplate — cf. `tasks/TASK052.md`
-- [ ] Service OneShotChargeTemplate — cf. `tasks/TASK053.md`
-- [ ] Service RecurringChargeTemplate — cf. `tasks/TASK054.md`
-- [ ] Service ServiceTemplate — cf. `tasks/TASK055.md`
-- [ ] Service TriggeredEdr — cf. `tasks/TASK056.md`
-- [ ] Service UnitOfMeasure — cf. `tasks/TASK057.md`
-- [ ] Service UsageChargeTemplate — cf. `tasks/TASK058.md`
-- [ ] Service Communication — cf. `tasks/TASK059.md`
-- [ ] Service EmailTemplate — cf. `tasks/TASK060.md`
-- [ ] Service MeveoInstance — cf. `tasks/TASK061.md`
-- [ ] Service AddressBook — cf. `tasks/TASK062.md`
-- [ ] Service Contact — cf. `tasks/TASK063.md`
-- [ ] Service CustomEntityInstance — cf. `tasks/TASK064.md`
-- [ ] Service CustomFieldTemplate — cf. `tasks/TASK065.md`
-- [ ] Service CustomTable — cf. `tasks/TASK066.md`
-- [ ] Service DataCollector — cf. `tasks/TASK067.md`
-- [ ] Service DocumentSign — cf. `tasks/TASK068.md`
-- [ ] Service PDFDocument — cf. `tasks/TASK069.md`
-- [ ] Service DunningDocument — cf. `tasks/TASK070.md`
-- [ ] Service Chart — cf. `tasks/TASK071.md`
-- [ ] Service MeasurableQuantity — cf. `tasks/TASK072.md`
-- [ ] Service FilteredList — cf. `tasks/TASK073.md`
-- [ ] Service ReportExtract — cf. `tasks/TASK074.md`
-- [ ] Service GenericWorkflow — cf. `tasks/TASK075.md`
-- [ ] Service UserHierarchyLevel — cf. `tasks/TASK076.md`
-- [ ] Service ImportExport — cf. `tasks/TASK077.md`
-- [ ] Service Invoice — cf. `tasks/TASK078.md`
-- [ ] Service Job — cf. `tasks/TASK079.md`
-- [ ] Service TimerEntity — cf. `tasks/TASK080.md`
-- [ ] Service MetricsConfiguration — cf. `tasks/TASK081.md`
-- [ ] Service Module — cf. `tasks/TASK082.md`
-- [ ] Service EmailNotification — cf. `tasks/TASK083.md`
-- [ ] Service JobTrigger — cf. `tasks/TASK084.md`
-- [ ] Service Notification — cf. `tasks/TASK085.md`
-- [ ] Service WebHookNotification — cf. `tasks/TASK086.md`
-- [ ] Service AccountOperation — cf. `tasks/TASK087.md`
-- [ ] Service CreditCategory — cf. `tasks/TASK088.md`
-- [ ] Service DDRequestLotOp — cf. `tasks/TASK089.md`
-- [ ] Service IBan — cf. `tasks/TASK090.md`
-- [ ] Service Payment — cf. `tasks/TASK091.md`
-- [ ] Service Refund — cf. `tasks/TASK092.md`
-- [ ] Service RevenueRecognitionRules — cf. `tasks/TASK093.md`
-- [ ] Service RumSequence — cf. `tasks/TASK094.md`
-- [ ] Service TaxCategory — cf. `tasks/TASK095.md`
-- [ ] Service TaxClass — cf. `tasks/TASK096.md`
-- [ ] Service TaxMapping — cf. `tasks/TASK097.md`
-- [ ] Service Catalog — cf. `tasks/TASK098.md`
-- [ ] Service Order — cf. `tasks/TASK099.md`
+- [ ] API V2 AccountingArticle — cf. `tasks/v2/TASK001.md`
+- [ ] API V2 AccountingCodeMapping — cf. `tasks/v2/TASK002.md`
+- [ ] API V2 AccountingPeriods — cf. `tasks/v2/TASK003.md`
+- [ ] API V2 AccountOperation — cf. `tasks/v2/TASK004.md`
+- [ ] API V2 AgedReceivables — cf. `tasks/v2/TASK005.md`
+- [ ] API V2 AllowedParents — cf. `tasks/v2/TASK006.md`
+- [ ] API V2 articleMapping — cf. `tasks/v2/TASK007.md`
+- [ ] API V2 articleMappingLine — cf. `tasks/v2/TASK008.md`
+- [ ] API V2 AuxiliaryCode — cf. `tasks/v2/TASK009.md`
+- [ ] API V2 BillingRule — cf. `tasks/v2/TASK010.md`
+- [ ] API V2 CDR — cf. `tasks/v2/TASK011.md`
+- [ ] API V2 Collection Plan — cf. `tasks/v2/TASK012.md`
+- [ ] API V2 Collection Plan Status — cf. `tasks/v2/TASK013.md`
+- [ ] API V2 CollectionPlan — cf. `tasks/v2/TASK014.md`
+- [ ] API V2 communication — cf. `tasks/v2/TASK015.md`
+- [ ] API V2 contact — cf. `tasks/v2/TASK016.md`
+- [ ] API V2 contact_category — cf. `tasks/v2/TASK017.md`
+- [ ] API V2 CounterInstance — cf. `tasks/v2/TASK018.md`
+- [ ] API V2 Create — cf. `tasks/v2/TASK019.md`
+- [ ] API V2 Credit — cf. `tasks/v2/TASK020.md`
+- [ ] API V2 crm — cf. `tasks/v2/TASK021.md`
+- [ ] API V2 Customer Account — cf. `tasks/v2/TASK022.md`
+- [ ] API V2 Discount Plan instances — cf. `tasks/v2/TASK023.md`
+- [ ] API V2 Discount Plans — cf. `tasks/v2/TASK024.md`
+- [ ] API V2 Document — cf. `tasks/v2/TASK025.md`
+- [ ] API V2 Dunning — cf. `tasks/v2/TASK026.md`
+- [ ] API V2 Dunning Agent — cf. `tasks/v2/TASK027.md`
+- [ ] API V2 DunningAction — cf. `tasks/v2/TASK028.md`
+- [ ] API V2 DunningTemplate — cf. `tasks/v2/TASK029.md`
+- [ ] API V2 EDR — cf. `tasks/v2/TASK030.md`
+- [ ] API V2 email — cf. `tasks/v2/TASK031.md`
+- [ ] API V2 email_template — cf. `tasks/v2/TASK032.md`
+- [ ] API V2 export data — cf. `tasks/v2/TASK033.md`
+- [ ] API V2 Generic — cf. `tasks/v2/TASK034.md`
+- [ ] API V2 Global settings — cf. `tasks/v2/TASK035.md`
+- [ ] API V2 Import — cf. `tasks/v2/TASK036.md`
+- [ ] API V2 Instantiate — cf. `tasks/v2/TASK037.md`
+- [ ] API V2 InvoiceLines — cf. `tasks/v2/TASK038.md`
+- [ ] API V2 Invoices — cf. `tasks/v2/TASK039.md`
+- [ ] API V2 InvoiceValidationRules — cf. `tasks/v2/TASK040.md`
+- [ ] API V2 Invoicing — cf. `tasks/v2/TASK041.md`
+- [ ] API V2 Media — cf. `tasks/v2/TASK042.md`
+- [ ] API V2 Mediation — cf. `tasks/v2/TASK043.md`
+- [ ] API V2 Mediation Settings — cf. `tasks/v2/TASK044.md`
+- [ ] API V2 Move — cf. `tasks/v2/TASK045.md`
+- [ ] API V2 NotImplementedResource — cf. `tasks/v2/TASK046.md`
+- [ ] API V2 Open Orders — cf. `tasks/v2/TASK047.md`
+- [ ] API V2 Open Orders Quote — cf. `tasks/v2/TASK048.md`
+- [ ] API V2 Open Orders Templates — cf. `tasks/v2/TASK049.md`
+- [ ] API V2 Order-items — cf. `tasks/v2/TASK050.md`
+- [ ] API V2 Orders — cf. `tasks/v2/TASK051.md`
+- [ ] API V2 PaymentPlan — cf. `tasks/v2/TASK052.md`
+- [ ] API V2 PolicyRule — cf. `tasks/v2/TASK053.md`
+- [ ] API V2 Post — cf. `tasks/v2/TASK054.md`
+- [ ] API V2 Price Plan — cf. `tasks/v2/TASK055.md`
+- [ ] API V2 Price Plan Matrix — cf. `tasks/v2/TASK056.md`
+- [ ] API V2 PricePlanMatrixLine — cf. `tasks/v2/TASK057.md`
+- [ ] API V2 Products — cf. `tasks/v2/TASK058.md`
+- [ ] API V2 Put — cf. `tasks/v2/TASK059.md`
+- [ ] API V2 QueryScheduler — cf. `tasks/v2/TASK060.md`
+- [ ] API V2 Quote management — cf. `tasks/v2/TASK061.md`
+- [ ] API V2 RatedTransaction — cf. `tasks/v2/TASK062.md`
+- [ ] API V2 Refund — cf. `tasks/v2/TASK063.md`
+- [ ] API V2 ReportQuery — cf. `tasks/v2/TASK064.md`
+- [ ] API V2 Sans tag — cf. `tasks/v2/TASK065.md`
+- [ ] API V2 SecurityDeposit — cf. `tasks/v2/TASK066.md`
+- [ ] API V2 sms — cf. `tasks/v2/TASK067.md`
+- [ ] API V2 sms_template — cf. `tasks/v2/TASK068.md`
+- [ ] API V2 Subscription — cf. `tasks/v2/TASK069.md`
+- [ ] API V2 Transfer — cf. `tasks/v2/TASK070.md`
+- [ ] API V2 TrialBalance — cf. `tasks/v2/TASK071.md`
 
 ## Notes
 - `npm run dev` Utiliser pour viser l'API distante.
