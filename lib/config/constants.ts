@@ -38,6 +38,12 @@ export const NAV_SECTIONS: Array<{
     | 'access'
     | 'businessAccountModel'
     | 'businessOfferModel'
+    | 'businessProductModel'
+    | 'businessServiceModel'
+    | 'channel'
+    | 'channelsAndSegments'
+    | 'chargeTemplate'
+    | 'counterTemplate'
     | 'providerContact';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
@@ -57,6 +63,12 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.wallet', path: '/wallet', icon: 'billing' },
   { label: 'navigation.bundleTemplates', path: '/bundle-templates', icon: 'billing' },
   { label: 'navigation.businessOfferModels', path: '/business-offer-models', icon: 'businessOfferModel' },
+  { label: 'navigation.businessProductModels', path: '/business-product-models', icon: 'businessProductModel' },
+  { label: 'navigation.businessServiceModels', path: '/business-service-models', icon: 'businessServiceModel' },
+  { label: 'navigation.channels', path: '/channels', icon: 'channel' },
+  { label: 'navigation.channelsAndSegments', path: '/channels-and-segments', icon: 'channelsAndSegments' },
+  { label: 'navigation.chargeTemplates', path: '/charge-templates', icon: 'chargeTemplate' },
+  { label: 'navigation.counterTemplates', path: '/counter-templates', icon: 'counterTemplate' },
   { label: 'navigation.accesses', path: '/access', icon: 'access' },
   { label: 'navigation.billingCycles', path: '/billing-cycles', icon: 'billing' },
   { label: 'navigation.calendars', path: '/calendars', icon: 'calendar' },
