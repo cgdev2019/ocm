@@ -19,6 +19,15 @@ import type { AllowedParentDto } from '@/features/allowed-parents/types';
 import type { AuxiliaryAccountDto } from '@/features/auxiliary-codes/types';
 import type { ArticleMappingDto } from '@/features/article-mappings/types';
 import type { BillingRuleDto } from '@/features/billing-rules/types';
+import type {
+  EmailTemplateDto,
+  EmailTemplateFormValues,
+  SMSTemplateDto,
+  SMSTemplateFormValues,
+  TranslatedHtmlContentFormValue,
+  TranslatedSubjectFormValue,
+  TranslatedTextContentFormValue,
+} from '@/features/communication/types';
 import {
   customers,
   customerAccounts,
@@ -48,7 +57,78 @@ import {
   auxiliaryAccountsData,
   articleMappingsData,
   billingRulesData,
+  emailTemplatesData,
+  smsTemplatesData,
 } from '@/mocks/data';
+
+const cloneEmailTemplateForm = (template: EmailTemplateFormValues): EmailTemplateFormValues => ({
+  ...template,
+  translatedTextContent: template.translatedTextContent.map((item) => ({ ...item })),
+  translatedHtmlContent: template.translatedHtmlContent.map((item) => ({ ...item })),
+  translatedSubject: template.translatedSubject.map((item) => ({ ...item })),
+});
+
+const cloneSmsTemplateForm = (template: SMSTemplateFormValues): SMSTemplateFormValues => ({
+  ...template,
+  translatedTextContent: template.translatedTextContent.map((item) => ({ ...item })),
+});
+
+const toEmailTemplateDto = (template: EmailTemplateFormValues): EmailTemplateDto => ({
+  id: template.id,
+  code: template.code,
+  description: template.description,
+  media: template.media,
+  tagStartDelimiter: template.tagStartDelimiter,
+  tagEndDelimiter: template.tagEndDelimiter,
+  startDate: template.startDate,
+  endDate: template.endDate,
+  type: template.type,
+  textContent: template.textContent,
+  translatedTextContent:
+    template.translatedTextContent.length > 0
+      ? template.translatedTextContent.map((entry) => ({
+          languageCode: entry.languageCode,
+          textContent: entry.textContent,
+        }))
+      : undefined,
+  subject: template.subject,
+  htmlContent: template.htmlContent,
+  translatedHtmlContent:
+    template.translatedHtmlContent.length > 0
+      ? template.translatedHtmlContent.map((entry) => ({
+          languageCode: entry.languageCode,
+          htmlContent: entry.htmlContent,
+        }))
+      : undefined,
+  translatedSubject:
+    template.translatedSubject.length > 0
+      ? template.translatedSubject.map((entry) => ({
+          languageCode: entry.languageCode,
+          subject: entry.subject,
+          textContent: entry.textContent,
+        }))
+      : undefined,
+});
+
+const toSmsTemplateDto = (template: SMSTemplateFormValues): SMSTemplateDto => ({
+  id: template.id,
+  code: template.code,
+  description: template.description,
+  media: template.media,
+  tagStartDelimiter: template.tagStartDelimiter,
+  tagEndDelimiter: template.tagEndDelimiter,
+  startDate: template.startDate,
+  endDate: template.endDate,
+  type: template.type,
+  textContent: template.textContent,
+  translatedTextContent:
+    template.translatedTextContent.length > 0
+      ? template.translatedTextContent.map((entry) => ({
+          languageCode: entry.languageCode,
+          textContent: entry.textContent,
+        }))
+      : undefined,
+});
 
 const customersStore = [...customers];
 const customerAccountsStore = [...customerAccounts];
@@ -100,6 +180,8 @@ const articleMappingsStore: ArticleMappingDto[] = articleMappingsData.map((item)
 const billingRulesStore: BillingRuleDto[] = billingRulesData.map((item) => ({
   ...item,
 }));
+const emailTemplatesStore: EmailTemplateFormValues[] = emailTemplatesData.map((item) => cloneEmailTemplateForm(item));
+const smsTemplatesStore: SMSTemplateFormValues[] = smsTemplatesData.map((item) => cloneSmsTemplateForm(item));
 let nextAccountingArticleId = accountingArticlesStore.reduce(
   (acc, item) => (item.id && item.id > acc ? item.id : acc),
   200,
@@ -199,6 +281,109 @@ const mapAccountingPeriodToDto = (period: AccountingPeriodDetailValues) => ({
   startDate: period.startDate,
   endDate: period.endDate,
 });
+
+const normalizeTranslatedInput = <T extends
+  | TranslatedTextContentFormValue
+  | TranslatedHtmlContentFormValue
+  | TranslatedSubjectFormValue>(entries: T[] | undefined): T[] =>
+  entries
+    ? entries.map((item) => ({
+        ...item,
+        languageCode: typeof item.languageCode === 'string' ? item.languageCode.trim() : '',
+      }))
+    : [];
+
+const upsertEmailTemplate = (payload: EmailTemplateDto): EmailTemplateDto => {
+  const normalizedCode = payload.code?.trim();
+  if (!normalizedCode) {
+    throw new Error('Email template code is required');
+  }
+
+  const index = emailTemplatesStore.findIndex((item) => item.code === normalizedCode);
+  const formValues: EmailTemplateFormValues = {
+    id: payload.id,
+    code: normalizedCode,
+    description: payload.description ?? undefined,
+    media: payload.media ?? undefined,
+    tagStartDelimiter: payload.tagStartDelimiter ?? undefined,
+    tagEndDelimiter: payload.tagEndDelimiter ?? undefined,
+    startDate: payload.startDate ?? undefined,
+    endDate: payload.endDate ?? undefined,
+    type: payload.type ?? undefined,
+    textContent: payload.textContent ?? undefined,
+    subject: payload.subject ?? '',
+    htmlContent: payload.htmlContent ?? undefined,
+    translatedTextContent: normalizeTranslatedInput(payload.translatedTextContent ?? []).map((entry) => ({
+      languageCode: entry.languageCode,
+      textContent: entry.textContent ?? '',
+    })),
+    translatedHtmlContent: normalizeTranslatedInput(payload.translatedHtmlContent ?? []).map((entry) => ({
+      languageCode: entry.languageCode,
+      htmlContent: entry.htmlContent ?? '',
+    })),
+    translatedSubject: normalizeTranslatedInput(payload.translatedSubject ?? []).map((entry) => ({
+      languageCode: entry.languageCode,
+      subject: entry.subject ?? '',
+      textContent: entry.textContent ?? undefined,
+    })),
+  };
+
+  if (index >= 0) {
+    emailTemplatesStore[index] = cloneEmailTemplateForm(formValues);
+  } else {
+    emailTemplatesStore.push(cloneEmailTemplateForm(formValues));
+  }
+
+  return toEmailTemplateDto(emailTemplatesStore[index >= 0 ? index : emailTemplatesStore.length - 1]);
+};
+
+const upsertSmsTemplate = (payload: SMSTemplateDto): SMSTemplateDto => {
+  const normalizedCode = payload.code?.trim();
+  if (!normalizedCode) {
+    throw new Error('SMS template code is required');
+  }
+
+  const index = smsTemplatesStore.findIndex((item) => item.code === normalizedCode);
+  const formValues: SMSTemplateFormValues = {
+    id: payload.id,
+    code: normalizedCode,
+    description: payload.description ?? undefined,
+    media: payload.media ?? undefined,
+    tagStartDelimiter: payload.tagStartDelimiter ?? undefined,
+    tagEndDelimiter: payload.tagEndDelimiter ?? undefined,
+    startDate: payload.startDate ?? undefined,
+    endDate: payload.endDate ?? undefined,
+    type: payload.type ?? undefined,
+    textContent: payload.textContent ?? undefined,
+    translatedTextContent: normalizeTranslatedInput(payload.translatedTextContent ?? []).map((entry) => ({
+      languageCode: entry.languageCode,
+      textContent: entry.textContent ?? '',
+    })),
+  };
+
+  if (index >= 0) {
+    smsTemplatesStore[index] = cloneSmsTemplateForm(formValues);
+  } else {
+    smsTemplatesStore.push(cloneSmsTemplateForm(formValues));
+  }
+
+  return toSmsTemplateDto(smsTemplatesStore[index >= 0 ? index : smsTemplatesStore.length - 1]);
+};
+
+const findEmailTemplate = (code: string) => emailTemplatesStore.find((item) => item.code === code);
+const findSmsTemplate = (code: string) => smsTemplatesStore.find((item) => item.code === code);
+const deleteEmailTemplate = (code: string) => {
+  const index = emailTemplatesStore.findIndex((item) => item.code === code);
+  if (index >= 0) {
+    emailTemplatesStore.splice(index, 1);
+  }
+};
+const deleteSmsTemplate = (code: string) => {
+  const index = smsTemplatesStore.findIndex((item) => item.code === code);
+  if (index >= 0) {
+    smsTemplatesStore.splice(index, 1);
+  }
+};
 const findAccountingArticleByCode = (code: string) =>
   accountingArticlesStore.find((item) => item.code === code);
 const findAccountingArticleIndexByCode = (code: string) =>
@@ -1807,6 +1992,139 @@ export const handlers = [
 
     return HttpResponse.json(toAccountingCodeMappingResponse(accountingArticleCode, mappings));
   }),
+
+  http.get(
+    '*/api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}',
+    ({ params }) => {
+      const code = typeof params.EmailTemplateCode === 'string' ? params.EmailTemplateCode.trim() : '';
+      if (!code) {
+        return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Missing email template code' } }, { status: 400 });
+      }
+
+      const template = findEmailTemplate(code);
+      if (!template) {
+        return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Email template not found' } }, { status: 404 });
+      }
+
+      return HttpResponse.json({ actionStatus: success(), emailTemplate: toEmailTemplateDto(template) });
+    },
+  ),
+
+  http.post(
+    '*/api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}',
+    async ({ params, request }) => {
+      const pathCode = typeof params.EmailTemplateCode === 'string' ? params.EmailTemplateCode.trim() : '';
+      const payload = (await request.json()) as EmailTemplateDto;
+      const resolvedCode = pathCode || payload.code;
+      if (!resolvedCode) {
+        return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Missing email template code' } }, { status: 400 });
+      }
+
+      const dto = upsertEmailTemplate({ ...payload, code: resolvedCode });
+      return HttpResponse.json({ actionStatus: success(), emailTemplate: dto });
+    },
+  ),
+
+  http.put(
+    '*/api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}',
+    async ({ params, request }) => {
+      const pathCode = typeof params.EmailTemplateCode === 'string' ? params.EmailTemplateCode.trim() : '';
+      const payload = (await request.json()) as EmailTemplateDto;
+      const resolvedCode = pathCode || payload.code;
+      if (!resolvedCode) {
+        return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Missing email template code' } }, { status: 400 });
+      }
+
+      const dto = upsertEmailTemplate({ ...payload, code: resolvedCode });
+      return HttpResponse.json({ actionStatus: success(), emailTemplate: dto });
+    },
+  ),
+
+  http.patch(
+    '*/api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}',
+    async ({ params, request }) => {
+      const pathCode = typeof params.EmailTemplateCode === 'string' ? params.EmailTemplateCode.trim() : '';
+      const payload = (await request.json()) as Partial<EmailTemplateDto>;
+      const resolvedCode = pathCode || payload.code;
+      if (!resolvedCode) {
+        return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Missing email template code' } }, { status: 400 });
+      }
+
+      const existing = findEmailTemplate(resolvedCode);
+      const base = existing ? toEmailTemplateDto(existing) : { code: resolvedCode };
+      const dto = upsertEmailTemplate({ ...base, ...payload, code: resolvedCode });
+      return HttpResponse.json({ actionStatus: success(), emailTemplate: dto });
+    },
+  ),
+
+  http.delete(
+    '*/api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}',
+    ({ params }) => {
+      const code = typeof params.EmailTemplateCode === 'string' ? params.EmailTemplateCode.trim() : '';
+      if (!code) {
+        return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Missing email template code' } }, { status: 400 });
+      }
+
+      deleteEmailTemplate(code);
+      return HttpResponse.json({ actionStatus: success() });
+    },
+  ),
+
+  http.post('*/api/rest/v2/setting/internationalSettings/SMSTemplate', async ({ request }) => {
+    const payload = (await request.json()) as SMSTemplateDto;
+    const resolvedCode = payload.code?.trim();
+    if (!resolvedCode) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Missing SMS template code' } }, { status: 400 });
+    }
+
+    const dto = upsertSmsTemplate({ ...payload, code: resolvedCode });
+    return HttpResponse.json({ actionStatus: success(), smsTemplate: dto });
+  }),
+
+  http.get(
+    '*/api/rest/v2/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}',
+    ({ params }) => {
+      const code = typeof params.SMSTemplateCode === 'string' ? params.SMSTemplateCode.trim() : '';
+      if (!code) {
+        return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Missing SMS template code' } }, { status: 400 });
+      }
+
+      const template = findSmsTemplate(code);
+      if (!template) {
+        return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'SMS template not found' } }, { status: 404 });
+      }
+
+      return HttpResponse.json({ actionStatus: success(), smsTemplate: toSmsTemplateDto(template) });
+    },
+  ),
+
+  http.put(
+    '*/api/rest/v2/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}',
+    async ({ params, request }) => {
+      const pathCode = typeof params.SMSTemplateCode === 'string' ? params.SMSTemplateCode.trim() : '';
+      const payload = (await request.json()) as SMSTemplateDto;
+      const resolvedCode = pathCode || payload.code;
+      if (!resolvedCode) {
+        return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Missing SMS template code' } }, { status: 400 });
+      }
+
+      const dto = upsertSmsTemplate({ ...payload, code: resolvedCode });
+      return HttpResponse.json({ actionStatus: success(), smsTemplate: dto });
+    },
+  ),
+
+  http.delete(
+    '*/api/rest/v2/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}',
+    ({ params }) => {
+      const code = typeof params.SMSTemplateCode === 'string' ? params.SMSTemplateCode.trim() : '';
+      if (!code) {
+        return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Missing SMS template code' } }, { status: 400 });
+      }
+
+      deleteSmsTemplate(code);
+      return HttpResponse.json({ actionStatus: success() });
+    },
+  ),
 
   http.post('*/api/rest/massImport/uploadAndImport', async ({ request }) => {
     const payload = (await request.json()) as { filename?: string };

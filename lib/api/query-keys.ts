@@ -92,6 +92,16 @@ export const queryKeys = {
     detail: (id: number | string) => ['articleMappingLines', 'detail', id] as const,
     detailByCode: (code: string) => ['articleMappingLines', 'detailByCode', code] as const,
   },
+  communication: {
+    emailTemplates: {
+      root: ['communication', 'emailTemplates'] as const,
+      detail: (code: string) => ['communication', 'emailTemplates', 'detail', code] as const,
+    },
+    smsTemplates: {
+      root: ['communication', 'smsTemplates'] as const,
+      detail: (code: string) => ['communication', 'smsTemplates', 'detail', code] as const,
+    },
+  },
   accountingArticles: {
     root: ['accountingArticles'] as const,
     list: (params?: Record<string, unknown>) =>

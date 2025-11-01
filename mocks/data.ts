@@ -26,6 +26,7 @@ import type { AllowedParentDto } from '@/features/allowed-parents/types';
 import type { AuxiliaryAccountDto } from '@/features/auxiliary-codes/types';
 import type { ArticleMappingDto } from '@/features/article-mappings/types';
 import type { BillingRuleDto } from '@/features/billing-rules/types';
+import type { EmailTemplateFormValues, SMSTemplateFormValues } from '@/features/communication/types';
 import {
   customerAccountFormFixtures,
   customerFormFixtures,
@@ -57,6 +58,8 @@ import {
   auxiliaryAccountDtoFixtures,
   articleMappingDtoFixture,
   billingRuleDtoFixture,
+  emailTemplateFormValuesFixture,
+  smsTemplateFormValuesFixture,
 } from '@/tests/fixtures/opencellDataset';
 
 export const customers: CustomerFormValues[] = customerFormFixtures;
@@ -143,3 +146,5 @@ export const accountingArticlesData: AccountingArticleDto[] = [accountingArticle
 export const articleMappingsData: ArticleMappingDto[] = [articleMappingDtoFixture];
 export const billingRulesData: BillingRuleDto[] = [billingRuleDtoFixture];
 export const accountOperationsData: AccountOperation[] = accountOperationsFixture.map((operation) => ({ ...operation }));
+export const emailTemplatesData: EmailTemplateFormValues[] = [emailTemplateFormValuesFixture];
+export const smsTemplatesData: SMSTemplateFormValues[] = [smsTemplateFormValuesFixture];
