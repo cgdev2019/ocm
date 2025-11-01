@@ -38,6 +38,10 @@ export const queryKeys = {
         : (['subscriptions', 'oneShotCharges'] as const),
     version: () => ['subscriptions', 'version'] as const,
   },
+  accountingCodes: {
+    list: () => ['accountingCodes', 'list'] as const,
+    detail: (code: string) => ['accountingCodes', 'detail', code] as const,
+  },
   taxes: {
     list: () => ['taxes', 'list'] as const,
     detail: (code: string) => ['taxes', 'detail', code] as const,
@@ -232,5 +236,8 @@ export const queryKeys = {
     detail: (code: string) => ['ratedTransactions', 'detail', code] as const,
     export: () => ['ratedTransactions', 'export'] as const,
     version: () => ['ratedTransactions', 'version'] as const,
+  },
+  mediation: {
+    root: ['mediation'] as const,
   },
 };

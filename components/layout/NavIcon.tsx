@@ -32,6 +32,8 @@ import BadgeIcon from '@mui/icons-material/BadgeOutlined';
 import PolicyIcon from '@mui/icons-material/PolicyOutlined';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import FolderCopyIcon from '@mui/icons-material/FolderCopyOutlined';
+import CalculateIcon from '@mui/icons-material/CalculateOutlined';
+import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponentOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -60,6 +62,8 @@ const registry: Record<string, SvgIconComponent> = {
   fileFormat: InsertDriveFileIcon,
   files: FolderCopyIcon,
   query: QueryStatsIcon,
+  accountingCode: CalculateIcon,
+  mediation: SettingsInputComponentIcon,
   scriptInstance: IntegrationInstructionsIcon,
   seller: StorefrontIcon,
   terminationReason: HighlightOffIcon,
