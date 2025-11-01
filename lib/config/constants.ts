@@ -50,7 +50,6 @@ export const NAV_SECTIONS: Array<{
     | 'accountingCode'
     | 'accountingPeriod'
     | 'mediation'
-    | 'providerContact';
     | 'providerContact'
     | 'accountingArticle';
 }> = [
