@@ -34,6 +34,7 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import FolderCopyIcon from '@mui/icons-material/FolderCopyOutlined';
 import CalculateIcon from '@mui/icons-material/CalculateOutlined';
 import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponentOutlined';
+import WidgetsIcon from '@mui/icons-material/WidgetsOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -70,6 +71,7 @@ const registry: Record<string, SvgIconComponent> = {
   usage: BoltIcon,
   access: VpnKeyIcon,
   businessAccountModel: AccountTreeIcon,
+  businessOfferModel: WidgetsIcon,
   providerContact: ContactsIcon,
 };
 

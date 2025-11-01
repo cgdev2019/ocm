@@ -31,6 +31,7 @@
 - 2025-11-01 : Tests ciblés Invoicing (`npm run test -- --runTestsByPath features/invoicing/__tests__/useInvoicingOperations.test.tsx features/invoicing/__tests__/useInvoicingVersion.test.tsx`) — OK.
 - 2025-11-21 : Pagination Invoicing* alignée sur `PagingAndFiltering` + fixtures mises à jour ; `npm run typecheck` ✅.
 - 2025-11-22 : Tests ciblés AccountingCode & Mediation — `npm run test -- --runTestsByPath features/accounting-codes/__tests__/useAccountingCodes.test.tsx features/mediation/__tests__/useMediationOperations.test.tsx` ✅.
+- 2025-11-22 : Services Wallet / Bundle Template / Business Offer Model finalisés (UI, traductions, tests unitaires ciblés `npm run test -- --runTestsByPath features/wallet/__tests__/useWalletApi.test.tsx features/bundle-templates/__tests__/useBundleTemplateMutations.test.tsx features/business-offer-models/__tests__/useBusinessOfferModelApi.test.tsx` ✅).
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
@@ -84,9 +85,9 @@
 - [x] Service Mediation — cf. `tasks/TASK037.md`
 - [x] Service RatedTransaction — cf. `tasks/TASK038.md`
 - [x] Service Subscription — cf. `tasks/TASK039.md`
-- [ ] Service Wallet — cf. `tasks/TASK040.md`
-- [ ] Service BundleTemplate — cf. `tasks/TASK041.md`
-- [ ] Service BusinessOfferModel — cf. `tasks/TASK042.md`
+- [x] Service Wallet — cf. `tasks/TASK040.md`
+- [x] Service BundleTemplate — cf. `tasks/TASK041.md`
+- [x] Service BusinessOfferModel — cf. `tasks/TASK042.md`
 - [ ] Service BusinessProductModel — cf. `tasks/TASK043.md`
 - [ ] Service BusinessServiceModel — cf. `tasks/TASK044.md`
 - [ ] Service Channel — cf. `tasks/TASK045.md`
