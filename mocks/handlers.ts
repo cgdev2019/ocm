@@ -9,6 +9,7 @@ import type {
   InvalidateInvoiceDocumentsDto,
 } from '@/features/invoicing/types';
 import type { AccountingCodeFormValues } from '@/features/accounting-codes/types';
+import type { AccountingArticleDto } from '@/features/accounting-articles/types';
 import {
   customers,
   customerAccounts,
@@ -29,6 +30,7 @@ import {
   taxes,
   ratedTransactionsData,
   accountingCodesData,
+  accountingArticlesData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
@@ -49,6 +51,11 @@ const languageIsosStore = [...languageIsosData];
 const languagesStore = [...languagesData];
 const ratedTransactionsStore = [...ratedTransactionsData];
 const accountingCodesStore = [...accountingCodesData];
+const accountingArticlesStore = [...accountingArticlesData];
+let nextAccountingArticleId = accountingArticlesStore.reduce(
+  (acc, item) => (item.id && item.id > acc ? item.id : acc),
+  200,
+) + 1;
 let nextReservationId = 200;
 const mediationReservations = new Map<number, { availableQuantity: number }>();
 
@@ -85,6 +92,12 @@ const findInvoicingPlanItem = (code: string) =>
 const findLanguageIso = (code: string) => languageIsosStore.find((item) => item.code === code);
 const findLanguage = (code: string) => languagesStore.find((item) => item.code === code);
 const findAccountingCode = (code: string) => accountingCodesStore.find((item) => item.code === code);
+const findAccountingArticleByCode = (code: string) =>
+  accountingArticlesStore.find((item) => item.code === code);
+const findAccountingArticleIndexByCode = (code: string) =>
+  accountingArticlesStore.findIndex((item) => item.code === code);
+const findAccountingArticleIndexById = (id: number) =>
+  accountingArticlesStore.findIndex((item) => item.id === id);
 
 const filterRatedTransactions = (filters: Record<string, unknown> | undefined) => {
   if (!filters || Object.keys(filters).length === 0) {
@@ -268,6 +281,74 @@ export const handlers = [
     }
     return HttpResponse.json(success('Accounting code disabled'));
   }),
+
+  http.get('*/articles', ({ request }) => {
+    const url = new URL(request.url);
+    const limitParam = Number(url.searchParams.get('limit') ?? '20');
+    const offsetParam = Number(url.searchParams.get('offset') ?? '0');
+    const limit = Number.isNaN(limitParam) ? 20 : limitParam;
+    const offset = Number.isNaN(offsetParam) ? 0 : offsetParam;
+    const page = accountingArticlesStore.slice(offset, offset + limit);
+
+    return HttpResponse.json({
+      actionStatus: success(),
+      accountingArticles: page,
+      totalRecords: accountingArticlesStore.length,
+    });
+  }),
+  http.get('*/articles/{accountingArticleCode}', ({ params }) => {
+    const code = String(params.accountingArticleCode);
+    const article = findAccountingArticleByCode(code);
+    if (!article) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), accountingArticle: article });
+  }),
+  http.post('*/articles', async ({ request }) => {
+    const payload = (await request.json()) as AccountingArticleDto;
+    const dto = { ...payload } as AccountingArticleDto;
+    const code = typeof dto.code === 'string' && dto.code.length > 0 ? dto.code : `ART-${nextAccountingArticleId}`;
+    const normalized = {
+      ...dto,
+      code,
+      id: dto.id ?? nextAccountingArticleId++,
+    } as (typeof accountingArticlesStore)[number];
+    accountingArticlesStore.push(normalized);
+    return HttpResponse.json(success('Accounting article created'));
+  }),
+  http.put('*/articles/{id}', async ({ params, request }) => {
+    const id = Number(params.id);
+    const payload = (await request.json()) as AccountingArticleDto;
+    const index = findAccountingArticleIndexById(id);
+    if (index === -1) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    accountingArticlesStore[index] = {
+      ...accountingArticlesStore[index],
+      ...(payload as Record<string, unknown>),
+      id,
+    } as (typeof accountingArticlesStore)[number];
+    return HttpResponse.json(success('Accounting article updated'));
+  }),
+  http.delete('*/articles/{accountingArticleCode}', ({ params }) => {
+    const code = String(params.accountingArticleCode);
+    const index = findAccountingArticleIndexByCode(code);
+    if (index >= 0) {
+      accountingArticlesStore.splice(index, 1);
+    }
+    return HttpResponse.json(success('Accounting article deleted'));
+  }),
+  http.get('*/articles/products/{productCode}', ({ params }) => {
+    const productCode = String(params.productCode);
+    const matching = accountingArticlesStore.filter((article) =>
+      article.code?.toLowerCase().includes(productCode.toLowerCase()),
+    );
+    return HttpResponse.json({
+      actionStatus: success(),
+      accountingArticles: matching.length > 0 ? matching : accountingArticlesStore,
+    });
+  }),
+  http.post('*/articleMapping', async () => HttpResponse.json(success('Article mapping created'))),
 
   http.get('*/api/rest/invoice/list', () =>
     HttpResponse.json({

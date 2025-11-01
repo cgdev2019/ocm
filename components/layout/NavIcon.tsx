@@ -45,6 +45,7 @@ import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmarkOutl
 import LocalOfferIcon from '@mui/icons-material/LocalOfferOutlined';
 import SellIcon from '@mui/icons-material/SellOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
+import ArticleIcon from '@mui/icons-material/ArticleOutlined';
 
 const registry: Record<string, SvgIconComponent> = {
   dashboard: DashboardIcon,
@@ -91,6 +92,7 @@ const registry: Record<string, SvgIconComponent> = {
   discountPlan: LocalOfferIcon,
   discountPlanItem: SellIcon,
   providerContact: ContactsIcon,
+  accountingArticle: ArticleIcon,
 };
 
 export const NavIcon = ({ name }: { name: string }) => {
