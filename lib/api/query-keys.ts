@@ -11,6 +11,17 @@ export const queryKeys = {
       filters ? ['customerAccounts', 'list', filters] as const : ['customerAccounts', 'list'] as const,
     detail: (code: string) => ['customerAccounts', 'detail', code] as const,
   },
+  contracts: {
+    root: ['contracts'] as const,
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['contracts', 'list', filters] as const) : (['contracts', 'list'] as const),
+    detail: (code: string) => ['contracts', 'detail', code] as const,
+    billingRules: (contractCode: string) => ['contracts', 'billingRules', contractCode] as const,
+    billingRule: (contractCode: string, id: number | string) =>
+      ['contracts', 'billingRule', contractCode, id] as const,
+    billingRuleByCode: (contractCode: string, code: string) =>
+      ['contracts', 'billingRuleByCode', contractCode, code] as const,
+  },
   accountOperations: {
     root: ['accountOperations'] as const,
   },

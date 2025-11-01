@@ -18,6 +18,7 @@ import type { AccountingArticleDto } from '@/features/accounting-articles/types'
 import type { AllowedParentDto } from '@/features/allowed-parents/types';
 import type { AuxiliaryAccountDto } from '@/features/auxiliary-codes/types';
 import type { ArticleMappingDto } from '@/features/article-mappings/types';
+import type { BillingRuleDto } from '@/features/billing-rules/types';
 import {
   customers,
   customerAccounts,
@@ -46,6 +47,7 @@ import {
   allowedParentsData,
   auxiliaryAccountsData,
   articleMappingsData,
+  billingRulesData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
@@ -95,6 +97,9 @@ const accountingArticlesStore = [...accountingArticlesData];
 const articleMappingsStore: ArticleMappingDto[] = articleMappingsData.map((item) => ({
   ...item,
 }));
+const billingRulesStore: BillingRuleDto[] = billingRulesData.map((item) => ({
+  ...item,
+}));
 let nextAccountingArticleId = accountingArticlesStore.reduce(
   (acc, item) => (item.id && item.id > acc ? item.id : acc),
   200,
@@ -102,6 +107,8 @@ let nextAccountingArticleId = accountingArticlesStore.reduce(
 const accountOperationsStore = accountOperationsData.map((operation) => ({ ...operation }));
 let nextReservationId = 200;
 const mediationReservations = new Map<number, { availableQuantity: number }>();
+let nextBillingRuleId =
+  billingRulesStore.reduce((acc, item) => (item.id && item.id > acc ? item.id : acc), 500) + 1;
 
 const success = (message = 'OK') => ({ status: 'SUCCESS', message });
 
@@ -725,6 +732,52 @@ export const handlers = [
     return HttpResponse.json({ actionStatus: success(), articleMapping: mapping });
   }),
   http.post('*/articleMapping', async () => HttpResponse.json(success('Article mapping created'))),
+
+  http.post('*/api/rest/v2/cpq/contracts/:contractCode/billingRule', async ({ request }) => {
+    const payload = (await request.json()) as BillingRuleDto;
+    const id = typeof payload.id === 'number' && Number.isFinite(payload.id) ? payload.id : nextBillingRuleId++;
+    const billingRule: BillingRuleDto = {
+      ...payload,
+      id,
+      code: payload.code ?? `BILL-RULE-${id}`,
+    };
+    billingRulesStore.push({ ...billingRule });
+    return HttpResponse.json({ actionStatus: success('Billing rule created'), billingRule });
+  }),
+  http.put('*/api/rest/v2/cpq/contracts/:contractCode/billingRule/:id', async ({ params, request }) => {
+    const id = Number(params.id);
+    if (!Number.isFinite(id)) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Invalid identifier' } }, { status: 400 });
+    }
+    const payload = (await request.json()) as BillingRuleDto;
+    const index = billingRulesStore.findIndex((item) => item.id === id);
+    if (index < 0) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Billing rule not found' } }, { status: 404 });
+    }
+
+    const updated: BillingRuleDto = {
+      ...billingRulesStore[index],
+      ...payload,
+      id,
+      code: payload.code ?? billingRulesStore[index].code ?? `BILL-RULE-${id}`,
+    };
+    billingRulesStore[index] = { ...updated };
+
+    return HttpResponse.json({ actionStatus: success('Billing rule updated'), billingRule: updated });
+  }),
+  http.delete('*/api/rest/v2/cpq/contracts/:contractCode/billingRule/:id', ({ params }) => {
+    const id = Number(params.id);
+    if (!Number.isFinite(id)) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Invalid identifier' } }, { status: 400 });
+    }
+    const index = billingRulesStore.findIndex((item) => item.id === id);
+    if (index < 0) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Billing rule not found' } }, { status: 404 });
+    }
+
+    const [removed] = billingRulesStore.splice(index, 1);
+    return HttpResponse.json({ actionStatus: success('Billing rule deleted'), billingRule: removed });
+  }),
 
   http.get('*/api/rest/invoice/list', () =>
     HttpResponse.json({
