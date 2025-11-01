@@ -76,6 +76,16 @@ import type {
   InvoiceTypeListItem,
 } from '@/features/invoice-types/types';
 import type {
+  InvoicingPlanFormValues,
+  InvoicingPlanListItem,
+  InvoicingPlansResponseDto,
+} from '@/features/invoicing-plans/types';
+import type {
+  InvoicingPlanItemFormValues,
+  InvoicingPlanItemListItem,
+  InvoicingPlanItemsResponseDto,
+} from '@/features/invoicing-plan-items/types';
+import type {
   GetLanguageIsoResponse,
   GetLanguagesIsoResponse,
   LanguageIsoFormValues,
@@ -144,6 +154,21 @@ import type {
   UsageListItem,
   UsageResponseDto,
 } from '@/features/usage/types';
+import type {
+  ActionStatus,
+  BillingAccountInRunListItem,
+  BillingRunIdFormValues,
+  BillingRunInfoSummary,
+  CreateBillingRunFormValues,
+  GetBillingAccountListInRunResponseDto,
+  GetBillingRunInfoResponseDto,
+  GetPostInvoicingReportsResponseDto,
+  GetPreInvoicingReportsResponseDto,
+  InvoiceActionFormValues,
+  InvalidateInvoiceDocumentsFormValues,
+  PostInvoicingReportSummary,
+  PreInvoicingReportSummary,
+} from '@/features/invoicing/types';
 import type {
   RatedTransactionDto,
   RatedTransactionListItem,
@@ -914,6 +939,185 @@ export const invoiceTypeDetailFixture: GetInvoiceTypeResponse = {
     invoiceAccountable: true,
     useSelfSequence: false,
   },
+};
+
+export const invoicingPlanFormFixture: InvoicingPlanFormValues = {
+  code: 'PLAN-2024',
+  description: 'Plan annuel',
+};
+
+export const invoicingPlanListFixture: InvoicingPlanListItem[] = [
+  {
+    code: 'PLAN-2024',
+    description: 'Plan annuel',
+  },
+];
+
+export const invoicingPlansResponseFixture: InvoicingPlansResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  invoicingPlans: {
+    invoicingPlan: [
+      {
+        code: 'PLAN-2024',
+        description: 'Plan annuel',
+      },
+    ],
+  },
+};
+
+export const invoicingPlanItemFormFixture: InvoicingPlanItemFormValues = {
+  code: 'PLAN-ITEM-01',
+  description: '1ère échéance',
+  billingPlanCode: 'PLAN-2024',
+  advancement: 50,
+  rateToBill: 1200,
+};
+
+export const invoicingPlanItemListFixture: InvoicingPlanItemListItem[] = [
+  {
+    code: 'PLAN-ITEM-01',
+    description: '1ère échéance',
+    billingPlanCode: 'PLAN-2024',
+    advancement: 50,
+    rateToBill: 1200,
+  },
+];
+
+export const invoicingPlanItemsResponseFixture: InvoicingPlanItemsResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  invoicingPlanItems: {
+    invoicingPlanItem: [
+      {
+        code: 'PLAN-ITEM-01',
+        description: '1ère échéance',
+        billingPlanCode: 'PLAN-2024',
+        advancement: 50,
+        rateToBill: 1200,
+      },
+    ],
+  },
+};
+
+export const billingRunIdFormFixture: BillingRunIdFormValues = {
+  billingRunId: 101,
+};
+
+export const invoiceActionFormFixture: InvoiceActionFormValues = {
+  billingRunId: billingRunIdFormFixture.billingRunId,
+  invoiceIds: '101, 202 303',
+  deleteCanceledInvoices: true,
+};
+
+export const invalidateInvoiceDocumentsFormFixture: InvalidateInvoiceDocumentsFormValues = {
+  billingRunId: billingRunIdFormFixture.billingRunId,
+  invalidateXMLInvoices: true,
+  invalidatePDFInvoices: false,
+};
+
+export const createBillingRunFormFixture: CreateBillingRunFormValues = {
+  billingCycleCode: 'PLAN-2024',
+  billingRunTypeEnum: 'AUTOMATIC',
+  startDate: '2024-01-01T00:00:00.000Z',
+  endDate: '2024-01-31T23:59:59.000Z',
+  invoiceDate: '2024-02-01T00:00:00.000Z',
+  lastTransactionDate: '2024-01-31T12:00:00.000Z',
+  referenceDate: 'END_DATE',
+  collectionDate: '2024-02-10T00:00:00.000Z',
+  computeDatesAtValidation: true,
+  skipValidationScript: true,
+  rejectAutoAction: 'MOVE',
+  suspectAutoAction: 'MANUAL_ACTION',
+  generateAO: true,
+};
+
+export const billingAccountListInRunResponseFixture: GetBillingAccountListInRunResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Accounts ready' },
+  billingAccountsDto: {
+    billingRunId: billingRunIdFormFixture.billingRunId,
+    billingAccount: [
+      { code: 'BA-001', description: 'Compte principal' },
+      { code: 'BA-002', description: 'Compte secondaire' },
+      { description: 'Compte sans code' },
+    ],
+  },
+};
+
+export const billingAccountListInRunSummaryFixture: BillingAccountInRunListItem[] = [
+  { id: 'BA-001', code: 'BA-001', description: 'Compte principal' },
+  { id: 'BA-002', code: 'BA-002', description: 'Compte secondaire' },
+  { id: 'account-2', description: 'Compte sans code' },
+];
+
+export const billingRunInfoResponseFixture: GetBillingRunInfoResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Run info ready' },
+  billingRunDto: {
+    code: 'BR-101',
+    status: 'VALIDATED',
+    billingCycle: { code: 'PLAN-2024' },
+    processDate: '2024-02-02T10:00:00.000Z',
+    invoiceDate: '2024-02-03T10:00:00.000Z',
+    statusDate: '2024-02-04T10:00:00.000Z',
+    amountWithoutTax: 1500,
+    amountTax: 300,
+    amountWithTax: 1800,
+  },
+};
+
+export const billingRunInfoSummaryFixture: BillingRunInfoSummary = {
+  code: 'BR-101',
+  status: 'VALIDATED',
+  billingCycle: 'PLAN-2024',
+  processDate: '2024-02-02T10:00:00.000Z',
+  invoiceDate: '2024-02-03T10:00:00.000Z',
+  statusDate: '2024-02-04T10:00:00.000Z',
+  amountWithoutTax: 1500,
+  amountTax: 300,
+  amountWithTax: 1800,
+};
+
+export const preInvoicingReportResponseFixture: GetPreInvoicingReportsResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Pre report ready' },
+  preInvoicingReportsDTO: {
+    billingCycleCode: 'PLAN-2024',
+    billableBillingAccountNumber: 5,
+    amoutWitountTax: 2500,
+    taxesAmount: 500,
+    lastTransactionDate: '2024-01-31T12:00:00.000Z',
+    invoiceDate: '2024-02-01T00:00:00.000Z',
+    billingRunId: billingRunIdFormFixture.billingRunId,
+  },
+};
+
+export const preInvoicingReportSummaryFixture: PreInvoicingReportSummary = {
+  billingCycleCode: 'PLAN-2024',
+  billableAccounts: 5,
+  totalAmountWithoutTax: 2500,
+  taxesAmount: 500,
+  lastTransactionDate: '2024-01-31T12:00:00.000Z',
+  invoiceDate: '2024-02-01T00:00:00.000Z',
+};
+
+export const postInvoicingReportResponseFixture: GetPostInvoicingReportsResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Post report ready' },
+  postInvoicingReportsDTO: {
+    invoicesNumber: 4,
+    positiveInvoicesAmount: 1800,
+    negativeInvoicesAmount: 150,
+    globalAmount: 1650,
+    billingRunId: billingRunIdFormFixture.billingRunId,
+  },
+};
+
+export const postInvoicingReportSummaryFixture: PostInvoicingReportSummary = {
+  invoicesNumber: 4,
+  positiveInvoicesAmount: 1800,
+  negativeInvoicesAmount: 150,
+  globalAmount: 1650,
+};
+
+export const actionStatusSuccessFixture: ActionStatus = {
+  status: 'SUCCESS',
+  message: 'OK',
 };
 
 export const languageIsoFormFixture: LanguageIsoFormValues = {

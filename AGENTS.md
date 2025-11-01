@@ -28,6 +28,7 @@
 - Synthèse OpenAPI automatique générée pour `tasks/*.md` via `scripts/generateTasks.mjs`.
 - 2025-11-20 : Espace de travail Rated Transactions ajouté (hooks TanStack Query, liste paginée, tiroir de détail et flux d'annulation) + fixtures, handlers MSW et tests ciblés.
 - 2025-11-21 : `npm run build` repasse au vert (suppression de `next/font` externe et matcher proxy statique pour Next 16).
+- 2025-11-01 : Tests ciblés Invoicing (`npm run test -- --runTestsByPath features/invoicing/__tests__/useInvoicingOperations.test.tsx features/invoicing/__tests__/useInvoicingVersion.test.tsx`) — OK.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
@@ -75,9 +76,9 @@
 - [x] Service FileFormat — cf. `tasks/TASK031.md`
 - [x] Service Files — cf. `tasks/TASK032.md`
 - [ ] Service AccountingCode — cf. `tasks/TASK033.md`
-- [ ] Service InvoicingPlanItem — cf. `tasks/TASK034.md`
-- [ ] Service InvoicingPlan — cf. `tasks/TASK035.md`
-- [ ] Service Invoicing — cf. `tasks/TASK036.md`
+- [x] Service InvoicingPlanItem — cf. `tasks/TASK034.md`
+- [x] Service InvoicingPlan — cf. `tasks/TASK035.md`
+- [x] Service Invoicing — cf. `tasks/TASK036.md`
 - [ ] Service Mediation — cf. `tasks/TASK037.md`
 - [x] Service RatedTransaction — cf. `tasks/TASK038.md`
 - [x] Service Subscription — cf. `tasks/TASK039.md`
