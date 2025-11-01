@@ -9,6 +9,10 @@ import type {
   InvalidateInvoiceDocumentsDto,
 } from '@/features/invoicing/types';
 import type { AccountingCodeFormValues } from '@/features/accounting-codes/types';
+import type {
+  AccountingCodeMappingFormValues,
+  AccountingCodeMappingInputDto,
+} from '@/features/accounting-code-mappings/types';
 import {
   customers,
   customerAccounts,
@@ -29,6 +33,7 @@ import {
   taxes,
   ratedTransactionsData,
   accountingCodesData,
+  accountingCodeMappingsData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
@@ -49,6 +54,20 @@ const languageIsosStore = [...languageIsosData];
 const languagesStore = [...languagesData];
 const ratedTransactionsStore = [...ratedTransactionsData];
 const accountingCodesStore = [...accountingCodesData];
+const accountingCodeMappingsStore = new Map<string, AccountingCodeMappingFormValues['mappings']>();
+let nextAccountingCodeMappingId = 1;
+
+accountingCodeMappingsData.forEach((item) => {
+  accountingCodeMappingsStore.set(
+    item.accountingArticleCode,
+    item.mappings.map((mapping) => ({ ...mapping })),
+  );
+  item.mappings.forEach((mapping) => {
+    if (typeof mapping.id === 'number' && mapping.id >= nextAccountingCodeMappingId) {
+      nextAccountingCodeMappingId = mapping.id + 1;
+    }
+  });
+});
 let nextReservationId = 200;
 const mediationReservations = new Map<number, { availableQuantity: number }>();
 
@@ -64,6 +83,42 @@ const extractBillingRunId = (input: unknown): number | undefined => {
   }
   return undefined;
 };
+
+const normalizeAccountingCodeMappingInput = (
+  payload: AccountingCodeMappingInputDto,
+): AccountingCodeMappingFormValues => ({
+  accountingArticleCode: payload.accountingArticleCode ?? '',
+  mappings:
+    payload.accountingCodeMappings?.map((mapping) => ({
+      id: mapping.id ?? undefined,
+      code: mapping.code ?? undefined,
+      accountingArticleCode: mapping.accountingArticleCode ?? payload.accountingArticleCode ?? '',
+      accountingCode: mapping.accountingCode ?? undefined,
+      sellerCode: mapping.sellerCode ?? undefined,
+      sellerCountryCode: mapping.sellerCountryCode ?? undefined,
+      billingCountryCode: mapping.billingCountryCode ?? undefined,
+      billingCurrencyCode: mapping.billingCurrencyCode ?? undefined,
+      criteriaElValue: mapping.criteriaElValue ?? undefined,
+    })) ?? [],
+});
+
+const toAccountingCodeMappingResponse = (
+  accountingArticleCode: string,
+  mappings: AccountingCodeMappingFormValues['mappings'],
+): AccountingCodeMappingInputDto => ({
+  accountingArticleCode,
+  accountingCodeMappings: mappings.map((mapping) => ({
+    id: mapping.id,
+    code: mapping.code,
+    accountingArticleCode: mapping.accountingArticleCode ?? accountingArticleCode,
+    accountingCode: mapping.accountingCode,
+    sellerCode: mapping.sellerCode,
+    sellerCountryCode: mapping.sellerCountryCode,
+    billingCountryCode: mapping.billingCountryCode,
+    billingCurrencyCode: mapping.billingCurrencyCode,
+    criteriaElValue: mapping.criteriaElValue,
+  })),
+});
 
 const findCustomer = (code: string) => customersStore.find((c) => c.code === code);
 const findCustomerAccount = (code: string) => customerAccountsStore.find((c) => c.code === code);
@@ -1182,6 +1237,58 @@ export const handlers = [
   http.post('*/api/rest/billing/mediation/createCDR', async ({ request }) => {
     await request.json();
     return HttpResponse.json(success('CDR created'));
+  }),
+
+  http.post('*/v2/articles/accountingCodeMapping', async ({ request }) => {
+    const payload = (await request.json()) as AccountingCodeMappingInputDto;
+    const normalized = normalizeAccountingCodeMappingInput(payload);
+
+    if (!normalized.accountingArticleCode) {
+      return HttpResponse.json({ status: 'FAIL', message: 'Missing accountingArticleCode' }, { status: 400 });
+    }
+
+    const mappings = normalized.mappings.map((mapping) => {
+      if (typeof mapping.id === 'number') {
+        return mapping;
+      }
+      const id = nextAccountingCodeMappingId++;
+      return { ...mapping, id };
+    });
+
+    accountingCodeMappingsStore.set(normalized.accountingArticleCode, mappings);
+
+    return HttpResponse.json(
+      toAccountingCodeMappingResponse(normalized.accountingArticleCode, mappings),
+    );
+  }),
+
+  http.put('*/v2/articles/{accountingArticleCode}/accountingCodeMapping', async ({ request, params }) => {
+    const payload = (await request.json()) as AccountingCodeMappingInputDto;
+    const accountingArticleCode =
+      typeof params.accountingArticleCode === 'string'
+        ? params.accountingArticleCode
+        : payload.accountingArticleCode ?? '';
+
+    if (!accountingArticleCode) {
+      return HttpResponse.json({ status: 'FAIL', message: 'Missing accountingArticleCode' }, { status: 400 });
+    }
+
+    const normalized = normalizeAccountingCodeMappingInput({
+      ...payload,
+      accountingArticleCode,
+    });
+
+    const mappings = normalized.mappings.map((mapping) => {
+      if (typeof mapping.id === 'number') {
+        return mapping;
+      }
+      const id = nextAccountingCodeMappingId++;
+      return { ...mapping, id };
+    });
+
+    accountingCodeMappingsStore.set(accountingArticleCode, mappings);
+
+    return HttpResponse.json(toAccountingCodeMappingResponse(accountingArticleCode, mappings));
   }),
 
   http.post('*/api/rest/massImport/uploadAndImport', async ({ request }) => {

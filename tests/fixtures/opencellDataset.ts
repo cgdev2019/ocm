@@ -1189,6 +1189,8 @@ export const accountingCodeListFixture: AccountingCodeListItem[] = [
   },
 ];
 
+export { accountingCodeMappingFormFixture, accountingCodeMappingInputFixture } from './accountingCodeMapping';
+
 export const accountingCodeListResponseFixture: AccountingCodeListResponseDto = {
   actionStatus: actionStatusSuccessFixture,
   accountingCodes: [accountingCodeDtoFixture],

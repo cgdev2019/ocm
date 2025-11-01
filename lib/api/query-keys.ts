@@ -42,6 +42,10 @@ export const queryKeys = {
     list: () => ['accountingCodes', 'list'] as const,
     detail: (code: string) => ['accountingCodes', 'detail', code] as const,
   },
+  accountingCodeMappings: {
+    detail: (accountingArticleCode: string) =>
+      ['accountingCodeMappings', 'detail', accountingArticleCode] as const,
+  },
   taxes: {
     list: () => ['taxes', 'list'] as const,
     detail: (code: string) => ['taxes', 'detail', code] as const,

@@ -36,6 +36,8 @@
 - 2025-11-23 : Services ChannelsAndSegments / ChargeTemplate / CounterTemplate finalisés (UI + hooks + tests ciblés `npm run test -- --runTestsByPath features/channels-and-segments/__tests__/useChannelsAndSegmentsApi.test.tsx features/charge-templates/__tests__/useChargeTemplateApi.test.tsx features/counter-templates/__tests__/useCounterTemplateApi.test.tsx` ) ✅.
 - 2025-11-23 : Service OfferTemplateCategory livré (UI + hooks + tests ciblés `npm run test -- --runTestsByPath features/offer-template-categories/__tests__/useOfferTemplateCategoryApi.test.tsx` ) ✅.
 
+- 2025-11-23 : API V2 AccountingCodeMapping (hooks TanStack Query, MSW, tests ciblés `npm run test -- --runTestsByPath features/accounting-code-mappings/__tests__/useAccountingCodeMappingMutations.test.tsx` ) ✅.
+
 - 2025-11-23 : Tests ciblés DiscountPlanItem / DiscountPlan — `npm run test -- --runTestsByPath features/discount-plan-items/__tests__/useDiscountPlanItemApi.test.tsx features/discount-plans/__tests__/useDiscountPlanApi.test.tsx` ✅.
 
 ## A faire rapidement
@@ -52,7 +54,7 @@
 
 ## Tâches services à implémenter
 - [ ] API V2 AccountingArticle — cf. `tasks/v2/TASK001.md`
-- [ ] API V2 AccountingCodeMapping — cf. `tasks/v2/TASK002.md`
+- [x] API V2 AccountingCodeMapping — cf. `tasks/v2/TASK002.md`
 - [ ] API V2 AccountingPeriods — cf. `tasks/v2/TASK003.md`
 - [ ] API V2 AccountOperation — cf. `tasks/v2/TASK004.md`
 - [ ] API V2 AgedReceivables — cf. `tasks/v2/TASK005.md`
