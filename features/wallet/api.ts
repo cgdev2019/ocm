@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getApiClient } from '@/lib/api/client';
 import { assertActionSuccess, unwrapResponse } from '@/lib/api/helpers';
 import { queryKeys } from '@/lib/api/query-keys';
@@ -209,6 +209,7 @@ export const useWalletOperations = (params: {
       assertActionSuccess(payload?.actionStatus, 'Wallet operations request failed');
       return adaptListResponse(payload);
     },
+    placeholderData: keepPreviousData,
   });
 };
 

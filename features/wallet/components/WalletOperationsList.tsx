@@ -94,6 +94,8 @@ export const WalletOperationsList = () => {
     [operationsQuery.data?.items],
   );
 
+  const rowCount = operationsQuery.data?.totalRecords ?? 0;
+
   const handleFilterSubmit = (values: WalletOperationFiltersSchema) => {
     const sanitized = sanitizeFilters(values);
     setFilters(sanitized);
@@ -119,7 +121,7 @@ export const WalletOperationsList = () => {
       link.remove();
       URL.revokeObjectURL(url);
       setExportSuccess(t('forms.wallet.exportSuccess', { count: result.items.length }));
-    } catch (error) {
+    } catch {
       setErrorMessage(t('forms.error'));
     }
   };
@@ -222,11 +224,12 @@ export const WalletOperationsList = () => {
           columns={columns}
           loading={operationsQuery.isLoading || operationsQuery.isFetching}
           disableRowSelectionOnClick
-          paginationMode="client"
+          paginationMode="server"
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[10, 20, 50]}
-          sortingMode="client"
+          rowCount={rowCount}
+          sortingMode="server"
           sortModel={sortModel}
           onSortModelChange={setSortModel}
           localeText={{ noRowsLabel: t('table.empty') }}
