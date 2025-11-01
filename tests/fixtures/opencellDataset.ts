@@ -149,6 +149,13 @@ import type {
   ArticleMappingDto,
 } from '@/features/article-mappings/types';
 import type {
+  ArticleMappingLineDetail,
+  ArticleMappingLineDto,
+  ArticleMappingLineFormValues,
+  ArticleMappingLineResponseDto,
+  AttributeMappingDto as ArticleMappingLineAttributeMappingDto,
+} from '@/features/article-mapping-lines/types';
+import type {
   TitleDetailValues,
   TitleListItem,
   TitleResponseDto,
@@ -1595,6 +1602,63 @@ export const articleMappingDetailFixture: ArticleMappingDetail = {
   appendGeneratedCode: false,
   mappingScriptCode: 'SCRIPT-ART-001',
   mappingScriptDescription: 'Attribution script',
+};
+
+export const attributeMappingDtoFixture: ArticleMappingLineAttributeMappingDto = {
+  id: 8801,
+  operator: 'EQUAL',
+  attributeValue: 'PREPAID',
+  attribute: { code: 'PAYMENT_MODE' } as ArticleMappingLineAttributeMappingDto['attribute'],
+};
+
+export const articleMappingLineDtoFixture: ArticleMappingLineDto = {
+  id: 701,
+  code: 'ART-LINE-001',
+  description: 'Mapping line description',
+  articleMapping: { code: 'ART-MAP-001' } as ArticleMappingLineDto['articleMapping'],
+  accountingArticle: { code: 'ACC-001' } as ArticleMappingLineDto['accountingArticle'],
+  attributeOperator: 'AND',
+  attributesMapping: [attributeMappingDtoFixture],
+  offerTemplate: { code: 'OFFER-001' } as ArticleMappingLineDto['offerTemplate'],
+  product: { code: 'PROD-001' } as ArticleMappingLineDto['product'],
+  chargeTemplate: { code: 'CHARGE-001' } as ArticleMappingLineDto['chargeTemplate'],
+  parameter1: 'param-1',
+  parameter2: 'param-2',
+  parameter3: 'param-3',
+  mappingKeyEL: 'key == value',
+};
+
+export const articleMappingLineResponseFixture: ArticleMappingLineResponseDto = {
+  actionStatus: actionStatusSuccessFixture,
+  articleMappingLine: articleMappingLineDtoFixture,
+};
+
+export const articleMappingLineFormValuesFixture: ArticleMappingLineFormValues = {
+  id: 701,
+  code: 'ART-LINE-001',
+  description: 'Mapping line description',
+  articleMappingCode: 'ART-MAP-001',
+  accountingArticleCode: 'ACC-001',
+  attributeOperator: 'AND',
+  attributes: [
+    {
+      id: 8801,
+      attributeCode: 'PAYMENT_MODE',
+      operator: 'EQUAL',
+      attributeValue: 'PREPAID',
+    },
+  ],
+  offerTemplateCode: 'OFFER-001',
+  productCode: 'PROD-001',
+  chargeTemplateCode: 'CHARGE-001',
+  parameter1: 'param-1',
+  parameter2: 'param-2',
+  parameter3: 'param-3',
+  mappingKeyEL: 'key == value',
+};
+
+export const articleMappingLineDetailFixture: ArticleMappingLineDetail = {
+  ...articleMappingLineFormValuesFixture,
 };
 
 export const accountingArticleListResultFixture: AccountingArticleList = {

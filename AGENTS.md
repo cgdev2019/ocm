@@ -45,6 +45,7 @@
 - 2025-11-23 : Re-run ciblé AgedReceivables — `npm run test -- --runTestsByPath features/aged-receivables/__tests__/useAgedReceivables.test.tsx` ✅.
 - 2025-11-23 : Tests ciblés AllowedParents — `npm run test -- --runTestsByPath features/allowed-parents/__tests__/useAllowedParents.test.tsx` ✅.
 - 2025-11-23 : Tests ciblés articleMapping — `npm run test -- --runTestsByPath features/article-mappings/__tests__/useArticleMapping.test.tsx` ✅.
+- 2025-11-23 : API V2 articleMappingLine — hooks TanStack Query, mutations et fixtures ; test ciblé `npm run test -- --runTestsByPath features/article-mapping-lines/__tests__/useArticleMappingLineApi.test.tsx` ✅.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté le 23/11/2025, toujours présent).
