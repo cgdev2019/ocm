@@ -4,14 +4,18 @@ import { assertActionSuccess } from '@/lib/api/helpers';
 import type { ActionStatus } from '@/lib/api/helpers';
 import type {
   CollectionPlanMutationResult,
+  AvailablePoliciesInput,
   DunningActionInstanceInput,
+  DunningMassSwitchInput,
   DunningCollectionPlanPause,
   DunningCollectionPlanStop,
   DunningLevelInstanceInput,
+  MassSwitchDunningCollectionPlan,
   MassPauseDunningCollectionPlan,
   MassStopDunningCollectionPlan,
   RemoveActionInstanceInput,
   RemoveLevelInstanceInput,
+  SwitchDunningCollectionPlan,
   UpdateLevelInstanceInput,
 } from '@/features/collection-plans/types';
 
@@ -161,6 +165,30 @@ export const useAddDunningLevelInstance = () =>
     },
   });
 
+export const useAvailableDunningPolicies = () =>
+  useMutation({
+    mutationFn: async (payload: AvailablePoliciesInput) => {
+      const apiClient = getApiClient();
+      const result = await apiClient.POST(
+        '/api/rest/v2/dunning/collectionPlan/availableDunningPolicies' as never,
+        { body: payload } as never,
+      );
+      return processActionResponse(result, 'Unable to fetch available dunning policies');
+    },
+  });
+
+export const useCheckCollectionPlanMassSwitch = () =>
+  useMutation({
+    mutationFn: async (payload: DunningMassSwitchInput) => {
+      const apiClient = getApiClient();
+      const result = await apiClient.POST(
+        '/api/rest/v2/dunning/collectionPlan/checkMassSwitch' as never,
+        { body: payload } as never,
+      );
+      return processActionResponse(result, 'Unable to check collection plan mass switch');
+    },
+  });
+
 export const useMassPauseCollectionPlans = () =>
   useMutation({
     mutationFn: async (payload: MassPauseDunningCollectionPlan) => {
@@ -182,6 +210,18 @@ export const useMassStopCollectionPlans = () =>
         { body: payload } as never,
       );
       return processActionResponse(result, 'Unable to stop collection plans');
+    },
+  });
+
+export const useMassSwitchCollectionPlans = () =>
+  useMutation({
+    mutationFn: async (payload: MassSwitchDunningCollectionPlan) => {
+      const apiClient = getApiClient();
+      const result = await apiClient.POST(
+        '/api/rest/v2/dunning/collectionPlan/massSwitch' as never,
+        { body: payload } as never,
+      );
+      return processActionResponse(result, 'Unable to switch collection plans');
     },
   });
 
@@ -245,6 +285,25 @@ export const useStopCollectionPlan = () =>
         { params: { path: { id: normalizedId } }, body: payload } as never,
       );
       return processActionResponse(result, 'Unable to stop collection plan');
+    },
+  });
+
+export const useSwitchCollectionPlan = () =>
+  useMutation({
+    mutationFn: async ({
+      collectionPlanId,
+      payload,
+    }: {
+      collectionPlanId: number | string | null | undefined;
+      payload: SwitchDunningCollectionPlan;
+    }) => {
+      const apiClient = getApiClient();
+      const normalizedId = normalizeId(collectionPlanId);
+      const result = await apiClient.POST(
+        '/api/rest/v2/dunning/collectionPlan/switch/{collectionPlanId}' as never,
+        { params: { path: { collectionPlanId: normalizedId } }, body: payload } as never,
+      );
+      return processActionResponse(result, 'Unable to switch collection plan');
     },
   });
 

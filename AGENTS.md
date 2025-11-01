@@ -49,6 +49,7 @@
 - 2025-11-24 : API V2 AuxiliaryCode — hook TanStack Query, fixtures MSW et test ciblé `npm run test -- --runTestsByPath features/auxiliary-codes/__tests__/useAuxiliaryAccount.test.tsx` ✅.
 - 2025-11-24 : API V2 Collection Plan — hooks TanStack Query, mutations et test ciblé `npm run test -- --runTestsByPath features/collection-plans/__tests__/collectionPlanMutations.test.tsx` ✅.
 - 2025-11-24 : Tests ciblés Collection Plan Status — `npm run test -- --runTestsByPath features/collection-plan-statuses/__tests__/useCollectionPlanStatusMutations.test.tsx` ✅.
+- 2025-11-24 : Hooks CollectionPlan V2 (politiques disponibles, mass switch) + test ciblé `npm run test -- --runTestsByPath features/collection-plans/__tests__/collectionPlanMutations.test.tsx` ✅.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté le 23/11/2025, toujours présent).
@@ -77,7 +78,7 @@
 - [ ] API V2 CDR — cf. `tasks/v2/TASK011.md`
 - [ ] API V2 Collection Plan — cf. `tasks/v2/TASK012.md`
 - [ ] API V2 Collection Plan Status — cf. `tasks/v2/TASK013.md`
-- [ ] API V2 CollectionPlan — cf. `tasks/v2/TASK014.md`
+- [x] API V2 CollectionPlan — cf. `tasks/v2/TASK014.md`
 - [ ] API V2 communication — cf. `tasks/v2/TASK015.md`
 - [ ] API V2 contact — cf. `tasks/v2/TASK016.md`
 - [ ] API V2 contact_category — cf. `tasks/v2/TASK017.md`

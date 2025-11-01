@@ -3,15 +3,19 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook } from '@testing-library/react';
 import {
   __internals,
+  useAvailableDunningPolicies,
   useAddDunningActionInstance,
   useAddDunningLevelInstance,
+  useCheckCollectionPlanMassSwitch,
   useMassPauseCollectionPlans,
   useMassStopCollectionPlans,
+  useMassSwitchCollectionPlans,
   usePauseCollectionPlan,
   useRemoveDunningActionInstance,
   useRemoveDunningLevelInstance,
   useResumeCollectionPlan,
   useStopCollectionPlan,
+  useSwitchCollectionPlan,
   useUpdateDunningActionInstance,
   useUpdateDunningLevelInstance,
 } from '@/features/collection-plans/api';
@@ -19,14 +23,18 @@ import { getApiClient, type ApiClient } from '@/lib/api/client';
 import type { ActionStatus } from '@/lib/api/helpers';
 import {
   collectionPlanMutationResultFixture,
+  availablePoliciesInputFixture,
   dunningActionInstanceInputFixture,
+  dunningMassSwitchInputFixture,
   dunningCollectionPlanPauseFixture,
   dunningCollectionPlanStopFixture,
   dunningLevelInstanceInputFixture,
   massPauseCollectionPlanFixture,
   massStopCollectionPlanFixture,
+  massSwitchCollectionPlanFixture,
   removeActionInstanceInputFixture,
   removeLevelInstanceInputFixture,
+  switchDunningCollectionPlanFixture,
   updateLevelInstanceInputFixture,
 } from '@/tests/fixtures/opencellDataset';
 
@@ -103,6 +111,38 @@ describe('collection plan mutations', () => {
     );
   });
 
+  it('fetches available dunning policies', async () => {
+    const apiClient = { POST: jest.fn() } as Partial<ApiClient>;
+    mockedGetApiClient.mockReturnValue(apiClient as ApiClient);
+    (apiClient.POST as jest.Mock).mockResolvedValue({ data: collectionPlanMutationResultFixture });
+
+    const { wrapper } = createWrapper();
+    const { result } = renderHook(() => useAvailableDunningPolicies(), { wrapper });
+
+    await result.current.mutateAsync(availablePoliciesInputFixture);
+
+    expect(apiClient.POST).toHaveBeenCalledWith(
+      '/api/rest/v2/dunning/collectionPlan/availableDunningPolicies',
+      { body: availablePoliciesInputFixture },
+    );
+  });
+
+  it('checks mass switch eligibility for collection plans', async () => {
+    const apiClient = { POST: jest.fn() } as Partial<ApiClient>;
+    mockedGetApiClient.mockReturnValue(apiClient as ApiClient);
+    (apiClient.POST as jest.Mock).mockResolvedValue({ data: collectionPlanMutationResultFixture });
+
+    const { wrapper } = createWrapper();
+    const { result } = renderHook(() => useCheckCollectionPlanMassSwitch(), { wrapper });
+
+    await result.current.mutateAsync(dunningMassSwitchInputFixture);
+
+    expect(apiClient.POST).toHaveBeenCalledWith(
+      '/api/rest/v2/dunning/collectionPlan/checkMassSwitch',
+      { body: dunningMassSwitchInputFixture },
+    );
+  });
+
   it('pauses multiple collection plans', async () => {
     const apiClient = { POST: jest.fn() } as Partial<ApiClient>;
     mockedGetApiClient.mockReturnValue(apiClient as ApiClient);
@@ -135,6 +175,22 @@ describe('collection plan mutations', () => {
     );
   });
 
+  it('switches multiple collection plans', async () => {
+    const apiClient = { POST: jest.fn() } as Partial<ApiClient>;
+    mockedGetApiClient.mockReturnValue(apiClient as ApiClient);
+    (apiClient.POST as jest.Mock).mockResolvedValue({ data: collectionPlanMutationResultFixture });
+
+    const { wrapper } = createWrapper();
+    const { result } = renderHook(() => useMassSwitchCollectionPlans(), { wrapper });
+
+    await result.current.mutateAsync(massSwitchCollectionPlanFixture);
+
+    expect(apiClient.POST).toHaveBeenCalledWith(
+      '/api/rest/v2/dunning/collectionPlan/massSwitch',
+      { body: massSwitchCollectionPlanFixture },
+    );
+  });
+
   it('pauses a specific collection plan', async () => {
     const apiClient = { POST: jest.fn() } as Partial<ApiClient>;
     mockedGetApiClient.mockReturnValue(apiClient as ApiClient);
@@ -148,6 +204,28 @@ describe('collection plan mutations', () => {
     expect(apiClient.POST).toHaveBeenCalledWith(
       '/api/rest/v2/dunning/collectionPlan/pause/{id}',
       { params: { path: { id: 501 } }, body: dunningCollectionPlanPauseFixture },
+    );
+  });
+
+  it('switches a collection plan', async () => {
+    const apiClient = { POST: jest.fn() } as Partial<ApiClient>;
+    mockedGetApiClient.mockReturnValue(apiClient as ApiClient);
+    (apiClient.POST as jest.Mock).mockResolvedValue({ data: collectionPlanMutationResultFixture });
+
+    const { wrapper } = createWrapper();
+    const { result } = renderHook(() => useSwitchCollectionPlan(), { wrapper });
+
+    await result.current.mutateAsync({
+      collectionPlanId: ' 901 ',
+      payload: switchDunningCollectionPlanFixture,
+    });
+
+    expect(apiClient.POST).toHaveBeenCalledWith(
+      '/api/rest/v2/dunning/collectionPlan/switch/{collectionPlanId}',
+      {
+        params: { path: { collectionPlanId: 901 } },
+        body: switchDunningCollectionPlanFixture,
+      },
     );
   });
 

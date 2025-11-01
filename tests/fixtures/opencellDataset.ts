@@ -181,15 +181,19 @@ import type {
   AccountingCodeListResponseDto,
 } from '@/features/accounting-codes/types';
 import type {
+  AvailablePoliciesInput,
   CollectionPlanMutationResult,
   DunningActionInstanceInput,
+  DunningMassSwitchInput,
   DunningCollectionPlanPause,
   DunningCollectionPlanStop,
   DunningLevelInstanceInput,
+  MassSwitchDunningCollectionPlan,
   MassPauseDunningCollectionPlan,
   MassStopDunningCollectionPlan,
   RemoveActionInstanceInput,
   RemoveLevelInstanceInput,
+  SwitchDunningCollectionPlan,
   UpdateLevelInstanceInput,
 } from '@/features/collection-plans/types';
 import type {
@@ -2396,6 +2400,16 @@ export const collectionPlanStatusResponseFixture: DunningCollectionPlanStatusRes
   dunningCollectionPlanStatus: collectionPlanStatusDtoFixture,
 };
 
+export const availablePoliciesInputFixture: AvailablePoliciesInput = {
+  collectionPlan: { code: 'CP-001' },
+  billingAccount: { code: 'BA-001' },
+};
+
+export const dunningMassSwitchInputFixture: DunningMassSwitchInput = {
+  collectionPlans: [{ code: 'CP-001' }, { code: 'CP-002' }],
+  policy: { code: 'POLICY-001' },
+};
+
 export const dunningActionInstanceInputFixture: DunningActionInstanceInput = {
   code: 'DAI-001',
   description: 'Send reminder email',
@@ -2431,6 +2445,12 @@ export const massStopCollectionPlanFixture: MassStopDunningCollectionPlan = {
   dunningStopReason: { code: 'STOP-001' },
 };
 
+export const massSwitchCollectionPlanFixture: MassSwitchDunningCollectionPlan = {
+  collectionPlanList: [{ code: 'CP-001' }, { code: 'CP-003' }],
+  policyLevel: { code: 'LEVEL-PRIORITY' },
+  dunningPolicy: { code: 'POLICY-NEW' },
+};
+
 export const dunningCollectionPlanPauseFixture: DunningCollectionPlanPause = {
   forcePause: true,
   pauseUntil: '2025-01-05T10:00:00.000Z',
@@ -2447,6 +2467,11 @@ export const removeLevelInstanceInputFixture: RemoveLevelInstanceInput = {
 
 export const dunningCollectionPlanStopFixture: DunningCollectionPlanStop = {
   dunningStopReason: { code: 'STOP-001' },
+};
+
+export const switchDunningCollectionPlanFixture: SwitchDunningCollectionPlan = {
+  policyLevel: { code: 'LEVEL-RESUME' },
+  dunningPolicy: { code: 'POLICY-ALT' },
 };
 
 export const updateLevelInstanceInputFixture: UpdateLevelInstanceInput = {

@@ -12,6 +12,11 @@ export type RemoveActionInstanceInput = components['schemas']['RemoveActionInsta
 export type RemoveLevelInstanceInput = components['schemas']['RemoveLevelInstanceInput'];
 export type DunningCollectionPlanStop = components['schemas']['DunningCollectionPlanStop'];
 export type UpdateLevelInstanceInput = components['schemas']['UpdateLevelInstanceInput'];
+export type AvailablePoliciesInput = components['schemas']['AvailablePoliciesInput'];
+export type DunningMassSwitchInput = components['schemas']['DunningMassSwitchInput'];
+export type MassSwitchDunningCollectionPlan =
+  components['schemas']['MassSwitchDunningCollectionPlan'];
+export type SwitchDunningCollectionPlan = components['schemas']['SwitchDunningCollectionPlan'];
 
 export type CollectionPlanMutationResult = {
   actionStatus?: ActionStatus | null;
