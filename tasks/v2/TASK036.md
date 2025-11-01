@@ -19,10 +19,10 @@ Le domaine « Import » (tag OpenAPI `Import`) est défini dans `tasks/openceapi
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/catalog/priceManagement/pricePlanMatrixLines/import` | Import grid data in price versions | importPricePlanMatrixLines |
-| POST | `/catalog/priceManagement/pricePlanMatrixVersions/import` | Import price plan versions | importPricePlanMatrixVersions |
+| POST | `/api/rest/v2/catalog/priceManagement/pricePlanMatrixLines/import` | Import grid data in price versions | importPricePlanMatrixLines |
+| POST | `/api/rest/v2/catalog/priceManagement/pricePlanMatrixVersions/import` | Import price plan versions | importPricePlanMatrixVersions |
 
-#### POST /catalog/priceManagement/pricePlanMatrixLines/import
+#### POST /api/rest/v2/catalog/priceManagement/pricePlanMatrixLines/import
 
 - Résumé: Import grid data in price versions
 - OperationId: importPricePlanMatrixLines
@@ -37,7 +37,7 @@ Le domaine « Import » (tag OpenAPI `Import`) est défini dans `tasks/openceapi
   - 404: PricePlanMatrixColumn with code={columnCode} user1 does not exists.
   - 409: A line having similar values already exists!
 
-#### POST /catalog/priceManagement/pricePlanMatrixVersions/import
+#### POST /api/rest/v2/catalog/priceManagement/pricePlanMatrixVersions/import
 
 - Résumé: Import price plan versions
 - OperationId: importPricePlanMatrixVersions

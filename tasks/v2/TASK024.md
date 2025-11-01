@@ -19,18 +19,18 @@ Le domaine « Discount Plans » (tag OpenAPI `Discount Plans`) est défini dans 
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/catalog/discountPlans` | This endpoint allows to create a discount plan resource | create_5 |
-| GET | `/catalog/discountPlans/{id}` | Return an discount plan | get |
-| PUT | `/catalog/discountPlans/{id}` | Update a resource by giving it's Id | update_4 |
-| DELETE | `/catalog/discountPlans/{id}` | Delete a resource by giving it's Id | delete_3 |
-| GET | `/catalog/discountPlans/{id}/discountPlanItems` | Return an discount plan items | getDiscountPlanItems |
-| POST | `/catalog/discountPlans/{id}/discountPlanItems` | This endpoint allows to create a discount plan item resource | createItem |
-| GET | `/catalog/discountPlans/{id}/discountPlanItems/{idItem}` | Return an discount plan | getDiscountPlanItem |
-| PUT | `/catalog/discountPlans/{id}/discountPlanItems/{idItem}` | Update a discount plan item resource by giving it's Id | updateItem |
-| DELETE | `/catalog/discountPlans/{id}/discountPlanItems/{idItem}` | Delete a resource by giving it's Id | deleteItem |
-| PUT | `/catalog/discountPlans/{id}/expiration` | Force Expiration the discount plan by giving it's Id | expire_1 |
+| POST | `/api/rest/v2/catalog/discountPlans` | This endpoint allows to create a discount plan resource | create_5 |
+| GET | `/api/rest/v2/catalog/discountPlans/{id}` | Return an discount plan | get |
+| PUT | `/api/rest/v2/catalog/discountPlans/{id}` | Update a resource by giving it's Id | update_4 |
+| DELETE | `/api/rest/v2/catalog/discountPlans/{id}` | Delete a resource by giving it's Id | delete_3 |
+| GET | `/api/rest/v2/catalog/discountPlans/{id}/discountPlanItems` | Return an discount plan items | getDiscountPlanItems |
+| POST | `/api/rest/v2/catalog/discountPlans/{id}/discountPlanItems` | This endpoint allows to create a discount plan item resource | createItem |
+| GET | `/api/rest/v2/catalog/discountPlans/{id}/discountPlanItems/{idItem}` | Return an discount plan | getDiscountPlanItem |
+| PUT | `/api/rest/v2/catalog/discountPlans/{id}/discountPlanItems/{idItem}` | Update a discount plan item resource by giving it's Id | updateItem |
+| DELETE | `/api/rest/v2/catalog/discountPlans/{id}/discountPlanItems/{idItem}` | Delete a resource by giving it's Id | deleteItem |
+| PUT | `/api/rest/v2/catalog/discountPlans/{id}/expiration` | Force Expiration the discount plan by giving it's Id | expire_1 |
 
-#### POST /catalog/discountPlans
+#### POST /api/rest/v2/catalog/discountPlans
 
 - Résumé: This endpoint allows to create a discount plan resource
 - OperationId: create_5
@@ -43,7 +43,7 @@ Le domaine « Discount Plans » (tag OpenAPI `Discount Plans`) est défini dans 
   - 200: the entity successfully created, and the id is returned in the response
   - 400: bad request when entity information contains an error
 
-#### GET /catalog/discountPlans/{id}
+#### GET /api/rest/v2/catalog/discountPlans/{id}
 
 - Résumé: Return an discount plan
 - OperationId: get
@@ -56,7 +56,7 @@ Le domaine « Discount Plans » (tag OpenAPI `Discount Plans`) est défini dans 
     - application/json: ApiException (ApiException)
   - default: the searched discount Plan
 
-#### PUT /catalog/discountPlans/{id}
+#### PUT /api/rest/v2/catalog/discountPlans/{id}
 
 - Résumé: Update a resource by giving it's Id
 - OperationId: update_4
@@ -73,7 +73,7 @@ Le domaine « Discount Plans » (tag OpenAPI `Discount Plans`) est défini dans 
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### DELETE /catalog/discountPlans/{id}
+#### DELETE /api/rest/v2/catalog/discountPlans/{id}
 
 - Résumé: Delete a resource by giving it's Id
 - OperationId: delete_3
@@ -87,7 +87,7 @@ Le domaine « Discount Plans » (tag OpenAPI `Discount Plans`) est défini dans 
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### GET /catalog/discountPlans/{id}/discountPlanItems
+#### GET /api/rest/v2/catalog/discountPlans/{id}/discountPlanItems
 
 - Résumé: Return an discount plan items
 - OperationId: getDiscountPlanItems
@@ -102,7 +102,7 @@ Le domaine « Discount Plans » (tag OpenAPI `Discount Plans`) est défini dans 
   - 200: paginated results successfully retrieved with hypermedia links
   - 400: bad request when entityName not well formed or entity unrecognized
 
-#### POST /catalog/discountPlans/{id}/discountPlanItems
+#### POST /api/rest/v2/catalog/discountPlans/{id}/discountPlanItems
 
 - Résumé: This endpoint allows to create a discount plan item resource
 - OperationId: createItem
@@ -117,7 +117,7 @@ Le domaine « Discount Plans » (tag OpenAPI `Discount Plans`) est défini dans 
   - 200: the entity successfully created, and the id is returned in the response
   - 400: bad request when entity information contains an error
 
-#### GET /catalog/discountPlans/{id}/discountPlanItems/{idItem}
+#### GET /api/rest/v2/catalog/discountPlans/{id}/discountPlanItems/{idItem}
 
 - Résumé: Return an discount plan
 - OperationId: getDiscountPlanItem
@@ -131,7 +131,7 @@ Le domaine « Discount Plans » (tag OpenAPI `Discount Plans`) est défini dans 
     - application/json: ApiException (ApiException)
   - default: the searched discount plan item
 
-#### PUT /catalog/discountPlans/{id}/discountPlanItems/{idItem}
+#### PUT /api/rest/v2/catalog/discountPlans/{id}/discountPlanItems/{idItem}
 
 - Résumé: Update a discount plan item resource by giving it's Id
 - OperationId: updateItem
@@ -148,7 +148,7 @@ Le domaine « Discount Plans » (tag OpenAPI `Discount Plans`) est défini dans 
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### DELETE /catalog/discountPlans/{id}/discountPlanItems/{idItem}
+#### DELETE /api/rest/v2/catalog/discountPlans/{id}/discountPlanItems/{idItem}
 
 - Résumé: Delete a resource by giving it's Id
 - OperationId: deleteItem
@@ -162,7 +162,7 @@ Le domaine « Discount Plans » (tag OpenAPI `Discount Plans`) est défini dans 
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### PUT /catalog/discountPlans/{id}/expiration
+#### PUT /api/rest/v2/catalog/discountPlans/{id}/expiration
 
 - Résumé: Force Expiration the discount plan by giving it's Id
 - OperationId: expire_1

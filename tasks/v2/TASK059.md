@@ -19,9 +19,9 @@ Le domaine « Put » (tag OpenAPI `Put`) est défini dans `tasks/openceapi.json`
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| PUT | `/setting/openOrderSettings/{id}` | Update Open Order settings | update_23 |
+| PUT | `/api/rest/v2/setting/openOrderSettings/{id}` | Update Open Order settings | update_23 |
 
-#### PUT /setting/openOrderSettings/{id}
+#### PUT /api/rest/v2/setting/openOrderSettings/{id}
 
 - Résumé: Update Open Order settings
 - OperationId: update_23

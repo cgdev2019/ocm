@@ -19,10 +19,10 @@ Le domaine « CounterInstance » (tag OpenAPI `CounterInstance`) est défini dan
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/accountsManagement/counterInstance` | This API allows to create a new counter instance with its proper counter periods. | createCounterInstance |
-| PUT | `/accountsManagement/counterInstance/{id}` | This API allows to update an existing counter instance with its proper counter periods. | updateCounterInstance |
+| POST | `/api/rest/v2/accountsManagement/counterInstance` | This API allows to create a new counter instance with its proper counter periods. | createCounterInstance |
+| PUT | `/api/rest/v2/accountsManagement/counterInstance/{id}` | This API allows to update an existing counter instance with its proper counter periods. | updateCounterInstance |
 
-#### POST /accountsManagement/counterInstance
+#### POST /api/rest/v2/accountsManagement/counterInstance
 
 - Résumé: This API allows to create a new counter instance with its proper counter periods.
 - OperationId: createCounterInstance
@@ -35,7 +35,7 @@ Le domaine « CounterInstance » (tag OpenAPI `CounterInstance`) est défini dan
   - 204: Success, no return data
   - 404: Nested entites not found
 
-#### PUT /accountsManagement/counterInstance/{id}
+#### PUT /api/rest/v2/accountsManagement/counterInstance/{id}
 
 - Résumé: This API allows to update an existing counter instance with its proper counter periods.
 - OperationId: updateCounterInstance

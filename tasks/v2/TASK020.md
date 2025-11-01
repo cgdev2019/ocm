@@ -19,10 +19,10 @@ Le domaine « Credit » (tag OpenAPI `Credit`) est défini dans `tasks/openceapi
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/securityDeposit/{id}/payInvoices` | Pay invoice manually with Security Deposit | payInvoices |
-| POST | `/securityDeposit/credit/{id}` | Credit Security Deposit | credit |
+| POST | `/api/rest/v2/securityDeposit/{id}/payInvoices` | Pay invoice manually with Security Deposit | payInvoices |
+| POST | `/api/rest/v2/securityDeposit/credit/{id}` | Credit Security Deposit | credit |
 
-#### POST /securityDeposit/{id}/payInvoices
+#### POST /api/rest/v2/securityDeposit/{id}/payInvoices
 
 - Résumé: Pay invoice manually with Security Deposit
 - OperationId: payInvoices
@@ -38,7 +38,7 @@ Le domaine « Credit » (tag OpenAPI `Credit`) est défini dans `tasks/openceapi
   - 400: Bad Request
   - 404: Following security deposit does not exist : {securityDeposit ids}
 
-#### POST /securityDeposit/credit/{id}
+#### POST /api/rest/v2/securityDeposit/credit/{id}
 
 - Résumé: Credit Security Deposit
 - OperationId: credit

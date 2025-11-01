@@ -19,12 +19,12 @@ Le domaine « RatedTransaction » (tag OpenAPI `RatedTransaction`) est défini d
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/billing/ratedTransaction` | This endpoint allows to create a ratedTransaction resource | createRatedTransaction |
-| GET | `/billing/ratedTransaction/{code}` | Return a rated transaction | find_4 |
-| PUT | `/billing/ratedTransaction/{id}` | This endpoint allows to update an existing ratedTransaction resource | updateRatedTransaction |
-| PUT | `/billing/ratedTransaction/{id}/cancellation` | This endpoint allows to cancel an existing ratedTransaction resource | cancel |
+| POST | `/api/rest/v2/billing/ratedTransaction` | This endpoint allows to create a ratedTransaction resource | createRatedTransaction |
+| GET | `/api/rest/v2/billing/ratedTransaction/{code}` | Return a rated transaction | find_4 |
+| PUT | `/api/rest/v2/billing/ratedTransaction/{id}` | This endpoint allows to update an existing ratedTransaction resource | updateRatedTransaction |
+| PUT | `/api/rest/v2/billing/ratedTransaction/{id}/cancellation` | This endpoint allows to cancel an existing ratedTransaction resource | cancel |
 
-#### POST /billing/ratedTransaction
+#### POST /api/rest/v2/billing/ratedTransaction
 
 - Résumé: This endpoint allows to create a ratedTransaction resource
 - OperationId: createRatedTransaction
@@ -37,7 +37,7 @@ Le domaine « RatedTransaction » (tag OpenAPI `RatedTransaction`) est défini d
   - 200: the ratedTransaction successfully created, and the id is returned in the response
   - 400: bad request on ratedTransaction creation
 
-#### GET /billing/ratedTransaction/{code}
+#### GET /api/rest/v2/billing/ratedTransaction/{code}
 
 - Résumé: Return a rated transaction
 - OperationId: find_4
@@ -51,7 +51,7 @@ Le domaine « RatedTransaction » (tag OpenAPI `RatedTransaction`) est défini d
   - default: the searched RatedTransaction
     - application/json: Invoice (Invoice)
 
-#### PUT /billing/ratedTransaction/{id}
+#### PUT /api/rest/v2/billing/ratedTransaction/{id}
 
 - Résumé: This endpoint allows to update an existing ratedTransaction resource
 - OperationId: updateRatedTransaction
@@ -67,7 +67,7 @@ Le domaine « RatedTransaction » (tag OpenAPI `RatedTransaction`) est défini d
   - 400: bad request, ratedTransaction is not eligible for update
   - 404: bad request, ratedTransaction is not found
 
-#### PUT /billing/ratedTransaction/{id}/cancellation
+#### PUT /api/rest/v2/billing/ratedTransaction/{id}/cancellation
 
 - Résumé: This endpoint allows to cancel an existing ratedTransaction resource
 - OperationId: cancel

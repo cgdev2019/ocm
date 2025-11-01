@@ -19,16 +19,16 @@ Le domaine « Order-items » (tag OpenAPI `Order-items`) est défini dans `tasks
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/ordering/order-items` | Return a list of order-items | getOrderItems |
-| POST | `/ordering/order-items` | Returns the created order-item | createOrderItem |
-| DELETE | `/ordering/order-items` | delete more than one order-item | deleteOrderItem_1 |
-| GET | `/ordering/order-items/{id}` | Return an order-Item | getOrderItem |
-| PUT | `/ordering/order-items/{id}` | update an existing order-item | updateOrderItem |
-| PATCH | `/ordering/order-items/{id}` | partially update an existing order-item | patchOrderItem |
-| DELETE | `/ordering/order-items/{id}` | delete an existing order-item | deleteOrderItem |
-| GET | `/ordering/order-items/find/{code}` | Return an order-Item | getOrderItem_1 |
+| GET | `/api/rest/v2/ordering/order-items` | Return a list of order-items | getOrderItems |
+| POST | `/api/rest/v2/ordering/order-items` | Returns the created order-item | createOrderItem |
+| DELETE | `/api/rest/v2/ordering/order-items` | delete more than one order-item | deleteOrderItem_1 |
+| GET | `/api/rest/v2/ordering/order-items/{id}` | Return an order-Item | getOrderItem |
+| PUT | `/api/rest/v2/ordering/order-items/{id}` | update an existing order-item | updateOrderItem |
+| PATCH | `/api/rest/v2/ordering/order-items/{id}` | partially update an existing order-item | patchOrderItem |
+| DELETE | `/api/rest/v2/ordering/order-items/{id}` | delete an existing order-item | deleteOrderItem |
+| GET | `/api/rest/v2/ordering/order-items/find/{code}` | Return an order-Item | getOrderItem_1 |
 
-#### GET /ordering/order-items
+#### GET /api/rest/v2/ordering/order-items
 
 - Résumé: Return a list of order-items
 - OperationId: getOrderItems
@@ -49,7 +49,7 @@ Le domaine « Order-items » (tag OpenAPI `Order-items`) est défini dans `tasks
   - default: list of order-items
     - application/json: OrderItems (OrderItems)
 
-#### POST /ordering/order-items
+#### POST /api/rest/v2/ordering/order-items
 
 - Résumé: Returns the created order-item
 - OperationId: createOrderItem
@@ -64,7 +64,7 @@ Le domaine « Order-items » (tag OpenAPI `Order-items`) est défini dans `tasks
   - 400: Invalid inputs supplied
     - application/json: ApiException (ApiException)
 
-#### DELETE /ordering/order-items
+#### DELETE /api/rest/v2/ordering/order-items
 
 - Résumé: delete more than one order-item
 - OperationId: deleteOrderItem_1
@@ -78,7 +78,7 @@ Le domaine « Order-items » (tag OpenAPI `Order-items`) est défini dans `tasks
   - 404: order-item not found
     - application/json: ApiException (ApiException)
 
-#### GET /ordering/order-items/{id}
+#### GET /api/rest/v2/ordering/order-items/{id}
 
 - Résumé: Return an order-Item
 - OperationId: getOrderItem
@@ -93,7 +93,7 @@ Le domaine « Order-items » (tag OpenAPI `Order-items`) est défini dans `tasks
   - default: the searched order-Item
     - application/json: OrderItem (OrderItem)
 
-#### PUT /ordering/order-items/{id}
+#### PUT /api/rest/v2/ordering/order-items/{id}
 
 - Résumé: update an existing order-item
 - OperationId: updateOrderItem
@@ -112,7 +112,7 @@ Le domaine « Order-items » (tag OpenAPI `Order-items`) est défini dans `tasks
   - default: the updated order-item
     - application/json: OrderItem (OrderItem)
 
-#### PATCH /ordering/order-items/{id}
+#### PATCH /api/rest/v2/ordering/order-items/{id}
 
 - Résumé: partially update an existing order-item
 - OperationId: patchOrderItem
@@ -131,7 +131,7 @@ Le domaine « Order-items » (tag OpenAPI `Order-items`) est défini dans `tasks
   - default: the updated order-item
     - application/json: OrderItem (OrderItem)
 
-#### DELETE /ordering/order-items/{id}
+#### DELETE /api/rest/v2/ordering/order-items/{id}
 
 - Résumé: delete an existing order-item
 - OperationId: deleteOrderItem
@@ -145,7 +145,7 @@ Le domaine « Order-items » (tag OpenAPI `Order-items`) est défini dans `tasks
   - default: the deleted order-item
     - application/json: OrderItem (OrderItem)
 
-#### GET /ordering/order-items/find/{code}
+#### GET /api/rest/v2/ordering/order-items/find/{code}
 
 - Résumé: Return an order-Item
 - OperationId: getOrderItem_1

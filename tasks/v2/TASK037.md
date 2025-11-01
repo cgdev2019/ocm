@@ -19,9 +19,9 @@ Le domaine « Instantiate » (tag OpenAPI `Instantiate`) est défini dans `tasks
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/securityDeposit/instantiateSecurityDeposit` | Instantiate Security Deposit | instantiate |
+| POST | `/api/rest/v2/securityDeposit/instantiateSecurityDeposit` | Instantiate Security Deposit | instantiate |
 
-#### POST /securityDeposit/instantiateSecurityDeposit
+#### POST /api/rest/v2/securityDeposit/instantiateSecurityDeposit
 
 - Résumé: Instantiate Security Deposit
 - OperationId: instantiate

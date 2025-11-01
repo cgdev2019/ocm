@@ -19,10 +19,10 @@ Le domaine « Global settings » (tag OpenAPI `Global settings`) est défini dan
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/setting/globalSettings` | Global settings | create_22 |
-| PUT | `/setting/globalSettings/{id}` | Global settings | update_22 |
+| POST | `/api/rest/v2/setting/globalSettings` | Global settings | create_22 |
+| PUT | `/api/rest/v2/setting/globalSettings/{id}` | Global settings | update_22 |
 
-#### POST /setting/globalSettings
+#### POST /api/rest/v2/setting/globalSettings
 
 - Résumé: Global settings
 - OperationId: create_22
@@ -35,7 +35,7 @@ Le domaine « Global settings » (tag OpenAPI `Global settings`) est défini dan
   - 200: Global settings was successfully created
   - 400: Bad Request
 
-#### PUT /setting/globalSettings/{id}
+#### PUT /api/rest/v2/setting/globalSettings/{id}
 
 - Résumé: Global settings
 - OperationId: update_22

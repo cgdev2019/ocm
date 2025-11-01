@@ -19,9 +19,9 @@ Le domaine « QueryScheduler » (tag OpenAPI `QueryScheduler`) est défini dans 
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/queryManagement/reportQueries/{reportQueryId}/schedule` | Create a new query scheduler | createQueryScheduler |
+| POST | `/api/rest/v2/queryManagement/reportQueries/{reportQueryId}/schedule` | Create a new query scheduler | createQueryScheduler |
 
-#### POST /queryManagement/reportQueries/{reportQueryId}/schedule
+#### POST /api/rest/v2/queryManagement/reportQueries/{reportQueryId}/schedule
 
 - Résumé: Create a new query scheduler
 - OperationId: createQueryScheduler

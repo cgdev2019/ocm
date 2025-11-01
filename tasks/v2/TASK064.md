@@ -19,17 +19,17 @@ Le domaine « ReportQuery » (tag OpenAPI `ReportQuery`) est défini dans `tasks
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/queryManagement/reportQueries` | Return a list of report queries | getReportQueries |
-| POST | `/queryManagement/reportQueries` | Create a new report query | createReportQuery |
-| PUT | `/queryManagement/reportQueries/{id}` | This endpoint allows to update an report query | update_18 |
-| GET | `/queryManagement/reportQueries/{queryId}` | This endpoint allows to load a report query resource | find_5 |
-| DELETE | `/queryManagement/reportQueries/{queryId}` | This endpoint allows to delete a report query resource | delete_15 |
-| GET | `/queryManagement/reportQueries/{queryId}/download` | This API will download result query as csv or excel format. | downloadQueryExecutionResult |
-| POST | `/queryManagement/reportQueries/{queryId}/execute` | execute report query | execute |
-| GET | `/queryManagement/reportQueries/queryExecutionResult/{queryexecutionResultId}/results` | This API will convert the generate report file to json. | findQueryResult |
-| POST | `/queryManagement/reportQueries/verify` | Verify report query | verifyReportQuery |
+| GET | `/api/rest/v2/queryManagement/reportQueries` | Return a list of report queries | getReportQueries |
+| POST | `/api/rest/v2/queryManagement/reportQueries` | Create a new report query | createReportQuery |
+| PUT | `/api/rest/v2/queryManagement/reportQueries/{id}` | This endpoint allows to update an report query | update_18 |
+| GET | `/api/rest/v2/queryManagement/reportQueries/{queryId}` | This endpoint allows to load a report query resource | find_5 |
+| DELETE | `/api/rest/v2/queryManagement/reportQueries/{queryId}` | This endpoint allows to delete a report query resource | delete_15 |
+| GET | `/api/rest/v2/queryManagement/reportQueries/{queryId}/download` | This API will download result query as csv or excel format. | downloadQueryExecutionResult |
+| POST | `/api/rest/v2/queryManagement/reportQueries/{queryId}/execute` | execute report query | execute |
+| GET | `/api/rest/v2/queryManagement/reportQueries/queryExecutionResult/{queryexecutionResultId}/results` | This API will convert the generate report file to json. | findQueryResult |
+| POST | `/api/rest/v2/queryManagement/reportQueries/verify` | Verify report query | verifyReportQuery |
 
-#### GET /queryManagement/reportQueries
+#### GET /api/rest/v2/queryManagement/reportQueries
 
 - Résumé: Return a list of report queries
 - OperationId: getReportQueries
@@ -52,7 +52,7 @@ Le domaine « ReportQuery » (tag OpenAPI `ReportQuery`) est défini dans `tasks
   - default: list of report queries
     - application/json: ReportQuery (ReportQuery)
 
-#### POST /queryManagement/reportQueries
+#### POST /api/rest/v2/queryManagement/reportQueries
 
 - Résumé: Create a new report query
 - OperationId: createReportQuery
@@ -66,7 +66,7 @@ Le domaine « ReportQuery » (tag OpenAPI `ReportQuery`) est défini dans `tasks
   - 204: Report query successfully created
   - 404: Target entity does not exist
 
-#### PUT /queryManagement/reportQueries/{id}
+#### PUT /api/rest/v2/queryManagement/reportQueries/{id}
 
 - Résumé: This endpoint allows to update an report query
 - OperationId: update_18
@@ -81,7 +81,7 @@ Le domaine « ReportQuery » (tag OpenAPI `ReportQuery`) est défini dans `tasks
   - 200: the report query successfully updated, and the id is returned in the response
   - 404: bad request, report query is not found
 
-#### GET /queryManagement/reportQueries/{queryId}
+#### GET /api/rest/v2/queryManagement/reportQueries/{queryId}
 
 - Résumé: This endpoint allows to load a report query resource
 - OperationId: find_5
@@ -93,7 +93,7 @@ Le domaine « ReportQuery » (tag OpenAPI `ReportQuery`) est défini dans `tasks
   - 200: Query successfully loaded
   - 404: Query does not exist
 
-#### DELETE /queryManagement/reportQueries/{queryId}
+#### DELETE /api/rest/v2/queryManagement/reportQueries/{queryId}
 
 - Résumé: This endpoint allows to delete a report query resource
 - OperationId: delete_15
@@ -105,7 +105,7 @@ Le domaine « ReportQuery » (tag OpenAPI `ReportQuery`) est défini dans `tasks
   - 204: Query successfully deleted
   - 404: Query does not exist
 
-#### GET /queryManagement/reportQueries/{queryId}/download
+#### GET /api/rest/v2/queryManagement/reportQueries/{queryId}/download
 
 - Résumé: This API will download result query as csv or excel format.
 - OperationId: downloadQueryExecutionResult
@@ -120,7 +120,7 @@ Le domaine « ReportQuery » (tag OpenAPI `ReportQuery`) est défini dans `tasks
   - 200: query execution result is downloaded
   - 404: the Report query execution does not exist
 
-#### POST /queryManagement/reportQueries/{queryId}/execute
+#### POST /api/rest/v2/queryManagement/reportQueries/{queryId}/execute
 
 - Résumé: execute report query
 - OperationId: execute
@@ -138,7 +138,7 @@ Le domaine « ReportQuery » (tag OpenAPI `ReportQuery`) est défini dans `tasks
   - 200: Query successfully executed
   - 404: Query does not exists
 
-#### GET /queryManagement/reportQueries/queryExecutionResult/{queryexecutionResultId}/results
+#### GET /api/rest/v2/queryManagement/reportQueries/queryExecutionResult/{queryexecutionResultId}/results
 
 - Résumé: This API will convert the generate report file to json.
 - OperationId: findQueryResult
@@ -150,7 +150,7 @@ Le domaine « ReportQuery » (tag OpenAPI `ReportQuery`) est défini dans `tasks
   - 200: query execution result successfully generated
   - 404: the Report query execution does not exist / the file path is missing / file path doesn't exist / file extension is not CSV format
 
-#### POST /queryManagement/reportQueries/verify
+#### POST /api/rest/v2/queryManagement/reportQueries/verify
 
 - Résumé: Verify report query
 - OperationId: verifyReportQuery

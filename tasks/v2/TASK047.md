@@ -19,10 +19,10 @@ Le domaine « Open Orders » (tag OpenAPI `Open Orders`) est défini dans `tasks
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| PUT | `/ordering/openOrder/{code}` | update  open order | updateOpenOrder |
-| POST | `/ordering/openOrder/{code}/cancel` | cancel open order | cancelOpenOrder |
+| PUT | `/api/rest/v2/ordering/openOrder/{code}` | update  open order | updateOpenOrder |
+| POST | `/api/rest/v2/ordering/openOrder/{code}/cancel` | cancel open order | cancelOpenOrder |
 
-#### PUT /ordering/openOrder/{code}
+#### PUT /api/rest/v2/ordering/openOrder/{code}
 
 - Résumé: update  open order
 - OperationId: updateOpenOrder
@@ -38,7 +38,7 @@ Le domaine « Open Orders » (tag OpenAPI `Open Orders`) est défini dans `tasks
   - 400: Invalid inputs supplied
     - application/json: ApiException (ApiException)
 
-#### POST /ordering/openOrder/{code}/cancel
+#### POST /api/rest/v2/ordering/openOrder/{code}/cancel
 
 - Résumé: cancel open order
 - OperationId: cancelOpenOrder

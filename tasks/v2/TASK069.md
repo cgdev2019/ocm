@@ -19,9 +19,9 @@ Le domaine « Subscription » (tag OpenAPI `Subscription`) est défini dans `tas
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/accountsManagement/subscriptions/{subscriptionCode}/transfer` | This endpoint allows to transfer a subscription to another account | transferSubscription |
+| POST | `/api/rest/v2/accountsManagement/subscriptions/{subscriptionCode}/transfer` | This endpoint allows to transfer a subscription to another account | transferSubscription |
 
-#### POST /accountsManagement/subscriptions/{subscriptionCode}/transfer
+#### POST /api/rest/v2/accountsManagement/subscriptions/{subscriptionCode}/transfer
 
 - Résumé: This endpoint allows to transfer a subscription to another account
 - OperationId: transferSubscription

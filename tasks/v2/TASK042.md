@@ -19,9 +19,9 @@ Le domaine « Media » (tag OpenAPI `Media`) est défini dans `tasks/openceapi.j
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/media/files/upload` | Upload a media file | uploadFile |
+| POST | `/api/rest/v2/media/files/upload` | Upload a media file | uploadFile |
 
-#### POST /media/files/upload
+#### POST /api/rest/v2/media/files/upload
 
 - Résumé: Upload a media file
 - OperationId: uploadFile

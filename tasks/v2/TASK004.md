@@ -19,9 +19,9 @@ Le domaine « AccountOperation » (tag OpenAPI `AccountOperation`) est défini d
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/accountReceivable/accountOperation/assignOperation/{id}` | Assign an account operation to a customer | assignAccountOperation |
+| POST | `/api/rest/v2/accountReceivable/accountOperation/assignOperation/{id}` | Assign an account operation to a customer | assignAccountOperation |
 
-#### POST /accountReceivable/accountOperation/assignOperation/{id}
+#### POST /api/rest/v2/accountReceivable/accountOperation/assignOperation/{id}
 
 - Résumé: Assign an account operation to a customer
 - OperationId: assignAccountOperation

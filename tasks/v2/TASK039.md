@@ -19,22 +19,22 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/billing/invoices` | Return a list of invoices | getInvoices |
-| POST | `/billing/invoices` | Create a new invoice | create_3 |
-| GET | `/billing/invoices/{id}` | Return an invoice | getInvoice |
-| PUT | `/billing/invoices/{id}` | Update an invoice | update_2 |
-| POST | `/billing/invoices/{id}/deletePdfFile` | Delete existing invoice PDF file | deleteInvoicePdf |
-| POST | `/billing/invoices/{id}/deleteXmlFile` | Delete existing invoice XML file | deleteInvoiceXml |
-| GET | `/billing/invoices/{id}/pdf` | Returns the invoice PDF | fetchPdfInvoice |
-| GET | `/billing/invoices/{invoiceType}/{invoiceNumber}` | Return an invoice | getInvoice_1 |
-| GET | `/billing/invoices/{invoiceType}/{invoiceNumber}/matchedOperations` | Get all operations matched to the given invoice | getInvoiceMatchedOperations |
-| POST | `/billing/invoices/addSubTotals` | Add Sub Totals | addSubTotals |
-| POST | `/billing/invoices/basicInvoices` | Create a new basic invoice | createBasicInvoices |
-| POST | `/billing/invoices/deleteSubTotals` | Add Sub Totals | deleteSubTotals |
-| GET | `/billing/invoices/find/{invoiceNumber}` | Return an invoice | find_3 |
-| PATCH | `/billing/invoices/validated/{id}` | Update a validated invoice | updateValidateInvoice |
+| GET | `/api/rest/v2/billing/invoices` | Return a list of invoices | getInvoices |
+| POST | `/api/rest/v2/billing/invoices` | Create a new invoice | create_3 |
+| GET | `/api/rest/v2/billing/invoices/{id}` | Return an invoice | getInvoice |
+| PUT | `/api/rest/v2/billing/invoices/{id}` | Update an invoice | update_2 |
+| POST | `/api/rest/v2/billing/invoices/{id}/deletePdfFile` | Delete existing invoice PDF file | deleteInvoicePdf |
+| POST | `/api/rest/v2/billing/invoices/{id}/deleteXmlFile` | Delete existing invoice XML file | deleteInvoiceXml |
+| GET | `/api/rest/v2/billing/invoices/{id}/pdf` | Returns the invoice PDF | fetchPdfInvoice |
+| GET | `/api/rest/v2/billing/invoices/{invoiceType}/{invoiceNumber}` | Return an invoice | getInvoice_1 |
+| GET | `/api/rest/v2/billing/invoices/{invoiceType}/{invoiceNumber}/matchedOperations` | Get all operations matched to the given invoice | getInvoiceMatchedOperations |
+| POST | `/api/rest/v2/billing/invoices/addSubTotals` | Add Sub Totals | addSubTotals |
+| POST | `/api/rest/v2/billing/invoices/basicInvoices` | Create a new basic invoice | createBasicInvoices |
+| POST | `/api/rest/v2/billing/invoices/deleteSubTotals` | Add Sub Totals | deleteSubTotals |
+| GET | `/api/rest/v2/billing/invoices/find/{invoiceNumber}` | Return an invoice | find_3 |
+| PATCH | `/api/rest/v2/billing/invoices/validated/{id}` | Update a validated invoice | updateValidateInvoice |
 
-#### GET /billing/invoices
+#### GET /api/rest/v2/billing/invoices
 
 - Résumé: Return a list of invoices
 - OperationId: getInvoices
@@ -55,7 +55,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - default: list of invoices
     - application/json: Invoices (Invoices)
 
-#### POST /billing/invoices
+#### POST /api/rest/v2/billing/invoices
 
 - Résumé: Create a new invoice
 - OperationId: create_3
@@ -68,7 +68,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - 200: the Invoice is successfully created
   - 400: bad request when Invoice information contains an error
 
-#### GET /billing/invoices/{id}
+#### GET /api/rest/v2/billing/invoices/{id}
 
 - Résumé: Return an invoice
 - OperationId: getInvoice
@@ -82,7 +82,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - default: the searched invoice
     - application/json: Invoice (Invoice)
 
-#### PUT /billing/invoices/{id}
+#### PUT /api/rest/v2/billing/invoices/{id}
 
 - Résumé: Update an invoice
 - OperationId: update_2
@@ -97,7 +97,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - 200: the Invoice is successfully created
   - 400: bad request when Invoice information contains an error
 
-#### POST /billing/invoices/{id}/deletePdfFile
+#### POST /api/rest/v2/billing/invoices/{id}/deletePdfFile
 
 - Résumé: Delete existing invoice PDF file
 - OperationId: deleteInvoicePdf
@@ -109,7 +109,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - 200: the PDF file successfully deleted
   - 404: The PDF file does not exist on the invoice
 
-#### POST /billing/invoices/{id}/deleteXmlFile
+#### POST /api/rest/v2/billing/invoices/{id}/deleteXmlFile
 
 - Résumé: Delete existing invoice XML file
 - OperationId: deleteInvoiceXml
@@ -121,7 +121,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - 200: the XML file successfully deleted
   - 404: The PDF file does not exist on the invoice
 
-#### GET /billing/invoices/{id}/pdf
+#### GET /api/rest/v2/billing/invoices/{id}/pdf
 
 - Résumé: Returns the invoice PDF
 - OperationId: fetchPdfInvoice
@@ -136,7 +136,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - default: the invoice pdf
     - application/json: Invoice (Invoice)
 
-#### GET /billing/invoices/{invoiceType}/{invoiceNumber}
+#### GET /api/rest/v2/billing/invoices/{invoiceType}/{invoiceNumber}
 
 - Résumé: Return an invoice
 - OperationId: getInvoice_1
@@ -151,7 +151,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - default: the searched invoice
     - application/json: Invoice (Invoice)
 
-#### GET /billing/invoices/{invoiceType}/{invoiceNumber}/matchedOperations
+#### GET /api/rest/v2/billing/invoices/{invoiceType}/{invoiceNumber}/matchedOperations
 
 - Résumé: Get all operations matched to the given invoice
 - OperationId: getInvoiceMatchedOperations
@@ -166,7 +166,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - default: the searched invoice
     - application/json: Invoice (Invoice)
 
-#### POST /billing/invoices/addSubTotals
+#### POST /api/rest/v2/billing/invoices/addSubTotals
 
 - Résumé: Add Sub Totals
 - OperationId: addSubTotals
@@ -179,7 +179,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - 200: the sub totals successfully created, and the id is returned in the response
   - 400: bad request when sub totals information contains an error
 
-#### POST /billing/invoices/basicInvoices
+#### POST /api/rest/v2/billing/invoices/basicInvoices
 
 - Résumé: Create a new basic invoice
 - OperationId: createBasicInvoices
@@ -192,7 +192,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - 200: the basicInvoice successfully created, and the id is returned in the response
   - 400: bad request when basicInvoice information contains an error
 
-#### POST /billing/invoices/deleteSubTotals
+#### POST /api/rest/v2/billing/invoices/deleteSubTotals
 
 - Résumé: Add Sub Totals
 - OperationId: deleteSubTotals
@@ -205,7 +205,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - 200: the sub totals successfully deleted
   - 400: bad request when sub totals is not found
 
-#### GET /billing/invoices/find/{invoiceNumber}
+#### GET /api/rest/v2/billing/invoices/find/{invoiceNumber}
 
 - Résumé: Return an invoice
 - OperationId: find_3
@@ -219,7 +219,7 @@ Le domaine « Invoices » (tag OpenAPI `Invoices`) est défini dans `tasks/openc
   - default: the searched invoice
     - application/json: Invoice (Invoice)
 
-#### PATCH /billing/invoices/validated/{id}
+#### PATCH /api/rest/v2/billing/invoices/validated/{id}
 
 - Résumé: Update a validated invoice
 - OperationId: updateValidateInvoice

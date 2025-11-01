@@ -19,12 +19,12 @@ Le domaine « SecurityDeposit » (tag OpenAPI `SecurityDeposit`) est défini dan
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/securityDeposit` | Create a Security Deposit | create_20 |
-| POST | `/securityDeposit/{id}/payInvoices` | Pay invoice manually with Security Deposit | payInvoices |
-| POST | `/securityDeposit/credit/{id}` | Credit Security Deposit | credit |
-| POST | `/securityDeposit/instantiateSecurityDeposit` | Instantiate Security Deposit | instantiate |
+| POST | `/api/rest/v2/securityDeposit` | Create a Security Deposit | create_20 |
+| POST | `/api/rest/v2/securityDeposit/{id}/payInvoices` | Pay invoice manually with Security Deposit | payInvoices |
+| POST | `/api/rest/v2/securityDeposit/credit/{id}` | Credit Security Deposit | credit |
+| POST | `/api/rest/v2/securityDeposit/instantiateSecurityDeposit` | Instantiate Security Deposit | instantiate |
 
-#### POST /securityDeposit
+#### POST /api/rest/v2/securityDeposit
 
 - Résumé: Create a Security Deposit
 - OperationId: create_20
@@ -37,7 +37,7 @@ Le domaine « SecurityDeposit » (tag OpenAPI `SecurityDeposit`) est défini dan
   - 200: Security deposit was successfully created
   - 400: Bad Request
 
-#### POST /securityDeposit/{id}/payInvoices
+#### POST /api/rest/v2/securityDeposit/{id}/payInvoices
 
 - Résumé: Pay invoice manually with Security Deposit
 - OperationId: payInvoices
@@ -53,7 +53,7 @@ Le domaine « SecurityDeposit » (tag OpenAPI `SecurityDeposit`) est défini dan
   - 400: Bad Request
   - 404: Following security deposit does not exist : {securityDeposit ids}
 
-#### POST /securityDeposit/credit/{id}
+#### POST /api/rest/v2/securityDeposit/credit/{id}
 
 - Résumé: Credit Security Deposit
 - OperationId: credit
@@ -69,7 +69,7 @@ Le domaine « SecurityDeposit » (tag OpenAPI `SecurityDeposit`) est défini dan
   - 400: Bad Request
   - 404: Following security deposit does not exist : {securityDeposit ids}
 
-#### POST /securityDeposit/instantiateSecurityDeposit
+#### POST /api/rest/v2/securityDeposit/instantiateSecurityDeposit
 
 - Résumé: Instantiate Security Deposit
 - OperationId: instantiate

@@ -19,11 +19,11 @@ Le domaine « Collection Plan Status » (tag OpenAPI `Collection Plan Status`) e
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/dunning/collectionPlanStatus` | Create new Collection plan status | create_9 |
-| PUT | `/dunning/collectionPlanStatus/{id}` | Update an existing Collection plan status | update_8 |
-| DELETE | `/dunning/collectionPlanStatus/{id}` | Delete an existing Collection plan status | delete_6 |
+| POST | `/api/rest/v2/dunning/collectionPlanStatus` | Create new Collection plan status | create_9 |
+| PUT | `/api/rest/v2/dunning/collectionPlanStatus/{id}` | Update an existing Collection plan status | update_8 |
+| DELETE | `/api/rest/v2/dunning/collectionPlanStatus/{id}` | Delete an existing Collection plan status | delete_6 |
 
-#### POST /dunning/collectionPlanStatus
+#### POST /api/rest/v2/dunning/collectionPlanStatus
 
 - Résumé: Create new Collection plan status
 - OperationId: create_9
@@ -36,7 +36,7 @@ Le domaine « Collection Plan Status » (tag OpenAPI `Collection Plan Status`) e
   - 200: collection plan status successfully created
   - 404: Dunning with the same code exist
 
-#### PUT /dunning/collectionPlanStatus/{id}
+#### PUT /api/rest/v2/dunning/collectionPlanStatus/{id}
 
 - Résumé: Update an existing Collection plan status
 - OperationId: update_8
@@ -51,7 +51,7 @@ Le domaine « Collection Plan Status » (tag OpenAPI `Collection Plan Status`) e
   - 200: collection plan status successfully updated
   - 404: Collection with dunning code parameter and status doesn't exist
 
-#### DELETE /dunning/collectionPlanStatus/{id}
+#### DELETE /api/rest/v2/dunning/collectionPlanStatus/{id}
 
 - Résumé: Delete an existing Collection plan status
 - OperationId: delete_6

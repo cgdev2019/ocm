@@ -19,11 +19,11 @@ Le domaine « Invoicing » (tag OpenAPI `Invoicing`) est défini dans `tasks/ope
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| PUT | `/billing/invoicing/{billingRunId}/advanceStatus` | Advance the billing run status | advanceStatus |
-| POST | `/billing/invoicing/{billingRunId}/cancelBillingRun` | cancel the billing run | cancelBillingRun |
-| POST | `/billing/invoicing/exceptionalBillingRun` | Create exceptional billing run | createExceptionalBillingRuns |
+| PUT | `/api/rest/v2/billing/invoicing/{billingRunId}/advanceStatus` | Advance the billing run status | advanceStatus |
+| POST | `/api/rest/v2/billing/invoicing/{billingRunId}/cancelBillingRun` | cancel the billing run | cancelBillingRun |
+| POST | `/api/rest/v2/billing/invoicing/exceptionalBillingRun` | Create exceptional billing run | createExceptionalBillingRuns |
 
-#### PUT /billing/invoicing/{billingRunId}/advanceStatus
+#### PUT /api/rest/v2/billing/invoicing/{billingRunId}/advanceStatus
 
 - Résumé: Advance the billing run status
 - OperationId: advanceStatus
@@ -36,7 +36,7 @@ Le domaine « Invoicing » (tag OpenAPI `Invoicing`) est défini dans `tasks/ope
   - 200: Status changed successfully
   - 409: The status should be either NEW, INVOICE_LINES_CREATED , DRAFT_INVOICES , or REJECTED
 
-#### POST /billing/invoicing/{billingRunId}/cancelBillingRun
+#### POST /api/rest/v2/billing/invoicing/{billingRunId}/cancelBillingRun
 
 - Résumé: cancel the billing run
 - OperationId: cancelBillingRun
@@ -49,7 +49,7 @@ Le domaine « Invoicing » (tag OpenAPI `Invoicing`) est défini dans `tasks/ope
   - 404: The billing run does not exists
   - 409: The billing run cannot be cancelled
 
-#### POST /billing/invoicing/exceptionalBillingRun
+#### POST /api/rest/v2/billing/invoicing/exceptionalBillingRun
 
 - Résumé: Create exceptional billing run
 - OperationId: createExceptionalBillingRuns
