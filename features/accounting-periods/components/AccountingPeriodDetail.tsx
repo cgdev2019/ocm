@@ -10,7 +10,7 @@ import {
   useAccountingPeriodStatusMutations,
 } from '@/features/accounting-periods/api';
 import type { AccountingSubPeriodStatusInput } from '@/features/accounting-periods/types';
-import { useRouter } from '@/lib/i18n/navigation';
+import { usePathname, useRouter } from '@/lib/i18n/navigation';
 
 const STATUS_OPTIONS = ['OPEN', 'CLOSED', 'REOPEN'];
 
@@ -21,6 +21,7 @@ export const AccountingPeriodDetail = ({ fiscalYear }: { fiscalYear: string }) =
   const { updateStatus, updateAllUsersStatus, updateRegularUsersStatus } = useAccountingPeriodStatusMutations();
   const t = useTranslations();
   const router = useRouter();
+  const pathname = usePathname();
 
   const [globalStatus, setGlobalStatus] = useState(STATUS_OPTIONS[0]);
   const [allUsersForm, setAllUsersForm] = useState<AccountingSubPeriodStatusInput>({
@@ -88,7 +89,7 @@ export const AccountingPeriodDetail = ({ fiscalYear }: { fiscalYear: string }) =
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="h4">{data.fiscalYear}</Typography>
         <Button
-          onClick={() => router.push(`./${fiscalYear}/edit`)}
+          onClick={() => router.push(`${pathname}/edit`)}
           startIcon={<EditIcon />}
           variant="outlined"
         >

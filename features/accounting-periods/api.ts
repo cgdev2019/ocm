@@ -51,13 +51,18 @@ const extractDtos = (payload: AccountingPeriodListResponse | null | undefined): 
     return [];
   }
 
-  const direct =
-    toArray(payload.accountingPeriods) ||
-    toArray(payload.results) ||
-    toArray(payload.list) ||
-    toArray(payload.data);
-  if (direct.length > 0) {
-    return direct;
+  const topLevelCandidates = [
+    payload.accountingPeriods,
+    payload.results,
+    payload.list,
+    payload.data,
+  ];
+
+  for (const candidate of topLevelCandidates) {
+    const items = toArray(candidate);
+    if (items.length > 0) {
+      return items;
+    }
   }
 
   if (payload && typeof payload === 'object' && 'data' in payload) {
@@ -67,6 +72,7 @@ const extractDtos = (payload: AccountingPeriodListResponse | null | undefined): 
         (data as Record<string, unknown>).accountingPeriods,
         (data as Record<string, unknown>).results,
         (data as Record<string, unknown>).list,
+        (data as Record<string, unknown>).data,
       ];
       for (const candidate of nestedCandidates) {
         const items = toArray(candidate);
