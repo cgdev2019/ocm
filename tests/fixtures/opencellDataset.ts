@@ -160,6 +160,12 @@ import type {
   AttributeMappingDto as ArticleMappingLineAttributeMappingDto,
 } from '@/features/article-mapping-lines/types';
 import type {
+  BillingRuleDetail,
+  BillingRuleDto,
+  BillingRuleFormValues,
+  BillingRuleResponseDto,
+} from '@/features/billing-rules/types';
+import type {
   TitleDetailValues,
   TitleListItem,
   TitleResponseDto,
@@ -1689,6 +1695,31 @@ export const articleMappingLineFormValuesFixture: ArticleMappingLineFormValues =
 
 export const articleMappingLineDetailFixture: ArticleMappingLineDetail = {
   ...articleMappingLineFormValuesFixture,
+};
+
+export const billingRuleDtoFixture: BillingRuleDto = {
+  id: 501,
+  code: 'BILL-RULE-001',
+  criteriaEL: "input.subscription == 'STANDARD'",
+  invoicedBACodeEL: "billingAccount('DEFAULT')",
+  priority: 10,
+};
+
+export const billingRuleFormValuesFixture: BillingRuleFormValues = {
+  id: 501,
+  code: 'BILL-RULE-001',
+  criteriaEL: "input.subscription == 'STANDARD'",
+  invoicedBACodeEL: "billingAccount('DEFAULT')",
+  priority: 10,
+};
+
+export const billingRuleDetailFixture: BillingRuleDetail = {
+  ...billingRuleFormValuesFixture,
+};
+
+export const billingRuleResponseFixture: BillingRuleResponseDto = {
+  actionStatus: actionStatusSuccessFixture,
+  billingRule: billingRuleDtoFixture,
 };
 
 export const accountingArticleListResultFixture: AccountingArticleList = {
