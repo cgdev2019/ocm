@@ -2,8 +2,12 @@ import { z } from 'zod';
 
 const payloadSchema = z.string().min(1, 'forms.required');
 
+const processingModes = ['STOP_ON_FIRST_FAIL', 'PROCESS_ALL', 'ROLLBACK_ON_ERROR'] as const;
+
 export const registerCdrSchema = z.object({
   payload: payloadSchema,
+  isReturnEDRs: z.boolean().optional(),
+  mode: z.enum(processingModes).optional(),
 });
 
 export const processCdrSchema = z.object({
@@ -13,13 +17,14 @@ export const processCdrSchema = z.object({
 export const chargeCdrSchema = z.object({
   payload: payloadSchema,
   isVirtual: z.boolean().optional(),
-  rateTriggeredEdr: z.boolean().optional(),
+  isRateTriggeredEdr: z.boolean().optional(),
   maxDepth: z.number().int().min(0).optional(),
-  returnEDRs: z.boolean().optional(),
-  returnWalletOperations: z.boolean().optional(),
-  returnWalletOperationDetails: z.boolean().optional(),
-  returnCounters: z.boolean().optional(),
-  generateRTs: z.boolean().optional(),
+  isReturnEDRs: z.boolean().optional(),
+  isReturnWalletOperations: z.boolean().optional(),
+  isReturnWalletOperationDetails: z.boolean().optional(),
+  isReturnCounters: z.boolean().optional(),
+  isGenerateRTs: z.boolean().optional(),
+  mode: z.enum(processingModes).optional(),
 });
 
 export const notifyRejectedCdrsSchema = z.object({
@@ -29,6 +34,8 @@ export const notifyRejectedCdrsSchema = z.object({
 
 export const reserveCdrSchema = z.object({
   payload: payloadSchema,
+  isReturnEDRs: z.boolean().optional(),
+  mode: z.enum(processingModes).optional(),
 });
 
 export const reservationActionSchema = z.object({

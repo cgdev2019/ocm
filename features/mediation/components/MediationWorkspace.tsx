@@ -8,9 +8,9 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Checkbox,
   FormControlLabel,
   Grid2 as Grid,
+  MenuItem,
   Snackbar,
   Stack,
   Switch,
@@ -38,10 +38,27 @@ import {
   type ReserveCdrSchema,
 } from '@/features/mediation/schema';
 import type {
+  CdrProcessingMode,
   ChargeCdrSummary,
   ProcessCdrSummary,
   ReservationSummary,
 } from '@/features/mediation/types';
+
+const processingModes: CdrProcessingMode[] = [
+  'STOP_ON_FIRST_FAIL',
+  'PROCESS_ALL',
+  'ROLLBACK_ON_ERROR',
+];
+
+const chargeFlagFields = [
+  'isVirtual',
+  'isRateTriggeredEdr',
+  'isReturnEDRs',
+  'isReturnWalletOperations',
+  'isReturnWalletOperationDetails',
+  'isReturnCounters',
+  'isGenerateRTs',
+] as const;
 
 const PayloadField = ({
   control,
@@ -182,7 +199,7 @@ export const MediationWorkspace = () => {
 
   const registerForm = useForm<RegisterCdrSchema>({
     resolver: zodResolver(registerCdrSchema),
-    defaultValues: { payload: '' },
+    defaultValues: { payload: '', isReturnEDRs: true, mode: 'STOP_ON_FIRST_FAIL' },
   });
 
   const processForm = useForm<ProcessCdrSchema>({
@@ -195,18 +212,19 @@ export const MediationWorkspace = () => {
     defaultValues: {
       payload: '',
       isVirtual: false,
-      rateTriggeredEdr: false,
-      returnEDRs: true,
-      returnWalletOperations: false,
-      returnWalletOperationDetails: false,
-      returnCounters: false,
-      generateRTs: false,
+      isRateTriggeredEdr: false,
+      isReturnEDRs: true,
+      isReturnWalletOperations: false,
+      isReturnWalletOperationDetails: false,
+      isReturnCounters: false,
+      isGenerateRTs: false,
+      mode: 'STOP_ON_FIRST_FAIL',
     },
   });
 
   const reserveForm = useForm<ReserveCdrSchema>({
     resolver: zodResolver(reserveCdrSchema),
-    defaultValues: { payload: '' },
+    defaultValues: { payload: '', isReturnEDRs: true, mode: 'STOP_ON_FIRST_FAIL' },
   });
 
   const reservationActionForm = useForm<ReservationActionSchema>({
@@ -264,6 +282,45 @@ export const MediationWorkspace = () => {
               label={t('forms.mediation.register.payload')}
               error={registerForm.formState.errors.payload ? t(registerForm.formState.errors.payload.message ?? 'forms.required') : undefined}
             />
+            <Grid container spacing={2} alignItems="center">
+              <Grid size={{ xs: 12, md: 6 }}>
+                <Controller
+                  control={registerForm.control}
+                  name="isReturnEDRs"
+                  render={({ field }) => (
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={Boolean(field.value)}
+                          onChange={(_event, checked) => field.onChange(checked)}
+                        />
+                      }
+                      label={t('forms.mediation.shared.returnEDRs')}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <Controller
+                  control={registerForm.control}
+                  name="mode"
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      select
+                      fullWidth
+                      label={t('forms.mediation.shared.mode.label')}
+                    >
+                      {processingModes.map((mode) => (
+                        <MenuItem key={mode} value={mode}>
+                          {t(`forms.mediation.shared.mode.options.${mode}`)}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  )}
+                />
+              </Grid>
+            </Grid>
             <MutationError message={operations.register.isError ? t('forms.error') : undefined} />
             <Box display="flex" gap={2}>
               <Button type="submit" variant="contained" disabled={operations.register.isPending}>
@@ -273,7 +330,7 @@ export const MediationWorkspace = () => {
                 type="button"
                 variant="outlined"
                 onClick={() => {
-                  registerForm.reset({ payload: '' });
+                  registerForm.reset({ payload: '', isReturnEDRs: true, mode: 'STOP_ON_FIRST_FAIL' });
                   operations.register.reset();
                 }}
                 disabled={operations.register.isPending}
@@ -360,9 +417,29 @@ export const MediationWorkspace = () => {
                   )}
                 />
               </Grid>
-              <Grid size={{ xs: 12, md: 8 }}>
+              <Grid size={{ xs: 12, md: 4 }}>
+                <Controller
+                  control={chargeForm.control}
+                  name="mode"
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      select
+                      fullWidth
+                      label={t('forms.mediation.shared.mode.label')}
+                    >
+                      {processingModes.map((mode) => (
+                        <MenuItem key={mode} value={mode}>
+                          {t(`forms.mediation.shared.mode.options.${mode}`)}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  )}
+                />
+              </Grid>
+              <Grid size={{ xs: 12 }}>
                 <Stack direction="row" spacing={2} flexWrap="wrap">
-                  {(['isVirtual', 'rateTriggeredEdr', 'returnEDRs', 'returnWalletOperations', 'returnWalletOperationDetails', 'returnCounters', 'generateRTs'] as const).map((name) => (
+                  {chargeFlagFields.map((name) => (
                     <Controller
                       key={name}
                       control={chargeForm.control}
@@ -395,13 +472,14 @@ export const MediationWorkspace = () => {
                   chargeForm.reset({
                     payload: '',
                     isVirtual: false,
-                    rateTriggeredEdr: false,
-                    returnEDRs: true,
-                    returnWalletOperations: false,
-                    returnWalletOperationDetails: false,
-                    returnCounters: false,
-                    generateRTs: false,
+                    isRateTriggeredEdr: false,
+                    isReturnEDRs: true,
+                    isReturnWalletOperations: false,
+                    isReturnWalletOperationDetails: false,
+                    isReturnCounters: false,
+                    isGenerateRTs: false,
                     maxDepth: undefined,
+                    mode: 'STOP_ON_FIRST_FAIL',
                   });
                   operations.charge.reset();
                   setChargeSummary(null);
@@ -436,6 +514,45 @@ export const MediationWorkspace = () => {
                   label={t('forms.mediation.reservations.payload')}
                   error={reserveForm.formState.errors.payload ? t(reserveForm.formState.errors.payload.message ?? 'forms.required') : undefined}
                 />
+                <Grid container spacing={2} alignItems="center">
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Controller
+                      control={reserveForm.control}
+                      name="isReturnEDRs"
+                      render={({ field }) => (
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={Boolean(field.value)}
+                              onChange={(_event, checked) => field.onChange(checked)}
+                            />
+                          }
+                          label={t('forms.mediation.shared.returnEDRs')}
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Controller
+                      control={reserveForm.control}
+                      name="mode"
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          select
+                          fullWidth
+                          label={t('forms.mediation.shared.mode.label')}
+                        >
+                          {processingModes.map((mode) => (
+                            <MenuItem key={mode} value={mode}>
+                              {t(`forms.mediation.shared.mode.options.${mode}`)}
+                            </MenuItem>
+                          ))}
+                        </TextField>
+                      )}
+                    />
+                  </Grid>
+                </Grid>
                 <MutationError message={operations.reserve.isError ? t('forms.error') : undefined} />
                 <Box display="flex" gap={2}>
                   <Button type="submit" variant="contained" disabled={operations.reserve.isPending}>
@@ -445,7 +562,7 @@ export const MediationWorkspace = () => {
                     type="button"
                     variant="outlined"
                     onClick={() => {
-                      reserveForm.reset({ payload: '' });
+                      reserveForm.reset({ payload: '', isReturnEDRs: true, mode: 'STOP_ON_FIRST_FAIL' });
                       operations.reserve.reset();
                     }}
                     disabled={operations.reserve.isPending}

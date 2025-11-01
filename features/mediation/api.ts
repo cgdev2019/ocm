@@ -2,14 +2,17 @@ import { useMemo } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { getApiClient } from '@/lib/api/client';
 import { assertActionSuccess, unwrapResponse } from '@/lib/api/helpers';
-import type { ActionStatus } from '@/features/customers/types';
+import type { ActionStatus } from '@/lib/api/helpers';
 import type {
   ChargeCdrFormValues,
   ChargeCdrResponseDto,
   ChargeCdrSummary,
+  ChargeCdrListInputRequest,
+  ChargeCdrListResult,
   CreateCdrFormValues,
   CdrDto,
   CdrListDto,
+  CdrListInputRequest,
   NotifyRejectedCdrsFormValues,
   PrepaidReservationDto,
   ProcessCdrFormValues,
@@ -28,15 +31,116 @@ const trimLines = (value: string): string[] =>
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
 
-const adaptChargeResponse = (payload: ChargeCdrResponseDto | undefined): ChargeCdrSummary => ({
-  message: payload?.actionStatus?.message ?? undefined,
-  amountWithoutTax: payload?.amountWithoutTax ?? undefined,
-  amountTax: payload?.amountTax ?? undefined,
-  amountWithTax: payload?.amountWithTax ?? undefined,
-  walletOperationCount: payload?.walletOperationCount ?? undefined,
-  reservationIds: payload?.reservationIds ?? undefined,
-  edrIds: payload?.edrIds ?? undefined,
-});
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === 'object' && value !== null;
+
+const isActionStatusLike = (value: unknown): value is ActionStatus =>
+  isRecord(value) && typeof value.status === 'string';
+
+const findActionStatus = (payload: unknown): ActionStatus | undefined => {
+  const queue: unknown[] = [payload];
+  const visited = new Set<unknown>();
+
+  while (queue.length > 0) {
+    const current = queue.shift();
+
+    if (!current || visited.has(current)) {
+      continue;
+    }
+
+    visited.add(current);
+
+    if (isActionStatusLike(current)) {
+      return current;
+    }
+
+    if (Array.isArray(current)) {
+      queue.push(...current);
+      continue;
+    }
+
+    if (isRecord(current)) {
+      queue.push(...Object.values(current));
+    }
+  }
+
+  return undefined;
+};
+
+const extractActionStatusMessage = (payload: unknown, errorMessage: string): string | undefined => {
+  const status = findActionStatus(payload);
+  if (status) {
+    assertActionSuccess(status, errorMessage);
+    return status.message ?? undefined;
+  }
+
+  return undefined;
+};
+
+const adaptChargeResponse = (
+  payload: ChargeCdrResponseDto | ChargeCdrListResult | undefined,
+  errorMessage: string,
+): ChargeCdrSummary => {
+  if (!payload) {
+    return {
+      message: undefined,
+      amountWithoutTax: undefined,
+      amountTax: undefined,
+      amountWithTax: undefined,
+      walletOperationCount: undefined,
+      reservationIds: undefined,
+      edrIds: undefined,
+    } satisfies ChargeCdrSummary;
+  }
+
+  const listResult = payload as ChargeCdrListResult;
+
+  if (Array.isArray(listResult.chargedCDRs)) {
+    const firstCharge = listResult.chargedCDRs.find(
+      (item): item is ChargeCdrResponseDto => Boolean(item),
+    );
+
+    if (listResult.actionStatus) {
+      assertActionSuccess(listResult.actionStatus, errorMessage);
+    }
+
+    if (firstCharge?.actionStatus) {
+      assertActionSuccess(firstCharge.actionStatus, errorMessage);
+    }
+
+    return {
+      message: listResult.actionStatus?.message ?? firstCharge?.actionStatus?.message ?? undefined,
+      amountWithoutTax:
+        (typeof listResult.amountWithoutTax === 'number' ? listResult.amountWithoutTax : undefined) ??
+        (firstCharge?.amountWithoutTax ?? undefined),
+      amountTax:
+        (typeof listResult.amountTax === 'number' ? listResult.amountTax : undefined) ??
+        (firstCharge?.amountTax ?? undefined),
+      amountWithTax:
+        (typeof listResult.amountWithTax === 'number' ? listResult.amountWithTax : undefined) ??
+        (firstCharge?.amountWithTax ?? undefined),
+      walletOperationCount:
+        (typeof listResult.walletOperationCount === 'number'
+          ? listResult.walletOperationCount
+          : undefined) ?? firstCharge?.walletOperationCount ?? undefined,
+      reservationIds: firstCharge?.reservationIds ?? undefined,
+      edrIds: firstCharge?.edrIds ?? undefined,
+    } satisfies ChargeCdrSummary;
+  }
+
+  const dto = payload as ChargeCdrResponseDto;
+  assertActionSuccess(dto.actionStatus, errorMessage);
+
+  return {
+    message: dto.actionStatus?.message ?? undefined,
+    amountWithoutTax: dto.amountWithoutTax ?? undefined,
+    amountTax: dto.amountTax ?? undefined,
+    amountWithTax: dto.amountWithTax ?? undefined,
+    walletOperationCount: dto.walletOperationCount ?? undefined,
+    reservationIds: dto.reservationIds ?? undefined,
+    edrIds: dto.edrIds ?? undefined,
+  } satisfies ChargeCdrSummary;
+};
 
 const adaptProcessResponse = (payload: ProcessCdrResponseDto | undefined): ProcessCdrSummary => {
   const items = payload?.listProcessCdrDto ?? [];
@@ -79,18 +183,49 @@ const toCdrDto = (values: CreateCdrFormValues): CdrDto => ({
   extraParam: values.extraParam,
 });
 
+const toCdrListInput = (
+  values: RegisterCdrFormValues | ReserveCdrFormValues,
+): CdrListInputRequest => ({
+  cdrs: trimLines(values.payload),
+  ...(values.isReturnEDRs !== undefined ? { isReturnEDRs: values.isReturnEDRs } : {}),
+  ...(values.mode ? { mode: values.mode } : {}),
+});
+
+const toChargeCdrListInput = (values: ChargeCdrFormValues): ChargeCdrListInputRequest => ({
+  cdrs: trimLines(values.payload),
+  ...(values.mode ? { mode: values.mode } : {}),
+  ...(values.isVirtual !== undefined ? { isVirtual: values.isVirtual } : {}),
+  ...(values.isRateTriggeredEdr !== undefined
+    ? { isRateTriggeredEdr: values.isRateTriggeredEdr }
+    : {}),
+  ...(typeof values.maxDepth === 'number' ? { maxDepth: values.maxDepth } : {}),
+  ...(values.isReturnEDRs !== undefined ? { isReturnEDRs: values.isReturnEDRs } : {}),
+  ...(values.isReturnWalletOperations !== undefined
+    ? { isReturnWalletOperations: values.isReturnWalletOperations }
+    : {}),
+  ...(values.isReturnWalletOperationDetails !== undefined
+    ? { isReturnWalletOperationDetails: values.isReturnWalletOperationDetails }
+    : {}),
+  ...(values.isReturnCounters !== undefined ? { isReturnCounters: values.isReturnCounters } : {}),
+  ...(values.isGenerateRTs !== undefined ? { isGenerateRTs: values.isGenerateRTs } : {}),
+});
+
 export const useMediationOperations = () => {
   const apiClient = getApiClient();
 
   const register = useMutation({
     mutationFn: async (values: RegisterCdrFormValues) => {
-      const result = await apiClient.POST('/api/rest/billing/mediation/registerCdrList', { body: values.payload });
-      const payload = unwrapResponse<ActionStatus>(
-        { data: result.data, error: result.error },
+      const dto = toCdrListInput(values);
+      const result = await apiClient.POST(
+        '/api/rest/v2/mediation/cdrs/registerCdrList' as never,
+        { body: dto } as never,
+      );
+      const payload = unwrapResponse<unknown>(
+        { data: (result.data ?? null) as unknown, error: result.error },
         'Unable to register CDR list',
       );
-      assertActionSuccess(payload, 'Register CDR list failed');
-      return { message: payload.message };
+      const message = extractActionStatusMessage(payload, 'Register CDR list failed');
+      return { message };
     },
   });
 
@@ -108,35 +243,37 @@ export const useMediationOperations = () => {
 
   const charge = useMutation({
     mutationFn: async (values: ChargeCdrFormValues) => {
-      const { payload, maxDepth, ...flags } = values;
-      const result = await apiClient.POST('/api/rest/billing/mediation/chargeCdr', {
-        params: {
-          query: {
-            ...Object.fromEntries(
-              Object.entries(flags).filter(([, value]) => value !== undefined && value !== null),
-            ),
-            ...(typeof maxDepth === 'number' ? { maxDepth } : {}),
-          },
-        },
-        body: payload,
-      });
-      const response = unwrapResponse<ChargeCdrResponseDto>(
-        { data: result.data, error: result.error },
-        'Unable to charge CDR',
+      const dto = toChargeCdrListInput(values);
+      const result = await apiClient.POST(
+        '/api/rest/v2/mediation/cdrs/chargeCdrList' as never,
+        { body: dto } as never,
       );
-      assertActionSuccess(response.actionStatus, 'Charge CDR failed');
-      return adaptChargeResponse(response);
+      const response = unwrapResponse<ChargeCdrResponseDto | ChargeCdrListResult | undefined>(
+        {
+          data: (result.data ?? null) as
+            | ChargeCdrResponseDto
+            | ChargeCdrListResult
+            | undefined,
+          error: result.error,
+        },
+        'Unable to charge CDR list',
+      );
+      return adaptChargeResponse(response, 'Charge CDR list failed');
     },
   });
 
   const reserve = useMutation({
     mutationFn: async (values: ReserveCdrFormValues) => {
-      const result = await apiClient.POST('/api/rest/billing/mediation/reserveCdr', { body: values.payload });
+      const dto = toCdrListInput(values);
+      const result = await apiClient.POST(
+        '/api/rest/v2/mediation/cdrs/reserveCdrList' as never,
+        { body: dto } as never,
+      );
       const payload = unwrapResponse<CdrReservationResponseDto>(
         { data: result.data, error: result.error },
-        'Unable to reserve CDR',
+        'Unable to reserve CDR list',
       );
-      assertActionSuccess(payload.actionStatus, 'Reserve CDR failed');
+      assertActionSuccess(payload.actionStatus, 'Reserve CDR list failed');
       return adaptReservationResponse(payload);
     },
   });

@@ -32,7 +32,9 @@ describe('useMediationOperations', () => {
   it('registers a CDR payload', async () => {
     const apiClient = { POST: jest.fn() } as Partial<ApiClient>;
     mockedGetApiClient.mockReturnValue(apiClient as ApiClient);
-    (apiClient.POST as jest.Mock).mockResolvedValue({ data: { status: 'SUCCESS', message: 'Registered' } });
+    (apiClient.POST as jest.Mock).mockResolvedValue({
+      data: { actionStatus: { status: 'SUCCESS', message: 'Registered' } },
+    });
 
     const { wrapper } = renderWithClient();
     const { result } = renderHook(() => useMediationOperations(), { wrapper });
@@ -42,8 +44,12 @@ describe('useMediationOperations', () => {
       expect(response).toEqual({ message: 'Registered' });
     });
 
-    expect(apiClient.POST).toHaveBeenCalledWith('/api/rest/billing/mediation/registerCdrList', {
-      body: mediationRegisterFixture.payload,
+    expect(apiClient.POST).toHaveBeenCalledWith('/api/rest/v2/mediation/cdrs/registerCdrList', {
+      body: {
+        cdrs: ['CDR|REGISTER|demo'],
+        isReturnEDRs: true,
+        mode: 'PROCESS_ALL',
+      },
     });
   });
 
@@ -60,20 +66,19 @@ describe('useMediationOperations', () => {
       expect(response).toEqual(mediationChargeSummaryFixture);
     });
 
-    expect(apiClient.POST).toHaveBeenCalledWith('/api/rest/billing/mediation/chargeCdr', {
-      params: {
-        query: {
-          isVirtual: true,
-          rateTriggeredEdr: true,
-          returnEDRs: true,
-          returnWalletOperations: false,
-          returnWalletOperationDetails: false,
-          returnCounters: false,
-          generateRTs: false,
-          maxDepth: 3,
-        },
+    expect(apiClient.POST).toHaveBeenCalledWith('/api/rest/v2/mediation/cdrs/chargeCdrList', {
+      body: {
+        cdrs: ['CDR|CHARGE|demo'],
+        isVirtual: true,
+        isRateTriggeredEdr: true,
+        maxDepth: 3,
+        isReturnEDRs: true,
+        isReturnWalletOperations: false,
+        isReturnWalletOperationDetails: false,
+        isReturnCounters: false,
+        isGenerateRTs: false,
+        mode: 'STOP_ON_FIRST_FAIL',
       },
-      body: mediationChargeFormFixture.payload,
     });
   });
 
@@ -94,8 +99,12 @@ describe('useMediationOperations', () => {
       });
     });
 
-    expect(apiClient.POST).toHaveBeenCalledWith('/api/rest/billing/mediation/reserveCdr', {
-      body: mediationReservationFormFixture.payload,
+    expect(apiClient.POST).toHaveBeenCalledWith('/api/rest/v2/mediation/cdrs/reserveCdrList', {
+      body: {
+        cdrs: ['CDR|RESERVE|demo'],
+        isReturnEDRs: true,
+        mode: 'ROLLBACK_ON_ERROR',
+      },
     });
   });
 });

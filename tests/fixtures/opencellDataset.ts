@@ -1735,18 +1735,21 @@ export const accountingArticleListResultFixture: AccountingArticleList = {
 
 export const mediationRegisterFixture: RegisterCdrFormValues = {
   payload: 'CDR|REGISTER|demo',
+  isReturnEDRs: true,
+  mode: 'PROCESS_ALL',
 };
 
 export const mediationChargeFormFixture: ChargeCdrFormValues = {
   payload: 'CDR|CHARGE|demo',
   isVirtual: true,
-  rateTriggeredEdr: true,
+  isRateTriggeredEdr: true,
   maxDepth: 3,
-  returnEDRs: true,
-  returnWalletOperations: false,
-  returnWalletOperationDetails: false,
-  returnCounters: false,
-  generateRTs: false,
+  isReturnEDRs: true,
+  isReturnWalletOperations: false,
+  isReturnWalletOperationDetails: false,
+  isReturnCounters: false,
+  isGenerateRTs: false,
+  mode: 'STOP_ON_FIRST_FAIL',
 };
 
 export const mediationChargeResponseFixture: ChargeCdrResponseDto = {
@@ -1771,6 +1774,8 @@ export const mediationChargeSummaryFixture: ChargeCdrSummary = {
 
 export const mediationReservationFormFixture: ReserveCdrFormValues = {
   payload: 'CDR|RESERVE|demo',
+  isReturnEDRs: true,
+  mode: 'ROLLBACK_ON_ERROR',
 };
 
 export const mediationReservationResponseFixture: CdrReservationResponseDto = {

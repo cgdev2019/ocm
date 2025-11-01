@@ -766,6 +766,17 @@
       "empty": "No data returned by the service."
     },
     "mediation": {
+      "shared": {
+        "returnEDRs": "Return EDR identifiers",
+        "mode": {
+          "label": "Processing mode",
+          "options": {
+            "STOP_ON_FIRST_FAIL": "Stop on first failure",
+            "PROCESS_ALL": "Process all",
+            "ROLLBACK_ON_ERROR": "Rollback on error"
+          }
+        }
+      },
       "register": {
         "title": "Register CDR list",
         "subtitle": "Send raw CDR lines to create EDR entries.",
@@ -797,12 +808,12 @@
         "edrs": "EDR IDs: {ids}",
         "flags": {
           "isVirtual": "Virtual",
-          "rateTriggeredEdr": "Rate triggered EDR",
-          "returnEDRs": "Return EDRs",
-          "returnWalletOperations": "Return wallet operations",
-          "returnWalletOperationDetails": "Return wallet details",
-          "returnCounters": "Return counters",
-          "generateRTs": "Generate rated transactions"
+          "isRateTriggeredEdr": "Rate triggered EDR",
+          "isReturnEDRs": "Return EDRs",
+          "isReturnWalletOperations": "Return wallet operations",
+          "isReturnWalletOperationDetails": "Return wallet details",
+          "isReturnCounters": "Return counters",
+          "isGenerateRTs": "Generate rated transactions"
         }
       },
       "reservations": {

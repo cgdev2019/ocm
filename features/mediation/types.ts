@@ -1,4 +1,5 @@
 import type { components } from '@/lib/api/generated/schema';
+import type { ActionStatus } from '@/lib/api/helpers';
 
 export type ChargeCdrResponseDto = components['schemas']['ChargeCDRResponseDto'];
 export type ProcessCdrResponseDto = components['schemas']['ProcessCDRResponseDto'];
@@ -7,8 +8,12 @@ export type PrepaidReservationDto = components['schemas']['PrepaidReservationDto
 export type CdrDto = components['schemas']['CdrDto'];
 export type CdrListDto = components['schemas']['CdrListDto'];
 
+export type CdrProcessingMode = 'STOP_ON_FIRST_FAIL' | 'PROCESS_ALL' | 'ROLLBACK_ON_ERROR';
+
 export type RegisterCdrFormValues = {
   payload: string;
+  isReturnEDRs?: boolean;
+  mode?: CdrProcessingMode;
 };
 
 export type ProcessCdrFormValues = {
@@ -18,13 +23,14 @@ export type ProcessCdrFormValues = {
 export type ChargeCdrFormValues = {
   payload: string;
   isVirtual?: boolean;
-  rateTriggeredEdr?: boolean;
+  isRateTriggeredEdr?: boolean;
   maxDepth?: number;
-  returnEDRs?: boolean;
-  returnWalletOperations?: boolean;
-  returnWalletOperationDetails?: boolean;
-  returnCounters?: boolean;
-  generateRTs?: boolean;
+  isReturnEDRs?: boolean;
+  isReturnWalletOperations?: boolean;
+  isReturnWalletOperationDetails?: boolean;
+  isReturnCounters?: boolean;
+  isGenerateRTs?: boolean;
+  mode?: CdrProcessingMode;
 };
 
 export type NotifyRejectedCdrsFormValues = {
@@ -39,6 +45,8 @@ export type ReservationActionFormValues = {
 
 export type ReserveCdrFormValues = {
   payload: string;
+  isReturnEDRs?: boolean;
+  mode?: CdrProcessingMode;
 };
 
 export type CreateCdrFormValues = {
@@ -72,4 +80,29 @@ export type ReservationSummary = {
   message?: string;
   reservationId?: number;
   availableQuantity?: number;
+};
+
+export type CdrListInputRequest = {
+  cdrs: string[];
+  isReturnEDRs?: boolean;
+  mode?: CdrProcessingMode;
+};
+
+export type ChargeCdrListInputRequest = CdrListInputRequest & {
+  isVirtual?: boolean;
+  isRateTriggeredEdr?: boolean;
+  isReturnWalletOperations?: boolean;
+  isReturnWalletOperationDetails?: boolean;
+  isReturnCounters?: boolean;
+  isGenerateRTs?: boolean;
+  maxDepth?: number;
+};
+
+export type ChargeCdrListResult = {
+  actionStatus?: ActionStatus | null;
+  amountWithoutTax?: number | null;
+  amountTax?: number | null;
+  amountWithTax?: number | null;
+  walletOperationCount?: number | null;
+  chargedCDRs?: (ChargeCdrResponseDto | null | undefined)[] | null;
 };
