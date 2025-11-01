@@ -29,6 +29,7 @@
 - 2025-11-20 : Espace de travail Rated Transactions ajouté (hooks TanStack Query, liste paginée, tiroir de détail et flux d'annulation) + fixtures, handlers MSW et tests ciblés.
 - 2025-11-21 : `npm run build` repasse au vert (suppression de `next/font` externe et matcher proxy statique pour Next 16).
 - 2025-11-01 : Tests ciblés Invoicing (`npm run test -- --runTestsByPath features/invoicing/__tests__/useInvoicingOperations.test.tsx features/invoicing/__tests__/useInvoicingVersion.test.tsx`) — OK.
+- 2025-11-21 : Pagination Invoicing* alignée sur `PagingAndFiltering` + fixtures mises à jour ; `npm run typecheck` ✅.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).

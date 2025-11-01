@@ -47,7 +47,7 @@ export const useInvoicingPlanItems = () =>
     queryFn: async () => {
       const apiClient = getApiClient();
       const result = await apiClient.POST('/api/rest/billing/invoicingPlanItems/list', {
-        body: { paging: { offset: 0, limit: DEFAULT_INVOICING_PLAN_ITEM_PAGE_SIZE } },
+        body: { offset: 0, limit: DEFAULT_INVOICING_PLAN_ITEM_PAGE_SIZE },
       });
       const payload = unwrapResponse<InvoicingPlanItemsResponseDto>(
         { data: result.data, error: result.error },
