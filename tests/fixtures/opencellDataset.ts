@@ -15,6 +15,16 @@ import type {
   AuxiliaryAccountDetail,
   AuxiliaryAccountDto,
 } from '@/features/auxiliary-codes/types';
+import type {
+  EmailTemplateDetail,
+  EmailTemplateDto,
+  EmailTemplateFormValues,
+  EmailTemplateResponseDto,
+  SMSTemplateDetail,
+  SMSTemplateDto,
+  SMSTemplateFormValues,
+  SMSTemplateResponseDto,
+} from '@/features/communication/types';
 import type { InvoiceDto } from '@/features/invoices/types';
 import type { GetTaxesResponse, TaxFormValues, TaxListItem } from '@/features/taxes/types';
 import type {
@@ -2443,6 +2453,183 @@ export const massPauseCollectionPlanFixture: MassPauseDunningCollectionPlan = {
 export const massStopCollectionPlanFixture: MassStopDunningCollectionPlan = {
   collectionPlans: [{ code: 'CP-001' }, { code: 'CP-002' }],
   dunningStopReason: { code: 'STOP-001' },
+};
+
+export const emailTemplateDtoFixture: EmailTemplateDto = {
+  id: 1201,
+  code: 'INV-EMAIL',
+  description: 'Invoice email template',
+  updatedCode: 'INV-EMAIL-V2',
+  media: 'EMAIL',
+  tagStartDelimiter: ' {{ ',
+  tagEndDelimiter: ' }} ',
+  startDate: '2025-01-01T00:00:00.000Z',
+  endDate: '2025-12-31T23:59:59.000Z',
+  type: 'INVOICE',
+  textContent: ' Hello {{customer}} ',
+  translatedTextContent: [
+    {
+      languageCode: ' fr ',
+      textContent: ' Bonjour {{customer}} ',
+    },
+  ],
+  subject: ' Invoice {{invoiceNumber}} ',
+  htmlContent: ' <p>Hello {{customer}}</p> ',
+  translatedHtmlContent: [
+    {
+      languageCode: ' fr ',
+      htmlContent: ' <p>Bonjour {{customer}}</p> ',
+    },
+  ],
+  translatedSubject: [
+    {
+      languageCode: ' fr ',
+      subject: ' Facture {{invoiceNumber}} ',
+      textContent: ' Facture {{invoiceNumber}} ',
+    },
+  ],
+};
+
+export const emailTemplateDetailFixture: EmailTemplateDetail = {
+  id: 1201,
+  code: 'INV-EMAIL',
+  description: 'Invoice email template',
+  media: 'EMAIL',
+  tagStartDelimiter: '{{',
+  tagEndDelimiter: '}}',
+  startDate: '2025-01-01T00:00:00.000Z',
+  endDate: '2025-12-31T23:59:59.000Z',
+  type: 'INVOICE',
+  textContent: 'Hello {{customer}}',
+  subject: 'Invoice {{invoiceNumber}}',
+  htmlContent: '<p>Hello {{customer}}</p>',
+  translatedTextContent: [
+    {
+      languageCode: 'fr',
+      textContent: 'Bonjour {{customer}}',
+    },
+  ],
+  translatedHtmlContent: [
+    {
+      languageCode: 'fr',
+      htmlContent: '<p>Bonjour {{customer}}</p>',
+    },
+  ],
+  translatedSubject: [
+    {
+      languageCode: 'fr',
+      subject: 'Facture {{invoiceNumber}}',
+      textContent: 'Facture {{invoiceNumber}}',
+    },
+  ],
+  updatedCode: 'INV-EMAIL-V2',
+};
+
+export const emailTemplateFormValuesFixture: EmailTemplateFormValues = {
+  id: 1201,
+  code: 'INV-EMAIL',
+  description: 'Invoice email template',
+  media: 'EMAIL',
+  tagStartDelimiter: '{{',
+  tagEndDelimiter: '}}',
+  startDate: '2025-01-01T00:00:00.000Z',
+  endDate: '2025-12-31T23:59:59.000Z',
+  type: 'INVOICE',
+  textContent: 'Hello {{customer}}',
+  subject: 'Invoice {{invoiceNumber}}',
+  htmlContent: '<p>Hello {{customer}}</p>',
+  translatedTextContent: [
+    {
+      languageCode: 'fr',
+      textContent: 'Bonjour {{customer}}',
+    },
+  ],
+  translatedHtmlContent: [
+    {
+      languageCode: 'fr',
+      htmlContent: '<p>Bonjour {{customer}}</p>',
+    },
+  ],
+  translatedSubject: [
+    {
+      languageCode: 'fr',
+      subject: 'Facture {{invoiceNumber}}',
+      textContent: 'Facture {{invoiceNumber}}',
+    },
+  ],
+};
+
+export const emailTemplateResponseFixture: EmailTemplateResponseDto = {
+  actionStatus: actionStatusSuccessFixture,
+  data: {
+    emailTemplate: emailTemplateDtoFixture,
+  },
+};
+
+export const smsTemplateDtoFixture: SMSTemplateDto = {
+  id: 2201,
+  code: 'PAYMENT-SMS',
+  description: 'Payment reminder SMS',
+  updatedCode: 'PAYMENT-SMS-V2',
+  media: 'SMS',
+  tagStartDelimiter: '<<',
+  tagEndDelimiter: '>>',
+  startDate: '2025-02-01T00:00:00.000Z',
+  endDate: '2025-06-30T23:59:59.000Z',
+  type: 'DUNNING',
+  textContent: ' Rappel de paiement {{customer}} ',
+  translatedTextContent: [
+    {
+      languageCode: ' en ',
+      textContent: ' Payment reminder {{customer}} ',
+    },
+  ],
+};
+
+export const smsTemplateDetailFixture: SMSTemplateDetail = {
+  id: 2201,
+  code: 'PAYMENT-SMS',
+  description: 'Payment reminder SMS',
+  media: 'SMS',
+  tagStartDelimiter: '<<',
+  tagEndDelimiter: '>>',
+  startDate: '2025-02-01T00:00:00.000Z',
+  endDate: '2025-06-30T23:59:59.000Z',
+  type: 'DUNNING',
+  textContent: 'Rappel de paiement {{customer}}',
+  translatedTextContent: [
+    {
+      languageCode: 'en',
+      textContent: 'Payment reminder {{customer}}',
+    },
+  ],
+  updatedCode: 'PAYMENT-SMS-V2',
+};
+
+export const smsTemplateFormValuesFixture: SMSTemplateFormValues = {
+  id: 2201,
+  code: 'PAYMENT-SMS',
+  description: 'Payment reminder SMS',
+  media: 'SMS',
+  tagStartDelimiter: '<<',
+  tagEndDelimiter: '>>',
+  startDate: '2025-02-01T00:00:00.000Z',
+  endDate: '2025-06-30T23:59:59.000Z',
+  type: 'DUNNING',
+  textContent: 'Rappel de paiement {{customer}}',
+  translatedTextContent: [
+    {
+      languageCode: 'en',
+      textContent: 'Payment reminder {{customer}}',
+    },
+  ],
+};
+
+export const smsTemplateResponseFixture: SMSTemplateResponseDto = {
+  actionStatus: actionStatusSuccessFixture,
+  result: {
+    data: smsTemplateDtoFixture,
+  },
 };
 
 export const massSwitchCollectionPlanFixture: MassSwitchDunningCollectionPlan = {
