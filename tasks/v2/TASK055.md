@@ -19,11 +19,11 @@ Le domaine « Price Plan » (tag OpenAPI `Price Plan`) est défini dans `tasks/o
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/catalog/priceManagement/pricePlanMatrixLines/import` | Import grid data in price versions | importPricePlanMatrixLines |
-| POST | `/catalog/priceManagement/pricePlanMatrixVersions/import` | Import price plan versions | importPricePlanMatrixVersions |
-| GET | `/pricePlans/{pricePlanMatrixCode}/pricePlanVersions/{pricePlanMatrixVersion}/checkIfUsed` | Check if the current price plan version is used | getDiscountPlanItem_1 |
+| POST | `/api/rest/v2/catalog/priceManagement/pricePlanMatrixLines/import` | Import grid data in price versions | importPricePlanMatrixLines |
+| POST | `/api/rest/v2/catalog/priceManagement/pricePlanMatrixVersions/import` | Import price plan versions | importPricePlanMatrixVersions |
+| GET | `/api/rest/v2/pricePlans/{pricePlanMatrixCode}/pricePlanVersions/{pricePlanMatrixVersion}/checkIfUsed` | Check if the current price plan version is used | getDiscountPlanItem_1 |
 
-#### POST /catalog/priceManagement/pricePlanMatrixLines/import
+#### POST /api/rest/v2/catalog/priceManagement/pricePlanMatrixLines/import
 
 - Résumé: Import grid data in price versions
 - OperationId: importPricePlanMatrixLines
@@ -38,7 +38,7 @@ Le domaine « Price Plan » (tag OpenAPI `Price Plan`) est défini dans `tasks/o
   - 404: PricePlanMatrixColumn with code={columnCode} user1 does not exists.
   - 409: A line having similar values already exists!
 
-#### POST /catalog/priceManagement/pricePlanMatrixVersions/import
+#### POST /api/rest/v2/catalog/priceManagement/pricePlanMatrixVersions/import
 
 - Résumé: Import price plan versions
 - OperationId: importPricePlanMatrixVersions
@@ -52,7 +52,7 @@ Le domaine « Price Plan » (tag OpenAPI `Price Plan`) est défini dans `tasks/o
   - 400: The following parameters are required or contain invalid values: fileToImport
   - 500: Error occured while importing price plan versions
 
-#### GET /pricePlans/{pricePlanMatrixCode}/pricePlanVersions/{pricePlanMatrixVersion}/checkIfUsed
+#### GET /api/rest/v2/pricePlans/{pricePlanMatrixCode}/pricePlanVersions/{pricePlanMatrixVersion}/checkIfUsed
 
 - Résumé: Check if the current price plan version is used
 - OperationId: getDiscountPlanItem_1

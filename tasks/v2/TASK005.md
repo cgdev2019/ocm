@@ -19,9 +19,9 @@ Le domaine « AgedReceivables » (tag OpenAPI `AgedReceivables`) est défini dan
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/standardReports/AgedReceivables` | Return aged balance | getAgedReceivables |
+| GET | `/api/rest/v2/standardReports/AgedReceivables` | Return aged balance | getAgedReceivables |
 
-#### GET /standardReports/AgedReceivables
+#### GET /api/rest/v2/standardReports/AgedReceivables
 
 - Résumé: Return aged balance
 - OperationId: getAgedReceivables

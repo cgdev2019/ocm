@@ -19,9 +19,9 @@ Le domaine « export data » (tag OpenAPI `export data`) est défini dans `tasks
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/importExport/exportData` | export data | exportData |
+| POST | `/api/rest/v2/importExport/exportData` | export data | exportData |
 
-#### POST /importExport/exportData
+#### POST /api/rest/v2/importExport/exportData
 
 - Résumé: export data
 - OperationId: exportData

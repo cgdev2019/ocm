@@ -19,10 +19,10 @@ Le domaine « AccountingCodeMapping » (tag OpenAPI `AccountingCodeMapping`) est
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| PUT | `/articles/{accountingArticleCode}/accountingCodeMapping` | This endpoint update accounting code mapping | updateAccountingCodeMapping |
-| POST | `/articles/accountingCodeMapping` | This endpoint create accounting code mapping | createAccountingCodeMapping |
+| PUT | `/api/rest/v2/articles/{accountingArticleCode}/accountingCodeMapping` | This endpoint update accounting code mapping | updateAccountingCodeMapping |
+| POST | `/api/rest/v2/articles/accountingCodeMapping` | This endpoint create accounting code mapping | createAccountingCodeMapping |
 
-#### PUT /articles/{accountingArticleCode}/accountingCodeMapping
+#### PUT /api/rest/v2/articles/{accountingArticleCode}/accountingCodeMapping
 
 - Résumé: This endpoint update accounting code mapping
 - OperationId: updateAccountingCodeMapping
@@ -37,7 +37,7 @@ Le domaine « AccountingCodeMapping » (tag OpenAPI `AccountingCodeMapping`) est
   - 200: Accounting code mapping successfully updated, and the id is returned in the response
   - 404: Entity not found
 
-#### POST /articles/accountingCodeMapping
+#### POST /api/rest/v2/articles/accountingCodeMapping
 
 - Résumé: This endpoint create accounting code mapping
 - OperationId: createAccountingCodeMapping

@@ -19,9 +19,9 @@ Le domaine « Price Plan Matrix » (tag OpenAPI `Price Plan Matrix`) est défini
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/catalog/priceManagement/pricePlanMatrixVersions/export` | Export price plan matrix versions | exportPricePlanMatrixVersions |
+| POST | `/api/rest/v2/catalog/priceManagement/pricePlanMatrixVersions/export` | Export price plan matrix versions | exportPricePlanMatrixVersions |
 
-#### POST /catalog/priceManagement/pricePlanMatrixVersions/export
+#### POST /api/rest/v2/catalog/priceManagement/pricePlanMatrixVersions/export
 
 - Résumé: Export price plan matrix versions
 - OperationId: exportPricePlanMatrixVersions

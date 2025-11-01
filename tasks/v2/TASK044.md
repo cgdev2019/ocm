@@ -19,14 +19,14 @@ Le domaine « Mediation Settings » (tag OpenAPI `Mediation Settings`) est défi
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/mediationSetting` | Create new Mediation Setting | create_18 |
-| PUT | `/mediationSetting/{mediationRuleId}` | Update new Mediation Setting | update_17 |
-| POST | `/mediationSetting/edrVersioningRule` | Create new Edr Version rule | createEdrVersionRule |
-| PUT | `/mediationSetting/edrVersioningRule/{edrVersionRuleId}` | Update new Edr Version rule | updateEdrVersionRule |
-| DELETE | `/mediationSetting/edrVersioningRule/{edrVersionRuleId}` | Remove new Edr Version rule | deleteEdrVersioningRule |
-| POST | `/mediationSetting/edrVersioningRule/swapPriority` | Update new Edr Version rule | swapPriority |
+| POST | `/api/rest/v2/mediationSetting` | Create new Mediation Setting | create_18 |
+| PUT | `/api/rest/v2/mediationSetting/{mediationRuleId}` | Update new Mediation Setting | update_17 |
+| POST | `/api/rest/v2/mediationSetting/edrVersioningRule` | Create new Edr Version rule | createEdrVersionRule |
+| PUT | `/api/rest/v2/mediationSetting/edrVersioningRule/{edrVersionRuleId}` | Update new Edr Version rule | updateEdrVersionRule |
+| DELETE | `/api/rest/v2/mediationSetting/edrVersioningRule/{edrVersionRuleId}` | Remove new Edr Version rule | deleteEdrVersioningRule |
+| POST | `/api/rest/v2/mediationSetting/edrVersioningRule/swapPriority` | Update new Edr Version rule | swapPriority |
 
-#### POST /mediationSetting
+#### POST /api/rest/v2/mediationSetting
 
 - Résumé: Create new Mediation Setting
 - OperationId: create_18
@@ -41,7 +41,7 @@ Le domaine « Mediation Settings » (tag OpenAPI `Mediation Settings`) est défi
   - 404: missing paramters
     - application/json: ApiException (ApiException)
 
-#### PUT /mediationSetting/{mediationRuleId}
+#### PUT /api/rest/v2/mediationSetting/{mediationRuleId}
 
 - Résumé: Update new Mediation Setting
 - OperationId: update_17
@@ -57,7 +57,7 @@ Le domaine « Mediation Settings » (tag OpenAPI `Mediation Settings`) est défi
   - 404: missing paramters
     - application/json: ApiException (ApiException)
 
-#### POST /mediationSetting/edrVersioningRule
+#### POST /api/rest/v2/mediationSetting/edrVersioningRule
 
 - Résumé: Create new Edr Version rule
 - OperationId: createEdrVersionRule
@@ -71,7 +71,7 @@ Le domaine « Mediation Settings » (tag OpenAPI `Mediation Settings`) est défi
   - 404: missing paramters
     - application/json: ApiException (ApiException)
 
-#### PUT /mediationSetting/edrVersioningRule/{edrVersionRuleId}
+#### PUT /api/rest/v2/mediationSetting/edrVersioningRule/{edrVersionRuleId}
 
 - Résumé: Update new Edr Version rule
 - OperationId: updateEdrVersionRule
@@ -87,7 +87,7 @@ Le domaine « Mediation Settings » (tag OpenAPI `Mediation Settings`) est défi
   - 404: missing paramters
     - application/json: ApiException (ApiException)
 
-#### DELETE /mediationSetting/edrVersioningRule/{edrVersionRuleId}
+#### DELETE /api/rest/v2/mediationSetting/edrVersioningRule/{edrVersionRuleId}
 
 - Résumé: Remove new Edr Version rule
 - OperationId: deleteEdrVersioningRule
@@ -100,7 +100,7 @@ Le domaine « Mediation Settings » (tag OpenAPI `Mediation Settings`) est défi
   - 400: Edr Version doesn't exist
     - application/json: object
 
-#### POST /mediationSetting/edrVersioningRule/swapPriority
+#### POST /api/rest/v2/mediationSetting/edrVersioningRule/swapPriority
 
 - Résumé: Update new Edr Version rule
 - OperationId: swapPriority

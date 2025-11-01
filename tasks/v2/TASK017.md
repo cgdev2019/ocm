@@ -19,11 +19,11 @@ Le domaine « contact_category » (tag OpenAPI `contact_category`) est défini d
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/account/contactCategory` | Create a ContactCategory | create_8 |
-| PUT | `/account/contactCategory/{contactCategoryCode}` | Update a ContactCategory | update_7 |
-| DELETE | `/account/contactCategory/{contactCategoryCode}` | Delete a ContactCategory | delete_5 |
+| POST | `/api/rest/v2/account/contactCategory` | Create a ContactCategory | create_8 |
+| PUT | `/api/rest/v2/account/contactCategory/{contactCategoryCode}` | Update a ContactCategory | update_7 |
+| DELETE | `/api/rest/v2/account/contactCategory/{contactCategoryCode}` | Delete a ContactCategory | delete_5 |
 
-#### POST /account/contactCategory
+#### POST /api/rest/v2/account/contactCategory
 
 - Résumé: Create a ContactCategory
 - OperationId: create_8
@@ -35,7 +35,7 @@ Le domaine « contact_category » (tag OpenAPI `contact_category`) est défini d
   - 200: the contactCategory successfully created
   - 400: An error happened when trying to create a contactCategory
 
-#### PUT /account/contactCategory/{contactCategoryCode}
+#### PUT /api/rest/v2/account/contactCategory/{contactCategoryCode}
 
 - Résumé: Update a ContactCategory
 - OperationId: update_7
@@ -50,7 +50,7 @@ Le domaine « contact_category » (tag OpenAPI `contact_category`) est défini d
   - 400: An error happened when trying to create a contactCategory
   - 404: The contactCategoryCode does not exists
 
-#### DELETE /account/contactCategory/{contactCategoryCode}
+#### DELETE /api/rest/v2/account/contactCategory/{contactCategoryCode}
 
 - Résumé: Delete a ContactCategory
 - OperationId: delete_5

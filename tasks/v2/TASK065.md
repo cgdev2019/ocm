@@ -19,39 +19,39 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| PUT | `/accountReceivable/accountOperation/changeStatus` | mark account operation as exported | markExported |
-| POST | `/billing/invoiceLines/markForAdjustment` | This API will allow mark adjustment for invoice lines | markForAdjustment |
-| POST | `/billing/invoiceLines/unmarkForAdjustment` | This API will allow creating adjustment based on an existing validated invoice. | unmarkForAdjustment |
-| POST | `/billing/invoices/{id}/calculateSubTotals` | Calucate subtotals | calculateSubTotals |
-| PUT | `/billing/invoices/{id}/calculation` | calculate invoice | calculateInvoice |
-| PUT | `/billing/invoices/{id}/cancellation` | Cancel invoice | cancelInvoice |
-| POST | `/billing/invoices/{id}/createAdjustment` | This API will allow creating adjustment based on an existing validated invoice. | createAdjustment |
-| POST | `/billing/invoices/{id}/invoiceLines` | Create invoice lines | addInvoiceLines |
-| DELETE | `/billing/invoices/{id}/invoiceLines` | Remove invoice lines | removeInvoiceLines |
-| PUT | `/billing/invoices/{id}/invoiceLines/{lineId}` | Update invoice line | updateInvoiceLine |
-| DELETE | `/billing/invoices/{id}/invoiceLines/{lineId}` | Remove invoice line | removeInvoiceLine |
-| POST | `/billing/invoices/{id}/invoiceLines/duplicate` | Duplicate invoice lines | duplicateInvoiceLines |
-| PUT | `/billing/invoices/{id}/quarantine` | Quarantine invoice | quarantineInvoice |
-| PUT | `/billing/invoices/{id}/rebuild` | Rebuild invoice | rebuildInvoiceLine |
-| PUT | `/billing/invoices/{id}/refreshRate` | Refresh rate | refreshRate |
-| PUT | `/billing/invoices/{id}/rejection` | Reject invoice | rejectInvoiceLine |
-| PUT | `/billing/invoices/{id}/validation` | Validate invoice | validateInvoiceLine |
-| POST | `/billing/invoices/{invoicId}/duplication` | this endpoint allow to duplicate invoice | duplicate |
-| POST | `/billing/invoices/generate` |  Launch all the invoicing process for a given billingAccount | generate |
-| GET | `/commercialOrders/{code}/availableOpenOrders` | Get available open orders for a commercial order | findAvailableOpenOrders |
-| GET | `/cpq/quotes/{quoteCode}/availableOpenOrders` | Get available open orders for a quote | findAvailableOpenOrders_1 |
-| POST | `/importExport/importData` |  Send a file to be imported. ImportExportResponseDto.executionId contains   |     POST_ImportExport_importData |
-| POST | `/mediation/cdrs` | create manuel CDR | POST_Mediation_processCdrList |
-| PUT | `/mediation/cdrs` | update multiple for an existing CDRs | POST_Mediation_processCdrList_4 |
-| DELETE | `/mediation/cdrs` | delete  list of  an existing  CDR | POST_Mediation_processCdrList_2 |
-| PUT | `/mediation/cdrs/{id}` | update an existing  CDR | POST_Mediation_processCdrList_3 |
-| DELETE | `/mediation/cdrs/{id}` | delete an existing  CDR | POST_Mediation_processCdrList_1 |
-| POST | `/ordering/open-order-quote` | Create Open Order Quote | POST_Open-Order-Quote |
-| PUT | `/ordering/open-order-quote/{id}` | Update Open Order Quote | PUT_Open-Order-Quote |
-| POST | `/ordering/open-order-quote/{id}/duplicate` | Duplicate Open Order Quote from existing one | POST_DUPLICATE-Open-Order-Quote |
-| POST | `/rating/walletOperation/markToRerate` | Mark WalletOperations to rerate | POST_WalletOperation_markToRerate |
+| PUT | `/api/rest/v2/accountReceivable/accountOperation/changeStatus` | mark account operation as exported | markExported |
+| POST | `/api/rest/v2/billing/invoiceLines/markForAdjustment` | This API will allow mark adjustment for invoice lines | markForAdjustment |
+| POST | `/api/rest/v2/billing/invoiceLines/unmarkForAdjustment` | This API will allow creating adjustment based on an existing validated invoice. | unmarkForAdjustment |
+| POST | `/api/rest/v2/billing/invoices/{id}/calculateSubTotals` | Calucate subtotals | calculateSubTotals |
+| PUT | `/api/rest/v2/billing/invoices/{id}/calculation` | calculate invoice | calculateInvoice |
+| PUT | `/api/rest/v2/billing/invoices/{id}/cancellation` | Cancel invoice | cancelInvoice |
+| POST | `/api/rest/v2/billing/invoices/{id}/createAdjustment` | This API will allow creating adjustment based on an existing validated invoice. | createAdjustment |
+| POST | `/api/rest/v2/billing/invoices/{id}/invoiceLines` | Create invoice lines | addInvoiceLines |
+| DELETE | `/api/rest/v2/billing/invoices/{id}/invoiceLines` | Remove invoice lines | removeInvoiceLines |
+| PUT | `/api/rest/v2/billing/invoices/{id}/invoiceLines/{lineId}` | Update invoice line | updateInvoiceLine |
+| DELETE | `/api/rest/v2/billing/invoices/{id}/invoiceLines/{lineId}` | Remove invoice line | removeInvoiceLine |
+| POST | `/api/rest/v2/billing/invoices/{id}/invoiceLines/duplicate` | Duplicate invoice lines | duplicateInvoiceLines |
+| PUT | `/api/rest/v2/billing/invoices/{id}/quarantine` | Quarantine invoice | quarantineInvoice |
+| PUT | `/api/rest/v2/billing/invoices/{id}/rebuild` | Rebuild invoice | rebuildInvoiceLine |
+| PUT | `/api/rest/v2/billing/invoices/{id}/refreshRate` | Refresh rate | refreshRate |
+| PUT | `/api/rest/v2/billing/invoices/{id}/rejection` | Reject invoice | rejectInvoiceLine |
+| PUT | `/api/rest/v2/billing/invoices/{id}/validation` | Validate invoice | validateInvoiceLine |
+| POST | `/api/rest/v2/billing/invoices/{invoicId}/duplication` | this endpoint allow to duplicate invoice | duplicate |
+| POST | `/api/rest/v2/billing/invoices/generate` |  Launch all the invoicing process for a given billingAccount | generate |
+| GET | `/api/rest/v2/commercialOrders/{code}/availableOpenOrders` | Get available open orders for a commercial order | findAvailableOpenOrders |
+| GET | `/api/rest/v2/cpq/quotes/{quoteCode}/availableOpenOrders` | Get available open orders for a quote | findAvailableOpenOrders_1 |
+| POST | `/api/rest/v2/importExport/importData` |  Send a file to be imported. ImportExportResponseDto.executionId contains   |     POST_ImportExport_importData |
+| POST | `/api/rest/v2/mediation/cdrs` | create manuel CDR | POST_Mediation_processCdrList |
+| PUT | `/api/rest/v2/mediation/cdrs` | update multiple for an existing CDRs | POST_Mediation_processCdrList_4 |
+| DELETE | `/api/rest/v2/mediation/cdrs` | delete  list of  an existing  CDR | POST_Mediation_processCdrList_2 |
+| PUT | `/api/rest/v2/mediation/cdrs/{id}` | update an existing  CDR | POST_Mediation_processCdrList_3 |
+| DELETE | `/api/rest/v2/mediation/cdrs/{id}` | delete an existing  CDR | POST_Mediation_processCdrList_1 |
+| POST | `/api/rest/v2/ordering/open-order-quote` | Create Open Order Quote | POST_Open-Order-Quote |
+| PUT | `/api/rest/v2/ordering/open-order-quote/{id}` | Update Open Order Quote | PUT_Open-Order-Quote |
+| POST | `/api/rest/v2/ordering/open-order-quote/{id}/duplicate` | Duplicate Open Order Quote from existing one | POST_DUPLICATE-Open-Order-Quote |
+| POST | `/api/rest/v2/rating/walletOperation/markToRerate` | Mark WalletOperations to rerate | POST_WalletOperation_markToRerate |
 
-#### PUT /accountReceivable/accountOperation/changeStatus
+#### PUT /api/rest/v2/accountReceivable/accountOperation/changeStatus
 
 - Résumé: mark account operation as exported
 - OperationId: markExported
@@ -65,7 +65,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 404: Account operations don't exist
   - 409: Status of account operations can not be updated
 
-#### POST /billing/invoiceLines/markForAdjustment
+#### POST /api/rest/v2/billing/invoiceLines/markForAdjustment
 
 - Résumé: This API will allow mark adjustment for invoice lines
 - OperationId: markForAdjustment
@@ -79,7 +79,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 403: Only NOT_ADJUSTED invoice lines can be marked TO_ADJUST
   - 500: Error marking for adjustment
 
-#### POST /billing/invoiceLines/unmarkForAdjustment
+#### POST /api/rest/v2/billing/invoiceLines/unmarkForAdjustment
 
 - Résumé: This API will allow creating adjustment based on an existing validated invoice.
 - OperationId: unmarkForAdjustment
@@ -93,7 +93,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 403: Only invoice lines marked TO_ADJUST can be unmarked as NOT_ADJUSTED
   - 500: Error marking for adjustment
 
-#### POST /billing/invoices/{id}/calculateSubTotals
+#### POST /api/rest/v2/billing/invoices/{id}/calculateSubTotals
 
 - Résumé: Calucate subtotals
 - OperationId: calculateSubTotals
@@ -106,7 +106,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 400: Action is failed
   - 404: The invoice entity doesn't exist
 
-#### PUT /billing/invoices/{id}/calculation
+#### PUT /api/rest/v2/billing/invoices/{id}/calculation
 
 - Résumé: calculate invoice
 - OperationId: calculateInvoice
@@ -118,7 +118,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice successfully calculated
   - 403: error when calculating invoice
 
-#### PUT /billing/invoices/{id}/cancellation
+#### PUT /api/rest/v2/billing/invoices/{id}/cancellation
 
 - Résumé: Cancel invoice
 - OperationId: cancelInvoice
@@ -132,7 +132,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice successfully canceled
   - 403: error when canceling invoice
 
-#### POST /billing/invoices/{id}/createAdjustment
+#### POST /api/rest/v2/billing/invoices/{id}/createAdjustment
 
 - Résumé: This API will allow creating adjustment based on an existing validated invoice.
 - OperationId: createAdjustment
@@ -148,7 +148,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 403: IThe following parameters are required or contain invalid values: globalAdjustment
   - 500: Error when creating adjustment
 
-#### POST /billing/invoices/{id}/invoiceLines
+#### POST /api/rest/v2/billing/invoices/{id}/invoiceLines
 
 - Résumé: Create invoice lines
 - OperationId: addInvoiceLines
@@ -163,7 +163,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice lines successfully created
   - 403: error when creating invoice lines
 
-#### DELETE /billing/invoices/{id}/invoiceLines
+#### DELETE /api/rest/v2/billing/invoices/{id}/invoiceLines
 
 - Résumé: Remove invoice lines
 - OperationId: removeInvoiceLines
@@ -178,7 +178,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice lines successfully removed
   - 403: error when removing invoice lines
 
-#### PUT /billing/invoices/{id}/invoiceLines/{lineId}
+#### PUT /api/rest/v2/billing/invoices/{id}/invoiceLines/{lineId}
 
 - Résumé: Update invoice line
 - OperationId: updateInvoiceLine
@@ -194,7 +194,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice lines successfully updated
   - 403: error when updating invoice line
 
-#### DELETE /billing/invoices/{id}/invoiceLines/{lineId}
+#### DELETE /api/rest/v2/billing/invoices/{id}/invoiceLines/{lineId}
 
 - Résumé: Remove invoice line
 - OperationId: removeInvoiceLine
@@ -210,7 +210,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice line successfully removed
   - 403: error when removing invoice line
 
-#### POST /billing/invoices/{id}/invoiceLines/duplicate
+#### POST /api/rest/v2/billing/invoices/{id}/invoiceLines/duplicate
 
 - Résumé: Duplicate invoice lines
 - OperationId: duplicateInvoiceLines
@@ -225,7 +225,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice lines successfully duplicated
   - 403: error when duplicating invoice lines
 
-#### PUT /billing/invoices/{id}/quarantine
+#### PUT /api/rest/v2/billing/invoices/{id}/quarantine
 
 - Résumé: Quarantine invoice
 - OperationId: quarantineInvoice
@@ -240,7 +240,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice successfully quarantined
   - 403: Only possible for invoices in DRAFT/REJECTED/SUSPECT statuses
 
-#### PUT /billing/invoices/{id}/rebuild
+#### PUT /api/rest/v2/billing/invoices/{id}/rebuild
 
 - Résumé: Rebuild invoice
 - OperationId: rebuildInvoiceLine
@@ -252,7 +252,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice successfully rebuilded
   - 403: error when rebuilding invoice
 
-#### PUT /billing/invoices/{id}/refreshRate
+#### PUT /api/rest/v2/billing/invoices/{id}/refreshRate
 
 - Résumé: Refresh rate
 - OperationId: refreshRate
@@ -265,7 +265,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 403: Refresh rate only allowed on invoices with status : NEW or DRAFT
   - 404: Invoice not found
 
-#### PUT /billing/invoices/{id}/rejection
+#### PUT /api/rest/v2/billing/invoices/{id}/rejection
 
 - Résumé: Reject invoice
 - OperationId: rejectInvoiceLine
@@ -280,7 +280,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice successfully rejected
   - 403: error when rejecting invoice
 
-#### PUT /billing/invoices/{id}/validation
+#### PUT /api/rest/v2/billing/invoices/{id}/validation
 
 - Résumé: Validate invoice
 - OperationId: validateInvoiceLine
@@ -292,7 +292,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - 200: invoice successfully validated
   - 403: error when validating invoice
 
-#### POST /billing/invoices/{invoicId}/duplication
+#### POST /api/rest/v2/billing/invoices/{invoicId}/duplication
 
 - Résumé: this endpoint allow to duplicate invoice
 - OperationId: duplicate
@@ -304,7 +304,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - default: will return new invoice duplicated
     - application/json: InvoicesDto (InvoicesDto)
 
-#### POST /billing/invoices/generate
+#### POST /api/rest/v2/billing/invoices/generate
 
 - Résumé:  Launch all the invoicing process for a given billingAccount
 - OperationId: generate
@@ -317,7 +317,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - default: invoice response
     - application/json: Invoice (Invoice)
 
-#### GET /commercialOrders/{code}/availableOpenOrders
+#### GET /api/rest/v2/commercialOrders/{code}/availableOpenOrders
 
 - Résumé: Get available open orders for a commercial order
 - OperationId: findAvailableOpenOrders
@@ -327,7 +327,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
 - Réponses:
   - 200: The Open Orders avaiblable for commercial order
 
-#### GET /cpq/quotes/{quoteCode}/availableOpenOrders
+#### GET /api/rest/v2/cpq/quotes/{quoteCode}/availableOpenOrders
 
 - Résumé: Get available open orders for a quote
 - OperationId: findAvailableOpenOrders_1
@@ -337,7 +337,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
 - Réponses:
   - 200: The Open Orders avaiblable for quote
 
-#### POST /importExport/importData
+#### POST /api/rest/v2/importExport/importData
 
 - Résumé:  Send a file to be imported. ImportExportResponseDto.executionId contains  
 - OperationId:     POST_ImportExport_importData
@@ -351,7 +351,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
     - application/json: ImportExportResponseDto (ImportExportResponseDto)
     - application/xml: ImportExportResponseDto (ImportExportResponseDto)
 
-#### POST /mediation/cdrs
+#### POST /api/rest/v2/mediation/cdrs
 
 - Résumé: create manuel CDR
 - OperationId: POST_Mediation_processCdrList
@@ -364,7 +364,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - default: return new created CDR id
     - application/json: CdrDtoResponse (CdrDtoResponse)
 
-#### PUT /mediation/cdrs
+#### PUT /api/rest/v2/mediation/cdrs
 
 - Résumé: update multiple for an existing CDRs
 - OperationId: POST_Mediation_processCdrList_4
@@ -377,7 +377,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - default: status of the operation
     - application/json: CdrDtoResponse (CdrDtoResponse)
 
-#### DELETE /mediation/cdrs
+#### DELETE /api/rest/v2/mediation/cdrs
 
 - Résumé: delete  list of  an existing  CDR
 - OperationId: POST_Mediation_processCdrList_2
@@ -390,7 +390,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - default: status of the operation
     - application/json: CdrDtoResponse (CdrDtoResponse)
 
-#### PUT /mediation/cdrs/{id}
+#### PUT /api/rest/v2/mediation/cdrs/{id}
 
 - Résumé: update an existing  CDR
 - OperationId: POST_Mediation_processCdrList_3
@@ -405,7 +405,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - default: status of the operation
     - application/json: ActionStatus (ActionStatus)
 
-#### DELETE /mediation/cdrs/{id}
+#### DELETE /api/rest/v2/mediation/cdrs/{id}
 
 - Résumé: delete an existing  CDR
 - OperationId: POST_Mediation_processCdrList_1
@@ -417,7 +417,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
   - default: status of the operation
     - application/json: ActionStatus (ActionStatus)
 
-#### POST /ordering/open-order-quote
+#### POST /api/rest/v2/ordering/open-order-quote
 
 - Résumé: Create Open Order Quote
 - OperationId: POST_Open-Order-Quote
@@ -429,7 +429,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
 - Réponses:
   - default: Id of created Open Order Quote
 
-#### PUT /ordering/open-order-quote/{id}
+#### PUT /api/rest/v2/ordering/open-order-quote/{id}
 
 - Résumé: Update Open Order Quote
 - OperationId: PUT_Open-Order-Quote
@@ -443,7 +443,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
 - Réponses:
   - default: Id of updated Open Order Quote
 
-#### POST /ordering/open-order-quote/{id}/duplicate
+#### POST /api/rest/v2/ordering/open-order-quote/{id}/duplicate
 
 - Résumé: Duplicate Open Order Quote from existing one
 - OperationId: POST_DUPLICATE-Open-Order-Quote
@@ -454,7 +454,7 @@ Le domaine « Sans tag » (tag OpenAPI `_untagged`) est défini dans `tasks/open
 - Réponses:
   - default: Id of created Open Order Quote
 
-#### POST /rating/walletOperation/markToRerate
+#### POST /api/rest/v2/rating/walletOperation/markToRerate
 
 - Résumé: Mark WalletOperations to rerate
 - OperationId: POST_WalletOperation_markToRerate

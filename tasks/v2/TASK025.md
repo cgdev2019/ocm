@@ -19,12 +19,12 @@ Le domaine « Document » (tag OpenAPI `Document`) est défini dans `tasks/openc
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| DELETE | `/document/{id}` | Delete a document by providing it's Id as param | deleteDocument |
-| GET | `/document/{id}/file` | This endpoint allows to retrieve a document's file using the document id | getDocumentFile |
-| PUT | `/document/{id}/file` | This endpoint allows to update the document file content | updateDocumentFile |
-| DELETE | `/document/{id}/file` | This endpoint allows to delete a document's file using the document id | deleteDocumentFile |
+| DELETE | `/api/rest/v2/document/{id}` | Delete a document by providing it's Id as param | deleteDocument |
+| GET | `/api/rest/v2/document/{id}/file` | This endpoint allows to retrieve a document's file using the document id | getDocumentFile |
+| PUT | `/api/rest/v2/document/{id}/file` | This endpoint allows to update the document file content | updateDocumentFile |
+| DELETE | `/api/rest/v2/document/{id}/file` | This endpoint allows to delete a document's file using the document id | deleteDocumentFile |
 
-#### DELETE /document/{id}
+#### DELETE /api/rest/v2/document/{id}
 
 - Résumé: Delete a document by providing it's Id as param
 - OperationId: deleteDocument
@@ -36,7 +36,7 @@ Le domaine « Document » (tag OpenAPI `Document`) est défini dans `tasks/openc
   - 204: document successfully deleted
   - 404: the document with id in param does not exist
 
-#### GET /document/{id}/file
+#### GET /api/rest/v2/document/{id}/file
 
 - Résumé: This endpoint allows to retrieve a document's file using the document id
 - OperationId: getDocumentFile
@@ -49,7 +49,7 @@ Le domaine « Document » (tag OpenAPI `Document`) est défini dans `tasks/openc
     - text/plain: string
   - 404: the document file with document id in param does not exist
 
-#### PUT /document/{id}/file
+#### PUT /api/rest/v2/document/{id}/file
 
 - Résumé: This endpoint allows to update the document file content
 - OperationId: updateDocumentFile
@@ -65,7 +65,7 @@ Le domaine « Document » (tag OpenAPI `Document`) est défini dans `tasks/openc
   - 400: bad request when provided file content contains an error
   - 404: the document file with document id in param does not exist
 
-#### DELETE /document/{id}/file
+#### DELETE /api/rest/v2/document/{id}/file
 
 - Résumé: This endpoint allows to delete a document's file using the document id
 - OperationId: deleteDocumentFile

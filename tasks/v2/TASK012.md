@@ -19,19 +19,19 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/dunning/collectionPlan/addDunningActionInstance` | Add DunningActionInstance | addDunningActionInstance |
-| POST | `/dunning/collectionPlan/addDunningLevelInstance` | Add DunningLevelInstance | addDunningLevelInstance |
-| POST | `/dunning/collectionPlan/massPause` | Mass Pause list of Collection plan | massPauseCollectionPlan |
-| POST | `/dunning/collectionPlan/massStop` | Mass Stop list of Collection plan | massStopCollectionPlan |
-| POST | `/dunning/collectionPlan/pause/{id}` | Pause Collection plan | pauseCollectionPlan |
-| POST | `/dunning/collectionPlan/removeDunningActionInstance` | Remove DunningActionInstance | removeDunningActionInstance |
-| POST | `/dunning/collectionPlan/removeDunningLevelInstance` | Remove DunningLevelInstance | removeDunningLevelInstance |
-| POST | `/dunning/collectionPlan/resume/{id}` | Resume Collection plan | resumeCollectionPlan |
-| POST | `/dunning/collectionPlan/stop/{id}` | Stop Collection plan | stopCollectionPlan |
-| PUT | `/dunning/collectionPlan/updateDunningActionInstance/{actionInstanceId}` | Update DunningActionInstance | updateDunningActionInstance |
-| PUT | `/dunning/collectionPlan/updateDunningLevelInstance/{levelInstanceId}` | Update DunningLevelInstance | updateDunningLevelInstance |
+| POST | `/api/rest/v2/dunning/collectionPlan/addDunningActionInstance` | Add DunningActionInstance | addDunningActionInstance |
+| POST | `/api/rest/v2/dunning/collectionPlan/addDunningLevelInstance` | Add DunningLevelInstance | addDunningLevelInstance |
+| POST | `/api/rest/v2/dunning/collectionPlan/massPause` | Mass Pause list of Collection plan | massPauseCollectionPlan |
+| POST | `/api/rest/v2/dunning/collectionPlan/massStop` | Mass Stop list of Collection plan | massStopCollectionPlan |
+| POST | `/api/rest/v2/dunning/collectionPlan/pause/{id}` | Pause Collection plan | pauseCollectionPlan |
+| POST | `/api/rest/v2/dunning/collectionPlan/removeDunningActionInstance` | Remove DunningActionInstance | removeDunningActionInstance |
+| POST | `/api/rest/v2/dunning/collectionPlan/removeDunningLevelInstance` | Remove DunningLevelInstance | removeDunningLevelInstance |
+| POST | `/api/rest/v2/dunning/collectionPlan/resume/{id}` | Resume Collection plan | resumeCollectionPlan |
+| POST | `/api/rest/v2/dunning/collectionPlan/stop/{id}` | Stop Collection plan | stopCollectionPlan |
+| PUT | `/api/rest/v2/dunning/collectionPlan/updateDunningActionInstance/{actionInstanceId}` | Update DunningActionInstance | updateDunningActionInstance |
+| PUT | `/api/rest/v2/dunning/collectionPlan/updateDunningLevelInstance/{levelInstanceId}` | Update DunningLevelInstance | updateDunningLevelInstance |
 
-#### POST /dunning/collectionPlan/addDunningActionInstance
+#### POST /api/rest/v2/dunning/collectionPlan/addDunningActionInstance
 
 - Résumé: Add DunningActionInstance
 - OperationId: addDunningActionInstance
@@ -44,7 +44,7 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
   - 200: Add action success
   - 404: Entity does not exist
 
-#### POST /dunning/collectionPlan/addDunningLevelInstance
+#### POST /api/rest/v2/dunning/collectionPlan/addDunningLevelInstance
 
 - Résumé: Add DunningLevelInstance
 - OperationId: addDunningLevelInstance
@@ -57,7 +57,7 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
   - 200: Add action success
   - 404: Entity does not exist
 
-#### POST /dunning/collectionPlan/massPause
+#### POST /api/rest/v2/dunning/collectionPlan/massPause
 
 - Résumé: Mass Pause list of Collection plan
 - OperationId: massPauseCollectionPlan
@@ -70,7 +70,7 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
   - 200: list of collection plan successfully paused
   - 404: Entity does not exits
 
-#### POST /dunning/collectionPlan/massStop
+#### POST /api/rest/v2/dunning/collectionPlan/massStop
 
 - Résumé: Mass Stop list of Collection plan
 - OperationId: massStopCollectionPlan
@@ -83,7 +83,7 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
   - 200: list of collection plan successfully stoped
   - 404: Entity does not exits
 
-#### POST /dunning/collectionPlan/pause/{id}
+#### POST /api/rest/v2/dunning/collectionPlan/pause/{id}
 
 - Résumé: Pause Collection plan
 - OperationId: pauseCollectionPlan
@@ -98,7 +98,7 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
   - 200: collection plan successfully paused
   - 404: Entity does not exits
 
-#### POST /dunning/collectionPlan/removeDunningActionInstance
+#### POST /api/rest/v2/dunning/collectionPlan/removeDunningActionInstance
 
 - Résumé: Remove DunningActionInstance
 - OperationId: removeDunningActionInstance
@@ -111,7 +111,7 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
   - 200: Remove action success
   - 404: Entity does not exist
 
-#### POST /dunning/collectionPlan/removeDunningLevelInstance
+#### POST /api/rest/v2/dunning/collectionPlan/removeDunningLevelInstance
 
 - Résumé: Remove DunningLevelInstance
 - OperationId: removeDunningLevelInstance
@@ -124,7 +124,7 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
   - 200: Remove action success
   - 404: Entity does not exist
 
-#### POST /dunning/collectionPlan/resume/{id}
+#### POST /api/rest/v2/dunning/collectionPlan/resume/{id}
 
 - Résumé: Resume Collection plan
 - OperationId: resumeCollectionPlan
@@ -136,7 +136,7 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
   - 200: collection plan successfully paused
   - 404: Entity does not exits
 
-#### POST /dunning/collectionPlan/stop/{id}
+#### POST /api/rest/v2/dunning/collectionPlan/stop/{id}
 
 - Résumé: Stop Collection plan
 - OperationId: stopCollectionPlan
@@ -151,7 +151,7 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
   - 200: collection plan successfully stoped
   - 404: Entity does not exits
 
-#### PUT /dunning/collectionPlan/updateDunningActionInstance/{actionInstanceId}
+#### PUT /api/rest/v2/dunning/collectionPlan/updateDunningActionInstance/{actionInstanceId}
 
 - Résumé: Update DunningActionInstance
 - OperationId: updateDunningActionInstance
@@ -166,7 +166,7 @@ Le domaine « Collection Plan » (tag OpenAPI `Collection Plan`) est défini dan
   - 200: Update action success
   - 404: Entity does not exist
 
-#### PUT /dunning/collectionPlan/updateDunningLevelInstance/{levelInstanceId}
+#### PUT /api/rest/v2/dunning/collectionPlan/updateDunningLevelInstance/{levelInstanceId}
 
 - Résumé: Update DunningLevelInstance
 - OperationId: updateDunningLevelInstance

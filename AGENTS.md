@@ -53,7 +53,7 @@
 - [x] Vérifications automatiques du 2025-10-31 : `npm run lint`, `npm run typecheck`, `npm run test` tous passés.
 
 ## Tâches services à implémenter
-- [ ] API V2 AccountingArticle — cf. `tasks/v2/TASK001.md`
+- [x] API V2 AccountingArticle — cf. `tasks/v2/TASK001.md` (tests: `npm run lint` ⚠️, `npm run test -- --runTestsByPath features/accounting-articles/__tests__/useAccountingArticles.test.tsx` ✅)
 - [x] API V2 AccountingCodeMapping — cf. `tasks/v2/TASK002.md`
 - [ ] API V2 AccountingPeriods — cf. `tasks/v2/TASK003.md`
 - [ ] API V2 AccountOperation — cf. `tasks/v2/TASK004.md`

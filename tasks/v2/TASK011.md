@@ -19,11 +19,11 @@ Le domaine « CDR » (tag OpenAPI `CDR`) est défini dans `tasks/openceapi.json`
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/mediation/cdrs/chargeCdrList` | Accepts a list of CDR lines, parses them, creates EDRs and rates them. . CDR is same format use in mediation job | chargeCdrList |
-| POST | `/mediation/cdrs/registerCdrList` | Accepts a list of CDR lines, parses them and creates EDRs. CDR accepts the same format as in mediation job | registerCdrList |
-| POST | `/mediation/cdrs/reserveCdrList` | Accepts a list of CDR lines, parses them, creates EDRs and reserves. CDR accepts the same format as in mediation job | reserveCdrList |
+| POST | `/api/rest/v2/mediation/cdrs/chargeCdrList` | Accepts a list of CDR lines, parses them, creates EDRs and rates them. . CDR is same format use in mediation job | chargeCdrList |
+| POST | `/api/rest/v2/mediation/cdrs/registerCdrList` | Accepts a list of CDR lines, parses them and creates EDRs. CDR accepts the same format as in mediation job | registerCdrList |
+| POST | `/api/rest/v2/mediation/cdrs/reserveCdrList` | Accepts a list of CDR lines, parses them, creates EDRs and reserves. CDR accepts the same format as in mediation job | reserveCdrList |
 
-#### POST /mediation/cdrs/chargeCdrList
+#### POST /api/rest/v2/mediation/cdrs/chargeCdrList
 
 - Résumé: Accepts a list of CDR lines, parses them, creates EDRs and rates them. . CDR is same format use in mediation job
 - OperationId: chargeCdrList
@@ -35,7 +35,7 @@ Le domaine « CDR » (tag OpenAPI `CDR`) est défini dans `tasks/openceapi.json`
   - 200: A list of rated wallet operations, preserving the order of incomming CDRs
   - 400: bad request on register CDR list
 
-#### POST /mediation/cdrs/registerCdrList
+#### POST /api/rest/v2/mediation/cdrs/registerCdrList
 
 - Résumé: Accepts a list of CDR lines, parses them and creates EDRs. CDR accepts the same format as in mediation job
 - OperationId: registerCdrList
@@ -47,7 +47,7 @@ Le domaine « CDR » (tag OpenAPI `CDR`) est défini dans `tasks/openceapi.json`
   - 200: A list of EDRs, preserving the order of incomming CDRs
   - 400: bad request on register CDR list
 
-#### POST /mediation/cdrs/reserveCdrList
+#### POST /api/rest/v2/mediation/cdrs/reserveCdrList
 
 - Résumé: Accepts a list of CDR lines, parses them, creates EDRs and reserves. CDR accepts the same format as in mediation job
 - OperationId: reserveCdrList

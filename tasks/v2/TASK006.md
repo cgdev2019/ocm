@@ -19,9 +19,9 @@ Le domaine « AllowedParents » (tag OpenAPI `AllowedParents`) est défini dans 
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/accounts/userAccounts/{userAccountCode}/allowedParents` | List user accounts allowed to be parent of the giving user account | allowedUserAccountParents |
+| GET | `/api/rest/v2/accounts/userAccounts/{userAccountCode}/allowedParents` | List user accounts allowed to be parent of the giving user account | allowedUserAccountParents |
 
-#### GET /accounts/userAccounts/{userAccountCode}/allowedParents
+#### GET /api/rest/v2/accounts/userAccounts/{userAccountCode}/allowedParents
 
 - Résumé: List user accounts allowed to be parent of the giving user account
 - OperationId: allowedUserAccountParents
