@@ -11,6 +11,10 @@ import type {
   AssignAccountOperationResponse,
 } from '@/features/account-operations/types';
 import type { AllowedParentDto, AllowedParentListItem } from '@/features/allowed-parents/types';
+import type {
+  AuxiliaryAccountDetail,
+  AuxiliaryAccountDto,
+} from '@/features/auxiliary-codes/types';
 import type { InvoiceDto } from '@/features/invoices/types';
 import type { GetTaxesResponse, TaxFormValues, TaxListItem } from '@/features/taxes/types';
 import type {
@@ -651,6 +655,32 @@ export const allowedParentListFixtures: AllowedParentListItem[] = [
     parentId: 903,
     customerAccountCode: 'ACC-002',
     customerAccountDescription: 'Compte Lyon',
+  },
+];
+
+export const auxiliaryAccountDtoFixtures: AuxiliaryAccountDto[] = [
+  {
+    customerAccountCode: 'ACC-001',
+    auxiliaryAccountCode: 'AUX-0001',
+    auxiliaryAccountLabel: 'Compte auxiliaire principal',
+  },
+  {
+    customerAccountCode: 'ACC-002',
+    auxiliaryAccountCode: 'AUX-0002',
+    auxiliaryAccountLabel: 'Compte auxiliaire secondaire',
+  },
+];
+
+export const auxiliaryAccountDetailFixtures: AuxiliaryAccountDetail[] = [
+  {
+    customerAccountCode: 'ACC-001',
+    auxiliaryAccountCode: 'AUX-0001',
+    auxiliaryAccountLabel: 'Compte auxiliaire principal',
+  },
+  {
+    customerAccountCode: 'ACC-002',
+    auxiliaryAccountCode: 'AUX-0002',
+    auxiliaryAccountLabel: 'Compte auxiliaire secondaire',
   },
 ];
 

@@ -20,6 +20,10 @@ export const queryKeys = {
         ? (['allowedParents', 'list', userAccountCode] as const)
         : (['allowedParents', 'list'] as const),
   },
+  auxiliaryCodes: {
+    detail: (customerAccountCode: string) =>
+      ['auxiliaryCodes', 'detail', customerAccountCode] as const,
+  },
   agedReceivables: {
     list: (params?: Record<string, unknown>) =>
       params ? (['agedReceivables', 'list', params] as const) : (['agedReceivables', 'list'] as const),

@@ -16,6 +16,7 @@ import type {
 } from '@/features/accounting-code-mappings/types';
 import type { AccountingArticleDto } from '@/features/accounting-articles/types';
 import type { AllowedParentDto } from '@/features/allowed-parents/types';
+import type { AuxiliaryAccountDto } from '@/features/auxiliary-codes/types';
 import type { ArticleMappingDto } from '@/features/article-mappings/types';
 import {
   customers,
@@ -43,12 +44,16 @@ import {
   accountingArticlesData,
   accountOperationsData,
   allowedParentsData,
+  auxiliaryAccountsData,
   articleMappingsData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
 const customerAccountsStore = [...customerAccounts];
 const allowedParentsStore: AllowedParentDto[] = allowedParentsData.map((item) => ({
+  ...item,
+}));
+const auxiliaryAccountsStore: AuxiliaryAccountDto[] = auxiliaryAccountsData.map((item) => ({
   ...item,
 }));
 const invoicesStore = [...invoices];
@@ -323,6 +328,40 @@ export const handlers = [
       });
 
       return HttpResponse.json(candidates);
+    },
+  ),
+
+  http.get(
+    '*/api/rest/v2/accounting/auxiliaryAccounts/{customerAccountCode}',
+    ({ params }) => {
+      const customerAccountCode = String(params.customerAccountCode ?? '').trim();
+      if (!customerAccountCode) {
+        return HttpResponse.json({
+          actionStatus: success(),
+          auxiliaryAccountCode: null,
+          auxiliaryAccountLabel: null,
+          customerAccountCode: null,
+        });
+      }
+
+      const entry = auxiliaryAccountsStore.find((item) => {
+        const candidate = typeof item.customerAccountCode === 'string' ? item.customerAccountCode.trim() : '';
+        return candidate === customerAccountCode;
+      });
+
+      if (!entry) {
+        return HttpResponse.json(
+          { actionStatus: { status: 'FAIL', message: 'Auxiliary account not found' } },
+          { status: 404 },
+        );
+      }
+
+      return HttpResponse.json({
+        actionStatus: success(),
+        auxiliaryAccountCode: entry.auxiliaryAccountCode,
+        auxiliaryAccountLabel: entry.auxiliaryAccountLabel,
+        customerAccountCode: entry.customerAccountCode,
+      });
     },
   ),
 
