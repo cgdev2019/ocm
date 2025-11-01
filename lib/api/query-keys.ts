@@ -102,6 +102,14 @@ export const queryKeys = {
       detail: (code: string) => ['communication', 'smsTemplates', 'detail', code] as const,
     },
   },
+  contactCategories: {
+    root: ['contactCategories'] as const,
+    list: (params?: Record<string, unknown>) =>
+      params
+        ? (['contactCategories', 'list', params] as const)
+        : (['contactCategories', 'list'] as const),
+    detail: (code: string) => ['contactCategories', 'detail', code] as const,
+  },
   accountingArticles: {
     root: ['accountingArticles'] as const,
     list: (params?: Record<string, unknown>) =>
@@ -252,6 +260,12 @@ export const queryKeys = {
     detail: (code: string) => ['businessAccountModels', 'detail', code] as const,
     parents: (code: string) => ['businessAccountModels', 'parents', code] as const,
     version: () => ['businessAccountModels', 'version'] as const,
+  },
+  contacts: {
+    root: ['contacts'] as const,
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['contacts', 'list', filters] as const) : (['contacts', 'list'] as const),
+    detail: (code: string) => ['contacts', 'detail', code] as const,
   },
   providerContacts: {
     list: () => ['providerContacts', 'list'] as const,

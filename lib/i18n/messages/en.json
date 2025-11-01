@@ -62,7 +62,9 @@
     "accountingPeriods": "Accounting periods",
     "mediation": "Mediation",
     "businessAccountModels": "Business account models",
+    "contacts": "Contacts",
     "providerContacts": "Provider contacts",
+    "contactCategories": "Contact categories",
     "accountingArticles": "Accounting articles"
   },
   "breadcrumbs": {
@@ -79,6 +81,7 @@
     "search": "Search",
     "filter": "Filter",
     "reset": "Reset",
+    "clear": "Clear",
     "refresh": "Refresh",
     "retry": "Retry",
     "add": "Add",
@@ -412,6 +415,21 @@
       "state": "State",
       "version": "Version {version}",
       "deleteConfirmation": "Deleting this contact will remove it from Opencell."
+    },
+    "contact": {
+      "code": "Contact code",
+      "description": "Description",
+      "company": "Company",
+      "jobTitle": "Job title",
+      "email": "Email",
+      "phone": "Phone",
+      "mobile": "Mobile",
+      "comment": "Comment"
+    },
+    "contactCategory": {
+      "code": "Category code",
+      "description": "Description",
+      "id": "Identifier"
     },
     "billingCycle": {
       "code": "Code",

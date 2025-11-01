@@ -238,6 +238,20 @@ import type {
   ProviderContactsResponseDto,
 } from '@/features/provider-contact/types';
 import type {
+  ContactDetail,
+  ContactDto,
+  ContactFormValues,
+  ContactListItem,
+  ContactListResponse,
+} from '@/features/contacts/types';
+import type {
+  ContactCategoryDetail,
+  ContactCategoryDto,
+  ContactCategoryFormValues,
+  ContactCategoryListItem,
+  ContactCategoryListResponse,
+} from '@/features/contact-categories/types';
+import type {
   UsageChargeAggregateListItem,
   UsageChargeAggregateResponseDto,
   UsageListItem,
@@ -2372,6 +2386,90 @@ export const providerContactListFixture: ProviderContactListItem[] = [
     phone: '+33102030405',
   },
 ];
+
+export const contactDtoFixture: ContactDto = {
+  code: 'CT-001',
+  description: 'CRM contact',
+  company: 'Acme Corp',
+  jobTitle: 'Account Manager',
+  contactInformation: {
+    email: 'crm@example.com',
+    phone: '+33123456789',
+    mobile: '+33698765432',
+  },
+  comment: 'Important contact',
+};
+
+export const contactDetailFixture: ContactDetail = {
+  code: 'CT-001',
+  description: 'CRM contact',
+  company: 'Acme Corp',
+  jobTitle: 'Account Manager',
+  email: 'crm@example.com',
+  phone: '+33123456789',
+  mobile: '+33698765432',
+  comment: 'Important contact',
+};
+
+export const contactFormValuesFixture: ContactFormValues = {
+  code: 'CT-001',
+  description: 'CRM contact',
+  company: 'Acme Corp',
+  jobTitle: 'Account Manager',
+  email: 'crm@example.com',
+  phone: '+33123456789',
+  mobile: '+33698765432',
+  comment: 'Important contact',
+};
+
+export const contactListItemFixture: ContactListItem = {
+  code: 'CT-001',
+  description: 'CRM contact',
+  company: 'Acme Corp',
+  jobTitle: 'Account Manager',
+  email: 'crm@example.com',
+  phone: '+33123456789',
+};
+
+export const contactListResponseFixture: ContactListResponse = {
+  actionStatus: actionStatusSuccessFixture,
+  data: [contactDtoFixture],
+  contacts: {
+    contact: [contactDtoFixture],
+    totalNumberOfRecords: 1,
+  },
+  paging: { totalNumberOfRecords: 1 },
+};
+
+export const contactCategoryDtoFixture: ContactCategoryDto = {
+  id: 101,
+  code: 'SUPPORT',
+  description: 'Support contacts',
+};
+
+export const contactCategoryDetailFixture: ContactCategoryDetail = {
+  code: 'SUPPORT',
+  description: 'Support contacts',
+  id: 101,
+};
+
+export const contactCategoryFormValuesFixture: ContactCategoryFormValues = {
+  code: 'SUPPORT',
+  description: 'Support contacts',
+  id: 101,
+};
+
+export const contactCategoryListItemFixture: ContactCategoryListItem = {
+  code: 'SUPPORT',
+  description: 'Support contacts',
+  id: 101,
+};
+
+export const contactCategoryListResponseFixture: ContactCategoryListResponse = {
+  actionStatus: actionStatusSuccessFixture,
+  data: [contactCategoryDtoFixture],
+  paging: { totalNumberOfRecords: 1 },
+};
 
 export const queryResponseFixture: QueryResponse = {
   actionStatus: { status: 'SUCCESS', message: 'OK' },

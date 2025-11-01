@@ -52,6 +52,8 @@
 - 2025-11-24 : Hooks CollectionPlan V2 (politiques disponibles, mass switch) + test ciblé `npm run test -- --runTestsByPath features/collection-plans/__tests__/collectionPlanMutations.test.tsx` ✅.
 - 2025-11-24 : Tests ciblés communication — `npm run test -- --runTestsByPath features/communication/__tests__/communicationApi.test.tsx` ✅.
 - 2025-11-01 : Re-run ciblé communication — `npm run test -- --runTestsByPath features/communication/__tests__/communicationApi.test.tsx` ✅.
+- 2025-11-24 : API V2 contactCategory — liste, détail, formulaires App Router, hooks TanStack Query/mutations et mocks MSW. Tests ciblés `npm run test -- --runTestsByPath features/contact-categories/__tests__/useContactCategories.test.tsx features/contact-categories/__tests__/useContactCategoryMutations.test.tsx` ✅.
+- 2025-11-24 : API V2 contact — listes + formulaires CRM (App Router, hooks TanStack Query, traductions). Tests ciblés `npm run test -- --runTestsByPath features/contacts/__tests__/useContacts.test.tsx features/contacts/__tests__/useContactMutations.test.tsx` ✅.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté le 23/11/2025, toujours présent).
@@ -82,7 +84,7 @@
 - [ ] API V2 Collection Plan Status — cf. `tasks/v2/TASK013.md`
 - [x] API V2 CollectionPlan — cf. `tasks/v2/TASK014.md`
  - [x] API V2 communication — cf. `tasks/v2/TASK015.md`
-- [ ] API V2 contact — cf. `tasks/v2/TASK016.md`
+- [x] API V2 contact — cf. `tasks/v2/TASK016.md`
 - [ ] API V2 contact_category — cf. `tasks/v2/TASK017.md`
 - [ ] API V2 CounterInstance — cf. `tasks/v2/TASK018.md`
 - [ ] API V2 Create — cf. `tasks/v2/TASK019.md`
