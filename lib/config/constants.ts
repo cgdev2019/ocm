@@ -51,6 +51,7 @@ export const NAV_SECTIONS: Array<{
     | 'accountingPeriod'
     | 'mediation'
     | 'providerContact'
+    | 'contactCategory'
     | 'accountingArticle'
     | 'agedReceivable';
 }> = [
@@ -112,5 +113,7 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.accountingPeriods', path: '/accounting-periods', icon: 'accountingPeriod' },
   { label: 'navigation.mediation', path: '/mediation', icon: 'mediation' },
   { label: 'navigation.businessAccountModels', path: '/business-account-models', icon: 'businessAccountModel' },
+  { label: 'navigation.contacts', path: '/contacts', icon: 'contact' },
   { label: 'navigation.providerContacts', path: '/provider-contacts', icon: 'providerContact' },
+  { label: 'navigation.contactCategories', path: '/contact-categories', icon: 'contactCategory' },
 ];

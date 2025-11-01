@@ -94,7 +94,9 @@ const registry: Record<string, SvgIconComponent> = {
   discountPlan: LocalOfferIcon,
   discountPlanItem: SellIcon,
   accountingPeriod: CalendarMonthIcon,
+  contact: ContactsIcon,
   providerContact: ContactsIcon,
+  contactCategory: ContactsIcon,
   accountingArticle: ArticleIcon,
   agedReceivable: HistoryToggleOffIcon,
 };

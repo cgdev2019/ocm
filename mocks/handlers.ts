@@ -28,6 +28,7 @@ import type {
   TranslatedSubjectFormValue,
   TranslatedTextContentFormValue,
 } from '@/features/communication/types';
+import type { ContactCategoryFormValues } from '@/features/contact-categories/types';
 import {
   customers,
   customerAccounts,
@@ -59,6 +60,7 @@ import {
   billingRulesData,
   emailTemplatesData,
   smsTemplatesData,
+  contactCategoriesData,
 } from '@/mocks/data';
 
 const cloneEmailTemplateForm = (template: EmailTemplateFormValues): EmailTemplateFormValues => ({
@@ -182,6 +184,9 @@ const billingRulesStore: BillingRuleDto[] = billingRulesData.map((item) => ({
 }));
 const emailTemplatesStore: EmailTemplateFormValues[] = emailTemplatesData.map((item) => cloneEmailTemplateForm(item));
 const smsTemplatesStore: SMSTemplateFormValues[] = smsTemplatesData.map((item) => cloneSmsTemplateForm(item));
+const contactCategoriesStore: ContactCategoryFormValues[] = contactCategoriesData.map((item) => ({
+  ...item,
+}));
 let nextAccountingArticleId = accountingArticlesStore.reduce(
   (acc, item) => (item.id && item.id > acc ? item.id : acc),
   200,
@@ -191,6 +196,11 @@ let nextReservationId = 200;
 const mediationReservations = new Map<number, { availableQuantity: number }>();
 let nextBillingRuleId =
   billingRulesStore.reduce((acc, item) => (item.id && item.id > acc ? item.id : acc), 500) + 1;
+let nextContactCategoryId =
+  contactCategoriesStore.reduce(
+    (acc, item) => (typeof item.id === 'number' && item.id > acc ? item.id : acc),
+    100,
+  ) + 1;
 
 const success = (message = 'OK') => ({ status: 'SUCCESS', message });
 
@@ -674,6 +684,112 @@ export const handlers = [
       item.disabled = true;
     }
     return HttpResponse.json(success('Accounting code disabled'));
+  }),
+
+  http.post('*/api/rest/v2/generic/all/contactCategory', async ({ request }) => {
+    let body: Record<string, unknown> = {};
+    try {
+      body = (await request.json()) as Record<string, unknown>;
+    } catch (error) {
+      body = {};
+    }
+
+    const filters = (body.filters as Record<string, unknown>) ?? {};
+    const normalize = (value: unknown) =>
+      typeof value === 'string' && value.trim().length > 0 ? value.trim().toLowerCase() : undefined;
+    const search = normalize(filters.code ?? filters.description);
+
+    let categories = [...contactCategoriesStore];
+    if (search) {
+      categories = categories.filter((item) => {
+        const code = item.code.toLowerCase();
+        const description = (item.description ?? '').toLowerCase();
+        return code.includes(search) || description.includes(search);
+      });
+    }
+
+    categories.sort((a, b) => (b.id ?? 0) - (a.id ?? 0));
+
+    const offset = typeof body.offset === 'number' ? Math.max(0, Math.floor(body.offset)) : 0;
+    const limit =
+      typeof body.limit === 'number' && body.limit >= 0 ? Math.floor(body.limit) : categories.length;
+    const paginated = categories.slice(offset, offset + limit);
+
+    return HttpResponse.json({
+      actionStatus: success(),
+      data: paginated.map((item) => ({
+        id: item.id,
+        code: item.code,
+        description: item.description,
+      })),
+      paging: { totalNumberOfRecords: categories.length },
+    });
+  }),
+
+  http.post('*/api/rest/v2/account/contactCategory', async ({ request }) => {
+    const payload = (await request.json()) as Partial<ContactCategoryFormValues>;
+    const code =
+      typeof payload.code === 'string' && payload.code.trim().length > 0
+        ? payload.code.trim()
+        : `CAT-${nextContactCategoryId}`;
+    const description =
+      typeof payload.description === 'string' && payload.description.length > 0
+        ? payload.description
+        : undefined;
+    const existingIndex = contactCategoriesStore.findIndex((item) => item.code === code);
+    const id =
+      typeof payload.id === 'number'
+        ? payload.id
+        : existingIndex >= 0
+          ? contactCategoriesStore[existingIndex].id
+          : nextContactCategoryId++;
+    const entry: ContactCategoryFormValues = {
+      code,
+      ...(description ? { description } : {}),
+      ...(typeof id === 'number' ? { id } : {}),
+    };
+    if (existingIndex >= 0) {
+      contactCategoriesStore[existingIndex] = { ...contactCategoriesStore[existingIndex], ...entry };
+    } else {
+      contactCategoriesStore.push(entry);
+    }
+    return HttpResponse.json({ actionStatus: success('Created') });
+  }),
+
+  http.put('*/api/rest/v2/account/contactCategory/{contactCategoryCode}', async ({ params, request }) => {
+    const code = String(params.contactCategoryCode);
+    const payload = (await request.json()) as Partial<ContactCategoryFormValues>;
+    const description =
+      typeof payload.description === 'string' && payload.description.length > 0
+        ? payload.description
+        : undefined;
+    const index = contactCategoriesStore.findIndex((item) => item.code === code);
+    const id =
+      typeof payload.id === 'number'
+        ? payload.id
+        : index >= 0
+          ? contactCategoriesStore[index].id
+          : nextContactCategoryId++;
+    const entry: ContactCategoryFormValues = {
+      code,
+      ...(description ? { description } : {}),
+      ...(typeof id === 'number' ? { id } : {}),
+    };
+    if (index >= 0) {
+      contactCategoriesStore[index] = { ...contactCategoriesStore[index], ...entry };
+    } else {
+      contactCategoriesStore.push(entry);
+    }
+    return HttpResponse.json({ actionStatus: success('Updated') });
+  }),
+
+  http.delete('*/api/rest/v2/account/contactCategory/{contactCategoryCode}', ({ params }) => {
+    const code = String(params.contactCategoryCode);
+    const index = contactCategoriesStore.findIndex((item) => item.code === code);
+    if (index >= 0) {
+      contactCategoriesStore.splice(index, 1);
+    }
+    return HttpResponse.json({ actionStatus: success('Deleted') });
   }),
 
   http.post('*/v2/generic/all/accountingPeriod', async ({ request }) => {
