@@ -57,6 +57,7 @@
     "provider": "Provider",
     "query": "Query service",
     "accountingCodes": "Accounting codes",
+    "accountingPeriods": "Accounting periods",
     "mediation": "Mediation",
     "businessAccountModels": "Business account models",
     "providerContacts": "Provider contacts"
@@ -82,7 +83,8 @@
     "disable": "Disable",
     "generateCode": "Generate code",
     "run": "Run",
-    "load": "Load"
+    "load": "Load",
+    "all": "All"
   },
   "dashboard": {
     "welcome": "Welcome back, {name}!",
@@ -111,8 +113,10 @@
     "selectPlaceholder": "Select an option",
     "invalidEmail": "Please provide a valid email address",
     "invalidNumber": "Please provide a valid number",
+    "invalidDate": "Please provide a valid date",
     "confirmDeletion": "Are you sure you want to delete this item?",
     "success": "Changes saved",
+    "saved": "Saved",
     "error": "Something went wrong",
     "customer": {
       "code": "Code",
@@ -177,6 +181,35 @@
         "VIEW": "View",
         "REGULAR": "Regular"
       }
+    },
+    "accountingPeriod": {
+      "fiscalYear": "Fiscal year",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "status": "Status",
+      "subAccountingPeriodType": "Sub-accounting period type",
+      "subAccountingPeriodProgress": "Sub-accounting period progress",
+      "ongoingSubAccountingPeriods": "Ongoing sub-accounting periods",
+      "useSubAccountingPeriods": "Use sub-accounting periods",
+      "regularUserLockOption": "Regular user lock option",
+      "customLockNumberDays": "Custom lock number of days",
+      "customLockOption": "Custom lock option",
+      "forceCustomDay": "Force custom day",
+      "forceOption": "Force option",
+      "accountingOperationAction": "Accounting operation action",
+      "generateNext": "Generate next period",
+      "generateSuccess": "Next accounting period generated",
+      "generateSuccessWithYear": "Next accounting period generated ({fiscalYear})",
+      "searchLabel": "Search by fiscal year or code",
+      "statusFilterLabel": "Filter by status",
+      "applyStatus": "Apply status",
+      "updateStatusTitle": "Update global status",
+      "updateAllUsersTitle": "Update status for all users",
+      "updateRegularUsersTitle": "Update status for regular users",
+      "subPeriodNumber": "Sub-period number",
+      "reason": "Reason",
+      "subStatusUpdated": "Sub-accounting period status updated",
+      "statusUpdated": "Accounting period status updated"
     },
     "scriptInstance": {
       "code": "Script code",

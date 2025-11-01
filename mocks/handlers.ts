@@ -9,6 +9,7 @@ import type {
   InvalidateInvoiceDocumentsDto,
 } from '@/features/invoicing/types';
 import type { AccountingCodeFormValues } from '@/features/accounting-codes/types';
+import type { AccountingPeriodDetailValues } from '@/features/accounting-periods/types';
 import {
   customers,
   customerAccounts,
@@ -29,6 +30,7 @@ import {
   taxes,
   ratedTransactionsData,
   accountingCodesData,
+  accountingPeriodsData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
@@ -49,6 +51,7 @@ const languageIsosStore = [...languageIsosData];
 const languagesStore = [...languagesData];
 const ratedTransactionsStore = [...ratedTransactionsData];
 const accountingCodesStore = [...accountingCodesData];
+const accountingPeriodsStore: AccountingPeriodDetailValues[] = [...accountingPeriodsData];
 let nextReservationId = 200;
 const mediationReservations = new Map<number, { availableQuantity: number }>();
 
@@ -85,6 +88,25 @@ const findInvoicingPlanItem = (code: string) =>
 const findLanguageIso = (code: string) => languageIsosStore.find((item) => item.code === code);
 const findLanguage = (code: string) => languagesStore.find((item) => item.code === code);
 const findAccountingCode = (code: string) => accountingCodesStore.find((item) => item.code === code);
+const findAccountingPeriod = (fiscalYear: string) =>
+  accountingPeriodsStore.find((item) => item.fiscalYear === fiscalYear);
+
+const mapAccountingPeriodToDto = (period: AccountingPeriodDetailValues) => ({
+  fiscalYear: period.fiscalYear,
+  accountingPeriodStatus: period.accountingPeriodStatus,
+  subAccountingPeriodType: period.subAccountingPeriodType,
+  subAccountingPeriodProgress: period.subAccountingPeriodProgress,
+  ongoingSubAccountingPeriods: period.ongoingSubAccountingPeriods,
+  useSubAccountingPeriods: period.useSubAccountingPeriods,
+  regularUserLockOption: period.regularUserLockOption,
+  customLockNumberDays: period.customLockNumberDays,
+  customLockOption: period.customLockOption,
+  forceCustomDay: period.forceCustomDay,
+  forceOption: period.forceOption,
+  accountingOperationAction: period.accountingOperationAction,
+  startDate: period.startDate,
+  endDate: period.endDate,
+});
 
 const filterRatedTransactions = (filters: Record<string, unknown> | undefined) => {
   if (!filters || Object.keys(filters).length === 0) {
@@ -267,6 +289,171 @@ export const handlers = [
       item.disabled = true;
     }
     return HttpResponse.json(success('Accounting code disabled'));
+  }),
+
+  http.post('*/v2/generic/all/accountingPeriod', async ({ request }) => {
+    let body: Record<string, unknown> = {};
+    try {
+      body = (await request.json()) as Record<string, unknown>;
+    } catch (err) {
+      body = {};
+    }
+    const filters = (body.filters as Record<string, unknown>) ?? {};
+    const normalize = (value: unknown) =>
+      typeof value === 'string' && value.length > 0 ? value.toLowerCase() : undefined;
+
+    const fiscalYearFilter = normalize(filters.fiscalYear ?? filters.code ?? filters.query);
+    const statusFilter = normalize(filters.accountingPeriodStatus);
+
+    let periods = [...accountingPeriodsStore];
+    if (fiscalYearFilter) {
+      periods = periods.filter((item) => item.fiscalYear.toLowerCase().includes(fiscalYearFilter));
+    }
+    if (statusFilter) {
+      periods = periods.filter((item) =>
+        (item.accountingPeriodStatus ?? '').toLowerCase().includes(statusFilter),
+      );
+    }
+
+    const offset = typeof body.offset === 'number' ? Math.max(0, body.offset) : 0;
+    const limit = typeof body.limit === 'number' && body.limit >= 0 ? body.limit : periods.length;
+    const paginated = periods.slice(offset, offset + limit);
+
+    return HttpResponse.json({
+      actionStatus: success(),
+      results: paginated.map(mapAccountingPeriodToDto),
+      paging: { totalNumberOfRecords: periods.length },
+    });
+  }),
+
+  http.post('*/v2/accountingPeriodManagement/accountingPeriods', async ({ request }) => {
+    const payload = (await request.json()) as Partial<AccountingPeriodDetailValues>;
+    const fiscalYear =
+      typeof payload.fiscalYear === 'string' && payload.fiscalYear.length > 0
+        ? payload.fiscalYear
+        : `period-${Date.now()}`;
+    const detail: AccountingPeriodDetailValues = {
+      fiscalYear,
+      useSubAccountingPeriods: payload.useSubAccountingPeriods ?? false,
+      subAccountingPeriodType: payload.subAccountingPeriodType ?? undefined,
+      regularUserLockOption: payload.regularUserLockOption ?? undefined,
+      customLockNumberDays: payload.customLockNumberDays ?? undefined,
+      customLockOption: payload.customLockOption ?? undefined,
+      forceCustomDay: payload.forceCustomDay ?? undefined,
+      forceOption: payload.forceOption ?? undefined,
+      accountingOperationAction: payload.accountingOperationAction ?? undefined,
+      startDate: payload.startDate ?? undefined,
+      endDate: payload.endDate ?? undefined,
+      accountingPeriodStatus: payload.accountingPeriodStatus ?? 'OPEN',
+      subAccountingPeriodProgress: payload.subAccountingPeriodProgress ?? 'NOT_STARTED',
+      ongoingSubAccountingPeriods: payload.ongoingSubAccountingPeriods ?? 0,
+    };
+    const index = accountingPeriodsStore.findIndex((item) => item.fiscalYear === fiscalYear);
+    if (index >= 0) {
+      accountingPeriodsStore[index] = { ...accountingPeriodsStore[index], ...detail };
+    } else {
+      accountingPeriodsStore.push(detail);
+    }
+    return HttpResponse.json({ actionStatus: success('Created') });
+  }),
+
+  http.put('*/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}', async ({ params, request }) => {
+    const fiscalYear = String(params.fiscalYear);
+    const payload = (await request.json()) as Partial<AccountingPeriodDetailValues>;
+    const index = accountingPeriodsStore.findIndex((item) => item.fiscalYear === fiscalYear);
+    if (index >= 0) {
+      accountingPeriodsStore[index] = { ...accountingPeriodsStore[index], ...payload };
+    } else {
+      accountingPeriodsStore.push({
+        fiscalYear,
+        useSubAccountingPeriods: payload.useSubAccountingPeriods ?? false,
+        subAccountingPeriodType: payload.subAccountingPeriodType ?? undefined,
+        regularUserLockOption: payload.regularUserLockOption ?? undefined,
+        customLockNumberDays: payload.customLockNumberDays ?? undefined,
+        customLockOption: payload.customLockOption ?? undefined,
+        forceCustomDay: payload.forceCustomDay ?? undefined,
+        forceOption: payload.forceOption ?? undefined,
+        accountingOperationAction: payload.accountingOperationAction ?? undefined,
+        startDate: payload.startDate ?? undefined,
+        endDate: payload.endDate ?? undefined,
+        accountingPeriodStatus: payload.accountingPeriodStatus ?? 'OPEN',
+        subAccountingPeriodProgress: payload.subAccountingPeriodProgress ?? 'NOT_STARTED',
+        ongoingSubAccountingPeriods: payload.ongoingSubAccountingPeriods ?? 0,
+      });
+    }
+    return HttpResponse.json({ actionStatus: success('Updated') });
+  }),
+
+  http.put(
+    '*/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}/{status}',
+    ({ params }) => {
+      const fiscalYear = String(params.fiscalYear);
+      const status = String(params.status);
+      const period = findAccountingPeriod(fiscalYear);
+      if (period) {
+        period.accountingPeriodStatus = status;
+      }
+      return HttpResponse.json({ actionStatus: success('Status updated') });
+    },
+  ),
+
+  http.put(
+    '*/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}/subAccountingPeriods/{number}/allUsersStatus/{status}',
+    ({ params }) => {
+      const fiscalYear = String(params.fiscalYear);
+      const status = String(params.status);
+      const period = findAccountingPeriod(fiscalYear);
+      if (period) {
+        period.subAccountingPeriodProgress = status;
+        const number = Number(params.number);
+        if (!Number.isNaN(number)) {
+          period.ongoingSubAccountingPeriods = number;
+        }
+      }
+      return HttpResponse.json({ actionStatus: success('Sub status updated') });
+    },
+  ),
+
+  http.put(
+    '*/v2/accountingPeriodManagement/accountingPeriods/{fiscalYear}/subAccountingPeriods/{number}/regularUsersStatus/{status}',
+    ({ params }) => {
+      const fiscalYear = String(params.fiscalYear);
+      const status = String(params.status);
+      const period = findAccountingPeriod(fiscalYear);
+      if (period) {
+        period.subAccountingPeriodProgress = status;
+        const number = Number(params.number);
+        if (!Number.isNaN(number)) {
+          period.ongoingSubAccountingPeriods = number;
+        }
+      }
+      return HttpResponse.json({ actionStatus: success('Sub status updated') });
+    },
+  ),
+
+  http.post('*/v2/accountingPeriodManagement/accountingPeriods/generateNextAP', () => {
+    const numericYears = accountingPeriodsStore
+      .map((item) => Number.parseInt(item.fiscalYear, 10))
+      .filter((value) => !Number.isNaN(value));
+    const nextYearNumber = numericYears.length > 0 ? Math.max(...numericYears) + 1 : new Date().getFullYear();
+    const nextYear = String(nextYearNumber);
+    const base = accountingPeriodsStore[accountingPeriodsStore.length - 1] ?? accountingPeriodsStore[0];
+    const detail: AccountingPeriodDetailValues = {
+      ...(base ?? {
+        useSubAccountingPeriods: false,
+      }),
+      fiscalYear: nextYear,
+      accountingPeriodStatus: 'OPEN',
+      subAccountingPeriodProgress: 'NOT_STARTED',
+      ongoingSubAccountingPeriods: 0,
+      startDate: base?.startDate ?? new Date(Date.UTC(nextYearNumber, 0, 1)).toISOString(),
+      endDate: base?.endDate ?? new Date(Date.UTC(nextYearNumber, 11, 31, 23, 59, 59)).toISOString(),
+    };
+    accountingPeriodsStore.push(detail);
+    return HttpResponse.json({
+      actionStatus: success('Generated'),
+      accountingPeriod: mapAccountingPeriodToDto(detail),
+    });
   }),
 
   http.get('*/api/rest/invoice/list', () =>

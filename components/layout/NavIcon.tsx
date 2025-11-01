@@ -44,6 +44,7 @@ import CountertopsIcon from '@mui/icons-material/CountertopsOutlined';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmarkOutlined';
 import LocalOfferIcon from '@mui/icons-material/LocalOfferOutlined';
 import SellIcon from '@mui/icons-material/SellOutlined';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonthOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -90,6 +91,7 @@ const registry: Record<string, SvgIconComponent> = {
   counterTemplate: CountertopsIcon,
   discountPlan: LocalOfferIcon,
   discountPlanItem: SellIcon,
+  accountingPeriod: CalendarMonthIcon,
   providerContact: ContactsIcon,
 };
 

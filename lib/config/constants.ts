@@ -47,6 +47,9 @@ export const NAV_SECTIONS: Array<{
     | 'counterTemplate'
     | 'discountPlan'
     | 'discountPlanItem'
+    | 'accountingCode'
+    | 'accountingPeriod'
+    | 'mediation'
     | 'providerContact';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
@@ -101,6 +104,7 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.provider', path: '/provider', icon: 'provider' },
   { label: 'navigation.query', path: '/query', icon: 'query' },
   { label: 'navigation.accountingCodes', path: '/accounting-codes', icon: 'accountingCode' },
+  { label: 'navigation.accountingPeriods', path: '/accounting-periods', icon: 'accountingPeriod' },
   { label: 'navigation.mediation', path: '/mediation', icon: 'mediation' },
   { label: 'navigation.businessAccountModels', path: '/business-account-models', icon: 'businessAccountModel' },
   { label: 'navigation.providerContacts', path: '/provider-contacts', icon: 'providerContact' },

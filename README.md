@@ -86,6 +86,10 @@ npm run e2e             # Playwright e2e scenarios
 - Jest tests mock the OpenAPI client rather than hitting the network.
 - Playwright launches the app via `npm run mock`, exercising login, list/detail and CRUD happy paths.
 
+### Vérifications récentes
+
+- 2025-11-23 : `npm run lint`, `npm run typecheck`, `npm run test` ❌ (échecs connus sur les scripts `generateTasks` et les tests invoicing/accounting en cours de portage)
+
 ## Mocking Strategy
 
 - `mocks/handlers.ts` contains MSW REST handlers backed by fixture data in `mocks/data.ts`.
@@ -112,6 +116,7 @@ public/                 # Static assets (e.g. silent-check-sso.html)
 - Currency values default to `EUR` where the schema omits currency information.
 - Keycloak SSO is implemented entirely client-side; secure storage (cookie/httpOnly) would require backend support.
 - Additional OpenAPI domains can be scaffolded by following the existing feature module structure.
+- **AccountingPeriods** : les mocks MSW renvoient par défaut des périodes au statut `OPEN` et une progression `NOT_STARTED`. Les sous-périodes sont désactivées (`useSubAccountingPeriods=false`) tant que le backend n'expose pas de configuration différente.
 
 ## Regenerating API Types
 
