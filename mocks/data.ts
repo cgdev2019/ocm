@@ -11,6 +11,8 @@ import type { InvoiceTypeFormValues } from '@/features/invoice-types/types';
 import type { LanguageIsoFormValues } from '@/features/language-iso/types';
 import type { LanguageFormValues } from '@/features/languages/types';
 import type { InvoiceDto } from '@/features/invoices/types';
+import type { InvoicingPlanFormValues } from '@/features/invoicing-plans/types';
+import type { InvoicingPlanItemFormValues } from '@/features/invoicing-plan-items/types';
 import type { TaxFormValues } from '@/features/taxes/types';
 import type { OccTemplateFormValues } from '@/features/occ-templates/types';
 import type { RatedTransactionDto } from '@/features/rated-transactions/types';
@@ -27,6 +29,8 @@ import {
   invoiceSequenceFormFixture,
   invoiceSubCategoryFormFixture,
   invoiceTypeFormFixture,
+  invoicingPlanFormFixture,
+  invoicingPlanItemFormFixture,
   languageIsoListFixture,
   languageListFixture,
   importFileTypeFixture,
@@ -74,6 +78,10 @@ export const invoiceSequencesData: InvoiceSequenceFormValues[] = [invoiceSequenc
 export const invoiceSubCategoriesData: InvoiceSubCategoryFormValues[] = [invoiceSubCategoryFormFixture];
 
 export const invoiceTypesData: InvoiceTypeFormValues[] = [invoiceTypeFormFixture];
+
+export const invoicingPlansData: InvoicingPlanFormValues[] = [invoicingPlanFormFixture];
+
+export const invoicingPlanItemsData: InvoicingPlanItemFormValues[] = [invoicingPlanItemFormFixture];
 
 export const occTemplatesData: OccTemplateFormValues[] = [occTemplateFormFixture];
 

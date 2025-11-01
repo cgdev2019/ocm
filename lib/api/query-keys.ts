@@ -197,6 +197,29 @@ export const queryKeys = {
     all: () => ['files', 'all'] as const,
     version: () => ['files', 'version'] as const,
   },
+  invoicingPlanItems: {
+    list: (criteria?: Record<string, unknown>) =>
+      criteria
+        ? (['invoicingPlanItems', 'list', criteria] as const)
+        : (['invoicingPlanItems', 'list'] as const),
+    detail: (code: string) => ['invoicingPlanItems', 'detail', code] as const,
+    version: () => ['invoicingPlanItems', 'version'] as const,
+  },
+  invoicingPlans: {
+    list: (criteria?: Record<string, unknown>) =>
+      criteria
+        ? (['invoicingPlans', 'list', criteria] as const)
+        : (['invoicingPlans', 'list'] as const),
+    detail: (code: string) => ['invoicingPlans', 'detail', code] as const,
+    version: () => ['invoicingPlans', 'version'] as const,
+  },
+  invoicing: {
+    version: () => ['invoicing', 'version'] as const,
+    billingAccounts: () => ['invoicing', 'billingAccounts'] as const,
+    billingRunInfo: () => ['invoicing', 'billingRunInfo'] as const,
+    preInvoicingReport: () => ['invoicing', 'preInvoicingReport'] as const,
+    postInvoicingReport: () => ['invoicing', 'postInvoicingReport'] as const,
+  },
   ratedTransactions: {
     root: ['ratedTransactions'] as const,
     list: (params: {

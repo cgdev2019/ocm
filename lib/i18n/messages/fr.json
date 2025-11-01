@@ -8,6 +8,9 @@
     "customers": "Clients",
     "customerAccounts": "Comptes clients",
     "invoices": "Factures",
+    "invoicing": "Facturation",
+    "invoicingPlans": "Plans de facturation",
+    "invoicingPlanItems": "Échéances de plan",
     "subscriptions": "Abonnements",
     "taxes": "Taxes",
     "scriptInstances": "Instances de script",
@@ -63,7 +66,9 @@
     "add": "Ajouter",
     "enable": "Activer",
     "disable": "Désactiver",
-    "generateCode": "Générer un code"
+    "generateCode": "Générer un code",
+    "run": "Exécuter",
+    "load": "Charger"
   },
   "dashboard": {
     "welcome": "Bon retour, {name} !",
@@ -88,6 +93,7 @@
   },
   "forms": {
     "required": "Ce champ est obligatoire",
+    "selectPlaceholder": "Sélectionner une option",
     "invalidEmail": "Merci de saisir une adresse email valide",
     "invalidNumber": "Merci de saisir un nombre valide",
     "confirmDeletion": "Confirmez-vous la suppression ?",
@@ -447,6 +453,99 @@
       "matchingAuto": "Rapprochement automatique",
       "invoiceAccountable": "Comptabilisé en facture",
       "useSelfSequence": "Utiliser une séquence dédiée"
+    },
+    "invoicingPlan": {
+      "code": "Code",
+      "description": "Description",
+      "updatedCode": "Code mis à jour"
+    },
+    "invoicingPlanItem": {
+      "code": "Code",
+      "description": "Description",
+      "billingPlanCode": "Code du plan",
+      "advancement": "Avancement (%)",
+      "rateToBill": "Taux à facturer",
+      "updatedCode": "Code mis à jour"
+    },
+    "invoicing": {
+      "billingRunId": "Identifiant de campagne",
+      "invoiceIdsLabel": "Identifiants de facture",
+      "invoiceIdsHelper": "Séparer les valeurs par des virgules",
+      "deleteCanceledInvoices": "Supprimer les factures annulées",
+      "billingCycleCode": "Code du cycle",
+      "billingRunType": "Type de campagne",
+      "referenceDate": "Date de référence",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "invoiceDate": "Date de facture",
+      "lastTransactionDate": "Dernière transaction",
+      "collectionDate": "Date de prélèvement",
+      "rejectAutoAction": "Action automatique sur rejet",
+      "suspectAutoAction": "Action automatique sur suspect",
+      "computeDatesAtValidation": "Calculer les dates à la validation",
+      "skipValidationScript": "Ignorer le script de validation",
+      "generateAO": "Générer AO",
+      "invalidateXMLInvoices": "Invalider les factures XML",
+      "invalidatePDFInvoices": "Invalider les factures PDF",
+      "invoiceActions": {
+        "title": "Actions sur les factures",
+        "cancel": "Annuler les factures",
+        "move": "Déplacer les factures",
+        "reject": "Rejeter les factures",
+        "validate": "Valider les factures",
+        "rebuild": "Reconstruire les factures"
+      },
+      "createBillingRun": {
+        "title": "Création de campagne de facturation",
+        "submitCreate": "Créer la campagne",
+        "submitUpsert": "Créer ou mettre à jour"
+      },
+      "lifecycle": {
+        "title": "Cycle de vie de la campagne",
+        "cancelTitle": "Annuler la campagne",
+        "cancelSubmit": "Annuler",
+        "cancelByIdSubmit": "Annuler par ID",
+        "validateTitle": "Valider la campagne",
+        "validateSubmit": "Valider",
+        "validateByIdSubmit": "Valider par ID",
+        "deleteCanceledTitle": "Supprimer les factures annulées",
+        "deleteCanceledSubmit": "Supprimer",
+        "invalidateDocumentsTitle": "Invalider les documents",
+        "invalidateDocumentsSubmit": "Invalider"
+      },
+      "reports": {
+        "title": "Rapports",
+        "accountsTitle": "Comptes facturables",
+        "runInfoTitle": "Informations de campagne",
+        "preTitle": "Rapport pré-facturation",
+        "postTitle": "Rapport post-facturation"
+      },
+      "runInfo": {
+        "code": "Code",
+        "status": "Statut",
+        "billingCycle": "Cycle de facturation",
+        "processDate": "Date de traitement",
+        "invoiceDate": "Date de facture",
+        "statusDate": "Date de statut",
+        "amountWithoutTax": "Montant HT",
+        "amountTax": "Montant de taxe",
+        "amountWithTax": "Montant TTC"
+      },
+      "preReport": {
+        "billingCycleCode": "Cycle de facturation",
+        "billableAccounts": "Comptes facturables",
+        "totalAmountWithoutTax": "Montant total HT",
+        "taxesAmount": "Montant des taxes",
+        "lastTransactionDate": "Dernière transaction",
+        "invoiceDate": "Date de facture"
+      },
+      "postReport": {
+        "invoicesNumber": "Nombre de factures",
+        "positiveInvoicesAmount": "Montant factures positives",
+        "negativeInvoicesAmount": "Montant factures négatives",
+        "globalAmount": "Montant global"
+      },
+      "version": "Version du service : {version}"
     },
     "languageIso": {
       "code": "Code langue",
