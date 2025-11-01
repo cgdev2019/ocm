@@ -48,6 +48,7 @@
 - 2025-11-23 : API V2 articleMappingLine — hooks TanStack Query, mutations et fixtures ; test ciblé `npm run test -- --runTestsByPath features/article-mapping-lines/__tests__/useArticleMappingLineApi.test.tsx` ✅.
 - 2025-11-24 : API V2 AuxiliaryCode — hook TanStack Query, fixtures MSW et test ciblé `npm run test -- --runTestsByPath features/auxiliary-codes/__tests__/useAuxiliaryAccount.test.tsx` ✅.
 - 2025-11-24 : API V2 Collection Plan — hooks TanStack Query, mutations et test ciblé `npm run test -- --runTestsByPath features/collection-plans/__tests__/collectionPlanMutations.test.tsx` ✅.
+- 2025-11-24 : Tests ciblés Collection Plan Status — `npm run test -- --runTestsByPath features/collection-plan-statuses/__tests__/useCollectionPlanStatusMutations.test.tsx` ✅.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté le 23/11/2025, toujours présent).
