@@ -78,6 +78,8 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.pdfInvoices', path: '/pdf-invoices', icon: 'pdfInvoice' },
   { label: 'navigation.provider', path: '/provider', icon: 'provider' },
   { label: 'navigation.query', path: '/query', icon: 'query' },
+  { label: 'navigation.accountingCodes', path: '/accounting-codes', icon: 'accountingCode' },
+  { label: 'navigation.mediation', path: '/mediation', icon: 'mediation' },
   { label: 'navigation.businessAccountModels', path: '/business-account-models', icon: 'businessAccountModel' },
   { label: 'navigation.providerContacts', path: '/provider-contacts', icon: 'providerContact' },
 ];

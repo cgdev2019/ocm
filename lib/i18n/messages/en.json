@@ -44,6 +44,8 @@
     "pdfInvoices": "PDF invoices",
     "provider": "Provider",
     "query": "Query service",
+    "accountingCodes": "Accounting codes",
+    "mediation": "Mediation",
     "businessAccountModels": "Business account models",
     "providerContacts": "Provider contacts"
   },
@@ -139,6 +141,29 @@
       "description": "Description",
       "percent": "Percent",
       "accountingCode": "Accounting code"
+    },
+    "accountingCode": {
+      "code": "Accounting code",
+      "description": "Description",
+      "parentAccountingCode": "Parent accounting code",
+      "chartOfAccountType": "Chart of account type",
+      "chartOfAccountViewType": "Chart of account view",
+      "reportingAccount": "Reporting account",
+      "notes": "Notes",
+      "disabled": "Disabled",
+      "migrated": "Migrated",
+      "additionalInfo": "Additional information",
+      "type": {
+        "ASSETS": "Assets",
+        "LIABILITIES": "Liabilities",
+        "EQUITY": "Equity",
+        "REVENUE": "Revenue",
+        "EXPENSE": "Expense"
+      },
+      "view": {
+        "VIEW": "View",
+        "REGULAR": "Regular"
+      }
     },
     "scriptInstance": {
       "code": "Script code",
@@ -652,6 +677,71 @@
     "query": {
       "latestResult": "Latest result",
       "empty": "No data returned by the service."
+    },
+    "mediation": {
+      "register": {
+        "title": "Register CDR list",
+        "subtitle": "Send raw CDR lines to create EDR entries.",
+        "payload": "CDR payload"
+      },
+      "process": {
+        "title": "Process CDR list",
+        "subtitle": "Convert uploaded CDRs into EDRs without immediate rating.",
+        "payload": "CDR payload",
+        "resultTitle": "Processing summary",
+        "processed": "Processed records",
+        "rejected": "Rejected records",
+        "errors": "Errors",
+        "errorEntry": "CDR {id}: {reason}",
+        "unknownId": "unknown",
+        "noReason": "No reason provided"
+      },
+      "charge": {
+        "title": "Charge CDR",
+        "subtitle": "Parse, process and rate a CDR payload in one step.",
+        "payload": "CDR payload",
+        "maxDepth": "Max depth",
+        "resultTitle": "Charge summary",
+        "amountWithoutTax": "Amount without tax",
+        "amountTax": "Tax amount",
+        "amountWithTax": "Amount with tax",
+        "walletOperations": "Wallet operations",
+        "reservations": "Reservations: {ids}",
+        "edrs": "EDR IDs: {ids}",
+        "flags": {
+          "isVirtual": "Virtual",
+          "rateTriggeredEdr": "Rate triggered EDR",
+          "returnEDRs": "Return EDRs",
+          "returnWalletOperations": "Return wallet operations",
+          "returnWalletOperationDetails": "Return wallet details",
+          "returnCounters": "Return counters",
+          "generateRTs": "Generate rated transactions"
+        }
+      },
+      "reservations": {
+        "title": "Reservations",
+        "subtitle": "Manage prepaid reservations on charged CDRs.",
+        "payload": "Reservation payload",
+        "resultTitle": "Reservation summary",
+        "reservationId": "Reservation ID",
+        "availableQuantity": "Available quantity",
+        "consumedQuantity": "Consumed quantity",
+        "confirm": "Confirm reservation",
+        "cancel": "Cancel reservation"
+      },
+      "maintenance": {
+        "title": "Maintenance operations",
+        "subtitle": "Notify rejected CDRs or craft a single CDR manually.",
+        "rejectedPayload": "Rejected CDR payload",
+        "ipAddress": "Source IP address",
+        "eventDate": "Event date",
+        "quantity": "Quantity",
+        "accessCode": "Access code",
+        "parameter1": "Parameter 1",
+        "parameter2": "Parameter 2",
+        "parameter3": "Parameter 3",
+        "extraParam": "Extra parameter"
+      }
     }
   },
   "feedback": {

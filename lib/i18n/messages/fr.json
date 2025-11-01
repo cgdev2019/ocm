@@ -44,6 +44,8 @@
     "pdfInvoices": "Factures PDF",
     "provider": "Opérateur",
     "query": "Service Query",
+    "accountingCodes": "Codes comptables",
+    "mediation": "Médiation",
     "businessAccountModels": "Modèles de compte entreprise",
     "providerContacts": "Contacts opérateur"
   },
@@ -139,6 +141,29 @@
       "description": "Description",
       "percent": "Pourcentage",
       "accountingCode": "Code comptable"
+    },
+    "accountingCode": {
+      "code": "Code comptable",
+      "description": "Description",
+      "parentAccountingCode": "Code comptable parent",
+      "chartOfAccountType": "Type de compte",
+      "chartOfAccountViewType": "Vue comptable",
+      "reportingAccount": "Compte de reporting",
+      "notes": "Notes",
+      "disabled": "Désactivé",
+      "migrated": "Migré",
+      "additionalInfo": "Informations supplémentaires",
+      "type": {
+        "ASSETS": "Actifs",
+        "LIABILITIES": "Passifs",
+        "EQUITY": "Capitaux propres",
+        "REVENUE": "Produits",
+        "EXPENSE": "Charges"
+      },
+      "view": {
+        "VIEW": "Vue",
+        "REGULAR": "Standard"
+      }
     },
     "scriptInstance": {
       "code": "Code du script",
@@ -652,6 +677,71 @@
     "query": {
       "latestResult": "Dernier résultat",
       "empty": "Aucune donnée renvoyée par le service."
+    },
+    "mediation": {
+      "register": {
+        "title": "Enregistrer une liste de CDR",
+        "subtitle": "Envoyer des lignes CDR brutes pour créer des EDR.",
+        "payload": "Payload CDR"
+      },
+      "process": {
+        "title": "Traiter une liste de CDR",
+        "subtitle": "Convertir les CDR chargés en EDR sans tarification immédiate.",
+        "payload": "Payload CDR",
+        "resultTitle": "Résumé de traitement",
+        "processed": "Enregistrements traités",
+        "rejected": "Enregistrements rejetés",
+        "errors": "Erreurs",
+        "errorEntry": "CDR {id} : {reason}",
+        "unknownId": "inconnu",
+        "noReason": "Aucune raison fournie"
+      },
+      "charge": {
+        "title": "Tarifer un CDR",
+        "subtitle": "Parser, traiter et tarifer un CDR en une seule étape.",
+        "payload": "Payload CDR",
+        "maxDepth": "Profondeur max",
+        "resultTitle": "Résumé de tarification",
+        "amountWithoutTax": "Montant hors taxe",
+        "amountTax": "Montant taxe",
+        "amountWithTax": "Montant TTC",
+        "walletOperations": "Opérations de portefeuille",
+        "reservations": "Réservations : {ids}",
+        "edrs": "EDR : {ids}",
+        "flags": {
+          "isVirtual": "Virtuel",
+          "rateTriggeredEdr": "Tarifer l'EDR déclenché",
+          "returnEDRs": "Retourner les EDR",
+          "returnWalletOperations": "Retourner les opérations portefeuille",
+          "returnWalletOperationDetails": "Retourner le détail portefeuille",
+          "returnCounters": "Retourner les compteurs",
+          "generateRTs": "Générer des transactions tarifées"
+        }
+      },
+      "reservations": {
+        "title": "Réservations",
+        "subtitle": "Gérer les réservations prépayées issues du CDR.",
+        "payload": "Payload de réservation",
+        "resultTitle": "Résumé de réservation",
+        "reservationId": "ID de réservation",
+        "availableQuantity": "Quantité disponible",
+        "consumedQuantity": "Quantité consommée",
+        "confirm": "Confirmer la réservation",
+        "cancel": "Annuler la réservation"
+      },
+      "maintenance": {
+        "title": "Opérations de maintenance",
+        "subtitle": "Notifier les CDR rejetés ou créer un CDR manuel.",
+        "rejectedPayload": "Payload de CDR rejetés",
+        "ipAddress": "Adresse IP source",
+        "eventDate": "Date d'événement",
+        "quantity": "Quantité",
+        "accessCode": "Code d'accès",
+        "parameter1": "Paramètre 1",
+        "parameter2": "Paramètre 2",
+        "parameter3": "Paramètre 3",
+        "extraParam": "Paramètre additionnel"
+      }
     }
   },
   "feedback": {

@@ -8,6 +8,7 @@ import type {
   InvoiceValidationDto,
   InvalidateInvoiceDocumentsDto,
 } from '@/features/invoicing/types';
+import type { AccountingCodeFormValues } from '@/features/accounting-codes/types';
 import {
   customers,
   customerAccounts,
@@ -27,6 +28,7 @@ import {
   invoices,
   taxes,
   ratedTransactionsData,
+  accountingCodesData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
@@ -46,6 +48,9 @@ const invoicingPlanItemsStore = [...invoicingPlanItemsData];
 const languageIsosStore = [...languageIsosData];
 const languagesStore = [...languagesData];
 const ratedTransactionsStore = [...ratedTransactionsData];
+const accountingCodesStore = [...accountingCodesData];
+let nextReservationId = 200;
+const mediationReservations = new Map<number, { availableQuantity: number }>();
 
 const success = (message = 'OK') => ({ status: 'SUCCESS', message });
 
@@ -79,6 +84,7 @@ const findInvoicingPlanItem = (code: string) =>
   invoicingPlanItemsStore.find((item) => item.code === code);
 const findLanguageIso = (code: string) => languageIsosStore.find((item) => item.code === code);
 const findLanguage = (code: string) => languagesStore.find((item) => item.code === code);
+const findAccountingCode = (code: string) => accountingCodesStore.find((item) => item.code === code);
 
 const filterRatedTransactions = (filters: Record<string, unknown> | undefined) => {
   if (!filters || Object.keys(filters).length === 0) {
@@ -193,6 +199,74 @@ export const handlers = [
       customerAccountsStore.splice(index, 1);
     }
     return HttpResponse.json(success());
+  }),
+
+  http.get('*/api/rest/billing/accountingCode/listGetAll', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      accountingCodes: accountingCodesStore,
+    }),
+  ),
+  http.get('*/api/rest/billing/accountingCode/list', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      accountingCodes: accountingCodesStore,
+    }),
+  ),
+  http.get('*/api/rest/billing/accountingCode', ({ request }) => {
+    const url = new URL(request.url);
+    const code = url.searchParams.get('accountingCode');
+    const accountingCode = code ? findAccountingCode(code) : undefined;
+    if (!accountingCode) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), accountingCode });
+  }),
+  http.post('*/api/rest/billing/accountingCode', async ({ request }) => {
+    const payload = (await request.json()) as AccountingCodeFormValues;
+    accountingCodesStore.push({ ...payload });
+    return HttpResponse.json(success('Accounting code created'));
+  }),
+  http.put('*/api/rest/billing/accountingCode', async ({ request }) => {
+    const payload = (await request.json()) as AccountingCodeFormValues;
+    const index = accountingCodesStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      accountingCodesStore[index] = { ...accountingCodesStore[index], ...payload };
+    }
+    return HttpResponse.json(success('Accounting code updated'));
+  }),
+  http.post('*/api/rest/billing/accountingCode/createOrUpdate', async ({ request }) => {
+    const payload = (await request.json()) as AccountingCodeFormValues;
+    const index = accountingCodesStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      accountingCodesStore[index] = { ...accountingCodesStore[index], ...payload };
+    } else {
+      accountingCodesStore.push({ ...payload });
+    }
+    return HttpResponse.json(success('Accounting code saved'));
+  }),
+  http.delete('*/api/rest/billing/accountingCode/{accountingCode}', ({ params }) => {
+    const index = accountingCodesStore.findIndex((item) => item.code === params.accountingCode);
+    if (index >= 0) {
+      accountingCodesStore.splice(index, 1);
+    }
+    return HttpResponse.json(success('Accounting code removed'));
+  }),
+  http.post('*/api/rest/billing/accountingCode/{code}/enable', ({ params }) => {
+    const code = String(params.code);
+    const item = findAccountingCode(code);
+    if (item) {
+      item.disabled = false;
+    }
+    return HttpResponse.json(success('Accounting code enabled'));
+  }),
+  http.post('*/api/rest/billing/accountingCode/{code}/disable', ({ params }) => {
+    const code = String(params.code);
+    const item = findAccountingCode(code);
+    if (item) {
+      item.disabled = true;
+    }
+    return HttpResponse.json(success('Accounting code disabled'));
   }),
 
   http.get('*/api/rest/invoice/list', () =>
@@ -1047,6 +1121,68 @@ export const handlers = [
     });
   }),
   http.get('*/api/rest/billing/invoicing/version', () => HttpResponse.json(success('1.0.0'))),
+
+  http.post('*/api/rest/billing/mediation/registerCdrList', async ({ request }) => {
+    await request.text();
+    return HttpResponse.json(success('CDRs registered'));
+  }),
+  http.post('*/api/rest/billing/mediation/processCdrList', async ({ request }) => {
+    await request.text();
+    return HttpResponse.json({
+      actionStatus: success('CDRs processed'),
+      listProcessCdrDto: [
+        { cdrId: 1, status: 'PROCESSED' },
+        { cdrId: 2, status: 'ERROR', rejectReason: 'Missing wallet' },
+      ],
+    });
+  }),
+  http.post('*/api/rest/billing/mediation/chargeCdr', async ({ request }) => {
+    await request.text();
+    const reservationId = nextReservationId++;
+    mediationReservations.set(reservationId, { availableQuantity: 120 });
+    return HttpResponse.json({
+      actionStatus: success('CDR charged'),
+      amountWithoutTax: 1250.5,
+      amountTax: 250.1,
+      amountWithTax: 1500.6,
+      walletOperationCount: 4,
+      reservationIds: [reservationId],
+      edrIds: [9001, 9002],
+    });
+  }),
+  http.post('*/api/rest/billing/mediation/reserveCdr', async ({ request }) => {
+    await request.text();
+    const reservationId = nextReservationId++;
+    const availableQuantity = 100 + Math.random() * 50;
+    mediationReservations.set(reservationId, { availableQuantity });
+    return HttpResponse.json({
+      actionStatus: success('Reservation created'),
+      reservationId,
+      availableQuantity,
+    });
+  }),
+  http.post('*/api/rest/billing/mediation/confirmReservation', async ({ request }) => {
+    const payload = (await request.json()) as { reservationId?: number };
+    if (payload.reservationId && mediationReservations.has(payload.reservationId)) {
+      mediationReservations.delete(payload.reservationId);
+    }
+    return HttpResponse.json(success('Reservation confirmed'));
+  }),
+  http.post('*/api/rest/billing/mediation/cancelReservation', async ({ request }) => {
+    const payload = (await request.json()) as { reservationId?: number };
+    if (payload.reservationId && mediationReservations.has(payload.reservationId)) {
+      mediationReservations.delete(payload.reservationId);
+    }
+    return HttpResponse.json(success('Reservation cancelled'));
+  }),
+  http.post('*/api/rest/billing/mediation/notifyOfRejectedCdrs', async ({ request }) => {
+    await request.json();
+    return HttpResponse.json(success('Rejected CDRs notified'));
+  }),
+  http.post('*/api/rest/billing/mediation/createCDR', async ({ request }) => {
+    await request.json();
+    return HttpResponse.json(success('CDR created'));
+  }),
 
   http.post('*/api/rest/massImport/uploadAndImport', async ({ request }) => {
     const payload = (await request.json()) as { filename?: string };

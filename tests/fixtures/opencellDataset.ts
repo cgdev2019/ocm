@@ -124,6 +124,14 @@ import type {
 } from '@/features/titles/types';
 import type { FileListItem, GetFilesResponseDto } from '@/features/files/types';
 import type {
+  AccountingCodeDetailValues,
+  AccountingCodeDto,
+  AccountingCodeFormValues,
+  AccountingCodeGetResponseDto,
+  AccountingCodeListItem,
+  AccountingCodeListResponseDto,
+} from '@/features/accounting-codes/types';
+import type {
   GetCustomerAccountConfigurationResponseDto,
   GetCustomerConfigurationResponseDto,
   GetInvoicingConfigurationResponseDto,
@@ -182,6 +190,14 @@ import type {
   SubscriptionsListResponseDto,
 } from '@/features/subscriptions/types';
 import { DEFAULT_SUBSCRIPTIONS_PAGE_SIZE } from '@/features/subscriptions/api';
+import type {
+  ChargeCdrFormValues,
+  ChargeCdrResponseDto,
+  ChargeCdrSummary,
+  CdrReservationResponseDto,
+  RegisterCdrFormValues,
+  ReserveCdrFormValues,
+} from '@/features/mediation/types';
 
 export const DATASET_INVOICE_DATE = '2024-05-15T10:00:00.000Z';
 export const DATASET_INVOICE_DUE_DATE = '2024-05-29T10:00:00.000Z';
@@ -1136,6 +1152,109 @@ export const postInvoicingReportSummaryFixture: PostInvoicingReportSummary = {
 export const actionStatusSuccessFixture: ActionStatus = {
   status: 'SUCCESS',
   message: 'OK',
+};
+
+export const accountingCodeDtoFixture: AccountingCodeDto = {
+  code: 'ACC-1000',
+  description: 'Ventes France',
+  parentAccountingCode: 'ACC-100',
+  chartOfAccountTypeEnum: 'REVENUE',
+  chartOfAccountViewTypeEnum: 'REGULAR',
+  reportingAccount: '701000',
+  notes: 'Code principal ventes',
+  disabled: false,
+  migrated: false,
+};
+
+export const accountingCodeFormFixture: AccountingCodeFormValues = {
+  code: accountingCodeDtoFixture.code!,
+  description: accountingCodeDtoFixture.description!,
+  parentAccountingCode: accountingCodeDtoFixture.parentAccountingCode!,
+  chartOfAccountTypeEnum: accountingCodeDtoFixture.chartOfAccountTypeEnum,
+  chartOfAccountViewTypeEnum: accountingCodeDtoFixture.chartOfAccountViewTypeEnum,
+  reportingAccount: accountingCodeDtoFixture.reportingAccount!,
+  notes: accountingCodeDtoFixture.notes!,
+  disabled: accountingCodeDtoFixture.disabled!,
+  migrated: accountingCodeDtoFixture.migrated!,
+};
+
+export const accountingCodeListFixture: AccountingCodeListItem[] = [
+  {
+    code: accountingCodeDtoFixture.code!,
+    description: accountingCodeDtoFixture.description!,
+    chartOfAccountTypeEnum: accountingCodeDtoFixture.chartOfAccountTypeEnum,
+    chartOfAccountViewTypeEnum: accountingCodeDtoFixture.chartOfAccountViewTypeEnum,
+    parentAccountingCode: accountingCodeDtoFixture.parentAccountingCode!,
+    disabled: accountingCodeDtoFixture.disabled!,
+  },
+];
+
+export const accountingCodeListResponseFixture: AccountingCodeListResponseDto = {
+  actionStatus: actionStatusSuccessFixture,
+  accountingCodes: [accountingCodeDtoFixture],
+};
+
+export const accountingCodeResponseFixture: AccountingCodeGetResponseDto = {
+  actionStatus: actionStatusSuccessFixture,
+  accountingCode: accountingCodeDtoFixture,
+};
+
+export const accountingCodeDetailFixture: AccountingCodeDetailValues = {
+  code: accountingCodeDtoFixture.code!,
+  description: accountingCodeDtoFixture.description!,
+  parentAccountingCode: accountingCodeDtoFixture.parentAccountingCode!,
+  chartOfAccountTypeEnum: accountingCodeDtoFixture.chartOfAccountTypeEnum,
+  chartOfAccountViewTypeEnum: accountingCodeDtoFixture.chartOfAccountViewTypeEnum,
+  reportingAccount: accountingCodeDtoFixture.reportingAccount!,
+  notes: accountingCodeDtoFixture.notes!,
+  disabled: accountingCodeDtoFixture.disabled!,
+  migrated: accountingCodeDtoFixture.migrated!,
+};
+
+export const mediationRegisterFixture: RegisterCdrFormValues = {
+  payload: 'CDR|REGISTER|demo',
+};
+
+export const mediationChargeFormFixture: ChargeCdrFormValues = {
+  payload: 'CDR|CHARGE|demo',
+  isVirtual: true,
+  rateTriggeredEdr: true,
+  maxDepth: 3,
+  returnEDRs: true,
+  returnWalletOperations: false,
+  returnWalletOperationDetails: false,
+  returnCounters: false,
+  generateRTs: false,
+};
+
+export const mediationChargeResponseFixture: ChargeCdrResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Charged' },
+  amountWithoutTax: 1250.5,
+  amountTax: 250.1,
+  amountWithTax: 1500.6,
+  walletOperationCount: 4,
+  reservationIds: [12, 18],
+  edrIds: [101, 102],
+};
+
+export const mediationChargeSummaryFixture: ChargeCdrSummary = {
+  message: 'Charged',
+  amountWithoutTax: mediationChargeResponseFixture.amountWithoutTax,
+  amountTax: mediationChargeResponseFixture.amountTax,
+  amountWithTax: mediationChargeResponseFixture.amountWithTax,
+  walletOperationCount: mediationChargeResponseFixture.walletOperationCount,
+  reservationIds: mediationChargeResponseFixture.reservationIds,
+  edrIds: mediationChargeResponseFixture.edrIds,
+};
+
+export const mediationReservationFormFixture: ReserveCdrFormValues = {
+  payload: 'CDR|RESERVE|demo',
+};
+
+export const mediationReservationResponseFixture: CdrReservationResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Reservation created' },
+  reservationId: 42,
+  availableQuantity: 120.5,
 };
 
 export const languageIsoFormFixture: LanguageIsoFormValues = {
