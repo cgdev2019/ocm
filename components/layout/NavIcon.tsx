@@ -42,6 +42,8 @@ import HubIcon from '@mui/icons-material/HubOutlined';
 import PriceChangeIcon from '@mui/icons-material/PriceChangeOutlined';
 import CountertopsIcon from '@mui/icons-material/CountertopsOutlined';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmarkOutlined';
+import LocalOfferIcon from '@mui/icons-material/LocalOfferOutlined';
+import SellIcon from '@mui/icons-material/SellOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 
 const registry: Record<string, SvgIconComponent> = {
@@ -86,6 +88,8 @@ const registry: Record<string, SvgIconComponent> = {
   channelsAndSegments: HubIcon,
   chargeTemplate: PriceChangeIcon,
   counterTemplate: CountertopsIcon,
+  discountPlan: LocalOfferIcon,
+  discountPlanItem: SellIcon,
   providerContact: ContactsIcon,
 };
 

@@ -45,6 +45,8 @@ export const NAV_SECTIONS: Array<{
     | 'channelsAndSegments'
     | 'chargeTemplate'
     | 'counterTemplate'
+    | 'discountPlan'
+    | 'discountPlanItem'
     | 'providerContact';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
@@ -71,6 +73,8 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.channelsAndSegments', path: '/channels-and-segments', icon: 'channelsAndSegments' },
   { label: 'navigation.chargeTemplates', path: '/charge-templates', icon: 'chargeTemplate' },
   { label: 'navigation.counterTemplates', path: '/counter-templates', icon: 'counterTemplate' },
+  { label: 'navigation.discountPlans', path: '/discount-plans', icon: 'discountPlan' },
+  { label: 'navigation.discountPlanItems', path: '/discount-plan-items', icon: 'discountPlanItem' },
   { label: 'navigation.accesses', path: '/access', icon: 'access' },
   { label: 'navigation.billingCycles', path: '/billing-cycles', icon: 'billing' },
   { label: 'navigation.calendars', path: '/calendars', icon: 'calendar' },

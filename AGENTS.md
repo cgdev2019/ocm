@@ -36,6 +36,8 @@
 - 2025-11-23 : Services ChannelsAndSegments / ChargeTemplate / CounterTemplate finalisés (UI + hooks + tests ciblés `npm run test -- --runTestsByPath features/channels-and-segments/__tests__/useChannelsAndSegmentsApi.test.tsx features/charge-templates/__tests__/useChargeTemplateApi.test.tsx features/counter-templates/__tests__/useCounterTemplateApi.test.tsx` ) ✅.
 - 2025-11-23 : Service OfferTemplateCategory livré (UI + hooks + tests ciblés `npm run test -- --runTestsByPath features/offer-template-categories/__tests__/useOfferTemplateCategoryApi.test.tsx` ) ✅.
 
+- 2025-11-23 : Tests ciblés DiscountPlanItem / DiscountPlan — `npm run test -- --runTestsByPath features/discount-plan-items/__tests__/useDiscountPlanItemApi.test.tsx features/discount-plans/__tests__/useDiscountPlanApi.test.tsx` ✅.
+
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
@@ -96,9 +98,9 @@
 - [x] Service Channel — cf. `tasks/TASK045.md`
 - [x] Service ChannelsAndSegments — cf. `tasks/TASK046.md`
 - [x] Service ChargeTemplate — cf. `tasks/TASK047.md`
-- [x] Service CounterTemplate — cf. `tasks/TASK048.md`
-- [ ] Service DiscountPlanItem — cf. `tasks/TASK049.md`
-- [ ] Service DiscountPlan — cf. `tasks/TASK050.md`
+- [x] Service CounterTemplate — cf. `tasks/TASK048.md`51.md`
+- [x] Service DiscountPlanItem — cf. `tasks/TASK049.md`
+- [x] Service DiscountPlan — cf. `tasks/TASK050.md`
 - [x] Service OfferTemplateCategory — cf. `tasks/TASK051.md`
 - [ ] Service OfferTemplate — cf. `tasks/TASK052.md`
 - [ ] Service OneShotChargeTemplate — cf. `tasks/TASK053.md`

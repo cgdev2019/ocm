@@ -305,6 +305,20 @@ export const queryKeys = {
     detail: (code: string) => ['counterTemplates', 'detail', code] as const,
     version: () => ['counterTemplates', 'version'] as const,
   },
+  discountPlanItems: {
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['discountPlanItems', 'list', filters] as const) : (['discountPlanItems', 'list'] as const),
+    all: () => ['discountPlanItems', 'all'] as const,
+    detail: (code: string) => ['discountPlanItems', 'detail', code] as const,
+    version: () => ['discountPlanItems', 'version'] as const,
+  },
+  discountPlans: {
+    list: (filters?: Record<string, unknown>) =>
+      filters ? (['discountPlans', 'list', filters] as const) : (['discountPlans', 'list'] as const),
+    all: () => ['discountPlans', 'all'] as const,
+    detail: (code: string) => ['discountPlans', 'detail', code] as const,
+    version: () => ['discountPlans', 'version'] as const,
+  },
   channels: {
     list: (filters?: Record<string, unknown>) =>
       filters ? (['channels', 'list', filters] as const) : (['channels', 'list'] as const),
