@@ -17,6 +17,7 @@ import type { TaxFormValues } from '@/features/taxes/types';
 import type { OccTemplateFormValues } from '@/features/occ-templates/types';
 import type { RatedTransactionDto } from '@/features/rated-transactions/types';
 import type { AccountingCodeFormValues } from '@/features/accounting-codes/types';
+import type { AccountingArticleDto } from '@/features/accounting-articles/types';
 import {
   customerAccountFormFixtures,
   customerFormFixtures,
@@ -39,6 +40,7 @@ import {
   occTemplateFormFixture,
   ratedTransactionsFixture,
   accountingCodeFormFixture,
+  accountingArticleDtoFixture,
 } from '@/tests/fixtures/opencellDataset';
 
 export const customers: CustomerFormValues[] = customerFormFixtures;
@@ -103,3 +105,5 @@ export const massImportDetection = importFileTypeFixture;
 export const ratedTransactionsData: RatedTransactionDto[] = ratedTransactionsFixture;
 
 export const accountingCodesData: AccountingCodeFormValues[] = [accountingCodeFormFixture];
+
+export const accountingArticlesData: AccountingArticleDto[] = [accountingArticleDtoFixture];

@@ -42,6 +42,16 @@ export const queryKeys = {
     list: () => ['accountingCodes', 'list'] as const,
     detail: (code: string) => ['accountingCodes', 'detail', code] as const,
   },
+  accountingArticles: {
+    root: ['accountingArticles'] as const,
+    list: (params?: Record<string, unknown>) =>
+      params
+        ? (['accountingArticles', 'list', params] as const)
+        : (['accountingArticles', 'list'] as const),
+    detail: (code: string) => ['accountingArticles', 'detail', code] as const,
+    byProduct: (productCode: string, attributes: Record<string, unknown>) =>
+      ['accountingArticles', 'byProduct', productCode, attributes] as const,
+  },
   taxes: {
     list: () => ['taxes', 'list'] as const,
     detail: (code: string) => ['taxes', 'detail', code] as const,

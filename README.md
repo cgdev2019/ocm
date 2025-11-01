@@ -110,6 +110,8 @@ public/                 # Static assets (e.g. silent-check-sso.html)
 - The invoice creation endpoint requires detailed financial payloads; the UI provides a simplified form suitable for the MSW fixtures. Document fill-outs may need adjustment for real data.
 - Tax/Customer Account endpoints in the legacy API are marked deprecated but still functional; production usage should confirm with backend team.
 - Currency values default to `EUR` where the schema omits currency information.
+- Accounting article V2 endpoints have no explicit response schema; the UI assumes a payload containing `actionStatus`,
+  `accountingArticles`, and `totalRecords` fields consistent with other paginated services.
 - Keycloak SSO is implemented entirely client-side; secure storage (cookie/httpOnly) would require backend support.
 - Additional OpenAPI domains can be scaffolded by following the existing feature module structure.
 

@@ -59,7 +59,8 @@
     "accountingCodes": "Codes comptables",
     "mediation": "Médiation",
     "businessAccountModels": "Modèles de compte entreprise",
-    "providerContacts": "Contacts opérateur"
+    "providerContacts": "Contacts opérateur",
+    "accountingArticles": "Articles comptables"
   },
   "breadcrumbs": {
     "ariaLabel": "Fil d'Ariane",
@@ -1080,6 +1081,34 @@
       "enable": "Activer",
       "disable": "Désactiver",
       "enabled": "Plan de remise activé"
+    },
+    "invalidJson": "Format JSON invalide",
+    "accountingArticle": {
+      "code": "Code",
+      "description": "Description",
+      "invoiceSubCategory": "Sous-catégorie de facture",
+      "taxClass": "Classe de taxe",
+      "accountingCode": "Code comptable",
+      "articleFamily": "Famille d'article",
+      "invoiceType": "Type de facture",
+      "unitPrice": "Prix unitaire",
+      "invoiceTypeEl": "Expression type de facture",
+      "accountingCodeEl": "Expression code comptable",
+      "columnCriteriaEl": "Expression critère de colonne",
+      "analyticCode1": "Code analytique 1",
+      "analyticCode2": "Code analytique 2",
+      "analyticCode3": "Code analytique 3",
+      "ignoreAggregation": "Ignorer l'agrégation",
+      "languageDescriptions": "Descriptions par langue",
+      "languageCode": "Code langue",
+      "languageDescription": "Description",
+      "noLanguageDescriptions": "Aucune traduction définie",
+      "customFields": "Champs personnalisés",
+      "noCustomFields": "Aucun champ personnalisé configuré",
+      "generalInformation": "Informations générales",
+      "accountingInformation": "Informations comptables",
+      "analyticsSection": "Analytique",
+      "deleteConfirmation": "Confirmer la suppression de l’article comptable {code} ?"
     }
   },
   "feedback": {
