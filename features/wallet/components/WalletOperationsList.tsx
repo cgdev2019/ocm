@@ -222,9 +222,10 @@ export const WalletOperationsList = () => {
           columns={columns}
           loading={operationsQuery.isLoading || operationsQuery.isFetching}
           disableRowSelectionOnClick
-          paginationMode="client"
+          paginationMode="server"
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
+          rowCount={operationsQuery.data?.totalRecords ?? 0}
           pageSizeOptions={[10, 20, 50]}
           sortingMode="client"
           sortModel={sortModel}
