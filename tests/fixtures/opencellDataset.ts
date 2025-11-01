@@ -12,6 +12,13 @@ import type {
   BillingCyclesResponseDto,
 } from '@/features/billing-cycles/types';
 import type {
+  AccountingPeriodDetailValues,
+  AccountingPeriodDto,
+  AccountingPeriodFormValues,
+  AccountingPeriodListItem,
+  AccountingPeriodListResponse,
+} from '@/features/accounting-periods/types';
+import type {
   CalendarFormValues,
   CalendarListItem,
   ListCalendarResponse,
@@ -1222,6 +1229,62 @@ export const accountingCodeDetailFixture: AccountingCodeDetailValues = {
   migrated: accountingCodeDtoFixture.migrated!,
 };
 
+export const accountingPeriodDtoFixture: AccountingPeriodDto = {
+  fiscalYear: '2024',
+  accountingPeriodStatus: 'OPEN',
+  subAccountingPeriodType: 'MONTHLY',
+  subAccountingPeriodProgress: 'IN_PROGRESS',
+  ongoingSubAccountingPeriods: 2,
+  useSubAccountingPeriods: true,
+  regularUserLockOption: 'AUTO',
+  customLockNumberDays: 3,
+  customLockOption: 'NONE',
+  forceCustomDay: 15,
+  forceOption: 'NONE',
+  accountingOperationAction: 'CLOSE',
+  startDate: '2024-01-01T00:00:00Z',
+  endDate: '2024-12-31T23:59:59Z',
+};
+
+export const accountingPeriodFormFixture: AccountingPeriodFormValues = {
+  fiscalYear: accountingPeriodDtoFixture.fiscalYear!,
+  useSubAccountingPeriods: true,
+  subAccountingPeriodType: accountingPeriodDtoFixture.subAccountingPeriodType!,
+  regularUserLockOption: accountingPeriodDtoFixture.regularUserLockOption!,
+  customLockNumberDays: accountingPeriodDtoFixture.customLockNumberDays!,
+  customLockOption: accountingPeriodDtoFixture.customLockOption!,
+  forceCustomDay: accountingPeriodDtoFixture.forceCustomDay!,
+  forceOption: accountingPeriodDtoFixture.forceOption!,
+  accountingOperationAction: accountingPeriodDtoFixture.accountingOperationAction!,
+  startDate: accountingPeriodDtoFixture.startDate!,
+  endDate: accountingPeriodDtoFixture.endDate!,
+};
+
+export const accountingPeriodDetailFixture: AccountingPeriodDetailValues = {
+  ...accountingPeriodFormFixture,
+  accountingPeriodStatus: accountingPeriodDtoFixture.accountingPeriodStatus!,
+  subAccountingPeriodProgress: accountingPeriodDtoFixture.subAccountingPeriodProgress!,
+  ongoingSubAccountingPeriods: accountingPeriodDtoFixture.ongoingSubAccountingPeriods!,
+};
+
+export const accountingPeriodListItemFixture: AccountingPeriodListItem = {
+  fiscalYear: accountingPeriodDtoFixture.fiscalYear!,
+  status: accountingPeriodDtoFixture.accountingPeriodStatus!,
+  subAccountingPeriodType: accountingPeriodDtoFixture.subAccountingPeriodType!,
+  subAccountingPeriodProgress: accountingPeriodDtoFixture.subAccountingPeriodProgress!,
+  ongoingSubAccountingPeriods: accountingPeriodDtoFixture.ongoingSubAccountingPeriods!,
+  startDate: accountingPeriodDtoFixture.startDate!,
+  endDate: accountingPeriodDtoFixture.endDate!,
+  useSubAccountingPeriods: Boolean(accountingPeriodDtoFixture.useSubAccountingPeriods),
+};
+
+export const accountingPeriodListResponseFixture: AccountingPeriodListResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'Generated' },
+  results: [accountingPeriodDtoFixture],
+  paging: { totalNumberOfRecords: 1 },
+};
+
+export const accountingPeriodListItemsFixture: AccountingPeriodListItem[] = [accountingPeriodListItemFixture];
 export const accountingArticleDtoFixture: AccountingArticleDto = {
   id: 101,
   code: 'ART-STD',

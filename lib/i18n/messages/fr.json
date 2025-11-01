@@ -57,6 +57,7 @@
     "provider": "Opérateur",
     "query": "Service Query",
     "accountingCodes": "Codes comptables",
+    "accountingPeriods": "Périodes comptables",
     "mediation": "Médiation",
     "businessAccountModels": "Modèles de compte entreprise",
     "providerContacts": "Contacts opérateur",
@@ -83,7 +84,8 @@
     "disable": "Désactiver",
     "generateCode": "Générer un code",
     "run": "Exécuter",
-    "load": "Charger"
+    "load": "Charger",
+    "all": "Tous"
   },
   "dashboard": {
     "welcome": "Bon retour, {name} !",
@@ -112,8 +114,10 @@
     "selectPlaceholder": "Sélectionner une option",
     "invalidEmail": "Merci de saisir une adresse email valide",
     "invalidNumber": "Merci de saisir un nombre valide",
+    "invalidDate": "Merci de saisir une date valide",
     "confirmDeletion": "Confirmez-vous la suppression ?",
     "success": "Modifications enregistrées",
+    "saved": "Enregistré",
     "error": "Une erreur est survenue",
     "customer": {
       "code": "Code",
@@ -178,6 +182,35 @@
         "VIEW": "Vue",
         "REGULAR": "Standard"
       }
+    },
+    "accountingPeriod": {
+      "fiscalYear": "Exercice fiscal",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "status": "Statut",
+      "subAccountingPeriodType": "Type de sous-période",
+      "subAccountingPeriodProgress": "Progression des sous-périodes",
+      "ongoingSubAccountingPeriods": "Sous-périodes en cours",
+      "useSubAccountingPeriods": "Utiliser des sous-périodes",
+      "regularUserLockOption": "Verrouillage utilisateurs réguliers",
+      "customLockNumberDays": "Verrouillage personnalisé (jours)",
+      "customLockOption": "Option de verrouillage personnalisé",
+      "forceCustomDay": "Jour forcé",
+      "forceOption": "Option de forçage",
+      "accountingOperationAction": "Action sur opérations comptables",
+      "generateNext": "Générer la période suivante",
+      "generateSuccess": "Période suivante générée",
+      "generateSuccessWithYear": "Période suivante générée ({fiscalYear})",
+      "searchLabel": "Rechercher par exercice ou code",
+      "statusFilterLabel": "Filtrer par statut",
+      "applyStatus": "Appliquer le statut",
+      "updateStatusTitle": "Mettre à jour le statut global",
+      "updateAllUsersTitle": "Statut pour tous les utilisateurs",
+      "updateRegularUsersTitle": "Statut pour les utilisateurs réguliers",
+      "subPeriodNumber": "Numéro de sous-période",
+      "reason": "Motif",
+      "subStatusUpdated": "Statut de sous-période mis à jour",
+      "statusUpdated": "Statut de la période mis à jour"
     },
     "scriptInstance": {
       "code": "Code du script",

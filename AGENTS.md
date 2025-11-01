@@ -39,6 +39,7 @@
 - 2025-11-23 : API V2 AccountingCodeMapping (hooks TanStack Query, MSW, tests ciblés `npm run test -- --runTestsByPath features/accounting-code-mappings/__tests__/useAccountingCodeMappingMutations.test.tsx` ) ✅.
 
 - 2025-11-23 : Tests ciblés DiscountPlanItem / DiscountPlan — `npm run test -- --runTestsByPath features/discount-plan-items/__tests__/useDiscountPlanItemApi.test.tsx features/discount-plans/__tests__/useDiscountPlanApi.test.tsx` ✅.
+- 2025-11-23 : AccountingPeriods V2 — `npm run lint`, `npm run typecheck`, `npm run test` ❌ (échecs existants : lint sur `scripts/generateTasks.mjs`, typecheck/tests sur modules invoicing historiques).
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
@@ -55,7 +56,7 @@
 ## Tâches services à implémenter
 - [x] API V2 AccountingArticle — cf. `tasks/v2/TASK001.md` (tests: `npm run lint` ⚠️, `npm run test -- --runTestsByPath features/accounting-articles/__tests__/useAccountingArticles.test.tsx` ✅)
 - [x] API V2 AccountingCodeMapping — cf. `tasks/v2/TASK002.md`
-- [ ] API V2 AccountingPeriods — cf. `tasks/v2/TASK003.md`
+- [x] API V2 AccountingPeriods — cf. `tasks/v2/TASK003.md`
 - [ ] API V2 AccountOperation — cf. `tasks/v2/TASK004.md`
 - [ ] API V2 AgedReceivables — cf. `tasks/v2/TASK005.md`
 - [ ] API V2 AllowedParents — cf. `tasks/v2/TASK006.md`
