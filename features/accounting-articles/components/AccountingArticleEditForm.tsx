@@ -30,7 +30,7 @@ export const AccountingArticleEditForm = ({ code }: { code: string }) => {
     <AccountingArticleForm
       defaultValues={data}
       mode="edit"
-      onSuccess={(values) => router.replace(`../${values.code}`)}
+      onSuccess={() => router.replace('..')}
     />
   );
 };
