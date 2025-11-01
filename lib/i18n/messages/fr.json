@@ -7,6 +7,7 @@
     "dashboard": "Tableau de bord",
     "customers": "Clients",
     "customerAccounts": "Comptes clients",
+    "accountOperations": "Opérations de compte",
     "invoices": "Factures",
     "invoicing": "Facturation",
     "invoicingPlans": "Plans de facturation",
@@ -141,6 +142,15 @@
       "language": "Langue",
       "paymentMethod": "Mode de paiement",
       "creditLimit": "Limite de crédit"
+    },
+    "accountOperation": {
+      "title": "Assigner une opération de compte",
+      "helper": "Associez une opération de compte existante à un compte client.",
+      "accountOperationId": "ID de l'opération de compte",
+      "customerAccountCode": "Code du compte client",
+      "customerAccountId": "ID du compte client (optionnel)",
+      "customerAccountIdHelper": "Optionnel. Renseignez l'identifiant numérique si vous ciblez le compte par ID.",
+      "success": "Opération de compte assignée au client"
     },
     "invoice": {
       "number": "Numéro de facture",

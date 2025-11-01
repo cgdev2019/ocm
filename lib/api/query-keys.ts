@@ -11,6 +11,9 @@ export const queryKeys = {
       filters ? ['customerAccounts', 'list', filters] as const : ['customerAccounts', 'list'] as const,
     detail: (code: string) => ['customerAccounts', 'detail', code] as const,
   },
+  accountOperations: {
+    root: ['accountOperations'] as const,
+  },
   invoices: {
     list: (filters?: Record<string, unknown>) =>
       filters ? ['invoices', 'list', filters] as const : ['invoices', 'list'] as const,

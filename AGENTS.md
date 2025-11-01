@@ -40,9 +40,10 @@
 
 - 2025-11-23 : Tests ciblés DiscountPlanItem / DiscountPlan — `npm run test -- --runTestsByPath features/discount-plan-items/__tests__/useDiscountPlanItemApi.test.tsx features/discount-plans/__tests__/useDiscountPlanApi.test.tsx` ✅.
 - 2025-11-23 : AccountingPeriods V2 — `npm run lint`, `npm run typecheck`, `npm run test` ❌ (échecs existants : lint sur `scripts/generateTasks.mjs`, typecheck/tests sur modules invoicing historiques).
+- 2025-11-23 : Vérifs `npm run lint` ❌ (scripts generateTasks/generateViewTasks), `npm run typecheck` ❌ (erreurs OpenAPI historiques), test ciblé AccountOperation `npm run test -- --runTestsByPath features/account-operations/__tests__/useAccountOperations.test.tsx` ✅.
 
 ## A faire rapidement
-- [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté, toujours présent).
+- [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté le 23/11/2025, toujours présent).
 - [x] Corriger `npm run typecheck`: `createNextIntlPlugin` n'accepte pas les props `locales/defaultLocale`; pointer vers `./i18n/request.ts` ou reutiliser `lib/i18n/config` pour fournir la config.
 - [x] Remplacer les imports relatifs dans `i18n/request.ts` par l'alias `@/` et retirer `/* eslint-disable no-restricted-imports */`.
 - [x] Relancer Playwright (`npm run mock` puis `npm run e2e`) une fois l'intl corrige; `test-results/.last-run.json` indique un echec actuel.
@@ -58,7 +59,7 @@
 - [x] API V2 AccountingArticle — cf. `tasks/v2/TASK001.md` (tests: `npm run lint` ⚠️, `npm run test -- --runTestsByPath features/accounting-articles/__tests__/useAccountingArticles.test.tsx` ✅)
 - [x] API V2 AccountingCodeMapping — cf. `tasks/v2/TASK002.md`
 - [x] API V2 AccountingPeriods — cf. `tasks/v2/TASK003.md`
-- [ ] API V2 AccountOperation — cf. `tasks/v2/TASK004.md`
+- [x] API V2 AccountOperation — cf. `tasks/v2/TASK004.md`
 - [ ] API V2 AgedReceivables — cf. `tasks/v2/TASK005.md`
 - [ ] API V2 AllowedParents — cf. `tasks/v2/TASK006.md`
 - [ ] API V2 articleMapping — cf. `tasks/v2/TASK007.md`
