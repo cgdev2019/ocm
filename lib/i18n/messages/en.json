@@ -19,6 +19,7 @@
     "terminationReasons": "Termination reasons",
     "usage": "Usage",
     "ratedTransactions": "Rated transactions",
+    "agedReceivables": "Aged receivables",
     "wallet": "Wallet",
     "bundleTemplates": "Bundle templates",
     "offerTemplateCategories": "Offer template categories",
@@ -339,6 +340,25 @@
       "description": "Description",
       "unityDescription": "Unit description",
       "detailTitle": "Transaction details"
+    },
+    "agedReceivable": {
+      "filtersTitle": "Filter aged receivables",
+      "customerAccountCode": "Customer account code",
+      "customerAccountDescription": "Customer account description",
+      "sellerCode": "Seller code",
+      "sellerDescription": "Seller description",
+      "invoiceNumber": "Invoice number",
+      "invoiceDate": "Invoice date",
+      "dueDate": "Due date",
+      "tradingCurrency": "Trading currency",
+      "funcCurrency": "Functional currency",
+      "notDueAmount": "Not yet due",
+      "totalAmount": "Total amount",
+      "startDate": "Start date",
+      "startDueDate": "Start due date",
+      "endDueDate": "End due date",
+      "stepInDays": "Step (days)",
+      "numberOfPeriods": "Number of periods"
     },
     "access": {
       "code": "Access code",

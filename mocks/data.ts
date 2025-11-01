@@ -16,6 +16,7 @@ import type { InvoicingPlanItemFormValues } from '@/features/invoicing-plan-item
 import type { TaxFormValues } from '@/features/taxes/types';
 import type { OccTemplateFormValues } from '@/features/occ-templates/types';
 import type { RatedTransactionDto } from '@/features/rated-transactions/types';
+import type { AgedReceivableDto } from '@/features/aged-receivables/types';
 import type { AccountingCodeFormValues } from '@/features/accounting-codes/types';
 import type { AccountingPeriodDetailValues } from '@/features/accounting-periods/types';
 import type { AccountingCodeMappingFormValues } from '@/features/accounting-code-mappings/types';
@@ -42,6 +43,7 @@ import {
   taxFormFixtures,
   occTemplateFormFixture,
   ratedTransactionsFixture,
+  agedReceivablesFixture,
   accountingCodeFormFixture,
   accountingPeriodDetailFixture,
   accountingCodeMappingFormFixture,
@@ -109,6 +111,11 @@ export const languagesData: LanguageFormValues[] = languageListFixture.map(({ co
 export const massImportDetection = importFileTypeFixture;
 
 export const ratedTransactionsData: RatedTransactionDto[] = ratedTransactionsFixture;
+
+export const agedReceivablesData: AgedReceivableDto[] = agedReceivablesFixture.map((item) => ({
+  ...item,
+  buckets: item.buckets?.map((bucket) => ({ ...bucket })) ?? [],
+}));
 
 export const accountingCodesData: AccountingCodeFormValues[] = [accountingCodeFormFixture];
 

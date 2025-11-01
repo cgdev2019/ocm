@@ -119,6 +119,7 @@ public/                 # Static assets (e.g. silent-check-sso.html)
 - Keycloak SSO is implemented entirely client-side; secure storage (cookie/httpOnly) would require backend support.
 - Additional OpenAPI domains can be scaffolded by following the existing feature module structure.
 - **AccountingPeriods** : les mocks MSW renvoient par défaut des périodes au statut `OPEN` et une progression `NOT_STARTED`. Les sous-périodes sont désactivées (`useSubAccountingPeriods=false`) tant que le backend n'expose pas de configuration différente.
+- **AgedReceivables V2** : la réponse n'étant pas décrite dans le schéma OpenAPI, nous supposons un objet `{ actionStatus, paging, bucketLabels, agedReceivables }`. Chaque ligne expose un tableau `buckets` (libellé + montant) converti en colonnes dynamiques côté UI.
 
 ## Regenerating API Types
 

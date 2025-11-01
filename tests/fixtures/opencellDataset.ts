@@ -18,6 +18,11 @@ import type {
   BillingCyclesResponseDto,
 } from '@/features/billing-cycles/types';
 import type {
+  AgedReceivableDto,
+  AgedReceivableListItem,
+  AgedReceivablesResponseDto,
+} from '@/features/aged-receivables/types';
+import type {
   AccountingPeriodDetailValues,
   AccountingPeriodDto,
   AccountingPeriodFormValues,
@@ -364,6 +369,100 @@ export const ratedTransactionsResponseFixture: RatedTransactionListResponseDto =
   },
   ratedTransactions: ratedTransactionsFixture,
 };
+
+export const agedReceivablesResponseFixture: AgedReceivablesResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'Aged receivables loaded' },
+  paging: {
+    offset: 0,
+    limit: 20,
+    totalNumberOfRecords: 2,
+  },
+  bucketLabels: ['0-30', '31-60', '61-90'],
+  agedReceivables: [
+    {
+      id: 'AR-001',
+      customerAccountCode: 'CUST-001',
+      customerAccountDescription: 'Médiapost Paris',
+      sellerCode: 'SELLER-1',
+      sellerDescription: 'Domestic sales',
+      invoiceNumber: 'INV-2024-001',
+      invoiceDate: '2024-01-15T00:00:00.000Z',
+      dueDate: '2024-02-14T00:00:00.000Z',
+      tradingCurrency: 'EUR',
+      funcCurrency: 'EUR',
+      notDueAmount: 120,
+      totalAmount: 560,
+      buckets: [
+        { label: '0-30', amount: 220 },
+        { label: '31-60', amount: 140 },
+        { label: '61-90', amount: 80 },
+      ],
+    },
+    {
+      id: 'AR-002',
+      customerAccountCode: 'CUST-002',
+      customerAccountDescription: 'Agence Lyon',
+      sellerCode: 'SELLER-2',
+      sellerDescription: 'International sales',
+      invoiceNumber: 'INV-2024-045',
+      invoiceDate: '2024-02-01T00:00:00.000Z',
+      dueDate: '2024-03-02T00:00:00.000Z',
+      tradingCurrency: 'USD',
+      funcCurrency: 'EUR',
+      notDueAmount: 90,
+      totalAmount: 300,
+      buckets: [
+        { label: '0-30', amount: 110 },
+        { label: '31-60', amount: 60 },
+        { label: '61-90', amount: 40 },
+      ],
+    },
+  ],
+};
+
+export const agedReceivablesFixture: AgedReceivableDto[] =
+  agedReceivablesResponseFixture.agedReceivables ?? [];
+
+export const agedReceivablesListFixture: AgedReceivableListItem[] = [
+  {
+    id: 'AR-001',
+    customerAccountCode: 'CUST-001',
+    customerAccountDescription: 'Médiapost Paris',
+    sellerCode: 'SELLER-1',
+    sellerDescription: 'Domestic sales',
+    invoiceNumber: 'INV-2024-001',
+    invoiceDate: '2024-01-15T00:00:00.000Z',
+    dueDate: '2024-02-14T00:00:00.000Z',
+    tradingCurrency: 'EUR',
+    funcCurrency: 'EUR',
+    notDueAmount: 120,
+    totalAmount: 560,
+    bucketAmounts: {
+      '0-30': 220,
+      '31-60': 140,
+      '61-90': 80,
+    },
+  },
+  {
+    id: 'AR-002',
+    customerAccountCode: 'CUST-002',
+    customerAccountDescription: 'Agence Lyon',
+    sellerCode: 'SELLER-2',
+    sellerDescription: 'International sales',
+    invoiceNumber: 'INV-2024-045',
+    invoiceDate: '2024-02-01T00:00:00.000Z',
+    dueDate: '2024-03-02T00:00:00.000Z',
+    tradingCurrency: 'USD',
+    funcCurrency: 'EUR',
+    notDueAmount: 90,
+    totalAmount: 300,
+    bucketAmounts: {
+      '0-30': 110,
+      '31-60': 60,
+      '61-90': 40,
+    },
+  },
+];
 
 export const customersResponseFixture: CustomersResponseDto = {
   actionStatus: { status: 'SUCCESS', message: 'Jeu de données mock' },

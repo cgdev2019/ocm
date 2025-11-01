@@ -51,7 +51,8 @@ export const NAV_SECTIONS: Array<{
     | 'accountingPeriod'
     | 'mediation'
     | 'providerContact'
-    | 'accountingArticle';
+    | 'accountingArticle'
+    | 'agedReceivable';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
   { label: 'navigation.customers', path: '/customers', icon: 'customers' },
@@ -68,6 +69,7 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.terminationReasons', path: '/termination-reasons', icon: 'terminationReason' },
   { label: 'navigation.usage', path: '/usage', icon: 'usage' },
   { label: 'navigation.ratedTransactions', path: '/rated-transactions', icon: 'billing' },
+  { label: 'navigation.agedReceivables', path: '/aged-receivables', icon: 'agedReceivable' },
   { label: 'navigation.wallet', path: '/wallet', icon: 'billing' },
   { label: 'navigation.bundleTemplates', path: '/bundle-templates', icon: 'billing' },
   { label: 'navigation.offerTemplateCategories', path: '/offer-template-categories', icon: 'offerTemplateCategory' },

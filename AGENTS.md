@@ -41,6 +41,8 @@
 - 2025-11-23 : Tests ciblés DiscountPlanItem / DiscountPlan — `npm run test -- --runTestsByPath features/discount-plan-items/__tests__/useDiscountPlanItemApi.test.tsx features/discount-plans/__tests__/useDiscountPlanApi.test.tsx` ✅.
 - 2025-11-23 : AccountingPeriods V2 — `npm run lint`, `npm run typecheck`, `npm run test` ❌ (échecs existants : lint sur `scripts/generateTasks.mjs`, typecheck/tests sur modules invoicing historiques).
 - 2025-11-23 : Vérifs `npm run lint` ❌ (scripts generateTasks/generateViewTasks), `npm run typecheck` ❌ (erreurs OpenAPI historiques), test ciblé AccountOperation `npm run test -- --runTestsByPath features/account-operations/__tests__/useAccountOperations.test.tsx` ✅.
+- 2025-11-23 : Vérifs ciblées AgedReceivables — `npm run lint` ❌ (avis existants), `npm run typecheck` ❌ (erreurs historiques), `npm run test -- --runTestsByPath features/aged-receivables/__tests__/useAgedReceivables.test.tsx` ✅, `npm run e2e -- tests/e2e/aged-receivables.spec.ts --project=chromium` ⚠️ (navigateur Playwright non installé).
+- 2025-11-23 : Re-run ciblé AgedReceivables — `npm run test -- --runTestsByPath features/aged-receivables/__tests__/useAgedReceivables.test.tsx` ✅.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté le 23/11/2025, toujours présent).
@@ -60,7 +62,7 @@
 - [x] API V2 AccountingCodeMapping — cf. `tasks/v2/TASK002.md`
 - [x] API V2 AccountingPeriods — cf. `tasks/v2/TASK003.md`
 - [x] API V2 AccountOperation — cf. `tasks/v2/TASK004.md`
-- [ ] API V2 AgedReceivables — cf. `tasks/v2/TASK005.md`
+- [x] API V2 AgedReceivables — cf. `tasks/v2/TASK005.md`
 - [ ] API V2 AllowedParents — cf. `tasks/v2/TASK006.md`
 - [ ] API V2 articleMapping — cf. `tasks/v2/TASK007.md`
 - [ ] API V2 articleMappingLine — cf. `tasks/v2/TASK008.md`
