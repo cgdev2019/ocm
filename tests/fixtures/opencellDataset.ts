@@ -193,6 +193,12 @@ import type {
   UpdateLevelInstanceInput,
 } from '@/features/collection-plans/types';
 import type {
+  DunningCollectionPlanStatusDetail,
+  DunningCollectionPlanStatusDto,
+  DunningCollectionPlanStatusFormValues,
+  DunningCollectionPlanStatusResponseDto,
+} from '@/features/collection-plan-statuses/types';
+import type {
   GetCustomerAccountConfigurationResponseDto,
   GetCustomerConfigurationResponseDto,
   GetInvoicingConfigurationResponseDto,
@@ -2356,6 +2362,38 @@ export const providerContactListFixture: ProviderContactListItem[] = [
 export const queryResponseFixture: QueryResponse = {
   actionStatus: { status: 'SUCCESS', message: 'OK' },
   result: '{"items":[]}',
+};
+
+export const collectionPlanStatusDtoFixture: DunningCollectionPlanStatusDto = {
+  id: 401,
+  code: 'STATUS-001',
+  status: 'ACTIVE',
+  description: 'Statut actif pour le recouvrement',
+  colorCode: '#2ECC71',
+  dunningSettings: { code: 'DUNNING-001' },
+};
+
+export const collectionPlanStatusDetailFixture: DunningCollectionPlanStatusDetail = {
+  id: 401,
+  code: 'STATUS-001',
+  status: 'ACTIVE',
+  description: 'Statut actif pour le recouvrement',
+  colorCode: '#2ECC71',
+  dunningSettingsCode: 'DUNNING-001',
+};
+
+export const collectionPlanStatusFormValuesFixture: DunningCollectionPlanStatusFormValues = {
+  id: 401,
+  code: 'STATUS-001',
+  status: 'ACTIVE',
+  description: 'Statut actif pour le recouvrement',
+  colorCode: '#2ECC71',
+  dunningSettingsCode: 'DUNNING-001',
+};
+
+export const collectionPlanStatusResponseFixture: DunningCollectionPlanStatusResponseDto = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
+  dunningCollectionPlanStatus: collectionPlanStatusDtoFixture,
 };
 
 export const dunningActionInstanceInputFixture: DunningActionInstanceInput = {

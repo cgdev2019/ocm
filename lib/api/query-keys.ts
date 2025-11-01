@@ -118,6 +118,15 @@ export const queryKeys = {
     list: () => ['configuration', 'list'] as const,
     detail: (key: string) => ['configuration', 'detail', key] as const,
   },
+  collectionPlanStatuses: {
+    root: ['collectionPlanStatuses'] as const,
+    list: (filters?: Record<string, unknown>) =>
+      filters
+        ? (['collectionPlanStatuses', 'list', filters] as const)
+        : (['collectionPlanStatuses', 'list'] as const),
+    detail: (id: number | string) => ['collectionPlanStatuses', 'detail', id] as const,
+    detailByCode: (code: string) => ['collectionPlanStatuses', 'detailByCode', code] as const,
+  },
   countryIso: {
     list: () => ['countryIso', 'list'] as const,
     detail: (code: string) => ['countryIso', 'detail', code] as const,
