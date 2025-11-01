@@ -4,6 +4,12 @@ import type {
   CustomerListItem,
   CustomersResponseDto,
 } from '@/features/customers/types';
+import type {
+  AccountOperation,
+  AssignAccountOperationDto,
+  AssignAccountOperationFormValues,
+  AssignAccountOperationResponse,
+} from '@/features/account-operations/types';
 import type { InvoiceDto } from '@/features/invoices/types';
 import type { GetTaxesResponse, TaxFormValues, TaxListItem } from '@/features/taxes/types';
 import type {
@@ -482,6 +488,39 @@ export const customerAccountFormFixtures: CustomerAccountFormValues[] = [
     paymentMethod: 'DIRECTDEBIT',
   },
 ];
+
+export const accountOperationsFixture: AccountOperation[] = [
+  {
+    id: 101,
+    reference: 'AO-2024-0001',
+    amount: 275.4,
+    currency: 'EUR',
+    description: 'Initial balance adjustment',
+    assignedCustomerAccountCode: 'ACC-001',
+  },
+  {
+    id: 102,
+    reference: 'AO-2024-0002',
+    amount: 120,
+    currency: 'EUR',
+    description: 'Manual adjustment',
+    assignedCustomerAccountCode: null,
+  },
+];
+
+export const assignAccountOperationFormFixture: AssignAccountOperationFormValues = {
+  accountOperationId: String(accountOperationsFixture[1].id),
+  customerAccountCode: 'ACC-002',
+  customerAccountId: '',
+};
+
+export const assignAccountOperationDtoFixture: AssignAccountOperationDto = {
+  customerAccount: { code: 'ACC-002' },
+};
+
+export const assignAccountOperationResponseFixture: AssignAccountOperationResponse = {
+  actionStatus: { status: 'SUCCESS', message: 'Account operation assigned' },
+};
 
 export const invoiceFixtures: InvoiceDto[] = [
   {

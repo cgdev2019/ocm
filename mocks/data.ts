@@ -20,6 +20,7 @@ import type { AccountingCodeFormValues } from '@/features/accounting-codes/types
 import type { AccountingPeriodDetailValues } from '@/features/accounting-periods/types';
 import type { AccountingCodeMappingFormValues } from '@/features/accounting-code-mappings/types';
 import type { AccountingArticleDto } from '@/features/accounting-articles/types';
+import type { AccountOperation } from '@/features/account-operations/types';
 import {
   customerAccountFormFixtures,
   customerFormFixtures,
@@ -45,6 +46,7 @@ import {
   accountingPeriodDetailFixture,
   accountingCodeMappingFormFixture,
   accountingArticleDtoFixture,
+  accountOperationsFixture,
 } from '@/tests/fixtures/opencellDataset';
 
 export const customers: CustomerFormValues[] = customerFormFixtures;
@@ -115,3 +117,4 @@ export const accountingCodeMappingsData: AccountingCodeMappingFormValues[] = [
   accountingCodeMappingFormFixture,
 ];
 export const accountingArticlesData: AccountingArticleDto[] = [accountingArticleDtoFixture];
+export const accountOperationsData: AccountOperation[] = accountOperationsFixture.map((operation) => ({ ...operation }));

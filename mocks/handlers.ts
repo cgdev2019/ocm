@@ -38,6 +38,7 @@ import {
   accountingPeriodsData,
   accountingCodeMappingsData,
   accountingArticlesData,
+  accountOperationsData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
@@ -78,6 +79,7 @@ let nextAccountingArticleId = accountingArticlesStore.reduce(
   (acc, item) => (item.id && item.id > acc ? item.id : acc),
   200,
 ) + 1;
+const accountOperationsStore = accountOperationsData.map((operation) => ({ ...operation }));
 let nextReservationId = 200;
 const mediationReservations = new Map<number, { availableQuantity: number }>();
 
@@ -152,6 +154,7 @@ const findLanguage = (code: string) => languagesStore.find((item) => item.code =
 const findAccountingCode = (code: string) => accountingCodesStore.find((item) => item.code === code);
 const findAccountingPeriod = (fiscalYear: string) =>
   accountingPeriodsStore.find((item) => item.fiscalYear === fiscalYear);
+const findAccountOperation = (id: number) => accountOperationsStore.find((item) => item.id === id);
 
 const mapAccountingPeriodToDto = (period: AccountingPeriodDetailValues) => ({
   fiscalYear: period.fiscalYear,
@@ -290,6 +293,57 @@ export const handlers = [
     }
     return HttpResponse.json(success());
   }),
+
+  http.post(
+    '*/api/rest/v2/accountReceivable/accountOperation/assignOperation/:id',
+    async ({ params, request }) => {
+      const operationId = Number(params.id);
+      if (Number.isNaN(operationId)) {
+        return HttpResponse.json(
+          { actionStatus: { status: 'FAIL', message: 'Missing parameters' } },
+          { status: 412 },
+        );
+      }
+
+      const payload = (await request.json()) as {
+        customerAccount?: { code?: string | null; id?: number | null } | null;
+      };
+      const customerAccount = payload?.customerAccount;
+      if (!customerAccount || (!customerAccount.code && customerAccount.id == null)) {
+        return HttpResponse.json(
+          { actionStatus: { status: 'FAIL', message: 'Missing parameters' } },
+          { status: 412 },
+        );
+      }
+
+      const code = customerAccount.code?.trim();
+      let account = code ? findCustomerAccount(code) : undefined;
+      if (!account && typeof customerAccount.id === 'number') {
+        account = customerAccountsStore.find((item) => {
+          const candidate = item as unknown as { id?: number | null };
+          return candidate.id === customerAccount.id;
+        });
+      }
+      if (!account) {
+        return HttpResponse.json(
+          { actionStatus: { status: 'FAIL', message: 'Entity does not exist' } },
+          { status: 404 },
+        );
+      }
+
+      const operation = findAccountOperation(operationId);
+      if (!operation) {
+        return HttpResponse.json(
+          { actionStatus: { status: 'FAIL', message: 'Entity does not exist' } },
+          { status: 404 },
+        );
+      }
+
+      operation.assignedCustomerAccountCode = account.code;
+
+      return HttpResponse.json({ actionStatus: success('Account operation assigned') });
+    },
+  ),
 
   http.get('*/api/rest/billing/accountingCode/listGetAll', () =>
     HttpResponse.json({

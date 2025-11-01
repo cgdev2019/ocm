@@ -50,13 +50,13 @@ export const NAV_SECTIONS: Array<{
     | 'accountingCode'
     | 'accountingPeriod'
     | 'mediation'
-    | 'providerContact';
     | 'providerContact'
     | 'accountingArticle';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
   { label: 'navigation.customers', path: '/customers', icon: 'customers' },
   { label: 'navigation.customerAccounts', path: '/customer-accounts', icon: 'accounts' },
+  { label: 'navigation.accountOperations', path: '/account-operations', icon: 'accounts' },
   { label: 'navigation.invoices', path: '/invoices', icon: 'invoices' },
   { label: 'navigation.invoicing', path: '/invoicing', icon: 'billing' },
   { label: 'navigation.invoicingPlans', path: '/invoicing-plans', icon: 'billing' },
