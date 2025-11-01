@@ -181,6 +181,18 @@ import type {
   AccountingCodeListResponseDto,
 } from '@/features/accounting-codes/types';
 import type {
+  CollectionPlanMutationResult,
+  DunningActionInstanceInput,
+  DunningCollectionPlanPause,
+  DunningCollectionPlanStop,
+  DunningLevelInstanceInput,
+  MassPauseDunningCollectionPlan,
+  MassStopDunningCollectionPlan,
+  RemoveActionInstanceInput,
+  RemoveLevelInstanceInput,
+  UpdateLevelInstanceInput,
+} from '@/features/collection-plans/types';
+import type {
   GetCustomerAccountConfigurationResponseDto,
   GetCustomerConfigurationResponseDto,
   GetInvoicingConfigurationResponseDto,
@@ -2344,4 +2356,67 @@ export const providerContactListFixture: ProviderContactListItem[] = [
 export const queryResponseFixture: QueryResponse = {
   actionStatus: { status: 'SUCCESS', message: 'OK' },
   result: '{"items":[]}',
+};
+
+export const dunningActionInstanceInputFixture: DunningActionInstanceInput = {
+  code: 'DAI-001',
+  description: 'Send reminder email',
+  actionType: 'SEND_NOTIFICATION',
+  actionStatus: 'TO_BE_DONE',
+  mode: 'AUTOMATIC',
+  collectionPlan: { code: 'CP-001' },
+  dunningAction: { code: 'ACTION-001' },
+  dunningLevelInstance: { code: 'DLI-001' },
+  actionOwner: { code: 'AGENT-001' },
+};
+
+export const dunningLevelInstanceInputFixture: DunningLevelInstanceInput = {
+  code: 'DLI-001',
+  levelStatus: 'IN_PROGRESS',
+  daysOverdue: 15,
+  collectionPlan: { code: 'CP-001' },
+  collectionPlanStatus: { code: 'STATUS-001' },
+  dunningLevel: { code: 'LEVEL-001' },
+  sequence: 1,
+  actions: [dunningActionInstanceInputFixture],
+};
+
+export const massPauseCollectionPlanFixture: MassPauseDunningCollectionPlan = {
+  collectionPlans: [{ code: 'CP-001' }, { code: 'CP-002' }],
+  forcePause: true,
+  pauseUntil: '2025-01-01T00:00:00.000Z',
+  dunningPauseReason: { code: 'PAUSE-001' },
+};
+
+export const massStopCollectionPlanFixture: MassStopDunningCollectionPlan = {
+  collectionPlans: [{ code: 'CP-001' }, { code: 'CP-002' }],
+  dunningStopReason: { code: 'STOP-001' },
+};
+
+export const dunningCollectionPlanPauseFixture: DunningCollectionPlanPause = {
+  forcePause: true,
+  pauseUntil: '2025-01-05T10:00:00.000Z',
+  dunningPauseReason: { code: 'PAUSE-002' },
+};
+
+export const removeActionInstanceInputFixture: RemoveActionInstanceInput = {
+  actions: [{ code: 'DAI-001' }],
+};
+
+export const removeLevelInstanceInputFixture: RemoveLevelInstanceInput = {
+  levels: [{ code: 'DLI-001' }],
+};
+
+export const dunningCollectionPlanStopFixture: DunningCollectionPlanStop = {
+  dunningStopReason: { code: 'STOP-001' },
+};
+
+export const updateLevelInstanceInputFixture: UpdateLevelInstanceInput = {
+  levelStatus: 'DONE',
+  daysOverdue: 21,
+  actions: [dunningActionInstanceInputFixture],
+};
+
+export const collectionPlanMutationResultFixture: CollectionPlanMutationResult = {
+  actionStatus: { status: 'SUCCESS', message: 'OK' },
 };
