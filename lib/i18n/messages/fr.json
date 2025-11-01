@@ -766,6 +766,17 @@
       "empty": "Aucune donnée renvoyée par le service."
     },
     "mediation": {
+      "shared": {
+        "returnEDRs": "Retourner les identifiants EDR",
+        "mode": {
+          "label": "Mode de traitement",
+          "options": {
+            "STOP_ON_FIRST_FAIL": "Arrêter au premier échec",
+            "PROCESS_ALL": "Tout traiter",
+            "ROLLBACK_ON_ERROR": "Annuler en cas d'erreur"
+          }
+        }
+      },
       "register": {
         "title": "Enregistrer une liste de CDR",
         "subtitle": "Envoyer des lignes CDR brutes pour créer des EDR.",
@@ -797,12 +808,12 @@
         "edrs": "EDR : {ids}",
         "flags": {
           "isVirtual": "Virtuel",
-          "rateTriggeredEdr": "Tarifer l'EDR déclenché",
-          "returnEDRs": "Retourner les EDR",
-          "returnWalletOperations": "Retourner les opérations portefeuille",
-          "returnWalletOperationDetails": "Retourner le détail portefeuille",
-          "returnCounters": "Retourner les compteurs",
-          "generateRTs": "Générer des transactions tarifées"
+          "isRateTriggeredEdr": "Tarifer l'EDR déclenché",
+          "isReturnEDRs": "Retourner les EDR",
+          "isReturnWalletOperations": "Retourner les opérations portefeuille",
+          "isReturnWalletOperationDetails": "Retourner le détail portefeuille",
+          "isReturnCounters": "Retourner les compteurs",
+          "isGenerateRTs": "Générer des transactions tarifées"
         }
       },
       "reservations": {

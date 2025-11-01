@@ -1691,9 +1691,12 @@ export const handlers = [
   }),
   http.get('*/api/rest/billing/invoicing/version', () => HttpResponse.json(success('1.0.0'))),
 
-  http.post('*/api/rest/billing/mediation/registerCdrList', async ({ request }) => {
-    await request.text();
-    return HttpResponse.json(success('CDRs registered'));
+  http.post('*/api/rest/v2/mediation/cdrs/registerCdrList', async ({ request }) => {
+    const payload = ((await request.json().catch(() => ({}))) ?? {}) as {
+      cdrs?: string[];
+    };
+    const count = Array.isArray(payload.cdrs) ? payload.cdrs.length : 0;
+    return HttpResponse.json({ actionStatus: success(`CDRs registered (${count})`) });
   }),
   http.post('*/api/rest/billing/mediation/processCdrList', async ({ request }) => {
     await request.text();
@@ -1705,8 +1708,8 @@ export const handlers = [
       ],
     });
   }),
-  http.post('*/api/rest/billing/mediation/chargeCdr', async ({ request }) => {
-    await request.text();
+  http.post('*/api/rest/v2/mediation/cdrs/chargeCdrList', async ({ request }) => {
+    await request.json();
     const reservationId = nextReservationId++;
     mediationReservations.set(reservationId, { availableQuantity: 120 });
     return HttpResponse.json({
@@ -1719,8 +1722,8 @@ export const handlers = [
       edrIds: [9001, 9002],
     });
   }),
-  http.post('*/api/rest/billing/mediation/reserveCdr', async ({ request }) => {
-    await request.text();
+  http.post('*/api/rest/v2/mediation/cdrs/reserveCdrList', async ({ request }) => {
+    await request.json();
     const reservationId = nextReservationId++;
     const availableQuantity = 100 + Math.random() * 50;
     mediationReservations.set(reservationId, { availableQuantity });
