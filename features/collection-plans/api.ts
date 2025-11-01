@@ -25,11 +25,13 @@ const isActionStatus = (value: unknown): value is ActionStatus =>
       typeof (value as Record<string, unknown>).status === 'string',
   );
 
-const extractActionStatus = (payload: unknown): ActionStatus | undefined => {
+const collectActionStatuses = (payload: unknown): ActionStatus[] => {
   if (!payload) {
-    return undefined;
+    return [];
   }
 
+  const statuses: ActionStatus[] = [];
+  const seenStatuses = new Set<ActionStatus>();
   const queue: unknown[] = [payload];
   const visited = new Set<unknown>();
 
@@ -45,26 +47,31 @@ const extractActionStatus = (payload: unknown): ActionStatus | undefined => {
 
     visited.add(current);
 
-    if (isActionStatus(current)) {
-      return current;
+    if (isActionStatus(current) && !seenStatuses.has(current)) {
+      statuses.push(current);
+      seenStatuses.add(current);
+    }
+
+    if (Array.isArray(current)) {
+      queue.push(...current);
+      continue;
     }
 
     const values = Object.values(current as Record<string, unknown>);
     for (const value of values) {
-      if (!value) {
+      if (!value || (typeof value !== 'object' && !Array.isArray(value))) {
         continue;
       }
 
-      if (Array.isArray(value)) {
-        queue.push(...value);
-      } else if (typeof value === 'object') {
-        queue.push(value);
-      }
+      queue.push(value);
     }
   }
 
-  return undefined;
+  return statuses;
 };
+
+const extractActionStatus = (payload: unknown): ActionStatus | undefined =>
+  collectActionStatuses(payload)[0];
 
 const unwrapActionResponse = (
   result: { data?: unknown; error?: unknown | null },
@@ -110,9 +117,9 @@ const processActionResponse = (
   fallbackMessage: string,
 ): CollectionPlanMutationResult | undefined => {
   const data = unwrapActionResponse(result, fallbackMessage);
-  const actionStatus = extractActionStatus(data);
-  if (actionStatus) {
-    assertActionSuccess(actionStatus, fallbackMessage);
+  const actionStatuses = collectActionStatuses(data);
+  for (const status of actionStatuses) {
+    assertActionSuccess(status, fallbackMessage);
   }
   return data;
 };
@@ -289,6 +296,7 @@ export const useUpdateDunningLevelInstance = () =>
 export const __internals = {
   COLLECTION_PLAN_ERROR_MESSAGE,
   isActionStatus,
+  collectActionStatuses,
   extractActionStatus,
   unwrapActionResponse,
   processActionResponse,

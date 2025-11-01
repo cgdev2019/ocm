@@ -62,6 +62,35 @@ describe('collection plan mutations', () => {
     expect(__internals.extractActionStatus(nested)).toBe(status);
   });
 
+  it('collects all nested action statuses', () => {
+    const first: ActionStatus = { status: 'SUCCESS', message: 'ok' };
+    const second: ActionStatus = { status: 'FAIL', message: 'not ok' };
+    const nested = {
+      result: [{ payload: { actionStatus: first } }],
+      summary: { entries: [{ actionStatus: second }] },
+    };
+
+    const statuses = __internals.collectActionStatuses(nested);
+
+    expect(statuses).toHaveLength(2);
+    expect(statuses).toEqual(expect.arrayContaining([first, second]));
+  });
+
+  it('throws when any nested action status reports a failure', () => {
+    const result = {
+      data: {
+        items: [
+          { actionStatus: { status: 'SUCCESS', message: 'first' } },
+          { details: { actionStatus: { status: 'FAIL', message: 'failure detected' } } },
+        ],
+      },
+    };
+
+    expect(() =>
+      __internals.processActionResponse(result, __internals.COLLECTION_PLAN_ERROR_MESSAGE),
+    ).toThrow('failure detected');
+  });
+
   it('throws with nested action status error message during unwrap', () => {
     expect(() =>
       __internals.unwrapActionResponse(
