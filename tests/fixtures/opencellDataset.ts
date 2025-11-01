@@ -1033,11 +1033,31 @@ export const createBillingRunFormFixture: CreateBillingRunFormValues = {
 export const billingAccountListInRunResponseFixture: GetBillingAccountListInRunResponseDto = {
   actionStatus: { status: 'SUCCESS', message: 'Accounts ready' },
   billingAccountsDto: {
-    billingRunId: billingRunIdFormFixture.billingRunId,
     billingAccount: [
-      { code: 'BA-001', description: 'Compte principal' },
-      { code: 'BA-002', description: 'Compte secondaire' },
-      { description: 'Compte sans code' },
+      {
+        code: 'BA-001',
+        description: 'Compte principal',
+        customerAccount: 'CA-001',
+        billingCycle: 'PLAN-2024',
+        country: 'FR',
+        language: 'fr',
+      },
+      {
+        code: 'BA-002',
+        description: 'Compte secondaire',
+        customerAccount: 'CA-002',
+        billingCycle: 'PLAN-2024',
+        country: 'FR',
+        language: 'fr',
+      },
+      {
+        code: 'BA-003',
+        description: 'Compte supplémentaire',
+        customerAccount: 'CA-003',
+        billingCycle: 'PLAN-2024',
+        country: 'FR',
+        language: 'fr',
+      },
     ],
   },
 };
@@ -1045,26 +1065,26 @@ export const billingAccountListInRunResponseFixture: GetBillingAccountListInRunR
 export const billingAccountListInRunSummaryFixture: BillingAccountInRunListItem[] = [
   { id: 'BA-001', code: 'BA-001', description: 'Compte principal' },
   { id: 'BA-002', code: 'BA-002', description: 'Compte secondaire' },
-  { id: 'account-2', description: 'Compte sans code' },
+  { id: 'BA-003', code: 'BA-003', description: 'Compte supplémentaire' },
 ];
 
 export const billingRunInfoResponseFixture: GetBillingRunInfoResponseDto = {
   actionStatus: { status: 'SUCCESS', message: 'Run info ready' },
   billingRunDto: {
-    code: 'BR-101',
     status: 'VALIDATED',
-    billingCycle: { code: 'PLAN-2024' },
+    billingCycle: { code: 'PLAN-2024', invoiceDateDelayEL: '0', calendar: 'MAIN' },
     processDate: '2024-02-02T10:00:00.000Z',
     invoiceDate: '2024-02-03T10:00:00.000Z',
     statusDate: '2024-02-04T10:00:00.000Z',
-    amountWithoutTax: 1500,
-    amountTax: 300,
-    amountWithTax: 1800,
+    prAmountWithoutTax: 1500,
+    prAmountTax: 300,
+    prAmountWithTax: 1800,
+    invoiceNumber: 101,
   },
 };
 
 export const billingRunInfoSummaryFixture: BillingRunInfoSummary = {
-  code: 'BR-101',
+  code: '101',
   status: 'VALIDATED',
   billingCycle: 'PLAN-2024',
   processDate: '2024-02-02T10:00:00.000Z',
@@ -1084,7 +1104,6 @@ export const preInvoicingReportResponseFixture: GetPreInvoicingReportsResponseDt
     taxesAmount: 500,
     lastTransactionDate: '2024-01-31T12:00:00.000Z',
     invoiceDate: '2024-02-01T00:00:00.000Z',
-    billingRunId: billingRunIdFormFixture.billingRunId,
   },
 };
 
@@ -1104,7 +1123,6 @@ export const postInvoicingReportResponseFixture: GetPostInvoicingReportsResponse
     positiveInvoicesAmount: 1800,
     negativeInvoicesAmount: 150,
     globalAmount: 1650,
-    billingRunId: billingRunIdFormFixture.billingRunId,
   },
 };
 

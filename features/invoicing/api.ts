@@ -6,6 +6,7 @@ import { queryKeys } from '@/lib/api/query-keys';
 import {
   type BillingAccountInRunListItem,
   type BillingRunActionResult,
+  type BillingRunDto,
   type BillingRunIdFormValues,
   type BillingRunInfoSummary,
   type CancelBillingRunFormValues,
@@ -24,6 +25,13 @@ import {
   type InvoiceValidationDto,
   type InvalidateInvoiceDocumentsDto,
 } from '@/features/invoicing/types';
+
+type BillingRunDtoWithExtensions = BillingRunDto & {
+  code?: string;
+  amountWithoutTax?: number;
+  amountTax?: number;
+  amountWithTax?: number;
+};
 
 const parseInvoiceIds = (input: string): number[] =>
   input
@@ -75,17 +83,19 @@ const adaptBillingAccounts = (
 };
 
 const adaptBillingRunInfo = (response: GetBillingRunInfoResponseDto): BillingRunInfoSummary => {
-  const dto = response.billingRunDto;
+  const dto = response.billingRunDto as BillingRunDtoWithExtensions | undefined;
   return {
-    code: dto?.code ?? undefined,
+    code: dto?.code ?? dto?.invoiceNumber?.toString() ?? undefined,
     status: dto?.status ?? undefined,
     billingCycle: dto?.billingCycle?.code ?? undefined,
     processDate: dto?.processDate ?? undefined,
     invoiceDate: dto?.invoiceDate ?? undefined,
     statusDate: dto?.statusDate ?? undefined,
-    amountWithoutTax: dto?.amountWithoutTax ?? undefined,
-    amountTax: dto?.amountTax ?? undefined,
-    amountWithTax: dto?.amountWithTax ?? undefined,
+    amountWithoutTax:
+      dto?.prAmountWithoutTax ?? dto?.producibleAmountWithoutTax ?? dto?.amountWithoutTax ?? undefined,
+    amountTax: dto?.prAmountTax ?? dto?.producibleAmountTax ?? dto?.amountTax ?? undefined,
+    amountWithTax:
+      dto?.prAmountWithTax ?? dto?.producibleAmountWithTax ?? dto?.amountWithTax ?? undefined,
   };
 };
 
