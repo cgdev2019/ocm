@@ -54,6 +54,8 @@
 - 2025-11-01 : Re-run ciblé communication — `npm run test -- --runTestsByPath features/communication/__tests__/communicationApi.test.tsx` ✅.
 - 2025-11-24 : API V2 contactCategory — liste, détail, formulaires App Router, hooks TanStack Query/mutations et mocks MSW. Tests ciblés `npm run test -- --runTestsByPath features/contact-categories/__tests__/useContactCategories.test.tsx features/contact-categories/__tests__/useContactCategoryMutations.test.tsx` ✅.
 - 2025-11-24 : API V2 contact — listes + formulaires CRM (App Router, hooks TanStack Query, traductions). Tests ciblés `npm run test -- --runTestsByPath features/contacts/__tests__/useContacts.test.tsx features/contacts/__tests__/useContactMutations.test.tsx` ✅.
+- 2025-11-24 : Playwright ajoute un scénario contactCategory (création/édition/suppression) — `tests/e2e/contact-categories.spec.ts`.
+- 2025-11-24 : Tests Jest ciblés contactCategory — `npm run test -- --runTestsByPath features/contact-categories/__tests__/useContactCategories.test.tsx features/contact-categories/__tests__/useContactCategoryMutations.test.tsx` ✅.
 
 ## A faire rapidement
 - [ ] Résoudre `npm run lint`: erreurs `no-irregular-whitespace` et `no-useless-escape` dans `scripts/generateTasks.mjs` (retesté le 23/11/2025, toujours présent).
