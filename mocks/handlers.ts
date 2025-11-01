@@ -16,6 +16,7 @@ import type {
 } from '@/features/accounting-code-mappings/types';
 import type { AccountingArticleDto } from '@/features/accounting-articles/types';
 import type { AllowedParentDto } from '@/features/allowed-parents/types';
+import type { ArticleMappingDto } from '@/features/article-mappings/types';
 import {
   customers,
   customerAccounts,
@@ -42,6 +43,7 @@ import {
   accountingArticlesData,
   accountOperationsData,
   allowedParentsData,
+  articleMappingsData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
@@ -85,6 +87,9 @@ accountingCodeMappingsData.forEach((item) => {
   });
 });
 const accountingArticlesStore = [...accountingArticlesData];
+const articleMappingsStore: ArticleMappingDto[] = articleMappingsData.map((item) => ({
+  ...item,
+}));
 let nextAccountingArticleId = accountingArticlesStore.reduce(
   (acc, item) => (item.id && item.id > acc ? item.id : acc),
   200,
@@ -669,6 +674,16 @@ export const handlers = [
       actionStatus: success(),
       accountingArticles: matching.length > 0 ? matching : accountingArticlesStore,
     });
+  }),
+  http.get('*/api/rest/v2/articleMapping/{code}', ({ params }) => {
+    const code = String(params.code ?? '');
+    const mapping = articleMappingsStore.find(
+      (item) => item.code?.toLowerCase() === code.toLowerCase(),
+    );
+    if (!mapping) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), articleMapping: mapping });
   }),
   http.post('*/articleMapping', async () => HttpResponse.json(success('Article mapping created'))),
 
