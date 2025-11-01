@@ -283,6 +283,15 @@ export const queryKeys = {
         : (['channelsAndSegments', 'list'] as const),
     version: () => ['channelsAndSegments', 'version'] as const,
   },
+  offerTemplateCategories: {
+    list: (filters?: Record<string, unknown>) =>
+      filters
+        ? (['offerTemplateCategories', 'list', filters] as const)
+        : (['offerTemplateCategories', 'list'] as const),
+    listAll: () => ['offerTemplateCategories', 'listAll'] as const,
+    detail: (code: string) => ['offerTemplateCategories', 'detail', code] as const,
+    version: () => ['offerTemplateCategories', 'version'] as const,
+  },
   chargeTemplates: {
     list: (filters?: Record<string, unknown>) =>
       filters ? (['chargeTemplates', 'list', filters] as const) : (['chargeTemplates', 'list'] as const),

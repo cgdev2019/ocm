@@ -40,6 +40,7 @@ export const NAV_SECTIONS: Array<{
     | 'businessOfferModel'
     | 'businessProductModel'
     | 'businessServiceModel'
+    | 'offerTemplateCategory'
     | 'channel'
     | 'channelsAndSegments'
     | 'chargeTemplate'
@@ -64,6 +65,7 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.ratedTransactions', path: '/rated-transactions', icon: 'billing' },
   { label: 'navigation.wallet', path: '/wallet', icon: 'billing' },
   { label: 'navigation.bundleTemplates', path: '/bundle-templates', icon: 'billing' },
+  { label: 'navigation.offerTemplateCategories', path: '/offer-template-categories', icon: 'offerTemplateCategory' },
   { label: 'navigation.businessOfferModels', path: '/business-offer-models', icon: 'businessOfferModel' },
   { label: 'navigation.businessProductModels', path: '/business-product-models', icon: 'businessProductModel' },
   { label: 'navigation.businessServiceModels', path: '/business-service-models', icon: 'businessServiceModel' },

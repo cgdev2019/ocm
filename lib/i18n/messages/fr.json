@@ -20,6 +20,7 @@
     "ratedTransactions": "Transactions tarifées",
     "wallet": "Portefeuilles",
     "bundleTemplates": "Modèles groupés",
+    "offerTemplateCategories": "Catégories d'offres",
     "businessOfferModels": "Modèles d'offres commerciales",
     "businessProductModels": "Modèles de produits commerciaux",
     "businessServiceModels": "Modèles de services commerciaux",
@@ -931,6 +932,24 @@
       "channelsTitle": "Canaux",
       "segmentsTitle": "Segments",
       "onlyActive": "Afficher uniquement les canaux actifs"
+    },
+    "offerTemplateCategory": {
+      "title": "Catégorie d'offre",
+      "version": "Version du service {version}",
+      "code": "Code",
+      "name": "Nom",
+      "description": "Description",
+      "parentId": "ID parent",
+      "parentIdHelper": "Identifiant numérique de la catégorie parente",
+      "active": "Active",
+      "disabled": "Désactivée",
+      "create": "Créer",
+      "update": "Mettre à jour",
+      "createOrUpdate": "Créer ou mettre à jour",
+      "enable": "Activer",
+      "disable": "Désactiver",
+      "enabledMessage": "Catégorie d'offre activée",
+      "disabledMessage": "Catégorie d'offre désactivée"
     },
     "chargeTemplate": {
       "title": "Modèle de charge",
