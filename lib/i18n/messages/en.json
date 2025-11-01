@@ -371,6 +371,16 @@
       "deleteConfirmation": "Deleting this access will remove it from Opencell.",
       "version": "Version {version}"
     },
+    "allowedParent": {
+      "title": "Allowed parents for {code}",
+      "titleFallback": "Allowed parent user accounts",
+      "missingCode": "Provide a user account code to retrieve allowed parents.",
+      "empty": "No parent user accounts are allowed for this user.",
+      "parentCode": "Parent user account",
+      "parentDescription": "Description",
+      "customerAccountCode": "Customer account",
+      "customerAccountDescription": "Customer account description"
+    },
     "businessAccountModel": {
       "code": "Model code",
       "description": "Description",

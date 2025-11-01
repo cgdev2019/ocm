@@ -14,6 +14,12 @@ export const queryKeys = {
   accountOperations: {
     root: ['accountOperations'] as const,
   },
+  allowedParents: {
+    list: (userAccountCode?: string) =>
+      userAccountCode
+        ? (['allowedParents', 'list', userAccountCode] as const)
+        : (['allowedParents', 'list'] as const),
+  },
   agedReceivables: {
     list: (params?: Record<string, unknown>) =>
       params ? (['agedReceivables', 'list', params] as const) : (['agedReceivables', 'list'] as const),
