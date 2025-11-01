@@ -15,6 +15,7 @@ import type {
   AccountingCodeMappingInputDto,
 } from '@/features/accounting-code-mappings/types';
 import type { AccountingArticleDto } from '@/features/accounting-articles/types';
+import type { AllowedParentDto } from '@/features/allowed-parents/types';
 import {
   customers,
   customerAccounts,
@@ -40,10 +41,14 @@ import {
   accountingCodeMappingsData,
   accountingArticlesData,
   accountOperationsData,
+  allowedParentsData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
 const customerAccountsStore = [...customerAccounts];
+const allowedParentsStore: AllowedParentDto[] = allowedParentsData.map((item) => ({
+  ...item,
+}));
 const invoicesStore = [...invoices];
 const taxesStore = [...taxes];
 const currencyIsoStore = [...currencyIsos];
@@ -298,6 +303,23 @@ export const handlers = [
     }
     return HttpResponse.json(success());
   }),
+
+  http.get(
+    '*/api/rest/v2/accounts/userAccounts/{userAccountCode}/allowedParents',
+    ({ params }) => {
+      const userAccountCode = String(params.userAccountCode ?? '').trim();
+      if (!userAccountCode) {
+        return HttpResponse.json([]);
+      }
+
+      const candidates = allowedParentsStore.filter((item) => {
+        const candidateCode = typeof item.userAccountCode === 'string' ? item.userAccountCode.trim() : '';
+        return candidateCode === userAccountCode;
+      });
+
+      return HttpResponse.json(candidates);
+    },
+  ),
 
   http.post(
     '*/api/rest/v2/accountReceivable/accountOperation/assignOperation/:id',

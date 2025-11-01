@@ -10,6 +10,7 @@ import type {
   AssignAccountOperationFormValues,
   AssignAccountOperationResponse,
 } from '@/features/account-operations/types';
+import type { AllowedParentDto, AllowedParentListItem } from '@/features/allowed-parents/types';
 import type { InvoiceDto } from '@/features/invoices/types';
 import type { GetTaxesResponse, TaxFormValues, TaxListItem } from '@/features/taxes/types';
 import type {
@@ -585,6 +586,60 @@ export const customerAccountFormFixtures: CustomerAccountFormValues[] = [
     currency: 'EUR',
     language: 'fr',
     paymentMethod: 'DIRECTDEBIT',
+  },
+];
+
+export const allowedParentDtoFixtures: AllowedParentDto[] = [
+  {
+    userAccountCode: 'UA-0001',
+    parentId: 901,
+    parentCode: 'UA-ROOT',
+    parentDescription: 'Parent principal',
+    customerAccountCode: 'ACC-001',
+    customerAccountDescription: 'Compte principal Paris',
+  },
+  {
+    userAccountCode: 'UA-0001',
+    parentId: 902,
+    parentCode: 'UA-BACKUP',
+    parentDescription: 'Parent de secours',
+    customerAccountCode: 'ACC-002',
+    customerAccountDescription: 'Compte Lyon',
+  },
+  {
+    userAccountCode: 'UA-0002',
+    parentId: 903,
+    parentCode: 'UA-GLOBAL',
+    parentDescription: 'Parent global',
+    customerAccountCode: 'ACC-002',
+    customerAccountDescription: 'Compte Lyon',
+  },
+];
+
+export const allowedParentListFixtures: AllowedParentListItem[] = [
+  {
+    id: '901',
+    code: 'UA-ROOT',
+    description: 'Parent principal',
+    parentId: 901,
+    customerAccountCode: 'ACC-001',
+    customerAccountDescription: 'Compte principal Paris',
+  },
+  {
+    id: '902',
+    code: 'UA-BACKUP',
+    description: 'Parent de secours',
+    parentId: 902,
+    customerAccountCode: 'ACC-002',
+    customerAccountDescription: 'Compte Lyon',
+  },
+  {
+    id: '903',
+    code: 'UA-GLOBAL',
+    description: 'Parent global',
+    parentId: 903,
+    customerAccountCode: 'ACC-002',
+    customerAccountDescription: 'Compte Lyon',
   },
 ];
 

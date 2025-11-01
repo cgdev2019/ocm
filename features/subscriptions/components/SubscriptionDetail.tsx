@@ -5,6 +5,7 @@ import { Alert, Button, Card, CardContent, CircularProgress, Stack, Typography }
 import Grid from '@mui/material/Grid2';
 import { useTranslations } from 'next-intl';
 import { useSubscription } from '@/features/subscriptions/api';
+import { AllowedParentsCard } from '@/features/allowed-parents/components/AllowedParentsCard';
 import { useRouter } from '@/lib/i18n/navigation';
 
 const formatDate = (value?: string) => (value ? new Date(value).toLocaleString() : null);
@@ -66,6 +67,9 @@ export const SubscriptionDetail = ({ code }: { code: string }) => {
               </Stack>
             </CardContent>
           </Card>
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <AllowedParentsCard userAccountCode={data.userAccount} />
         </Grid>
       </Grid>
     </Stack>

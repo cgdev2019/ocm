@@ -22,6 +22,7 @@ import type { AccountingPeriodDetailValues } from '@/features/accounting-periods
 import type { AccountingCodeMappingFormValues } from '@/features/accounting-code-mappings/types';
 import type { AccountingArticleDto } from '@/features/accounting-articles/types';
 import type { AccountOperation } from '@/features/account-operations/types';
+import type { AllowedParentDto } from '@/features/allowed-parents/types';
 import {
   customerAccountFormFixtures,
   customerFormFixtures,
@@ -49,11 +50,16 @@ import {
   accountingCodeMappingFormFixture,
   accountingArticleDtoFixture,
   accountOperationsFixture,
+  allowedParentDtoFixtures,
 } from '@/tests/fixtures/opencellDataset';
 
 export const customers: CustomerFormValues[] = customerFormFixtures;
 
 export const customerAccounts: CustomerAccountFormValues[] = customerAccountFormFixtures;
+
+export const allowedParentsData: AllowedParentDto[] = allowedParentDtoFixtures.map((item) => ({
+  ...item,
+}));
 
 export const invoices: InvoiceDto[] = invoiceFixtures;
 
