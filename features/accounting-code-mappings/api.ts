@@ -7,27 +7,34 @@ import type {
   AccountingCodeMappingFormItem,
   AccountingCodeMappingFormValues,
   AccountingCodeMappingInputDto,
+  AccountingCodeMappingInputMapping,
   AccountingCodeMappingMutationResult,
 } from '@/features/accounting-code-mappings/types';
 
+const getTradingCountryCode = (
+  country: AccountingCodeMappingDto['billingCountry'] | undefined,
+) => country?.code ?? country?.country?.countryCode;
+
+const getTradingCurrencyCode = (
+  currency: AccountingCodeMappingDto['billingCurrency'] | undefined,
+) => currency?.currencyCode ?? currency?.currency?.currencyCode;
+
 const mapDtoToFormItem = (dto: AccountingCodeMappingDto): AccountingCodeMappingFormItem => ({
   id: dto.id ?? undefined,
-  code: dto.code ?? undefined,
-  accountingCode: dto.accountingCode ?? undefined,
-  accountingArticleCode: dto.accountingArticleCode ?? undefined,
-  sellerCode: dto.sellerCode ?? undefined,
-  sellerCountryCode: dto.sellerCountryCode ?? undefined,
-  billingCountryCode: dto.billingCountryCode ?? undefined,
-  billingCurrencyCode: dto.billingCurrencyCode ?? undefined,
+  accountingCode: dto.accountingCode?.code ?? undefined,
+  accountingArticleCode: dto.accountingArticle?.code ?? undefined,
+  sellerCode: dto.seller?.code ?? undefined,
+  sellerCountryCode: getTradingCountryCode(dto.sellerCountry),
+  billingCountryCode: getTradingCountryCode(dto.billingCountry),
+  billingCurrencyCode: getTradingCurrencyCode(dto.billingCurrency),
   criteriaElValue: dto.criteriaElValue ?? undefined,
 });
 
 const mapFormItemToDto = (
   item: AccountingCodeMappingFormItem,
   accountingArticleCode: string,
-): AccountingCodeMappingDto => ({
+): AccountingCodeMappingInputMapping => ({
   id: item.id,
-  code: item.code,
   accountingCode: item.accountingCode,
   accountingArticleCode: item.accountingArticleCode ?? accountingArticleCode,
   sellerCode: item.sellerCode,
@@ -37,11 +44,38 @@ const mapFormItemToDto = (
   criteriaElValue: item.criteriaElValue,
 });
 
+const mapInputToFormItem = (
+  mapping: AccountingCodeMappingInputDto['accountingCodeMappings'][number],
+  fallbackArticleCode: string,
+): AccountingCodeMappingFormItem => {
+  if (isAccountingCodeMappingDto(mapping)) {
+    return mapDtoToFormItem(mapping);
+  }
+
+  return {
+    id: mapping.id ?? undefined,
+    accountingCode: mapping.accountingCode ?? undefined,
+    accountingArticleCode: mapping.accountingArticleCode ?? fallbackArticleCode,
+    sellerCode: mapping.sellerCode ?? undefined,
+    sellerCountryCode: mapping.sellerCountryCode ?? undefined,
+    billingCountryCode: mapping.billingCountryCode ?? undefined,
+    billingCurrencyCode: mapping.billingCurrencyCode ?? undefined,
+    criteriaElValue: mapping.criteriaElValue ?? undefined,
+  };
+};
+
+const isAccountingCodeMappingDto = (
+  mapping: AccountingCodeMappingInputDto['accountingCodeMappings'][number],
+): mapping is AccountingCodeMappingDto =>
+  typeof mapping === 'object' && mapping !== null && 'accountingArticle' in mapping;
+
 export const mapAccountingCodeMappingInputToForm = (
   input: AccountingCodeMappingInputDto,
 ): AccountingCodeMappingFormValues => ({
   accountingArticleCode: input.accountingArticleCode ?? '',
-  mappings: (input.accountingCodeMappings ?? []).map(mapDtoToFormItem),
+  mappings: (input.accountingCodeMappings ?? []).map((mapping) =>
+    mapInputToFormItem(mapping, input.accountingArticleCode ?? ''),
+  ),
 });
 
 export const mapAccountingCodeMappingFormToDto = (

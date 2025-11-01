@@ -98,7 +98,6 @@ const normalizeAccountingCodeMappingInput = (
   mappings:
     payload.accountingCodeMappings?.map((mapping) => ({
       id: mapping.id ?? undefined,
-      code: mapping.code ?? undefined,
       accountingArticleCode: mapping.accountingArticleCode ?? payload.accountingArticleCode ?? '',
       accountingCode: mapping.accountingCode ?? undefined,
       sellerCode: mapping.sellerCode ?? undefined,
@@ -116,7 +115,6 @@ const toAccountingCodeMappingResponse = (
   accountingArticleCode,
   accountingCodeMappings: mappings.map((mapping) => ({
     id: mapping.id,
-    code: mapping.code,
     accountingArticleCode: mapping.accountingArticleCode ?? accountingArticleCode,
     accountingCode: mapping.accountingCode,
     sellerCode: mapping.sellerCode,
