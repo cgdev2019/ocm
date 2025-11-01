@@ -29,6 +29,7 @@ import type {
   TranslatedTextContentFormValue,
 } from '@/features/communication/types';
 import type { ContactCategoryFormValues } from '@/features/contact-categories/types';
+import type { ContactDto, ContactFormValues } from '@/features/contacts/types';
 import {
   customers,
   customerAccounts,
@@ -61,6 +62,7 @@ import {
   emailTemplatesData,
   smsTemplatesData,
   contactCategoriesData,
+  contactsData,
 } from '@/mocks/data';
 
 const cloneEmailTemplateForm = (template: EmailTemplateFormValues): EmailTemplateFormValues => ({
@@ -187,6 +189,19 @@ const smsTemplatesStore: SMSTemplateFormValues[] = smsTemplatesData.map((item) =
 const contactCategoriesStore: ContactCategoryFormValues[] = contactCategoriesData.map((item) => ({
   ...item,
 }));
+type ContactStoreItem = ContactFormValues & {
+  createdAt: string;
+  updatedAt: string;
+};
+
+const contactsStore: ContactStoreItem[] = contactsData.map((item, index) => {
+  const timestamp = new Date(Date.now() - index * 60 * 60 * 1000).toISOString();
+  return {
+    ...item,
+    createdAt: timestamp,
+    updatedAt: timestamp,
+  };
+});
 let nextAccountingArticleId = accountingArticlesStore.reduce(
   (acc, item) => (item.id && item.id > acc ? item.id : acc),
   200,
@@ -201,6 +216,7 @@ let nextContactCategoryId =
     (acc, item) => (typeof item.id === 'number' && item.id > acc ? item.id : acc),
     100,
   ) + 1;
+let nextContactIncrement = contactsStore.length + 1;
 
 const success = (message = 'OK') => ({ status: 'SUCCESS', message });
 
@@ -274,6 +290,66 @@ const findAccountingCode = (code: string) => accountingCodesStore.find((item) =>
 const findAccountingPeriod = (fiscalYear: string) =>
   accountingPeriodsStore.find((item) => item.fiscalYear === fiscalYear);
 const findAccountOperation = (id: number) => accountOperationsStore.find((item) => item.id === id);
+const findContact = (code: string) => contactsStore.find((item) => item.code === code);
+
+const normalizeContactInformation = (value: unknown): { email?: string; phone?: string; mobile?: string } => {
+  if (!value || typeof value !== 'object') {
+    return {};
+  }
+
+  const email = 'email' in value && typeof (value as { email?: unknown }).email === 'string'
+    ? (value as { email?: string }).email
+    : undefined;
+  const phone = 'phone' in value && typeof (value as { phone?: unknown }).phone === 'string'
+    ? (value as { phone?: string }).phone
+    : undefined;
+  const mobile = 'mobile' in value && typeof (value as { mobile?: unknown }).mobile === 'string'
+    ? (value as { mobile?: string }).mobile
+    : undefined;
+
+  return { email: email ?? undefined, phone: phone ?? undefined, mobile: mobile ?? undefined };
+};
+
+const toContactDto = (contact: ContactStoreItem): ContactDto => {
+  const contactInformation = {
+    ...(contact.email ? { email: contact.email } : {}),
+    ...(contact.phone ? { phone: contact.phone } : {}),
+    ...(contact.mobile ? { mobile: contact.mobile } : {}),
+  };
+
+  const hasContactInformation = Object.keys(contactInformation).length > 0;
+
+  return {
+    code: contact.code,
+    ...(contact.description ? { description: contact.description } : {}),
+    ...(contact.company ? { company: contact.company } : {}),
+    ...(contact.jobTitle ? { jobTitle: contact.jobTitle } : {}),
+    ...(hasContactInformation ? { contactInformation } : {}),
+    ...(contact.comment ? { comment: contact.comment } : {}),
+  } satisfies ContactDto;
+};
+
+const fromContactDto = (payload: Partial<ContactDto>, fallbackCode?: string): ContactStoreItem => {
+  const code = typeof payload.code === 'string' && payload.code.trim().length > 0
+    ? payload.code.trim()
+    : fallbackCode ?? `CT-${String(nextContactIncrement).padStart(3, '0')}`;
+  const contactInformation = normalizeContactInformation(payload.contactInformation);
+  const now = new Date().toISOString();
+  const existing = findContact(code);
+
+  return {
+    code,
+    description: typeof payload.description === 'string' ? payload.description : existing?.description,
+    company: typeof payload.company === 'string' ? payload.company : existing?.company,
+    jobTitle: typeof payload.jobTitle === 'string' ? payload.jobTitle : existing?.jobTitle,
+    email: contactInformation.email ?? existing?.email,
+    phone: contactInformation.phone ?? existing?.phone,
+    mobile: contactInformation.mobile ?? existing?.mobile,
+    comment: typeof payload.comment === 'string' ? payload.comment : existing?.comment,
+    createdAt: existing?.createdAt ?? now,
+    updatedAt: now,
+  } satisfies ContactStoreItem;
+};
 
 const mapAccountingPeriodToDto = (period: AccountingPeriodDetailValues) => ({
   fiscalYear: period.fiscalYear,
@@ -789,6 +865,113 @@ export const handlers = [
     if (index >= 0) {
       contactCategoriesStore.splice(index, 1);
     }
+    return HttpResponse.json({ actionStatus: success('Deleted') });
+  }),
+
+  http.post('*/api/rest/v2/generic/all/Contact', async ({ request }) => {
+    let body: Record<string, unknown> = {};
+    try {
+      body = (await request.json()) as Record<string, unknown>;
+    } catch (error) {
+      body = {};
+    }
+
+    const filters = (body.filters as Record<string, unknown>) ?? {};
+    const normalize = (value: unknown) =>
+      typeof value === 'string' && value.trim().length > 0 ? value.trim().toLowerCase() : undefined;
+
+    const searchTerms = [
+      normalize(filters.code),
+      normalize(filters.description),
+      normalize(filters.company),
+      normalize(filters.jobTitle),
+    ].filter((value): value is string => Boolean(value));
+
+    let contacts = [...contactsStore];
+    if (searchTerms.length > 0) {
+      contacts = contacts.filter((item) => {
+        const haystacks = [item.code, item.description, item.company, item.jobTitle].map((value) =>
+          typeof value === 'string' ? value.toLowerCase() : '',
+        );
+        return searchTerms.some((term) => haystacks.some((value) => value.includes(term)));
+      });
+    }
+
+    const sortBy = typeof body.sortBy === 'string' ? body.sortBy : undefined;
+    const sortOrder = body.sortOrder === 'ASCENDING' ? 1 : -1;
+
+    contacts.sort((a, b) => {
+      const direction = sortOrder === 1 ? 1 : -1;
+      if (sortBy === 'auditable.created') {
+        return a.createdAt.localeCompare(b.createdAt) * direction;
+      }
+      return a.code.toLowerCase().localeCompare(b.code.toLowerCase()) * direction;
+    });
+
+    const offset = typeof body.offset === 'number' ? Math.max(0, Math.floor(body.offset)) : 0;
+    const limit =
+      typeof body.limit === 'number' && body.limit >= 0 ? Math.floor(body.limit) : contacts.length;
+    const paginated = contacts.slice(offset, offset + limit);
+    const results = paginated.map((item) => toContactDto(item));
+
+    return HttpResponse.json({
+      actionStatus: success(),
+      data: results,
+      contacts: { contact: results, totalNumberOfRecords: contacts.length },
+      paging: { totalNumberOfRecords: contacts.length },
+    });
+  }),
+
+  http.post('*/api/rest/v2/contact', async ({ request }) => {
+    let payload: Partial<ContactDto> = {};
+    try {
+      payload = (await request.json()) as Partial<ContactDto>;
+    } catch (error) {
+      payload = {};
+    }
+
+    const entry = fromContactDto(payload);
+    const index = contactsStore.findIndex((item) => item.code === entry.code);
+    if (index >= 0) {
+      contactsStore[index] = { ...entry };
+    } else {
+      contactsStore.push({ ...entry });
+      nextContactIncrement += 1;
+    }
+
+    return HttpResponse.json({ actionStatus: success('Created') });
+  }),
+
+  http.put('*/api/rest/v2/contact', async ({ request }) => {
+    let payload: Partial<ContactDto> = {};
+    try {
+      payload = (await request.json()) as Partial<ContactDto>;
+    } catch (error) {
+      payload = {};
+    }
+
+    const entry = fromContactDto(payload);
+    const index = contactsStore.findIndex((item) => item.code === entry.code);
+    if (index >= 0) {
+      contactsStore[index] = { ...entry };
+    } else {
+      contactsStore.push({ ...entry });
+      nextContactIncrement += 1;
+    }
+
+    return HttpResponse.json({ actionStatus: success('Updated') });
+  }),
+
+  http.delete('*/api/rest/v2/contact/{code}', ({ params }) => {
+    const rawCode = params.code;
+    const code = typeof rawCode === 'string' ? rawCode.trim() : rawCode ? String(rawCode) : '';
+    if (code) {
+      const index = contactsStore.findIndex((item) => item.code === code);
+      if (index >= 0) {
+        contactsStore.splice(index, 1);
+      }
+    }
+
     return HttpResponse.json({ actionStatus: success('Deleted') });
   }),
 

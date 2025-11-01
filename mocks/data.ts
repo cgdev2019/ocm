@@ -28,6 +28,7 @@ import type { ArticleMappingDto } from '@/features/article-mappings/types';
 import type { BillingRuleDto } from '@/features/billing-rules/types';
 import type { EmailTemplateFormValues, SMSTemplateFormValues } from '@/features/communication/types';
 import type { ContactCategoryFormValues } from '@/features/contact-categories/types';
+import type { ContactFormValues } from '@/features/contacts/types';
 import {
   customerAccountFormFixtures,
   customerFormFixtures,
@@ -62,6 +63,7 @@ import {
   emailTemplateFormValuesFixture,
   smsTemplateFormValuesFixture,
   contactCategoryFormValuesFixture,
+  contactFormValuesFixture,
 } from '@/tests/fixtures/opencellDataset';
 
 export const customers: CustomerFormValues[] = customerFormFixtures;
@@ -151,3 +153,4 @@ export const accountOperationsData: AccountOperation[] = accountOperationsFixtur
 export const emailTemplatesData: EmailTemplateFormValues[] = [emailTemplateFormValuesFixture];
 export const smsTemplatesData: SMSTemplateFormValues[] = [smsTemplateFormValuesFixture];
 export const contactCategoriesData: ContactCategoryFormValues[] = [contactCategoryFormValuesFixture];
+export const contactsData: ContactFormValues[] = [contactFormValuesFixture];
