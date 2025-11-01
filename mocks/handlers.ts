@@ -2,6 +2,12 @@ import { http, HttpResponse } from 'msw';
 import type { CurrencyIsoFormValues } from '@/features/currency-iso/types';
 import type { CurrencyFormValues } from '@/features/currency/types';
 import type { FilterFormValues } from '@/features/filter/types';
+import type {
+  CancelBillingRunFormValues,
+  CreateBillingRunDto,
+  InvoiceValidationDto,
+  InvalidateInvoiceDocumentsDto,
+} from '@/features/invoicing/types';
 import {
   customers,
   customerAccounts,
@@ -13,6 +19,8 @@ import {
   invoiceSequencesData,
   invoiceSubCategoriesData,
   invoiceTypesData,
+  invoicingPlansData,
+  invoicingPlanItemsData,
   languageIsosData,
   languagesData,
   massImportDetection,
@@ -33,11 +41,24 @@ const invoiceCategoriesStore = [...invoiceCategoriesData];
 const invoiceSequencesStore = [...invoiceSequencesData];
 const invoiceSubCategoriesStore = [...invoiceSubCategoriesData];
 const invoiceTypesStore = [...invoiceTypesData];
+const invoicingPlansStore = [...invoicingPlansData];
+const invoicingPlanItemsStore = [...invoicingPlanItemsData];
 const languageIsosStore = [...languageIsosData];
 const languagesStore = [...languagesData];
 const ratedTransactionsStore = [...ratedTransactionsData];
 
 const success = (message = 'OK') => ({ status: 'SUCCESS', message });
+
+const extractBillingRunId = (input: unknown): number | undefined => {
+  if (typeof input === 'number') {
+    return input;
+  }
+  if (input && typeof input === 'object' && 'billingRunId' in input) {
+    const value = (input as CancelBillingRunFormValues).billingRunId;
+    return typeof value === 'number' ? value : undefined;
+  }
+  return undefined;
+};
 
 const findCustomer = (code: string) => customersStore.find((c) => c.code === code);
 const findCustomerAccount = (code: string) => customerAccountsStore.find((c) => c.code === code);
@@ -53,6 +74,9 @@ const findInvoiceSequence = (code: string) => invoiceSequencesStore.find((item) 
 const findInvoiceSubCategory = (code: string) =>
   invoiceSubCategoriesStore.find((item) => item.code === code);
 const findInvoiceType = (code: string) => invoiceTypesStore.find((item) => item.code === code);
+const findInvoicingPlan = (code: string) => invoicingPlansStore.find((item) => item.code === code);
+const findInvoicingPlanItem = (code: string) =>
+  invoicingPlanItemsStore.find((item) => item.code === code);
 const findLanguageIso = (code: string) => languageIsosStore.find((item) => item.code === code);
 const findLanguage = (code: string) => languagesStore.find((item) => item.code === code);
 
@@ -561,6 +585,94 @@ export const handlers = [
     return HttpResponse.json(success());
   }),
 
+  http.post('*/api/rest/billing/invoicingPlans/list', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      invoicingPlans: { invoicingPlan: invoicingPlansStore },
+    }),
+  ),
+  http.get('*/api/rest/billing/invoicingPlans', ({ request }) => {
+    const url = new URL(request.url);
+    const code = url.searchParams.get('invoicingPlanCode');
+    const plan = code ? findInvoicingPlan(code) : undefined;
+    if (!plan) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), invoicingPlanDto: plan });
+  }),
+  http.post('*/api/rest/billing/invoicingPlans', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoicingPlansStore)[number];
+    invoicingPlansStore.push(payload);
+    return HttpResponse.json(success());
+  }),
+  http.put('*/api/rest/billing/invoicingPlans', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoicingPlansStore)[number];
+    const index = invoicingPlansStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoicingPlansStore[index] = { ...invoicingPlansStore[index], ...payload };
+    }
+    return HttpResponse.json(success());
+  }),
+  http.delete('*/api/rest/billing/invoicingPlans/{invoicingPlanCode}', ({ params }) => {
+    const index = invoicingPlansStore.findIndex((item) => item.code === params.invoicingPlanCode);
+    if (index >= 0) {
+      invoicingPlansStore.splice(index, 1);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.get('*/api/rest/billing/invoicingPlans/version', () =>
+    HttpResponse.json(success('1.0.0')),
+  ),
+
+  http.post('*/api/rest/billing/invoicingPlanItems/list', () =>
+    HttpResponse.json({
+      actionStatus: success(),
+      invoicingPlanItems: { invoicingPlanItem: invoicingPlanItemsStore },
+    }),
+  ),
+  http.get('*/api/rest/billing/invoicingPlanItems', ({ request }) => {
+    const url = new URL(request.url);
+    const code = url.searchParams.get('invoicingPlanItemCode');
+    const item = code ? findInvoicingPlanItem(code) : undefined;
+    if (!item) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), invoicingPlanItemDto: item });
+  }),
+  http.post('*/api/rest/billing/invoicingPlanItems', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoicingPlanItemsStore)[number];
+    invoicingPlanItemsStore.push(payload);
+    return HttpResponse.json(success());
+  }),
+  http.put('*/api/rest/billing/invoicingPlanItems', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoicingPlanItemsStore)[number];
+    const index = invoicingPlanItemsStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoicingPlanItemsStore[index] = { ...invoicingPlanItemsStore[index], ...payload };
+    }
+    return HttpResponse.json(success());
+  }),
+  http.post('*/api/rest/billing/invoicingPlanItems/createOrUpdate', async ({ request }) => {
+    const payload = (await request.json()) as (typeof invoicingPlanItemsStore)[number];
+    const index = invoicingPlanItemsStore.findIndex((item) => item.code === payload.code);
+    if (index >= 0) {
+      invoicingPlanItemsStore[index] = { ...invoicingPlanItemsStore[index], ...payload };
+    } else {
+      invoicingPlanItemsStore.push(payload);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.delete('*/api/rest/billing/invoicingPlanItems/{invoicingPlanItemCode}', ({ params }) => {
+    const index = invoicingPlanItemsStore.findIndex((item) => item.code === params.invoicingPlanItemCode);
+    if (index >= 0) {
+      invoicingPlanItemsStore.splice(index, 1);
+    }
+    return HttpResponse.json(success());
+  }),
+  http.get('*/api/rest/billing/invoicingPlanItems/version', () =>
+    HttpResponse.json(success('1.0.0')),
+  ),
+
   http.get('*/api/rest/languageIso/listGetAll', () =>
     HttpResponse.json({
       actionStatus: success(),
@@ -782,6 +894,159 @@ export const handlers = [
     }
     return HttpResponse.json(success());
   }),
+
+  http.delete('*/api/rest/billing/invoicing/billingRun/{billingRunId}/canceledInvoices', ({ params }) =>
+    HttpResponse.json(success(`Billing run ${params.billingRunId} canceled invoices deleted`)),
+  ),
+  http.put('*/api/rest/billing/invoicing/billingRun/{billingRunId}/cancelInvoice', async ({ request, params }) => {
+    const payload = (await request.json()) as InvoiceValidationDto;
+    const invoiceCount = payload?.invoices?.length ?? 0;
+    return HttpResponse.json(
+      success(`${invoiceCount} invoice(s) canceled for run ${params.billingRunId ?? 'unknown'}`),
+    );
+  }),
+  http.put('*/api/rest/billing/invoicing/billingRun/{billingRunId}/moveInvoice', async ({ request, params }) => {
+    const payload = (await request.json()) as InvoiceValidationDto;
+    const invoiceCount = payload?.invoices?.length ?? 0;
+    return HttpResponse.json(
+      success(`${invoiceCount} invoice(s) moved for run ${params.billingRunId ?? 'unknown'}`),
+    );
+  }),
+  http.put('*/api/rest/billing/invoicing/billingRun/{billingRunId}/rejectInvoice', async ({ request, params }) => {
+    const payload = (await request.json()) as InvoiceValidationDto;
+    const invoiceCount = payload?.invoices?.length ?? 0;
+    return HttpResponse.json(
+      success(`${invoiceCount} invoice(s) rejected for run ${params.billingRunId ?? 'unknown'}`),
+    );
+  }),
+  http.put('*/api/rest/billing/invoicing/billingRun/{billingRunId}/validateInvoice', async ({ request, params }) => {
+    const payload = (await request.json()) as InvoiceValidationDto;
+    const invoiceCount = payload?.invoices?.length ?? 0;
+    return HttpResponse.json(
+      success(`${invoiceCount} invoice(s) validated for run ${params.billingRunId ?? 'unknown'}`),
+    );
+  }),
+  http.put(
+    '*/api/rest/billing/invoicing/billingRun/{billingRunId}/invalidateInvoiceDocuments',
+    async ({ request, params }) => {
+      const payload = (await request.json()) as InvalidateInvoiceDocumentsDto;
+      const xml = payload?.invalidateXMLInvoices ? 'XML' : undefined;
+      const pdf = payload?.invalidatePDFInvoices ? 'PDF' : undefined;
+      const invalidated = [xml, pdf].filter(Boolean).join(' & ') || 'no documents';
+      return HttpResponse.json(
+        success(`${invalidated} invalidated for run ${params.billingRunId ?? 'unknown'}`),
+      );
+    },
+  ),
+  http.post('*/api/rest/billing/invoicing/cancelBillingRun', async ({ request }) => {
+    const payload = await request.json();
+    const billingRunId = extractBillingRunId(payload);
+    return HttpResponse.json(
+      success(
+        billingRunId ? `Billing run ${billingRunId} canceled` : 'Billing run cancellation requested',
+      ),
+    );
+  }),
+  http.put('*/api/rest/billing/invoicing/cancelBillingRun', async ({ request }) => {
+    const payload = (await request.json()) as CancelBillingRunFormValues;
+    return HttpResponse.json(
+      success(`Billing run ${payload?.billingRunId ?? 'unknown'} cancelation scheduled`),
+    );
+  }),
+  http.post('*/api/rest/billing/invoicing/createBillingRun', async ({ request }) => {
+    const payload = (await request.json()) as CreateBillingRunDto;
+    const code = payload?.billingCycleCode ? `${payload.billingCycleCode}-BR-001` : 'BR-2024-01';
+    return HttpResponse.json({ ...success('Billing run created'), entityCode: code });
+  }),
+  http.post('*/api/rest/billing/invoicing/createOrUpdateBillingRun', async ({ request }) => {
+    const payload = (await request.json()) as CreateBillingRunDto;
+    const code = payload?.billingCycleCode ? `${payload.billingCycleCode}-BR-001` : 'BR-2024-01';
+    return HttpResponse.json({ ...success('Billing run saved'), entityCode: code });
+  }),
+  http.put('*/api/rest/billing/invoicing/rebuildInvoice', async ({ request }) => {
+    const payload = (await request.json()) as InvoiceValidationDto;
+    const invoiceCount = payload?.invoices?.length ?? 0;
+    return HttpResponse.json(success(`${invoiceCount} invoice(s) queued for rebuild`));
+  }),
+  http.post('*/api/rest/billing/invoicing/validateBillingRun', async ({ request }) => {
+    const payload = await request.json();
+    const billingRunId = extractBillingRunId(payload);
+    return HttpResponse.json(
+      success(
+        billingRunId ? `Billing run ${billingRunId} validated` : 'Billing run validation requested',
+      ),
+    );
+  }),
+  http.put('*/api/rest/billing/invoicing/validateBillingRun', async ({ request }) => {
+    const payload = (await request.json()) as CancelBillingRunFormValues;
+    return HttpResponse.json(
+      success(`Billing run ${payload?.billingRunId ?? 'unknown'} validation scheduled`),
+    );
+  }),
+  http.post('*/api/rest/billing/invoicing/getBillingAccountListInRun', async ({ request }) => {
+    const payload = await request.json();
+    const billingRunId = extractBillingRunId(payload);
+    const billingAccounts = customerAccountsStore.slice(0, 3).map((account, index) => ({
+      code: index === 2 ? undefined : account.code,
+      description: account.description ?? `Billing account ${index + 1}`,
+    }));
+    return HttpResponse.json({
+      actionStatus: success(`Run ${billingRunId ?? 'N/A'} accounts retrieved`),
+      billingAccountsDto: {
+        billingRunId,
+        billingAccount: billingAccounts,
+      },
+    });
+  }),
+  http.post('*/api/rest/billing/invoicing/getBillingRunInfo', async ({ request }) => {
+    const payload = await request.json();
+    const billingRunId = extractBillingRunId(payload);
+    return HttpResponse.json({
+      actionStatus: success(),
+      billingRunDto: {
+        code: billingRunId ? `BR-${billingRunId}` : 'BR-2024-01',
+        status: 'VALIDATED',
+        billingCycle: { code: 'PLAN-2024' },
+        processDate: new Date().toISOString(),
+        invoiceDate: new Date().toISOString(),
+        statusDate: new Date().toISOString(),
+        amountWithoutTax: 1200,
+        amountTax: 240,
+        amountWithTax: 1440,
+      },
+    });
+  }),
+  http.post('*/api/rest/billing/invoicing/getPreInvoicingReport', async ({ request }) => {
+    const payload = await request.json();
+    const billingRunId = extractBillingRunId(payload);
+    return HttpResponse.json({
+      actionStatus: success(),
+      preInvoicingReportsDTO: {
+        billingCycleCode: 'PLAN-2024',
+        billableBillingAccountNumber: 3,
+        amoutWitountTax: 1200,
+        taxesAmount: 240,
+        lastTransactionDate: new Date().toISOString(),
+        invoiceDate: new Date().toISOString(),
+        billingRunId,
+      },
+    });
+  }),
+  http.post('*/api/rest/billing/invoicing/getPostInvoicingReport', async ({ request }) => {
+    const payload = await request.json();
+    const billingRunId = extractBillingRunId(payload);
+    return HttpResponse.json({
+      actionStatus: success(),
+      postInvoicingReportsDTO: {
+        invoicesNumber: 3,
+        positiveInvoicesAmount: 1500,
+        negativeInvoicesAmount: 100,
+        globalAmount: 1400,
+        billingRunId,
+      },
+    });
+  }),
+  http.get('*/api/rest/billing/invoicing/version', () => HttpResponse.json(success('1.0.0'))),
 
   http.post('*/api/rest/massImport/uploadAndImport', async ({ request }) => {
     const payload = (await request.json()) as { filename?: string };

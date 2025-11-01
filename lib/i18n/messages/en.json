@@ -8,6 +8,9 @@
     "customers": "Customers",
     "customerAccounts": "Customer accounts",
     "invoices": "Invoices",
+    "invoicing": "Invoicing",
+    "invoicingPlans": "Invoicing plans",
+    "invoicingPlanItems": "Invoicing plan items",
     "subscriptions": "Subscriptions",
     "taxes": "Taxes",
     "scriptInstances": "Script instances",
@@ -63,7 +66,9 @@
     "add": "Add",
     "enable": "Enable",
     "disable": "Disable",
-    "generateCode": "Generate code"
+    "generateCode": "Generate code",
+    "run": "Run",
+    "load": "Load"
   },
   "dashboard": {
     "welcome": "Welcome back, {name}!",
@@ -88,6 +93,7 @@
   },
   "forms": {
     "required": "This field is required",
+    "selectPlaceholder": "Select an option",
     "invalidEmail": "Please provide a valid email address",
     "invalidNumber": "Please provide a valid number",
     "confirmDeletion": "Are you sure you want to delete this item?",
@@ -447,6 +453,99 @@
       "matchingAuto": "Automatic matching",
       "invoiceAccountable": "Invoice accountable",
       "useSelfSequence": "Use self sequence"
+    },
+    "invoicingPlan": {
+      "code": "Code",
+      "description": "Description",
+      "updatedCode": "Updated code"
+    },
+    "invoicingPlanItem": {
+      "code": "Code",
+      "description": "Description",
+      "billingPlanCode": "Billing plan code",
+      "advancement": "Advancement (%)",
+      "rateToBill": "Rate to bill",
+      "updatedCode": "Updated code"
+    },
+    "invoicing": {
+      "billingRunId": "Billing run ID",
+      "invoiceIdsLabel": "Invoice identifiers",
+      "invoiceIdsHelper": "Separate values with commas",
+      "deleteCanceledInvoices": "Delete canceled invoices",
+      "billingCycleCode": "Billing cycle code",
+      "billingRunType": "Billing run type",
+      "referenceDate": "Reference date",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "invoiceDate": "Invoice date",
+      "lastTransactionDate": "Last transaction date",
+      "collectionDate": "Collection date",
+      "rejectAutoAction": "Reject automatic action",
+      "suspectAutoAction": "Suspect automatic action",
+      "computeDatesAtValidation": "Compute dates at validation",
+      "skipValidationScript": "Skip validation script",
+      "generateAO": "Generate AO",
+      "invalidateXMLInvoices": "Invalidate XML invoices",
+      "invalidatePDFInvoices": "Invalidate PDF invoices",
+      "invoiceActions": {
+        "title": "Invoice actions",
+        "cancel": "Cancel invoices",
+        "move": "Move invoices",
+        "reject": "Reject invoices",
+        "validate": "Validate invoices",
+        "rebuild": "Rebuild invoices"
+      },
+      "createBillingRun": {
+        "title": "Billing run creation",
+        "submitCreate": "Create billing run",
+        "submitUpsert": "Create or update"
+      },
+      "lifecycle": {
+        "title": "Billing run lifecycle",
+        "cancelTitle": "Cancel billing run",
+        "cancelSubmit": "Cancel",
+        "cancelByIdSubmit": "Cancel by ID",
+        "validateTitle": "Validate billing run",
+        "validateSubmit": "Validate",
+        "validateByIdSubmit": "Validate by ID",
+        "deleteCanceledTitle": "Delete canceled invoices",
+        "deleteCanceledSubmit": "Delete invoices",
+        "invalidateDocumentsTitle": "Invalidate invoice documents",
+        "invalidateDocumentsSubmit": "Invalidate files"
+      },
+      "reports": {
+        "title": "Reports",
+        "accountsTitle": "Billing accounts in run",
+        "runInfoTitle": "Billing run information",
+        "preTitle": "Pre-invoicing report",
+        "postTitle": "Post-invoicing report"
+      },
+      "runInfo": {
+        "code": "Code",
+        "status": "Status",
+        "billingCycle": "Billing cycle",
+        "processDate": "Process date",
+        "invoiceDate": "Invoice date",
+        "statusDate": "Status date",
+        "amountWithoutTax": "Amount without tax",
+        "amountTax": "Tax amount",
+        "amountWithTax": "Amount with tax"
+      },
+      "preReport": {
+        "billingCycleCode": "Billing cycle",
+        "billableAccounts": "Billable accounts",
+        "totalAmountWithoutTax": "Total amount without tax",
+        "taxesAmount": "Taxes amount",
+        "lastTransactionDate": "Last transaction date",
+        "invoiceDate": "Invoice date"
+      },
+      "postReport": {
+        "invoicesNumber": "Invoices number",
+        "positiveInvoicesAmount": "Positive invoices amount",
+        "negativeInvoicesAmount": "Negative invoices amount",
+        "globalAmount": "Global amount"
+      },
+      "version": "Service version: {version}"
     },
     "languageIso": {
       "code": "Language code",
