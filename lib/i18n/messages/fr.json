@@ -19,6 +19,7 @@
     "terminationReasons": "Motifs de résiliation",
     "usage": "Consommations",
     "ratedTransactions": "Transactions tarifées",
+    "agedReceivables": "Balance âgée",
     "wallet": "Portefeuilles",
     "bundleTemplates": "Modèles groupés",
     "offerTemplateCategories": "Catégories d'offres",
@@ -339,6 +340,25 @@
       "description": "Description",
       "unityDescription": "Unité",
       "detailTitle": "Détails de la transaction"
+    },
+    "agedReceivable": {
+      "filtersTitle": "Filtrer la balance âgée",
+      "customerAccountCode": "Code compte client",
+      "customerAccountDescription": "Description compte client",
+      "sellerCode": "Code vendeur",
+      "sellerDescription": "Description vendeur",
+      "invoiceNumber": "Numéro de facture",
+      "invoiceDate": "Date de facture",
+      "dueDate": "Date d'échéance",
+      "tradingCurrency": "Devise de transaction",
+      "funcCurrency": "Devise fonctionnelle",
+      "notDueAmount": "Montant non échu",
+      "totalAmount": "Montant total",
+      "startDate": "Date de début",
+      "startDueDate": "Échéance initiale",
+      "endDueDate": "Échéance finale",
+      "stepInDays": "Pas (jours)",
+      "numberOfPeriods": "Nombre de périodes"
     },
     "access": {
       "code": "Code d'accès",

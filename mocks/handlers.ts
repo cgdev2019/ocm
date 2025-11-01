@@ -34,6 +34,7 @@ import {
   invoices,
   taxes,
   ratedTransactionsData,
+  agedReceivablesData,
   accountingCodesData,
   accountingPeriodsData,
   accountingCodeMappingsData,
@@ -58,6 +59,10 @@ const invoicingPlanItemsStore = [...invoicingPlanItemsData];
 const languageIsosStore = [...languageIsosData];
 const languagesStore = [...languagesData];
 const ratedTransactionsStore = [...ratedTransactionsData];
+const agedReceivablesStore = agedReceivablesData.map((item) => ({
+  ...item,
+  buckets: item.buckets?.map((bucket) => ({ ...bucket })) ?? [],
+}));
 const accountingCodesStore = [...accountingCodesData];
 const accountingPeriodsStore: AccountingPeriodDetailValues[] = [...accountingPeriodsData];
 const accountingCodeMappingsStore = new Map<string, AccountingCodeMappingFormValues['mappings']>();
@@ -666,6 +671,65 @@ export const handlers = [
     const invoice = { ...payload, invoiceId, invoiceNumber: `INV-${invoiceId}` };
     invoicesStore.push(invoice);
     return HttpResponse.json({ actionStatus: success(), invoiceId, invoiceNumber: invoice.invoiceNumber });
+  }),
+
+  http.get('*/api/rest/v2/standardReports/AgedReceivables', ({ request }) => {
+    const url = new URL(request.url);
+    const queryParams = Object.fromEntries(url.searchParams.entries());
+
+    const filtered = agedReceivablesStore.filter((item) => {
+      if (queryParams.customerAccountCode && item.customerAccountCode !== queryParams.customerAccountCode) {
+        return false;
+      }
+      if (
+        queryParams.customerAccountDescription &&
+        item.customerAccountDescription !== queryParams.customerAccountDescription
+      ) {
+        return false;
+      }
+      if (queryParams.sellerCode && item.sellerCode !== queryParams.sellerCode) {
+        return false;
+      }
+      if (queryParams.sellerDescription && item.sellerDescription !== queryParams.sellerDescription) {
+        return false;
+      }
+      if (queryParams.invoiceNumber && item.invoiceNumber !== queryParams.invoiceNumber) {
+        return false;
+      }
+      if (queryParams.tradingCurrency && item.tradingCurrency !== queryParams.tradingCurrency) {
+        return false;
+      }
+      if (queryParams.funcCurrency && item.funcCurrency !== queryParams.funcCurrency) {
+        return false;
+      }
+      return true;
+    });
+
+    const offset = Number.parseInt(queryParams.offset ?? '0', 10);
+    const limit = Number.parseInt(queryParams.limit ?? String(filtered.length), 10);
+    const safeOffset = Number.isNaN(offset) ? 0 : offset;
+    const safeLimit = Number.isNaN(limit) ? filtered.length : limit;
+    const paginated = filtered.slice(safeOffset, safeOffset + safeLimit);
+
+    const bucketLabels = new Set<string>();
+    paginated.forEach((entry) => {
+      entry.buckets?.forEach((bucket) => {
+        if (bucket?.label) {
+          bucketLabels.add(bucket.label);
+        }
+      });
+    });
+
+    return HttpResponse.json({
+      actionStatus: success('Aged receivables fetched'),
+      paging: {
+        offset: safeOffset,
+        limit: safeLimit,
+        totalNumberOfRecords: filtered.length,
+      },
+      bucketLabels: Array.from(bucketLabels),
+      agedReceivables: paginated,
+    });
   }),
 
   http.post('*/api/rest/billing/ratedTransaction/list', async ({ request }) => {

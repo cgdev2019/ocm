@@ -47,6 +47,7 @@ import SellIcon from '@mui/icons-material/SellOutlined';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonthOutlined';
 import type { SvgIconComponent } from '@mui/icons-material';
 import ArticleIcon from '@mui/icons-material/ArticleOutlined';
+import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOffOutlined';
 
 const registry: Record<string, SvgIconComponent> = {
   dashboard: DashboardIcon,
@@ -95,6 +96,7 @@ const registry: Record<string, SvgIconComponent> = {
   accountingPeriod: CalendarMonthIcon,
   providerContact: ContactsIcon,
   accountingArticle: ArticleIcon,
+  agedReceivable: HistoryToggleOffIcon,
 };
 
 export const NavIcon = ({ name }: { name: string }) => {

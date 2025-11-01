@@ -14,6 +14,10 @@ export const queryKeys = {
   accountOperations: {
     root: ['accountOperations'] as const,
   },
+  agedReceivables: {
+    list: (params?: Record<string, unknown>) =>
+      params ? (['agedReceivables', 'list', params] as const) : (['agedReceivables', 'list'] as const),
+  },
   invoices: {
     list: (filters?: Record<string, unknown>) =>
       filters ? ['invoices', 'list', filters] as const : ['invoices', 'list'] as const,
