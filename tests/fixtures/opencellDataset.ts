@@ -145,6 +145,10 @@ import type {
   AccountingArticleResponseDto,
 } from '@/features/accounting-articles/types';
 import type {
+  ArticleMappingDetail,
+  ArticleMappingDto,
+} from '@/features/article-mappings/types';
+import type {
   TitleDetailValues,
   TitleListItem,
   TitleResponseDto,
@@ -1570,6 +1574,28 @@ export const accountingArticleResponseFixture: AccountingArticleResponseDto = {
 };
 
 export const accountingArticleDetailFixture: AccountingArticleDetailValues = accountingArticleFormFixture;
+
+export const articleMappingDtoFixture: ArticleMappingDto = {
+  id: 501,
+  version: 3,
+  code: 'ART-MAP-001',
+  description: 'Mapping charges vers articles',
+  appendGeneratedCode: false,
+  mappingScript: {
+    code: 'SCRIPT-ART-001',
+    description: 'Attribution script',
+  } as ArticleMappingDto['mappingScript'],
+};
+
+export const articleMappingDetailFixture: ArticleMappingDetail = {
+  id: 501,
+  version: 3,
+  code: 'ART-MAP-001',
+  description: 'Mapping charges vers articles',
+  appendGeneratedCode: false,
+  mappingScriptCode: 'SCRIPT-ART-001',
+  mappingScriptDescription: 'Attribution script',
+};
 
 export const accountingArticleListResultFixture: AccountingArticleList = {
   items: accountingArticleListFixture,

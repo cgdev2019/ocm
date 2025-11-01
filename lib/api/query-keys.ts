@@ -65,6 +65,9 @@ export const queryKeys = {
     detail: (accountingArticleCode: string) =>
       ['accountingCodeMappings', 'detail', accountingArticleCode] as const,
   },
+  articleMappings: {
+    detail: (code: string) => ['articleMappings', 'detail', code] as const,
+  },
   accountingArticles: {
     root: ['accountingArticles'] as const,
     list: (params?: Record<string, unknown>) =>
