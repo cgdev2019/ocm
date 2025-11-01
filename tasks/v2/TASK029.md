@@ -19,12 +19,12 @@ Le domaine « DunningTemplate » (tag OpenAPI `DunningTemplate`) est défini dan
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/dunning/dunningtemplate` | Create a new Dunning Template | createDunningTemplate |
-| PUT | `/dunning/dunningtemplate/{dunningTemplateId}` | update a Dunning Template | updateDunningTemplate |
-| DELETE | `/dunning/dunningtemplate/{dunningTemplateId}` | Delete a Dunning Template | deleteDunningTemplate |
-| POST | `/dunning/dunningtemplate/{dunningTemplateId}/duplication` | duplicate a Dunning Template | duplicateDunningTemplate |
+| POST | `/api/rest/v2/dunning/dunningtemplate` | Create a new Dunning Template | createDunningTemplate |
+| PUT | `/api/rest/v2/dunning/dunningtemplate/{dunningTemplateId}` | update a Dunning Template | updateDunningTemplate |
+| DELETE | `/api/rest/v2/dunning/dunningtemplate/{dunningTemplateId}` | Delete a Dunning Template | deleteDunningTemplate |
+| POST | `/api/rest/v2/dunning/dunningtemplate/{dunningTemplateId}/duplication` | duplicate a Dunning Template | duplicateDunningTemplate |
 
-#### POST /dunning/dunningtemplate
+#### POST /api/rest/v2/dunning/dunningtemplate
 
 - Résumé: Create a new Dunning Template
 - OperationId: createDunningTemplate
@@ -39,7 +39,7 @@ Le domaine « DunningTemplate » (tag OpenAPI `DunningTemplate`) est défini dan
   - 404: a related entity does not exist
   - 412: Missing parameters
 
-#### PUT /dunning/dunningtemplate/{dunningTemplateId}
+#### PUT /api/rest/v2/dunning/dunningtemplate/{dunningTemplateId}
 
 - Résumé: update a Dunning Template
 - OperationId: updateDunningTemplate
@@ -56,7 +56,7 @@ Le domaine « DunningTemplate » (tag OpenAPI `DunningTemplate`) est défini dan
   - 404: a related entity does not exist
   - 412: Missing parameters
 
-#### DELETE /dunning/dunningtemplate/{dunningTemplateId}
+#### DELETE /api/rest/v2/dunning/dunningtemplate/{dunningTemplateId}
 
 - Résumé: Delete a Dunning Template
 - OperationId: deleteDunningTemplate
@@ -70,7 +70,7 @@ Le domaine « DunningTemplate » (tag OpenAPI `DunningTemplate`) est défini dan
   - 404: a related entity does not exist
   - 412: Missing parameters
 
-#### POST /dunning/dunningtemplate/{dunningTemplateId}/duplication
+#### POST /api/rest/v2/dunning/dunningtemplate/{dunningTemplateId}/duplication
 
 - Résumé: duplicate a Dunning Template
 - OperationId: duplicateDunningTemplate

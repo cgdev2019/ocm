@@ -19,10 +19,10 @@ Le domaine « Refund » (tag OpenAPI `Refund`) est défini dans `tasks/openceapi
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/refund/refundByCard` | Refund By Card | refundByCard |
-| POST | `/refund/refundBySCT` | Refund By SCT | refundBySCT |
+| POST | `/api/rest/v2/refund/refundByCard` | Refund By Card | refundByCard |
+| POST | `/api/rest/v2/refund/refundBySCT` | Refund By SCT | refundBySCT |
 
-#### POST /refund/refundByCard
+#### POST /api/rest/v2/refund/refundByCard
 
 - Résumé: Refund By Card
 - OperationId: refundByCard
@@ -37,7 +37,7 @@ Le domaine « Refund » (tag OpenAPI `Refund`) est défini dans `tasks/openceapi
   - 404: Entity does not exist
   - 412: Missing parameters
 
-#### POST /refund/refundBySCT
+#### POST /api/rest/v2/refund/refundBySCT
 
 - Résumé: Refund By SCT
 - OperationId: refundBySCT

@@ -19,9 +19,9 @@ Le domaine « InvoiceLines » (tag OpenAPI `InvoiceLines`) est défini dans `tas
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/billing/invoiceLines/{id}/taxes` | Return invoice line tax details | getTaxDetails |
+| GET | `/api/rest/v2/billing/invoiceLines/{id}/taxes` | Return invoice line tax details | getTaxDetails |
 
-#### GET /billing/invoiceLines/{id}/taxes
+#### GET /api/rest/v2/billing/invoiceLines/{id}/taxes
 
 - Résumé: Return invoice line tax details
 - OperationId: getTaxDetails

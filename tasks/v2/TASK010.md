@@ -19,11 +19,11 @@ Le domaine « BillingRule » (tag OpenAPI `BillingRule`) est défini dans `tasks
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/cpq/contracts/{contractCode}/billingRule` | Create a billingRule linked to an existing contract | createBillingRule |
-| PUT | `/cpq/contracts/{contractCode}/billingRule/{id}` | Update a billingRule linked to an existing contract | updateBillingRule |
-| DELETE | `/cpq/contracts/{contractCode}/billingRule/{id}` | Delete a billingRule | deleteBillingRule |
+| POST | `/api/rest/v2/cpq/contracts/{contractCode}/billingRule` | Create a billingRule linked to an existing contract | createBillingRule |
+| PUT | `/api/rest/v2/cpq/contracts/{contractCode}/billingRule/{id}` | Update a billingRule linked to an existing contract | updateBillingRule |
+| DELETE | `/api/rest/v2/cpq/contracts/{contractCode}/billingRule/{id}` | Delete a billingRule | deleteBillingRule |
 
-#### POST /cpq/contracts/{contractCode}/billingRule
+#### POST /api/rest/v2/cpq/contracts/{contractCode}/billingRule
 
 - Résumé: Create a billingRule linked to an existing contract
 - OperationId: createBillingRule
@@ -38,7 +38,7 @@ Le domaine « BillingRule » (tag OpenAPI `BillingRule`) est défini dans `tasks
   - 404: the contract code does not exist
   - 412: missing required paramter for billingRule.The required params are : contractCode, criteriaEl, InvoicedBACodeEL
 
-#### PUT /cpq/contracts/{contractCode}/billingRule/{id}
+#### PUT /api/rest/v2/cpq/contracts/{contractCode}/billingRule/{id}
 
 - Résumé: Update a billingRule linked to an existing contract
 - OperationId: updateBillingRule
@@ -54,7 +54,7 @@ Le domaine « BillingRule » (tag OpenAPI `BillingRule`) est défini dans `tasks
   - 404: the contract code does not exist
   - 412: missing required paramter for billingRule.The required params are : contractCode, criteriaEl, InvoicedBACodeEL
 
-#### DELETE /cpq/contracts/{contractCode}/billingRule/{id}
+#### DELETE /api/rest/v2/cpq/contracts/{contractCode}/billingRule/{id}
 
 - Résumé: Delete a billingRule
 - OperationId: deleteBillingRule

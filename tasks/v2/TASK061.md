@@ -19,10 +19,10 @@ Le domaine « Quote management » (tag OpenAPI `Quote management`) est défini d
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/quoteItems/{quoteCode}/{quoteVersion}/{quoteItemId}/duplicate` | This endpoint allows duplicate an existing quote item | duplicateQuote |
-| POST | `/quoteItems/{quoteCode}/{quoteVersion}/{quoteItemId}/duplication` | This endpoint allows duplicate an existing quote item | duplicate_2 |
+| POST | `/api/rest/v2/quoteItems/{quoteCode}/{quoteVersion}/{quoteItemId}/duplicate` | This endpoint allows duplicate an existing quote item | duplicateQuote |
+| POST | `/api/rest/v2/quoteItems/{quoteCode}/{quoteVersion}/{quoteItemId}/duplication` | This endpoint allows duplicate an existing quote item | duplicate_2 |
 
-#### POST /quoteItems/{quoteCode}/{quoteVersion}/{quoteItemId}/duplicate
+#### POST /api/rest/v2/quoteItems/{quoteCode}/{quoteVersion}/{quoteItemId}/duplicate
 
 - Résumé: This endpoint allows duplicate an existing quote item
 - OperationId: duplicateQuote
@@ -37,7 +37,7 @@ Le domaine « Quote management » (tag OpenAPI `Quote management`) est défini d
   - 403: Cannot move subscription
   - 404: quote item doesn't existe
 
-#### POST /quoteItems/{quoteCode}/{quoteVersion}/{quoteItemId}/duplication
+#### POST /api/rest/v2/quoteItems/{quoteCode}/{quoteVersion}/{quoteItemId}/duplication
 
 - Résumé: This endpoint allows duplicate an existing quote item
 - OperationId: duplicate_2

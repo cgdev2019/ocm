@@ -19,9 +19,9 @@ Le domaine « Open Orders Quote » (tag OpenAPI `Open Orders Quote`) est défini
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| PUT | `/ordering/open-order-quote/{code}/status/{status}` | update  open order quote status | changeStatus |
+| PUT | `/api/rest/v2/ordering/open-order-quote/{code}/status/{status}` | update  open order quote status | changeStatus |
 
-#### PUT /ordering/open-order-quote/{code}/status/{status}
+#### PUT /api/rest/v2/ordering/open-order-quote/{code}/status/{status}
 
 - Résumé: update  open order quote status
 - OperationId: changeStatus

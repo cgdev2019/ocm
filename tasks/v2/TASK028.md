@@ -19,12 +19,12 @@ Le domaine « DunningAction » (tag OpenAPI `DunningAction`) est défini dans `t
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/dunning/dunningaction` | Create a new Dunning Action | createDunningAction |
-| GET | `/dunning/dunningaction/{code}` | Retrieve a Dunning Action by code | getDunningAction |
-| PUT | `/dunning/dunningaction/{dunningActionId}` | Update a Dunning Action | updateDunningAction |
-| DELETE | `/dunning/dunningaction/{dunningActionId}` | Delete a Dunning Action | deleteDunningAction |
+| POST | `/api/rest/v2/dunning/dunningaction` | Create a new Dunning Action | createDunningAction |
+| GET | `/api/rest/v2/dunning/dunningaction/{code}` | Retrieve a Dunning Action by code | getDunningAction |
+| PUT | `/api/rest/v2/dunning/dunningaction/{dunningActionId}` | Update a Dunning Action | updateDunningAction |
+| DELETE | `/api/rest/v2/dunning/dunningaction/{dunningActionId}` | Delete a Dunning Action | deleteDunningAction |
 
-#### POST /dunning/dunningaction
+#### POST /api/rest/v2/dunning/dunningaction
 
 - Résumé: Create a new Dunning Action
 - OperationId: createDunningAction
@@ -39,7 +39,7 @@ Le domaine « DunningAction » (tag OpenAPI `DunningAction`) est défini dans `t
   - 404: a related entity does not exist
   - 412: Missing parameters
 
-#### GET /dunning/dunningaction/{code}
+#### GET /api/rest/v2/dunning/dunningaction/{code}
 
 - Résumé: Retrieve a Dunning Action by code
 - OperationId: getDunningAction
@@ -52,7 +52,7 @@ Le domaine « DunningAction » (tag OpenAPI `DunningAction`) est défini dans `t
   - 404: Dunning Action with code in the path doesn't exist
   - 412: Missing parameters
 
-#### PUT /dunning/dunningaction/{dunningActionId}
+#### PUT /api/rest/v2/dunning/dunningaction/{dunningActionId}
 
 - Résumé: Update a Dunning Action
 - OperationId: updateDunningAction
@@ -69,7 +69,7 @@ Le domaine « DunningAction » (tag OpenAPI `DunningAction`) est défini dans `t
   - 404: a related entity does not exist
   - 412: Missing parameters
 
-#### DELETE /dunning/dunningaction/{dunningActionId}
+#### DELETE /api/rest/v2/dunning/dunningaction/{dunningActionId}
 
 - Résumé: Delete a Dunning Action
 - OperationId: deleteDunningAction

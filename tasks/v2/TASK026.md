@@ -19,32 +19,32 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/dunning/dunningLevel` | Create new Dunning Level | create_11 |
-| GET | `/dunning/dunningLevel/{dunningLevelCode}` | Get existing Dunning Level | findByCode |
-| PUT | `/dunning/dunningLevel/{dunningLevelId}` | Update an existing Dunning Level | update_10 |
-| DELETE | `/dunning/dunningLevel/{dunningLevelId}` | Delete existing Dunning level | delete_8 |
-| POST | `/dunning/dunningPolicy` | Create new Dunning policy | create_14 |
-| PUT | `/dunning/dunningPolicy/{dunningPolicyId}` | update Dunning policy | update_13 |
-| DELETE | `/dunning/dunningPolicy/{dunningPolicyId}` | delete a dunning policy | delete_11 |
-| GET | `/dunning/dunningPolicy/{dunningPolicyName}` | Find dunning policy | findByName |
-| PUT | `/dunning/dunningPolicy/archive/{dunningPolicyId}` | Archive dunning policy | archive |
-| POST | `/dunning/dunningPolicy/deactivate` | deactivate dunning policy | deactivate |
-| POST | `/dunning/pauseReason` | Create new Dunning Pause Reason | create_12 |
-| PUT | `/dunning/pauseReason/{id}` | Update an existing Dunning Pause Reason | update_11 |
-| DELETE | `/dunning/pauseReason/{id}` | Delete existing Dunning Pause Reason | delete_9 |
-| POST | `/dunning/paymentRetry` | Create new Dunning Payment Retry | create_13 |
-| PUT | `/dunning/paymentRetry/{id}` | Update an existing Dunning Payment Retry | update_12 |
-| DELETE | `/dunning/paymentRetry/{id}` | Delete existing Dunning Payment Retry | delete_10 |
-| POST | `/dunning/stopReason` | Create new Dunning Stop Reason | create_16 |
-| PUT | `/dunning/stopReason/{id}` | Update an existing Dunning Stop Reason | update_15 |
-| DELETE | `/dunning/stopReason/{id}` | Delete existing Dunning Stop Reason | delete_13 |
-| POST | `/payment/dunning` | Create new Dunning Setting | create_15 |
-| GET | `/payment/dunning/{dunningCode}` | Get existing Dunning Setting | findByCode_1 |
-| POST | `/payment/dunning/{dunningCode}/duplication` | Duplicate an existing Dunning Setting | duplicate_1 |
-| PUT | `/payment/dunning/{dunningId}` | Update an existing Dunning Setting | update_14 |
-| DELETE | `/payment/dunning/{dunningId}` | Delete existing Dunning Setting | delete_12 |
+| POST | `/api/rest/v2/dunning/dunningLevel` | Create new Dunning Level | create_11 |
+| GET | `/api/rest/v2/dunning/dunningLevel/{dunningLevelCode}` | Get existing Dunning Level | findByCode |
+| PUT | `/api/rest/v2/dunning/dunningLevel/{dunningLevelId}` | Update an existing Dunning Level | update_10 |
+| DELETE | `/api/rest/v2/dunning/dunningLevel/{dunningLevelId}` | Delete existing Dunning level | delete_8 |
+| POST | `/api/rest/v2/dunning/dunningPolicy` | Create new Dunning policy | create_14 |
+| PUT | `/api/rest/v2/dunning/dunningPolicy/{dunningPolicyId}` | update Dunning policy | update_13 |
+| DELETE | `/api/rest/v2/dunning/dunningPolicy/{dunningPolicyId}` | delete a dunning policy | delete_11 |
+| GET | `/api/rest/v2/dunning/dunningPolicy/{dunningPolicyName}` | Find dunning policy | findByName |
+| PUT | `/api/rest/v2/dunning/dunningPolicy/archive/{dunningPolicyId}` | Archive dunning policy | archive |
+| POST | `/api/rest/v2/dunning/dunningPolicy/deactivate` | deactivate dunning policy | deactivate |
+| POST | `/api/rest/v2/dunning/pauseReason` | Create new Dunning Pause Reason | create_12 |
+| PUT | `/api/rest/v2/dunning/pauseReason/{id}` | Update an existing Dunning Pause Reason | update_11 |
+| DELETE | `/api/rest/v2/dunning/pauseReason/{id}` | Delete existing Dunning Pause Reason | delete_9 |
+| POST | `/api/rest/v2/dunning/paymentRetry` | Create new Dunning Payment Retry | create_13 |
+| PUT | `/api/rest/v2/dunning/paymentRetry/{id}` | Update an existing Dunning Payment Retry | update_12 |
+| DELETE | `/api/rest/v2/dunning/paymentRetry/{id}` | Delete existing Dunning Payment Retry | delete_10 |
+| POST | `/api/rest/v2/dunning/stopReason` | Create new Dunning Stop Reason | create_16 |
+| PUT | `/api/rest/v2/dunning/stopReason/{id}` | Update an existing Dunning Stop Reason | update_15 |
+| DELETE | `/api/rest/v2/dunning/stopReason/{id}` | Delete existing Dunning Stop Reason | delete_13 |
+| POST | `/api/rest/v2/payment/dunning` | Create new Dunning Setting | create_15 |
+| GET | `/api/rest/v2/payment/dunning/{dunningCode}` | Get existing Dunning Setting | findByCode_1 |
+| POST | `/api/rest/v2/payment/dunning/{dunningCode}/duplication` | Duplicate an existing Dunning Setting | duplicate_1 |
+| PUT | `/api/rest/v2/payment/dunning/{dunningId}` | Update an existing Dunning Setting | update_14 |
+| DELETE | `/api/rest/v2/payment/dunning/{dunningId}` | Delete existing Dunning Setting | delete_12 |
 
-#### POST /dunning/dunningLevel
+#### POST /api/rest/v2/dunning/dunningLevel
 
 - Résumé: Create new Dunning Level
 - OperationId: create_11
@@ -57,7 +57,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning level successfully created
   - 400: dunning level creation is failed
 
-#### GET /dunning/dunningLevel/{dunningLevelCode}
+#### GET /api/rest/v2/dunning/dunningLevel/{dunningLevelCode}
 
 - Résumé: Get existing Dunning Level
 - OperationId: findByCode
@@ -69,7 +69,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning level successfully retrivied
   - 404: Dunning level with given code does not exist
 
-#### PUT /dunning/dunningLevel/{dunningLevelId}
+#### PUT /api/rest/v2/dunning/dunningLevel/{dunningLevelId}
 
 - Résumé: Update an existing Dunning Level
 - OperationId: update_10
@@ -85,7 +85,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 400: dunning level with given code does not exist
   - 404: dunning level successfully updated
 
-#### DELETE /dunning/dunningLevel/{dunningLevelId}
+#### DELETE /api/rest/v2/dunning/dunningLevel/{dunningLevelId}
 
 - Résumé: Delete existing Dunning level
 - OperationId: delete_8
@@ -97,7 +97,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning level successfully deleted
   - 404: Dunning level with id in the path doesn't exist
 
-#### POST /dunning/dunningPolicy
+#### POST /api/rest/v2/dunning/dunningPolicy
 
 - Résumé: Create new Dunning policy
 - OperationId: create_14
@@ -112,7 +112,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 404: Dunning policy does not exist
   - 412: Missing parameters
 
-#### PUT /dunning/dunningPolicy/{dunningPolicyId}
+#### PUT /api/rest/v2/dunning/dunningPolicy/{dunningPolicyId}
 
 - Résumé: update Dunning policy
 - OperationId: update_13
@@ -127,7 +127,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: Dunning policy successfully updated
   - 404: Dunning policy does not exits
 
-#### DELETE /dunning/dunningPolicy/{dunningPolicyId}
+#### DELETE /api/rest/v2/dunning/dunningPolicy/{dunningPolicyId}
 
 - Résumé: delete a dunning policy
 - OperationId: delete_11
@@ -139,7 +139,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: Dunning policy successfully deleted
   - 404: Dunning policy does not exits
 
-#### GET /dunning/dunningPolicy/{dunningPolicyName}
+#### GET /api/rest/v2/dunning/dunningPolicy/{dunningPolicyName}
 
 - Résumé: Find dunning policy
 - OperationId: findByName
@@ -151,7 +151,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: Dunning policy successfully retrieved
   - 404: Dunning policy does not exits
 
-#### PUT /dunning/dunningPolicy/archive/{dunningPolicyId}
+#### PUT /api/rest/v2/dunning/dunningPolicy/archive/{dunningPolicyId}
 
 - Résumé: Archive dunning policy
 - OperationId: archive
@@ -163,7 +163,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning policy successfully archived
   - 404: Dunning policy does not exist
 
-#### POST /dunning/dunningPolicy/deactivate
+#### POST /api/rest/v2/dunning/dunningPolicy/deactivate
 
 - Résumé: deactivate dunning policy
 - OperationId: deactivate
@@ -176,7 +176,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning policy successfully deactivated
   - 404: Dunning policy does not exist
 
-#### POST /dunning/pauseReason
+#### POST /api/rest/v2/dunning/pauseReason
 
 - Résumé: Create new Dunning Pause Reason
 - OperationId: create_12
@@ -189,7 +189,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning Pause Reason successfully created
   - 404: Dunning Pause Reason with the same code exist
 
-#### PUT /dunning/pauseReason/{id}
+#### PUT /api/rest/v2/dunning/pauseReason/{id}
 
 - Résumé: Update an existing Dunning Pause Reason
 - OperationId: update_11
@@ -204,7 +204,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning Pause Reasons successfully updated
   - 404: new code for dunning Pause Reasons already exist
 
-#### DELETE /dunning/pauseReason/{id}
+#### DELETE /api/rest/v2/dunning/pauseReason/{id}
 
 - Résumé: Delete existing Dunning Pause Reason
 - OperationId: delete_9
@@ -216,7 +216,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning Pause Reasons successfully deleted
   - 404: Dunning Pause Reason with id in the path doesn't exist
 
-#### POST /dunning/paymentRetry
+#### POST /api/rest/v2/dunning/paymentRetry
 
 - Résumé: Create new Dunning Payment Retry
 - OperationId: create_13
@@ -229,7 +229,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning Payment Retry successfully created
   - 404: Dunning Payment Retry with the same code exist
 
-#### PUT /dunning/paymentRetry/{id}
+#### PUT /api/rest/v2/dunning/paymentRetry/{id}
 
 - Résumé: Update an existing Dunning Payment Retry
 - OperationId: update_12
@@ -244,7 +244,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning Payment Retry successfully updated
   - 404: new code for dunning Payment Retry already exist
 
-#### DELETE /dunning/paymentRetry/{id}
+#### DELETE /api/rest/v2/dunning/paymentRetry/{id}
 
 - Résumé: Delete existing Dunning Payment Retry
 - OperationId: delete_10
@@ -256,7 +256,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning Payment Retry successfully deleted
   - 404: Dunning Payment Retry with id in the path doesn't exist
 
-#### POST /dunning/stopReason
+#### POST /api/rest/v2/dunning/stopReason
 
 - Résumé: Create new Dunning Stop Reason
 - OperationId: create_16
@@ -269,7 +269,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning Stop Reason successfully created
   - 404: Dunning Stop Reason with the same code exist
 
-#### PUT /dunning/stopReason/{id}
+#### PUT /api/rest/v2/dunning/stopReason/{id}
 
 - Résumé: Update an existing Dunning Stop Reason
 - OperationId: update_15
@@ -284,7 +284,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning Stop Reasons successfully updated
   - 404: new code for dunning Stop Reasons already exist
 
-#### DELETE /dunning/stopReason/{id}
+#### DELETE /api/rest/v2/dunning/stopReason/{id}
 
 - Résumé: Delete existing Dunning Stop Reason
 - OperationId: delete_13
@@ -296,7 +296,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning Stop Reasons successfully deleted
   - 404: Dunning Stop Reason with id in the path doesn't exist
 
-#### POST /payment/dunning
+#### POST /api/rest/v2/payment/dunning
 
 - Résumé: Create new Dunning Setting
 - OperationId: create_15
@@ -309,7 +309,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning settings successfully created
   - 404: Dunning with the same code exist
 
-#### GET /payment/dunning/{dunningCode}
+#### GET /api/rest/v2/payment/dunning/{dunningCode}
 
 - Résumé: Get existing Dunning Setting
 - OperationId: findByCode_1
@@ -321,7 +321,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning settings successfully retrivied
   - 404: Dunning setting with code in the path doesn't exist
 
-#### POST /payment/dunning/{dunningCode}/duplication
+#### POST /api/rest/v2/payment/dunning/{dunningCode}/duplication
 
 - Résumé: Duplicate an existing Dunning Setting
 - OperationId: duplicate_1
@@ -333,7 +333,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning settings successfully retrivied
   - 404: Dunning setting with code in the path doesn't exist
 
-#### PUT /payment/dunning/{dunningId}
+#### PUT /api/rest/v2/payment/dunning/{dunningId}
 
 - Résumé: Update an existing Dunning Setting
 - OperationId: update_14
@@ -348,7 +348,7 @@ Le domaine « Dunning » (tag OpenAPI `Dunning`) est défini dans `tasks/opencea
   - 200: dunning settings successfully updated
   - 404: new code for dunning settings already exist
 
-#### DELETE /payment/dunning/{dunningId}
+#### DELETE /api/rest/v2/payment/dunning/{dunningId}
 
 - Résumé: Delete existing Dunning Setting
 - OperationId: delete_12

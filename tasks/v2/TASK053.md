@@ -19,10 +19,10 @@ Le domaine « PolicyRule » (tag OpenAPI `PolicyRule`) est défini dans `tasks/o
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/dunning/dunningPolicy/addRules/{dunningPolicyId}` | Add policy rule | addPolicyRule |
-| DELETE | `/dunning/dunningPolicy/policyRule/{policyRuleID}` | Remove policy rule | removePolicyRule |
+| POST | `/api/rest/v2/dunning/dunningPolicy/addRules/{dunningPolicyId}` | Add policy rule | addPolicyRule |
+| DELETE | `/api/rest/v2/dunning/dunningPolicy/policyRule/{policyRuleID}` | Remove policy rule | removePolicyRule |
 
-#### POST /dunning/dunningPolicy/addRules/{dunningPolicyId}
+#### POST /api/rest/v2/dunning/dunningPolicy/addRules/{dunningPolicyId}
 
 - Résumé: Add policy rule
 - OperationId: addPolicyRule
@@ -37,7 +37,7 @@ Le domaine « PolicyRule » (tag OpenAPI `PolicyRule`) est défini dans `tasks/o
   - 200: Policy rule successfully added
   - 400: Either first policy rule ruleJoint is not null or first policy rule line ruleJoint is not null
 
-#### DELETE /dunning/dunningPolicy/policyRule/{policyRuleID}
+#### DELETE /api/rest/v2/dunning/dunningPolicy/policyRule/{policyRuleID}
 
 - Résumé: Remove policy rule
 - OperationId: removePolicyRule

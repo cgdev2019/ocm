@@ -19,11 +19,11 @@ Le domaine « Dunning Agent » (tag OpenAPI `Dunning Agent`) est défini dans `t
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/dunning/dunningAgent` | Create new Dunning Agent | create_10 |
-| PUT | `/dunning/dunningAgent/{dunningSettingsCode}/{agentEmailItem}` | update an existing Dunning Agent | update_9 |
-| DELETE | `/dunning/dunningAgent/{dunningSettingsCode}/{agentEmailItem}` | delete an existing Dunning Agent | delete_7 |
+| POST | `/api/rest/v2/dunning/dunningAgent` | Create new Dunning Agent | create_10 |
+| PUT | `/api/rest/v2/dunning/dunningAgent/{dunningSettingsCode}/{agentEmailItem}` | update an existing Dunning Agent | update_9 |
+| DELETE | `/api/rest/v2/dunning/dunningAgent/{dunningSettingsCode}/{agentEmailItem}` | delete an existing Dunning Agent | delete_7 |
 
-#### POST /dunning/dunningAgent
+#### POST /api/rest/v2/dunning/dunningAgent
 
 - Résumé: Create new Dunning Agent
 - OperationId: create_10
@@ -35,7 +35,7 @@ Le domaine « Dunning Agent » (tag OpenAPI `Dunning Agent`) est défini dans `t
 - Réponses:
   - 200: dunning Agent successfully created
 
-#### PUT /dunning/dunningAgent/{dunningSettingsCode}/{agentEmailItem}
+#### PUT /api/rest/v2/dunning/dunningAgent/{dunningSettingsCode}/{agentEmailItem}
 
 - Résumé: update an existing Dunning Agent
 - OperationId: update_9
@@ -50,7 +50,7 @@ Le domaine « Dunning Agent » (tag OpenAPI `Dunning Agent`) est défini dans `t
 - Réponses:
   - 200: dunning Agent successfully updated
 
-#### DELETE /dunning/dunningAgent/{dunningSettingsCode}/{agentEmailItem}
+#### DELETE /api/rest/v2/dunning/dunningAgent/{dunningSettingsCode}/{agentEmailItem}
 
 - Résumé: delete an existing Dunning Agent
 - OperationId: delete_7

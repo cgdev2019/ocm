@@ -19,11 +19,11 @@ Le domaine « InvoiceValidationRules » (tag OpenAPI `InvoiceValidationRules`) e
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/billing/invoicevalidationrules` | Create invoice validation rule | create_4 |
-| PUT | `/billing/invoicevalidationrules/{id}` | Update invoice validation rule | update_3 |
-| DELETE | `/billing/invoicevalidationrules/{id}` | Delete invoice validation rule | delete_2 |
+| POST | `/api/rest/v2/billing/invoicevalidationrules` | Create invoice validation rule | create_4 |
+| PUT | `/api/rest/v2/billing/invoicevalidationrules/{id}` | Update invoice validation rule | update_3 |
+| DELETE | `/api/rest/v2/billing/invoicevalidationrules/{id}` | Delete invoice validation rule | delete_2 |
 
-#### POST /billing/invoicevalidationrules
+#### POST /api/rest/v2/billing/invoicevalidationrules
 
 - Résumé: Create invoice validation rule
 - OperationId: create_4
@@ -36,7 +36,7 @@ Le domaine « InvoiceValidationRules » (tag OpenAPI `InvoiceValidationRules`) e
   - 201: invoice validation rule successfully created
   - 304: error when creating invoice validation rule
 
-#### PUT /billing/invoicevalidationrules/{id}
+#### PUT /api/rest/v2/billing/invoicevalidationrules/{id}
 
 - Résumé: Update invoice validation rule
 - OperationId: update_3
@@ -51,7 +51,7 @@ Le domaine « InvoiceValidationRules » (tag OpenAPI `InvoiceValidationRules`) e
   - 201: invoice validation rule successfully updated
   - 304: error when updating invoice validation rule
 
-#### DELETE /billing/invoicevalidationrules/{id}
+#### DELETE /api/rest/v2/billing/invoicevalidationrules/{id}
 
 - Résumé: Delete invoice validation rule
 - OperationId: delete_2

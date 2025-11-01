@@ -19,13 +19,13 @@ Le domaine « articleMappingLine » (tag OpenAPI `articleMappingLine`) est défi
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/articleMappingLines` | This endpoint allows to create an article mapping line resource | createArticleMappingLine |
-| GET | `/articleMappingLines/{id}` | This endpoint allows to find an existing article mapping line resource | findById |
-| PUT | `/articleMappingLines/{id}` | This endpoint allows to updating an existing article mapping line resource | updateArticleMappingLine |
-| DELETE | `/articleMappingLines/{id}` | This endpoint allows to delete an existing article mapping line resource | deleteById |
-| GET | `/articleMappingLines/find/{code}` | This endpoint allows to find an existing article mapping line resource | find_1 |
+| POST | `/api/rest/v2/articleMappingLines` | This endpoint allows to create an article mapping line resource | createArticleMappingLine |
+| GET | `/api/rest/v2/articleMappingLines/{id}` | This endpoint allows to find an existing article mapping line resource | findById |
+| PUT | `/api/rest/v2/articleMappingLines/{id}` | This endpoint allows to updating an existing article mapping line resource | updateArticleMappingLine |
+| DELETE | `/api/rest/v2/articleMappingLines/{id}` | This endpoint allows to delete an existing article mapping line resource | deleteById |
+| GET | `/api/rest/v2/articleMappingLines/find/{code}` | This endpoint allows to find an existing article mapping line resource | find_1 |
 
-#### POST /articleMappingLines
+#### POST /api/rest/v2/articleMappingLines
 
 - Résumé: This endpoint allows to create an article mapping line resource
 - OperationId: createArticleMappingLine
@@ -38,7 +38,7 @@ Le domaine « articleMappingLine » (tag OpenAPI `articleMappingLine`) est défi
   - 200: the article mapping line resource successfully created, and the id is returned in the response
   - 400: bad request when article mapping line information contains an error
 
-#### GET /articleMappingLines/{id}
+#### GET /api/rest/v2/articleMappingLines/{id}
 
 - Résumé: This endpoint allows to find an existing article mapping line resource
 - OperationId: findById
@@ -50,7 +50,7 @@ Le domaine « articleMappingLine » (tag OpenAPI `articleMappingLine`) est défi
   - 200: the article mapping line resource retrieved, and the object is returned in the response
   - 400: bad request when article mapping line information doesn't exist
 
-#### PUT /articleMappingLines/{id}
+#### PUT /api/rest/v2/articleMappingLines/{id}
 
 - Résumé: This endpoint allows to updating an existing article mapping line resource
 - OperationId: updateArticleMappingLine
@@ -65,7 +65,7 @@ Le domaine « articleMappingLine » (tag OpenAPI `articleMappingLine`) est défi
   - 200: the article mapping line resource successfully updated, and the object is returned in the response
   - 400: bad request when article mapping line information contains an error
 
-#### DELETE /articleMappingLines/{id}
+#### DELETE /api/rest/v2/articleMappingLines/{id}
 
 - Résumé: This endpoint allows to delete an existing article mapping line resource
 - OperationId: deleteById
@@ -77,7 +77,7 @@ Le domaine « articleMappingLine » (tag OpenAPI `articleMappingLine`) est défi
   - 200: the article mapping line resource deleted, and the object is returned in the response
   - 400: bad request when article mapping line information doesn't exist
 
-#### GET /articleMappingLines/find/{code}
+#### GET /api/rest/v2/articleMappingLines/find/{code}
 
 - Résumé: This endpoint allows to find an existing article mapping line resource
 - OperationId: find_1

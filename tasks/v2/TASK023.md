@@ -19,20 +19,20 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/billing/billingAccounts/{billingAccountId}/discountPlanInstances` | Return an discount plan instance | getDiscountPlanInstances |
-| POST | `/billing/billingAccounts/{billingAccountId}/discountPlanInstances` | This endpoint allows to instantiate a discount plan instance resource | create_2 |
-| GET | `/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}` | Return an discount plan instance | getDiscountPlanInstance |
-| PUT | `/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}` | Update a resource by giving it's Id | update_1 |
-| DELETE | `/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}` | Delete a resource by giving it's Id | delete_1 |
-| PUT | `/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}/expiration` | Expire a discount plan Instance | expire |
-| GET | `/billing/subscriptions/{subscriptionId}/discountPlanInstances` | Return discount plan instances by subscription | getDiscountPlanInstancesBySubscription |
-| POST | `/billing/subscriptions/{subscriptionId}/discountPlanInstances` | This endpoint allows to instantiate a discount plan instance resource for a subscription | createBySubscription |
-| GET | `/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}` | Return an discount plan instance by subscription | getDiscountPlanInstanceBySubscription |
-| PUT | `/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}` | Update a resource by giving it's Id | updateBySubscription |
-| DELETE | `/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}` | Delete a resource by giving it's Id | deleteBySubscription |
-| PUT | `/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}/expiration` | Expire a discount plan Instance | expireBySubscription |
+| GET | `/api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances` | Return an discount plan instance | getDiscountPlanInstances |
+| POST | `/api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances` | This endpoint allows to instantiate a discount plan instance resource | create_2 |
+| GET | `/api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}` | Return an discount plan instance | getDiscountPlanInstance |
+| PUT | `/api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}` | Update a resource by giving it's Id | update_1 |
+| DELETE | `/api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}` | Delete a resource by giving it's Id | delete_1 |
+| PUT | `/api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}/expiration` | Expire a discount plan Instance | expire |
+| GET | `/api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances` | Return discount plan instances by subscription | getDiscountPlanInstancesBySubscription |
+| POST | `/api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances` | This endpoint allows to instantiate a discount plan instance resource for a subscription | createBySubscription |
+| GET | `/api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}` | Return an discount plan instance by subscription | getDiscountPlanInstanceBySubscription |
+| PUT | `/api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}` | Update a resource by giving it's Id | updateBySubscription |
+| DELETE | `/api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}` | Delete a resource by giving it's Id | deleteBySubscription |
+| PUT | `/api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}/expiration` | Expire a discount plan Instance | expireBySubscription |
 
-#### GET /billing/billingAccounts/{billingAccountId}/discountPlanInstances
+#### GET /api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances
 
 - Résumé: Return an discount plan instance
 - OperationId: getDiscountPlanInstances
@@ -48,7 +48,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
     - application/json: ApiException (ApiException)
   - default: the searched discount Plan
 
-#### POST /billing/billingAccounts/{billingAccountId}/discountPlanInstances
+#### POST /api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances
 
 - Résumé: This endpoint allows to instantiate a discount plan instance resource
 - OperationId: create_2
@@ -63,7 +63,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
   - 200: the entity successfully created, and the id is returned in the response
   - 400: bad request when entity information contains an error
 
-#### GET /billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}
+#### GET /api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}
 
 - Résumé: Return an discount plan instance
 - OperationId: getDiscountPlanInstance
@@ -77,7 +77,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
     - application/json: ApiException (ApiException)
   - default: the searched discount Plan
 
-#### PUT /billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}
+#### PUT /api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}
 
 - Résumé: Update a resource by giving it's Id
 - OperationId: update_1
@@ -95,7 +95,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### DELETE /billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}
+#### DELETE /api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}
 
 - Résumé: Delete a resource by giving it's Id
 - OperationId: delete_1
@@ -110,7 +110,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### PUT /billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}/expiration
+#### PUT /api/rest/v2/billing/billingAccounts/{billingAccountId}/discountPlanInstances/{id}/expiration
 
 - Résumé: Expire a discount plan Instance
 - OperationId: expire
@@ -125,7 +125,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### GET /billing/subscriptions/{subscriptionId}/discountPlanInstances
+#### GET /api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances
 
 - Résumé: Return discount plan instances by subscription
 - OperationId: getDiscountPlanInstancesBySubscription
@@ -141,7 +141,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
     - application/json: ApiException (ApiException)
   - default: the searched discount Plan
 
-#### POST /billing/subscriptions/{subscriptionId}/discountPlanInstances
+#### POST /api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances
 
 - Résumé: This endpoint allows to instantiate a discount plan instance resource for a subscription
 - OperationId: createBySubscription
@@ -156,7 +156,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
   - 200: the entity successfully created, and the id is returned in the response
   - 400: bad request when entity information contains an error
 
-#### GET /billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}
+#### GET /api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}
 
 - Résumé: Return an discount plan instance by subscription
 - OperationId: getDiscountPlanInstanceBySubscription
@@ -170,7 +170,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
     - application/json: ApiException (ApiException)
   - default: the searched discount Plan
 
-#### PUT /billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}
+#### PUT /api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}
 
 - Résumé: Update a resource by giving it's Id
 - OperationId: updateBySubscription
@@ -188,7 +188,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### DELETE /billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}
+#### DELETE /api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}
 
 - Résumé: Delete a resource by giving it's Id
 - OperationId: deleteBySubscription
@@ -203,7 +203,7 @@ Le domaine « Discount Plan instances » (tag OpenAPI `Discount Plan instances`)
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### PUT /billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}/expiration
+#### PUT /api/rest/v2/billing/subscriptions/{subscriptionId}/discountPlanInstances/{id}/expiration
 
 - Résumé: Expire a discount plan Instance
 - OperationId: expireBySubscription

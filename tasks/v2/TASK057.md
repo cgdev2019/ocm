@@ -19,9 +19,9 @@ Le domaine « PricePlanMatrixLine » (tag OpenAPI `PricePlanMatrixLine`) est dé
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/priceplanmatrixline/search` | search price plan using attributes information | search |
+| POST | `/api/rest/v2/priceplanmatrixline/search` | search price plan using attributes information | search |
 
-#### POST /priceplanmatrixline/search
+#### POST /api/rest/v2/priceplanmatrixline/search
 
 - Résumé: search price plan using attributes information
 - OperationId: search

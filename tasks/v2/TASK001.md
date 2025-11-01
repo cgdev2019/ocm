@@ -19,15 +19,15 @@ Le domaine « AccountingArticle » (tag OpenAPI `AccountingArticle`) est défini
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/articleMapping` | This endpoint allows to create an article mapping resource | createArticleMappingLine_1 |
-| GET | `/articles` | This endpoint allows to find list of accounting article resource | list |
-| POST | `/articles` | This endpoint allows to create an accounting article resource | createAccountingArticle |
-| GET | `/articles/{accountingArticleCode}` | This endpoint allows to find an existing accounting article resource | find |
-| DELETE | `/articles/{accountingArticleCode}` | This endpoint allows to delete an existing accounting article resource | delete |
-| PUT | `/articles/{id}` | This endpoint allows to update an existing accounting article resource | updateAccountingArticle |
-| GET | `/articles/products/{productCode}` | This endpoint allows to find accounting article resource with product and list of attributes | getAccountingArticles |
+| POST | `/api/rest/v2/articleMapping` | This endpoint allows to create an article mapping resource | createArticleMappingLine_1 |
+| GET | `/api/rest/v2/articles` | This endpoint allows to find list of accounting article resource | list |
+| POST | `/api/rest/v2/articles` | This endpoint allows to create an accounting article resource | createAccountingArticle |
+| GET | `/api/rest/v2/articles/{accountingArticleCode}` | This endpoint allows to find an existing accounting article resource | find |
+| DELETE | `/api/rest/v2/articles/{accountingArticleCode}` | This endpoint allows to delete an existing accounting article resource | delete |
+| PUT | `/api/rest/v2/articles/{id}` | This endpoint allows to update an existing accounting article resource | updateAccountingArticle |
+| GET | `/api/rest/v2/articles/products/{productCode}` | This endpoint allows to find accounting article resource with product and list of attributes | getAccountingArticles |
 
-#### POST /articleMapping
+#### POST /api/rest/v2/articleMapping
 
 - Résumé: This endpoint allows to create an article mapping resource
 - OperationId: createArticleMappingLine_1
@@ -40,7 +40,7 @@ Le domaine « AccountingArticle » (tag OpenAPI `AccountingArticle`) est défini
   - 200: the article mapping resource successfully created, and the id is returned in the response
   - 400: bad request when article mapping information contains an error
 
-#### GET /articles
+#### GET /api/rest/v2/articles
 
 - Résumé: This endpoint allows to find list of accounting article resource
 - OperationId: list
@@ -60,7 +60,7 @@ Le domaine « AccountingArticle » (tag OpenAPI `AccountingArticle`) est défini
   - 200: return list of accounting article
   - 400: bad request when article information contains an error
 
-#### POST /articles
+#### POST /api/rest/v2/articles
 
 - Résumé: This endpoint allows to create an accounting article resource
 - OperationId: createAccountingArticle
@@ -73,7 +73,7 @@ Le domaine « AccountingArticle » (tag OpenAPI `AccountingArticle`) est défini
   - 200: the article successfully created, and the id is returned in the response
   - 400: bad request when article information contains an error
 
-#### GET /articles/{accountingArticleCode}
+#### GET /api/rest/v2/articles/{accountingArticleCode}
 
 - Résumé: This endpoint allows to find an existing accounting article resource
 - OperationId: find
@@ -85,7 +85,7 @@ Le domaine « AccountingArticle » (tag OpenAPI `AccountingArticle`) est défini
   - 200: the article successfully retrieved
   - 400: bad request when article information contains an error
 
-#### DELETE /articles/{accountingArticleCode}
+#### DELETE /api/rest/v2/articles/{accountingArticleCode}
 
 - Résumé: This endpoint allows to delete an existing accounting article resource
 - OperationId: delete
@@ -97,7 +97,7 @@ Le domaine « AccountingArticle » (tag OpenAPI `AccountingArticle`) est défini
   - 200: the article successfully deleted
   - 400: bad request when article is not found
 
-#### PUT /articles/{id}
+#### PUT /api/rest/v2/articles/{id}
 
 - Résumé: This endpoint allows to update an existing accounting article resource
 - OperationId: updateAccountingArticle
@@ -112,7 +112,7 @@ Le domaine « AccountingArticle » (tag OpenAPI `AccountingArticle`) est défini
   - 200: the article successfully updated, and the id is returned in the response
   - 400: bad request when article information contains an error
 
-#### GET /articles/products/{productCode}
+#### GET /api/rest/v2/articles/products/{productCode}
 
 - Résumé: This endpoint allows to find accounting article resource with product and list of attributes
 - OperationId: getAccountingArticles

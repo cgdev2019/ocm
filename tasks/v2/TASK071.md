@@ -19,9 +19,9 @@ Le domaine « TrialBalance » (tag OpenAPI `TrialBalance`) est défini dans `tas
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/standardReports/trialBalances` | This endpoint allows to get trial balance according to the given filters | getTrialBalances |
+| GET | `/api/rest/v2/standardReports/trialBalances` | This endpoint allows to get trial balance according to the given filters | getTrialBalances |
 
-#### GET /standardReports/trialBalances
+#### GET /api/rest/v2/standardReports/trialBalances
 
 - Résumé: This endpoint allows to get trial balance according to the given filters
 - OperationId: getTrialBalances

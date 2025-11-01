@@ -19,9 +19,9 @@ Le domaine « NotImplementedResource » (tag OpenAPI `NotImplementedResource`) e
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/notImplemented` | This service represent a non implemented resource | getResource |
+| GET | `/api/rest/v2/notImplemented` | This service represent a non implemented resource | getResource |
 
-#### GET /notImplemented
+#### GET /api/rest/v2/notImplemented
 
 - Résumé: This service represent a non implemented resource
 - OperationId: getResource

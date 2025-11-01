@@ -19,10 +19,10 @@ Le domaine « Customer Account » (tag OpenAPI `Customer Account`) est défini d
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/accountsManagement/customerAccounts/{customerAccountCode}/moving` | The Customer Account will be moved immediately under the provided Customer.\n" +
+| POST | `/api/rest/v2/accountsManagement/customerAccounts/{customerAccountCode}/moving` | The Customer Account will be moved immediately under the provided Customer.\n" +
                     "All open wallet operation will be rerated. | changeCustomerAccountParentAccount |
 
-#### POST /accountsManagement/customerAccounts/{customerAccountCode}/moving
+#### POST /api/rest/v2/accountsManagement/customerAccounts/{customerAccountCode}/moving
 
 - Résumé: The Customer Account will be moved immediately under the provided Customer.\n" +
                     "All open wallet operation will be rerated.

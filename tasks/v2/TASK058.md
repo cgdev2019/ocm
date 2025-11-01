@@ -19,16 +19,16 @@ Le domaine « Products » (tag OpenAPI `Products`) est défini dans `tasks/openc
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/ordering/products` | Return a list of products | getProducts |
-| POST | `/ordering/products` | Returns the created product | createProduct |
-| DELETE | `/ordering/products` | delete more than one product | deleteProducts |
-| GET | `/ordering/products/{id}` | Return a product | getProduct |
-| PUT | `/ordering/products/{id}` | update an existing product | updateProduct |
-| PATCH | `/ordering/products/{id}` | partially update an existing product | patchProduct |
-| DELETE | `/ordering/products/{id}` | delete an existing product | deleteProduct |
-| GET | `/ordering/products/find/{code}` | Return a product | getProduct_1 |
+| GET | `/api/rest/v2/ordering/products` | Return a list of products | getProducts |
+| POST | `/api/rest/v2/ordering/products` | Returns the created product | createProduct |
+| DELETE | `/api/rest/v2/ordering/products` | delete more than one product | deleteProducts |
+| GET | `/api/rest/v2/ordering/products/{id}` | Return a product | getProduct |
+| PUT | `/api/rest/v2/ordering/products/{id}` | update an existing product | updateProduct |
+| PATCH | `/api/rest/v2/ordering/products/{id}` | partially update an existing product | patchProduct |
+| DELETE | `/api/rest/v2/ordering/products/{id}` | delete an existing product | deleteProduct |
+| GET | `/api/rest/v2/ordering/products/find/{code}` | Return a product | getProduct_1 |
 
-#### GET /ordering/products
+#### GET /api/rest/v2/ordering/products
 
 - Résumé: Return a list of products
 - OperationId: getProducts
@@ -49,7 +49,7 @@ Le domaine « Products » (tag OpenAPI `Products`) est défini dans `tasks/openc
   - default: list of products
     - application/json: Products (Products)
 
-#### POST /ordering/products
+#### POST /api/rest/v2/ordering/products
 
 - Résumé: Returns the created product
 - OperationId: createProduct
@@ -64,7 +64,7 @@ Le domaine « Products » (tag OpenAPI `Products`) est défini dans `tasks/openc
   - 400: Invalid inputs supplied
     - application/json: ApiException (ApiException)
 
-#### DELETE /ordering/products
+#### DELETE /api/rest/v2/ordering/products
 
 - Résumé: delete more than one product
 - OperationId: deleteProducts
@@ -78,7 +78,7 @@ Le domaine « Products » (tag OpenAPI `Products`) est défini dans `tasks/openc
   - 404: product not found
     - application/json: ApiException (ApiException)
 
-#### GET /ordering/products/{id}
+#### GET /api/rest/v2/ordering/products/{id}
 
 - Résumé: Return a product
 - OperationId: getProduct
@@ -93,7 +93,7 @@ Le domaine « Products » (tag OpenAPI `Products`) est défini dans `tasks/openc
   - default: the searched product
     - application/json: Product (Product)
 
-#### PUT /ordering/products/{id}
+#### PUT /api/rest/v2/ordering/products/{id}
 
 - Résumé: update an existing product
 - OperationId: updateProduct
@@ -112,7 +112,7 @@ Le domaine « Products » (tag OpenAPI `Products`) est défini dans `tasks/openc
   - default: the updated product
     - application/json: Product (Product)
 
-#### PATCH /ordering/products/{id}
+#### PATCH /api/rest/v2/ordering/products/{id}
 
 - Résumé: partially update an existing product
 - OperationId: patchProduct
@@ -131,7 +131,7 @@ Le domaine « Products » (tag OpenAPI `Products`) est défini dans `tasks/openc
   - default: the updated product
     - application/json: Product (Product)
 
-#### DELETE /ordering/products/{id}
+#### DELETE /api/rest/v2/ordering/products/{id}
 
 - Résumé: delete an existing product
 - OperationId: deleteProduct
@@ -145,7 +145,7 @@ Le domaine « Products » (tag OpenAPI `Products`) est défini dans `tasks/openc
   - default: the deleted product
     - application/json: Product (Product)
 
-#### GET /ordering/products/find/{code}
+#### GET /api/rest/v2/ordering/products/find/{code}
 
 - Résumé: Return a product
 - OperationId: getProduct_1

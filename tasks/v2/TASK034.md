@@ -19,23 +19,23 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/accountsManagement/customerAccounts/{customerAccountCode}/moving` | The Customer Account will be moved immediately under the provided Customer.\n" +
+| POST | `/api/rest/v2/accountsManagement/customerAccounts/{customerAccountCode}/moving` | The Customer Account will be moved immediately under the provided Customer.\n" +
                     "All open wallet operation will be rerated. | changeCustomerAccountParentAccount |
-| POST | `/accountsManagement/subscriptions/{subscriptionCode}/transfer` | This endpoint allows to transfer a subscription to another account | transferSubscription |
-| GET | `/generic/{entityName}` | Generic single endpoint to retrieve paginated records of an entity | getAllEntities |
-| POST | `/generic/{entityName}` | Create a resource by giving it's name and Id | create_17 |
-| GET | `/generic/{entityName}/{id}` | Generic single endpoint to retrieve resources by ID | getEntity |
-| POST | `/generic/{entityName}/{id}` | Generic single endpoint to retrieve resources by ID | get_2 |
-| PUT | `/generic/{entityName}/{id}` | Update a resource by giving it's name and Id | update_16 |
-| DELETE | `/generic/{entityName}/{id}` | Delete a resource by giving it's name and Id | delete_14 |
-| POST | `/generic/all/{entityName}` | Generic single endpoint to retrieve paginated records of an entity | getAll |
-| GET | `/generic/entities` | This endpoint is used to retrieve the full list of queryable entities | getFullListEntities |
-| GET | `/generic/entities/{entityName}` | This endpoint is used to retrieve the fields and corresponding types of an entity | getRelatedFieldsAndTypesOfEntity |
-| POST | `/generic/export/{entityName}/{fileFormat}` | Generic single endpoint to export paginated records of an entity | export_1 |
-| GET | `/generic/version` | Get versions information about OpenCell components | getVersions |
-| GET | `/version` | Get versions information about OpenCell components | getVersions_1 |
+| POST | `/api/rest/v2/accountsManagement/subscriptions/{subscriptionCode}/transfer` | This endpoint allows to transfer a subscription to another account | transferSubscription |
+| GET | `/api/rest/v2/generic/{entityName}` | Generic single endpoint to retrieve paginated records of an entity | getAllEntities |
+| POST | `/api/rest/v2/generic/{entityName}` | Create a resource by giving it's name and Id | create_17 |
+| GET | `/api/rest/v2/generic/{entityName}/{id}` | Generic single endpoint to retrieve resources by ID | getEntity |
+| POST | `/api/rest/v2/generic/{entityName}/{id}` | Generic single endpoint to retrieve resources by ID | get_2 |
+| PUT | `/api/rest/v2/generic/{entityName}/{id}` | Update a resource by giving it's name and Id | update_16 |
+| DELETE | `/api/rest/v2/generic/{entityName}/{id}` | Delete a resource by giving it's name and Id | delete_14 |
+| POST | `/api/rest/v2/generic/all/{entityName}` | Generic single endpoint to retrieve paginated records of an entity | getAll |
+| GET | `/api/rest/v2/generic/entities` | This endpoint is used to retrieve the full list of queryable entities | getFullListEntities |
+| GET | `/api/rest/v2/generic/entities/{entityName}` | This endpoint is used to retrieve the fields and corresponding types of an entity | getRelatedFieldsAndTypesOfEntity |
+| POST | `/api/rest/v2/generic/export/{entityName}/{fileFormat}` | Generic single endpoint to export paginated records of an entity | export_1 |
+| GET | `/api/rest/v2/generic/version` | Get versions information about OpenCell components | getVersions |
+| GET | `/api/rest/v2/version` | Get versions information about OpenCell components | getVersions_1 |
 
-#### POST /accountsManagement/customerAccounts/{customerAccountCode}/moving
+#### POST /api/rest/v2/accountsManagement/customerAccounts/{customerAccountCode}/moving
 
 - Résumé: The Customer Account will be moved immediately under the provided Customer.\n" +
                     "All open wallet operation will be rerated.
@@ -52,7 +52,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 400: bad request when input not well formed
   - 404: entity not found
 
-#### POST /accountsManagement/subscriptions/{subscriptionCode}/transfer
+#### POST /api/rest/v2/accountsManagement/subscriptions/{subscriptionCode}/transfer
 
 - Résumé: This endpoint allows to transfer a subscription to another account
 - OperationId: transferSubscription
@@ -72,7 +72,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 404: Either Customer Account or Customer not found
   - 409: Cannot move subscription
 
-#### GET /generic/{entityName}
+#### GET /api/rest/v2/generic/{entityName}
 
 - Résumé: Generic single endpoint to retrieve paginated records of an entity
 - OperationId: getAllEntities
@@ -90,7 +90,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### POST /generic/{entityName}
+#### POST /api/rest/v2/generic/{entityName}
 
 - Résumé: Create a resource by giving it's name and Id
 - OperationId: create_17
@@ -105,7 +105,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 200: resource successfully updated but not content exposed except the hypermedia
   - 400: bad request when input not well formed
 
-#### GET /generic/{entityName}/{id}
+#### GET /api/rest/v2/generic/{entityName}/{id}
 
 - Résumé: Generic single endpoint to retrieve resources by ID
 - OperationId: getEntity
@@ -124,7 +124,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### POST /generic/{entityName}/{id}
+#### POST /api/rest/v2/generic/{entityName}/{id}
 
 - Résumé: Generic single endpoint to retrieve resources by ID
 - OperationId: get_2
@@ -143,7 +143,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### PUT /generic/{entityName}/{id}
+#### PUT /api/rest/v2/generic/{entityName}/{id}
 
 - Résumé: Update a resource by giving it's name and Id
 - OperationId: update_16
@@ -161,7 +161,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### DELETE /generic/{entityName}/{id}
+#### DELETE /api/rest/v2/generic/{entityName}/{id}
 
 - Résumé: Delete a resource by giving it's name and Id
 - OperationId: delete_14
@@ -176,7 +176,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 404: baseEntityObject not found
     - application/json: ApiException (ApiException)
 
-#### POST /generic/all/{entityName}
+#### POST /api/rest/v2/generic/all/{entityName}
 
 - Résumé: Generic single endpoint to retrieve paginated records of an entity
 - OperationId: getAll
@@ -192,7 +192,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 200: paginated results successfully retrieved with hypermedia links
   - 400: bad request when entityName not well formed or entity unrecognized
 
-#### GET /generic/entities
+#### GET /api/rest/v2/generic/entities
 
 - Résumé: This endpoint is used to retrieve the full list of queryable entities
 - OperationId: getFullListEntities
@@ -203,7 +203,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 404: the full list of entities not found
     - application/json: ApiException (ApiException)
 
-#### GET /generic/entities/{entityName}
+#### GET /api/rest/v2/generic/entities/{entityName}
 
 - Résumé: This endpoint is used to retrieve the fields and corresponding types of an entity
 - OperationId: getRelatedFieldsAndTypesOfEntity
@@ -216,7 +216,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 404: the full list of entities not found
     - application/json: ApiException (ApiException)
 
-#### POST /generic/export/{entityName}/{fileFormat}
+#### POST /api/rest/v2/generic/export/{entityName}/{fileFormat}
 
 - Résumé: Generic single endpoint to export paginated records of an entity
 - OperationId: export_1
@@ -233,7 +233,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
   - 200: paginated results successfully exported
   - 400: bad request when entityName not well formed or entity unrecognized
 
-#### GET /generic/version
+#### GET /api/rest/v2/generic/version
 
 - Résumé: Get versions information about OpenCell components
 - OperationId: getVersions
@@ -242,7 +242,7 @@ Le domaine « Generic » (tag OpenAPI `Generic`) est défini dans `tasks/opencea
 - Réponses:
   - 200: resource successfully updated but not content exposed except the hypermedia
 
-#### GET /version
+#### GET /api/rest/v2/version
 
 - Résumé: Get versions information about OpenCell components
 - OperationId: getVersions_1

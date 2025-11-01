@@ -19,16 +19,16 @@ Le domaine « Orders » (tag OpenAPI `Orders`) est défini dans `tasks/openceapi
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/ordering/orders` | Return a list of orders | getOrders |
-| POST | `/ordering/orders` | Returns the created order | createOrder |
-| DELETE | `/ordering/orders` | delete more than one order | deleteOrder_1 |
-| GET | `/ordering/orders/{id}` | Return an order | getOrder |
-| PUT | `/ordering/orders/{id}` | update an existing order | updateOrder |
-| PATCH | `/ordering/orders/{id}` | partially update an existing order | patchOrder |
-| DELETE | `/ordering/orders/{id}` | delete an existing order | deleteOrder |
-| GET | `/ordering/orders/find/{id}` | Return an order | getOrder_1 |
+| GET | `/api/rest/v2/ordering/orders` | Return a list of orders | getOrders |
+| POST | `/api/rest/v2/ordering/orders` | Returns the created order | createOrder |
+| DELETE | `/api/rest/v2/ordering/orders` | delete more than one order | deleteOrder_1 |
+| GET | `/api/rest/v2/ordering/orders/{id}` | Return an order | getOrder |
+| PUT | `/api/rest/v2/ordering/orders/{id}` | update an existing order | updateOrder |
+| PATCH | `/api/rest/v2/ordering/orders/{id}` | partially update an existing order | patchOrder |
+| DELETE | `/api/rest/v2/ordering/orders/{id}` | delete an existing order | deleteOrder |
+| GET | `/api/rest/v2/ordering/orders/find/{id}` | Return an order | getOrder_1 |
 
-#### GET /ordering/orders
+#### GET /api/rest/v2/ordering/orders
 
 - Résumé: Return a list of orders
 - OperationId: getOrders
@@ -49,7 +49,7 @@ Le domaine « Orders » (tag OpenAPI `Orders`) est défini dans `tasks/openceapi
   - default: list of orders
     - application/json: Orders (Orders)
 
-#### POST /ordering/orders
+#### POST /api/rest/v2/ordering/orders
 
 - Résumé: Returns the created order
 - OperationId: createOrder
@@ -64,7 +64,7 @@ Le domaine « Orders » (tag OpenAPI `Orders`) est défini dans `tasks/openceapi
   - 400: Invalid inputs supplied
     - application/json: ApiException (ApiException)
 
-#### DELETE /ordering/orders
+#### DELETE /api/rest/v2/ordering/orders
 
 - Résumé: delete more than one order
 - OperationId: deleteOrder_1
@@ -78,7 +78,7 @@ Le domaine « Orders » (tag OpenAPI `Orders`) est défini dans `tasks/openceapi
   - 404: order not found
     - application/json: ApiException (ApiException)
 
-#### GET /ordering/orders/{id}
+#### GET /api/rest/v2/ordering/orders/{id}
 
 - Résumé: Return an order
 - OperationId: getOrder
@@ -93,7 +93,7 @@ Le domaine « Orders » (tag OpenAPI `Orders`) est défini dans `tasks/openceapi
   - default: the searched order
     - application/json: Order (Order)
 
-#### PUT /ordering/orders/{id}
+#### PUT /api/rest/v2/ordering/orders/{id}
 
 - Résumé: update an existing order
 - OperationId: updateOrder
@@ -112,7 +112,7 @@ Le domaine « Orders » (tag OpenAPI `Orders`) est défini dans `tasks/openceapi
   - default: the updated order
     - application/json: Order (Order)
 
-#### PATCH /ordering/orders/{id}
+#### PATCH /api/rest/v2/ordering/orders/{id}
 
 - Résumé: partially update an existing order
 - OperationId: patchOrder
@@ -131,7 +131,7 @@ Le domaine « Orders » (tag OpenAPI `Orders`) est défini dans `tasks/openceapi
   - default: the updated order
     - application/json: Order (Order)
 
-#### DELETE /ordering/orders/{id}
+#### DELETE /api/rest/v2/ordering/orders/{id}
 
 - Résumé: delete an existing order
 - OperationId: deleteOrder
@@ -145,7 +145,7 @@ Le domaine « Orders » (tag OpenAPI `Orders`) est défini dans `tasks/openceapi
   - default: the deleted order
     - application/json: Order (Order)
 
-#### GET /ordering/orders/find/{id}
+#### GET /api/rest/v2/ordering/orders/find/{id}
 
 - Résumé: Return an order
 - OperationId: getOrder_1
