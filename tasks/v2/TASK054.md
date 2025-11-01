@@ -19,29 +19,29 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/accountReceivable/accountOperation/forcePosting` | Refund By SCT | forcePosting |
-| POST | `/accountReceivable/accountOperation/matchOperations` | API to match Account operations | matchOperations |
-| POST | `/accountReceivable/accountOperation/post` | Refund By SCT | post |
-| POST | `/accountReceivable/accountOperation/unMatchOperations` | API to match Account operations | unMatchOperations |
-| POST | `/accountReceivable/deferralPayments` | Create a defferal Payment | create_1 |
-| POST | `/accountReceivable/financeSettings` | Create Security Deposit settings | create_19 |
-| PUT | `/accountReceivable/financeSettings/{id}` | Update Security Deposit settings | update_19 |
-| POST | `/customTable/export/{customTableCode}/{fileFormat}` | Create an export Custom Table | export |
-| POST | `/securityDeposit` | Create a Security Deposit | create_20 |
-| PUT | `/securityDeposit/{id}` | Update Security Deposit | update_20 |
-| POST | `/securityDeposit/{id}/payInvoices` | Pay invoice manually with Security Deposit | payInvoices |
-| POST | `/securityDeposit/cancel/{id}` | Cancel Security Deposit | cancel_1 |
-| POST | `/securityDeposit/credit/{id}` | Credit Security Deposit | credit |
-| POST | `/securityDeposit/instantiateSecurityDeposit` | Instantiate Security Deposit | instantiate |
-| POST | `/securityDeposit/refund/{id}` | Refund Security Deposit | refund |
-| POST | `/securityDeposit/securityDepositTemplate` | Create Security Deposit template | create_21 |
-| PUT | `/securityDeposit/securityDepositTemplate/{id}` | Update Security Deposit template | update_21 |
-| POST | `/securityDeposit/securityDepositTemplate/changeStatus` | Change status of Security Deposit Template | updateStatus_1 |
-| POST | `/setting/globalSettings` | Global settings | create_22 |
-| PUT | `/setting/globalSettings/{id}` | Global settings | update_22 |
-| POST | `/setting/openOrderSettings` | Create Open Order settings | create_23 |
+| POST | `/api/rest/v2/accountReceivable/accountOperation/forcePosting` | Refund By SCT | forcePosting |
+| POST | `/api/rest/v2/accountReceivable/accountOperation/matchOperations` | API to match Account operations | matchOperations |
+| POST | `/api/rest/v2/accountReceivable/accountOperation/post` | Refund By SCT | post |
+| POST | `/api/rest/v2/accountReceivable/accountOperation/unMatchOperations` | API to match Account operations | unMatchOperations |
+| POST | `/api/rest/v2/accountReceivable/deferralPayments` | Create a defferal Payment | create_1 |
+| POST | `/api/rest/v2/accountReceivable/financeSettings` | Create Security Deposit settings | create_19 |
+| PUT | `/api/rest/v2/accountReceivable/financeSettings/{id}` | Update Security Deposit settings | update_19 |
+| POST | `/api/rest/v2/customTable/export/{customTableCode}/{fileFormat}` | Create an export Custom Table | export |
+| POST | `/api/rest/v2/securityDeposit` | Create a Security Deposit | create_20 |
+| PUT | `/api/rest/v2/securityDeposit/{id}` | Update Security Deposit | update_20 |
+| POST | `/api/rest/v2/securityDeposit/{id}/payInvoices` | Pay invoice manually with Security Deposit | payInvoices |
+| POST | `/api/rest/v2/securityDeposit/cancel/{id}` | Cancel Security Deposit | cancel_1 |
+| POST | `/api/rest/v2/securityDeposit/credit/{id}` | Credit Security Deposit | credit |
+| POST | `/api/rest/v2/securityDeposit/instantiateSecurityDeposit` | Instantiate Security Deposit | instantiate |
+| POST | `/api/rest/v2/securityDeposit/refund/{id}` | Refund Security Deposit | refund |
+| POST | `/api/rest/v2/securityDeposit/securityDepositTemplate` | Create Security Deposit template | create_21 |
+| PUT | `/api/rest/v2/securityDeposit/securityDepositTemplate/{id}` | Update Security Deposit template | update_21 |
+| POST | `/api/rest/v2/securityDeposit/securityDepositTemplate/changeStatus` | Change status of Security Deposit Template | updateStatus_1 |
+| POST | `/api/rest/v2/setting/globalSettings` | Global settings | create_22 |
+| PUT | `/api/rest/v2/setting/globalSettings/{id}` | Global settings | update_22 |
+| POST | `/api/rest/v2/setting/openOrderSettings` | Create Open Order settings | create_23 |
 
-#### POST /accountReceivable/accountOperation/forcePosting
+#### POST /api/rest/v2/accountReceivable/accountOperation/forcePosting
 
 - Résumé: Refund By SCT
 - OperationId: forcePosting
@@ -54,7 +54,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 200: Account operations are successfully posted
   - 404: Following account operations does not exist : {accountOperation ids}
 
-#### POST /accountReceivable/accountOperation/matchOperations
+#### POST /api/rest/v2/accountReceivable/accountOperation/matchOperations
 
 - Résumé: API to match Account operations
 - OperationId: matchOperations
@@ -69,7 +69,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 404: Entity does not exist
   - 412: Missing parameters
 
-#### POST /accountReceivable/accountOperation/post
+#### POST /api/rest/v2/accountReceivable/accountOperation/post
 
 - Résumé: Refund By SCT
 - OperationId: post
@@ -83,7 +83,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 404: Following account operations does not exist : {accountOperation ids}
   - 409: the sub-accounting period of following account operations are already closed : {accountOperation ids}
 
-#### POST /accountReceivable/accountOperation/unMatchOperations
+#### POST /api/rest/v2/accountReceivable/accountOperation/unMatchOperations
 
 - Résumé: API to match Account operations
 - OperationId: unMatchOperations
@@ -97,7 +97,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 400: Matching action is failed
   - 404: Entity does not exist
 
-#### POST /accountReceivable/deferralPayments
+#### POST /api/rest/v2/accountReceivable/deferralPayments
 
 - Résumé: Create a defferal Payment
 - OperationId: create_1
@@ -112,7 +112,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 409: payment deferral already exists
   - 422: maximum deferral count per invoice is exceeded.
 
-#### POST /accountReceivable/financeSettings
+#### POST /api/rest/v2/accountReceivable/financeSettings
 
 - Résumé: Create Security Deposit settings
 - OperationId: create_19
@@ -125,7 +125,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 200: Security deposit settings was successfully created
   - 400: Bad Request
 
-#### PUT /accountReceivable/financeSettings/{id}
+#### PUT /api/rest/v2/accountReceivable/financeSettings/{id}
 
 - Résumé: Update Security Deposit settings
 - OperationId: update_19
@@ -141,7 +141,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 400: Bad Request
   - 404: Following security deposit does not exist : {financeSettings ids}
 
-#### POST /customTable/export/{customTableCode}/{fileFormat}
+#### POST /api/rest/v2/customTable/export/{customTableCode}/{fileFormat}
 
 - Résumé: Create an export Custom Table
 - OperationId: export
@@ -156,7 +156,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 403: user has not habilitation to create an export Custom Table
   - 404: The custom table code does not exist
 
-#### POST /securityDeposit
+#### POST /api/rest/v2/securityDeposit
 
 - Résumé: Create a Security Deposit
 - OperationId: create_20
@@ -169,7 +169,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 200: Security deposit was successfully created
   - 400: Bad Request
 
-#### PUT /securityDeposit/{id}
+#### PUT /api/rest/v2/securityDeposit/{id}
 
 - Résumé: Update Security Deposit
 - OperationId: update_20
@@ -185,7 +185,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 400: Bad Request
   - 404: Following security deposit does not exist : {securityDeposit ids}
 
-#### POST /securityDeposit/{id}/payInvoices
+#### POST /api/rest/v2/securityDeposit/{id}/payInvoices
 
 - Résumé: Pay invoice manually with Security Deposit
 - OperationId: payInvoices
@@ -201,7 +201,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 400: Bad Request
   - 404: Following security deposit does not exist : {securityDeposit ids}
 
-#### POST /securityDeposit/cancel/{id}
+#### POST /api/rest/v2/securityDeposit/cancel/{id}
 
 - Résumé: Cancel Security Deposit
 - OperationId: cancel_1
@@ -217,7 +217,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 400: Bad Request
   - 404: Following security deposit does not exist : {securityDeposit ids}
 
-#### POST /securityDeposit/credit/{id}
+#### POST /api/rest/v2/securityDeposit/credit/{id}
 
 - Résumé: Credit Security Deposit
 - OperationId: credit
@@ -233,7 +233,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 400: Bad Request
   - 404: Following security deposit does not exist : {securityDeposit ids}
 
-#### POST /securityDeposit/instantiateSecurityDeposit
+#### POST /api/rest/v2/securityDeposit/instantiateSecurityDeposit
 
 - Résumé: Instantiate Security Deposit
 - OperationId: instantiate
@@ -246,7 +246,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 200: Security deposit was successfully instantiated
   - 400: Bad Request
 
-#### POST /securityDeposit/refund/{id}
+#### POST /api/rest/v2/securityDeposit/refund/{id}
 
 - Résumé: Refund Security Deposit
 - OperationId: refund
@@ -262,7 +262,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 400: Bad Request
   - 404: Following security deposit does not exist : {securityDeposit ids}
 
-#### POST /securityDeposit/securityDepositTemplate
+#### POST /api/rest/v2/securityDeposit/securityDepositTemplate
 
 - Résumé: Create Security Deposit template
 - OperationId: create_21
@@ -275,7 +275,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 200: Security deposit template was successfully created
   - 400: Bad Request
 
-#### PUT /securityDeposit/securityDepositTemplate/{id}
+#### PUT /api/rest/v2/securityDeposit/securityDepositTemplate/{id}
 
 - Résumé: Update Security Deposit template
 - OperationId: update_21
@@ -291,7 +291,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 400: Bad Request
   - 404: Following security deposit template does not exist : {securityDepositTemplate ids}
 
-#### POST /securityDeposit/securityDepositTemplate/changeStatus
+#### POST /api/rest/v2/securityDeposit/securityDepositTemplate/changeStatus
 
 - Résumé: Change status of Security Deposit Template
 - OperationId: updateStatus_1
@@ -305,7 +305,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 400: Bad Request
   - 404: Following security deposit template does not exist : {securityDepositTemplate ids}
 
-#### POST /setting/globalSettings
+#### POST /api/rest/v2/setting/globalSettings
 
 - Résumé: Global settings
 - OperationId: create_22
@@ -318,7 +318,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 200: Global settings was successfully created
   - 400: Bad Request
 
-#### PUT /setting/globalSettings/{id}
+#### PUT /api/rest/v2/setting/globalSettings/{id}
 
 - Résumé: Global settings
 - OperationId: update_22
@@ -334,7 +334,7 @@ Le domaine « Post » (tag OpenAPI `Post`) est défini dans `tasks/openceapi.jso
   - 400: Bad Request
   - 404: The QuotesSettings does not exist
 
-#### POST /setting/openOrderSettings
+#### POST /api/rest/v2/setting/openOrderSettings
 
 - Résumé: Create Open Order settings
 - OperationId: create_23

@@ -124,6 +124,15 @@ import type {
   FileFormatResponseDto,
 } from '@/features/file-formats/types';
 import type {
+  AccountingArticleDetailValues,
+  AccountingArticleDto,
+  AccountingArticleFormValues,
+  AccountingArticleList,
+  AccountingArticleListItem,
+  AccountingArticleListResponseDto,
+  AccountingArticleResponseDto,
+} from '@/features/accounting-articles/types';
+import type {
   TitleDetailValues,
   TitleListItem,
   TitleResponseDto,
@@ -1196,6 +1205,8 @@ export const accountingCodeListFixture: AccountingCodeListItem[] = [
   },
 ];
 
+export { accountingCodeMappingFormFixture, accountingCodeMappingInputFixture } from './accountingCodeMapping';
+
 export const accountingCodeListResponseFixture: AccountingCodeListResponseDto = {
   actionStatus: actionStatusSuccessFixture,
   accountingCodes: [accountingCodeDtoFixture],
@@ -1274,6 +1285,109 @@ export const accountingPeriodListResponseFixture: AccountingPeriodListResponse =
 };
 
 export const accountingPeriodListItemsFixture: AccountingPeriodListItem[] = [accountingPeriodListItemFixture];
+export const accountingArticleDtoFixture: AccountingArticleDto = {
+  id: 101,
+  code: 'ART-STD',
+  description: 'Standard accounting article',
+  invoiceSubCategory: { code: 'INV-SUB-CAT' },
+  taxClass: { code: 'VAT-20' },
+  accountingCode: { code: accountingCodeDtoFixture.code! },
+  articleFamily: { code: 'ART-FAMILY' },
+  invoiceType: { code: 'INV-TYPE-STD' },
+  invoiceTypeEl: "return invoice.invoiceType.code",
+  accountingCodeEl: "return invoice.accountingCode.code",
+  columCriteriaEL: "billingAccount.code == 'ACC-001'",
+  analyticCode1: 'AN-001',
+  analyticCode2: 'AN-002',
+  analyticCode3: 'AN-003',
+  unitPrice: 49.99,
+  ignoreAggregation: false,
+  languageDescriptions: [
+    { languageCode: 'en', description: 'Standard article' },
+    { languageCode: 'fr', description: 'Article standard' },
+  ],
+  customFields: {
+    customField: [
+      {
+        code: 'LABEL',
+        description: 'Display label',
+        fieldType: 'STRING',
+        stringValue: 'Standard',
+        languageDescriptions: [],
+        empty: false,
+      },
+    ],
+    inheritedCustomField: [],
+    empty: false,
+  },
+};
+
+export const accountingArticleFormFixture: AccountingArticleFormValues = {
+  id: accountingArticleDtoFixture.id!,
+  code: accountingArticleDtoFixture.code!,
+  description: accountingArticleDtoFixture.description!,
+  invoiceSubCategoryCode: accountingArticleDtoFixture.invoiceSubCategory?.code ?? '',
+  taxClassCode: accountingArticleDtoFixture.taxClass?.code ?? '',
+  accountingCode: accountingArticleDtoFixture.accountingCode?.code ?? undefined,
+  articleFamilyCode: accountingArticleDtoFixture.articleFamily?.code ?? undefined,
+  invoiceTypeCode: accountingArticleDtoFixture.invoiceType?.code ?? undefined,
+  invoiceTypeEl: accountingArticleDtoFixture.invoiceTypeEl ?? undefined,
+  accountingCodeEl: accountingArticleDtoFixture.accountingCodeEl ?? undefined,
+  columnCriteriaEl: accountingArticleDtoFixture.columCriteriaEL ?? undefined,
+  analyticCode1: accountingArticleDtoFixture.analyticCode1 ?? undefined,
+  analyticCode2: accountingArticleDtoFixture.analyticCode2 ?? undefined,
+  analyticCode3: accountingArticleDtoFixture.analyticCode3 ?? undefined,
+  unitPrice:
+    accountingArticleDtoFixture.unitPrice !== undefined
+      ? String(accountingArticleDtoFixture.unitPrice)
+      : undefined,
+  ignoreAggregation: Boolean(accountingArticleDtoFixture.ignoreAggregation),
+  languageDescriptions:
+    accountingArticleDtoFixture.languageDescriptions?.map((item) => ({
+      languageCode: item.languageCode ?? '',
+      description: item.description ?? '',
+    })) ?? [],
+  customFieldsJson: accountingArticleDtoFixture.customFields
+    ? JSON.stringify(accountingArticleDtoFixture.customFields, null, 2)
+    : undefined,
+};
+
+export const accountingArticleListFixture: AccountingArticleListItem[] = [
+  {
+    code: accountingArticleDtoFixture.code!,
+    description: accountingArticleDtoFixture.description!,
+    invoiceSubCategoryCode: accountingArticleDtoFixture.invoiceSubCategory?.code ?? undefined,
+    taxClassCode: accountingArticleDtoFixture.taxClass?.code ?? undefined,
+    accountingCode: accountingArticleDtoFixture.accountingCode?.code ?? undefined,
+    articleFamilyCode: accountingArticleDtoFixture.articleFamily?.code ?? undefined,
+    unitPrice: accountingArticleDtoFixture.unitPrice ?? undefined,
+    ignoreAggregation: accountingArticleDtoFixture.ignoreAggregation ?? undefined,
+  },
+];
+
+export const accountingArticleListResponseFixture: AccountingArticleListResponseDto = {
+  actionStatus: actionStatusSuccessFixture,
+  accountingArticles: [accountingArticleDtoFixture],
+  totalRecords: 1,
+};
+
+export const accountingArticleResponseFixture: AccountingArticleResponseDto = {
+  actionStatus: actionStatusSuccessFixture,
+  accountingArticle: accountingArticleDtoFixture,
+};
+
+export const accountingArticleDetailFixture: AccountingArticleDetailValues = accountingArticleFormFixture;
+
+export const accountingArticleListResultFixture: AccountingArticleList = {
+  items: accountingArticleListFixture,
+  paging: {
+    totalRecords: 1,
+    limit: 20,
+    offset: 0,
+    sort: null,
+    orderBy: null,
+  },
+};
 
 export const mediationRegisterFixture: RegisterCdrFormValues = {
   payload: 'CDR|REGISTER|demo',

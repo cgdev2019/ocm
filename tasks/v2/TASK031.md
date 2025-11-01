@@ -19,14 +19,14 @@ Le domaine « email » (tag OpenAPI `email`) est défini dans `tasks/openceapi.j
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}` | Get An EmailTemplate | getEmailTemplate |
-| POST | `/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}` | Create an EmailTemplate | create_6 |
-| PUT | `/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}` | Update an EmailTemplate | update_5 |
-| PATCH | `/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}` | Update an EmailTemplate | partialUpdate |
-| DELETE | `/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}` | Delete an EmailTemplate | deleteEmailTemplate |
-| PUT | `/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}` | Update an SMSTemplate | update_6 |
+| GET | `/api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}` | Get An EmailTemplate | getEmailTemplate |
+| POST | `/api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}` | Create an EmailTemplate | create_6 |
+| PUT | `/api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}` | Update an EmailTemplate | update_5 |
+| PATCH | `/api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}` | Update an EmailTemplate | partialUpdate |
+| DELETE | `/api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}` | Delete an EmailTemplate | deleteEmailTemplate |
+| PUT | `/api/rest/v2/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}` | Update an SMSTemplate | update_6 |
 
-#### GET /setting/internationalSettings/EmailTemplate/{EmailTemplateCode}
+#### GET /api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}
 
 - Résumé: Get An EmailTemplate
 - OperationId: getEmailTemplate
@@ -38,7 +38,7 @@ Le domaine « email » (tag OpenAPI `email`) est défini dans `tasks/openceapi.j
   - 400: An error happened while getting EmailTemplate
   - 404: The EmailTemplateCode does not exist
 
-#### POST /setting/internationalSettings/EmailTemplate/{EmailTemplateCode}
+#### POST /api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}
 
 - Résumé: Create an EmailTemplate
 - OperationId: create_6
@@ -51,7 +51,7 @@ Le domaine « email » (tag OpenAPI `email`) est défini dans `tasks/openceapi.j
   - 400: An error happened while creating EmailTemplate
   - 404: The EmailTemplateCode already exists
 
-#### PUT /setting/internationalSettings/EmailTemplate/{EmailTemplateCode}
+#### PUT /api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}
 
 - Résumé: Update an EmailTemplate
 - OperationId: update_5
@@ -66,7 +66,7 @@ Le domaine « email » (tag OpenAPI `email`) est défini dans `tasks/openceapi.j
   - 400: An error happened while updating EmailTemplate
   - 404: The EmailTemplateCode does not exists
 
-#### PATCH /setting/internationalSettings/EmailTemplate/{EmailTemplateCode}
+#### PATCH /api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}
 
 - Résumé: Update an EmailTemplate
 - OperationId: partialUpdate
@@ -81,7 +81,7 @@ Le domaine « email » (tag OpenAPI `email`) est défini dans `tasks/openceapi.j
   - 400: An error happened while updating EmailTemplate
   - 404: The EmailTemplateCode does not exists
 
-#### DELETE /setting/internationalSettings/EmailTemplate/{EmailTemplateCode}
+#### DELETE /api/rest/v2/setting/internationalSettings/EmailTemplate/{EmailTemplateCode}
 
 - Résumé: Delete an EmailTemplate
 - OperationId: deleteEmailTemplate
@@ -93,7 +93,7 @@ Le domaine « email » (tag OpenAPI `email`) est défini dans `tasks/openceapi.j
   - 400: An error happened while deleting EmailTemplate
   - 404: The EmailTemplate does not exists
 
-#### PUT /setting/internationalSettings/SMSTemplate/{SMSTemplateCode}
+#### PUT /api/rest/v2/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}
 
 - Résumé: Update an SMSTemplate
 - OperationId: update_6

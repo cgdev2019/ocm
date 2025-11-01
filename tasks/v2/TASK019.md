@@ -19,9 +19,9 @@ Le domaine « Create » (tag OpenAPI `Create`) est défini dans `tasks/openceapi
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/securityDeposit` | Create a Security Deposit | create_20 |
+| POST | `/api/rest/v2/securityDeposit` | Create a Security Deposit | create_20 |
 
-#### POST /securityDeposit
+#### POST /api/rest/v2/securityDeposit
 
 - Résumé: Create a Security Deposit
 - OperationId: create_20

@@ -19,12 +19,12 @@ Le domaine « Open Orders Templates » (tag OpenAPI `Open Orders Templates`) est
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/ordering/openOrderTemplates` | create open order template | createOpenOrderTemplate |
-| PUT | `/ordering/openOrderTemplates/{code}` | update  open order template | updateOpenOrderTemplate |
-| PUT | `/ordering/openOrderTemplates/{code}/disable` | disable open order template | disableOpenOrderTemplate |
-| PUT | `/ordering/openOrderTemplates/{code}/status/{status}` | change status open order template | changeStatusOpenOrderTemplate |
+| POST | `/api/rest/v2/ordering/openOrderTemplates` | create open order template | createOpenOrderTemplate |
+| PUT | `/api/rest/v2/ordering/openOrderTemplates/{code}` | update  open order template | updateOpenOrderTemplate |
+| PUT | `/api/rest/v2/ordering/openOrderTemplates/{code}/disable` | disable open order template | disableOpenOrderTemplate |
+| PUT | `/api/rest/v2/ordering/openOrderTemplates/{code}/status/{status}` | change status open order template | changeStatusOpenOrderTemplate |
 
-#### POST /ordering/openOrderTemplates
+#### POST /api/rest/v2/ordering/openOrderTemplates
 
 - Résumé: create open order template
 - OperationId: createOpenOrderTemplate
@@ -38,7 +38,7 @@ Le domaine « Open Orders Templates » (tag OpenAPI `Open Orders Templates`) est
   - 400: Invalid inputs supplied
     - application/json: ApiException (ApiException)
 
-#### PUT /ordering/openOrderTemplates/{code}
+#### PUT /api/rest/v2/ordering/openOrderTemplates/{code}
 
 - Résumé: update  open order template
 - OperationId: updateOpenOrderTemplate
@@ -54,7 +54,7 @@ Le domaine « Open Orders Templates » (tag OpenAPI `Open Orders Templates`) est
   - 400: Invalid inputs supplied
     - application/json: ApiException (ApiException)
 
-#### PUT /ordering/openOrderTemplates/{code}/disable
+#### PUT /api/rest/v2/ordering/openOrderTemplates/{code}/disable
 
 - Résumé: disable open order template
 - OperationId: disableOpenOrderTemplate
@@ -66,7 +66,7 @@ Le domaine « Open Orders Templates » (tag OpenAPI `Open Orders Templates`) est
   - 400: Invalid inputs supplied
     - application/json: ApiException (ApiException)
 
-#### PUT /ordering/openOrderTemplates/{code}/status/{status}
+#### PUT /api/rest/v2/ordering/openOrderTemplates/{code}/status/{status}
 
 - Résumé: change status open order template
 - OperationId: changeStatusOpenOrderTemplate

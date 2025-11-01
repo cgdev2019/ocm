@@ -19,9 +19,9 @@ Le domaine « AuxiliaryCode » (tag OpenAPI `AuxiliaryCode`) est défini dans `t
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/accounting/auxiliaryAccounts/{customerAccountCode}` | Get the auxiliary account information corresponding to the giver customer account | getAuxiliaryAccount |
+| GET | `/api/rest/v2/accounting/auxiliaryAccounts/{customerAccountCode}` | Get the auxiliary account information corresponding to the giver customer account | getAuxiliaryAccount |
 
-#### GET /accounting/auxiliaryAccounts/{customerAccountCode}
+#### GET /api/rest/v2/accounting/auxiliaryAccounts/{customerAccountCode}
 
 - Résumé: Get the auxiliary account information corresponding to the giver customer account
 - OperationId: getAuxiliaryAccount

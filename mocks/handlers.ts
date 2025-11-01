@@ -10,6 +10,11 @@ import type {
 } from '@/features/invoicing/types';
 import type { AccountingCodeFormValues } from '@/features/accounting-codes/types';
 import type { AccountingPeriodDetailValues } from '@/features/accounting-periods/types';
+import type {
+  AccountingCodeMappingFormValues,
+  AccountingCodeMappingInputDto,
+} from '@/features/accounting-code-mappings/types';
+import type { AccountingArticleDto } from '@/features/accounting-articles/types';
 import {
   customers,
   customerAccounts,
@@ -31,6 +36,8 @@ import {
   ratedTransactionsData,
   accountingCodesData,
   accountingPeriodsData,
+  accountingCodeMappingsData,
+  accountingArticlesData,
 } from '@/mocks/data';
 
 const customersStore = [...customers];
@@ -52,6 +59,25 @@ const languagesStore = [...languagesData];
 const ratedTransactionsStore = [...ratedTransactionsData];
 const accountingCodesStore = [...accountingCodesData];
 const accountingPeriodsStore: AccountingPeriodDetailValues[] = [...accountingPeriodsData];
+const accountingCodeMappingsStore = new Map<string, AccountingCodeMappingFormValues['mappings']>();
+let nextAccountingCodeMappingId = 1;
+
+accountingCodeMappingsData.forEach((item) => {
+  accountingCodeMappingsStore.set(
+    item.accountingArticleCode,
+    item.mappings.map((mapping) => ({ ...mapping })),
+  );
+  item.mappings.forEach((mapping) => {
+    if (typeof mapping.id === 'number' && mapping.id >= nextAccountingCodeMappingId) {
+      nextAccountingCodeMappingId = mapping.id + 1;
+    }
+  });
+});
+const accountingArticlesStore = [...accountingArticlesData];
+let nextAccountingArticleId = accountingArticlesStore.reduce(
+  (acc, item) => (item.id && item.id > acc ? item.id : acc),
+  200,
+) + 1;
 let nextReservationId = 200;
 const mediationReservations = new Map<number, { availableQuantity: number }>();
 
@@ -67,6 +93,42 @@ const extractBillingRunId = (input: unknown): number | undefined => {
   }
   return undefined;
 };
+
+const normalizeAccountingCodeMappingInput = (
+  payload: AccountingCodeMappingInputDto,
+): AccountingCodeMappingFormValues => ({
+  accountingArticleCode: payload.accountingArticleCode ?? '',
+  mappings:
+    payload.accountingCodeMappings?.map((mapping) => ({
+      id: mapping.id ?? undefined,
+      code: mapping.code ?? undefined,
+      accountingArticleCode: mapping.accountingArticleCode ?? payload.accountingArticleCode ?? '',
+      accountingCode: mapping.accountingCode ?? undefined,
+      sellerCode: mapping.sellerCode ?? undefined,
+      sellerCountryCode: mapping.sellerCountryCode ?? undefined,
+      billingCountryCode: mapping.billingCountryCode ?? undefined,
+      billingCurrencyCode: mapping.billingCurrencyCode ?? undefined,
+      criteriaElValue: mapping.criteriaElValue ?? undefined,
+    })) ?? [],
+});
+
+const toAccountingCodeMappingResponse = (
+  accountingArticleCode: string,
+  mappings: AccountingCodeMappingFormValues['mappings'],
+): AccountingCodeMappingInputDto => ({
+  accountingArticleCode,
+  accountingCodeMappings: mappings.map((mapping) => ({
+    id: mapping.id,
+    code: mapping.code,
+    accountingArticleCode: mapping.accountingArticleCode ?? accountingArticleCode,
+    accountingCode: mapping.accountingCode,
+    sellerCode: mapping.sellerCode,
+    sellerCountryCode: mapping.sellerCountryCode,
+    billingCountryCode: mapping.billingCountryCode,
+    billingCurrencyCode: mapping.billingCurrencyCode,
+    criteriaElValue: mapping.criteriaElValue,
+  })),
+});
 
 const findCustomer = (code: string) => customersStore.find((c) => c.code === code);
 const findCustomerAccount = (code: string) => customerAccountsStore.find((c) => c.code === code);
@@ -107,6 +169,12 @@ const mapAccountingPeriodToDto = (period: AccountingPeriodDetailValues) => ({
   startDate: period.startDate,
   endDate: period.endDate,
 });
+const findAccountingArticleByCode = (code: string) =>
+  accountingArticlesStore.find((item) => item.code === code);
+const findAccountingArticleIndexByCode = (code: string) =>
+  accountingArticlesStore.findIndex((item) => item.code === code);
+const findAccountingArticleIndexById = (id: number) =>
+  accountingArticlesStore.findIndex((item) => item.id === id);
 
 const filterRatedTransactions = (filters: Record<string, unknown> | undefined) => {
   if (!filters || Object.keys(filters).length === 0) {
@@ -455,6 +523,73 @@ export const handlers = [
       accountingPeriod: mapAccountingPeriodToDto(detail),
     });
   }),
+  http.get('*/articles', ({ request }) => {
+    const url = new URL(request.url);
+    const limitParam = Number(url.searchParams.get('limit') ?? '20');
+    const offsetParam = Number(url.searchParams.get('offset') ?? '0');
+    const limit = Number.isNaN(limitParam) ? 20 : limitParam;
+    const offset = Number.isNaN(offsetParam) ? 0 : offsetParam;
+    const page = accountingArticlesStore.slice(offset, offset + limit);
+
+    return HttpResponse.json({
+      actionStatus: success(),
+      accountingArticles: page,
+      totalRecords: accountingArticlesStore.length,
+    });
+  }),
+  http.get('*/articles/{accountingArticleCode}', ({ params }) => {
+    const code = String(params.accountingArticleCode);
+    const article = findAccountingArticleByCode(code);
+    if (!article) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    return HttpResponse.json({ actionStatus: success(), accountingArticle: article });
+  }),
+  http.post('*/articles', async ({ request }) => {
+    const payload = (await request.json()) as AccountingArticleDto;
+    const dto = { ...payload } as AccountingArticleDto;
+    const code = typeof dto.code === 'string' && dto.code.length > 0 ? dto.code : `ART-${nextAccountingArticleId}`;
+    const normalized = {
+      ...dto,
+      code,
+      id: dto.id ?? nextAccountingArticleId++,
+    } as (typeof accountingArticlesStore)[number];
+    accountingArticlesStore.push(normalized);
+    return HttpResponse.json(success('Accounting article created'));
+  }),
+  http.put('*/articles/{id}', async ({ params, request }) => {
+    const id = Number(params.id);
+    const payload = (await request.json()) as AccountingArticleDto;
+    const index = findAccountingArticleIndexById(id);
+    if (index === -1) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Not found' } }, { status: 404 });
+    }
+    accountingArticlesStore[index] = {
+      ...accountingArticlesStore[index],
+      ...(payload as Record<string, unknown>),
+      id,
+    } as (typeof accountingArticlesStore)[number];
+    return HttpResponse.json(success('Accounting article updated'));
+  }),
+  http.delete('*/articles/{accountingArticleCode}', ({ params }) => {
+    const code = String(params.accountingArticleCode);
+    const index = findAccountingArticleIndexByCode(code);
+    if (index >= 0) {
+      accountingArticlesStore.splice(index, 1);
+    }
+    return HttpResponse.json(success('Accounting article deleted'));
+  }),
+  http.get('*/articles/products/{productCode}', ({ params }) => {
+    const productCode = String(params.productCode);
+    const matching = accountingArticlesStore.filter((article) =>
+      article.code?.toLowerCase().includes(productCode.toLowerCase()),
+    );
+    return HttpResponse.json({
+      actionStatus: success(),
+      accountingArticles: matching.length > 0 ? matching : accountingArticlesStore,
+    });
+  }),
+  http.post('*/articleMapping', async () => HttpResponse.json(success('Article mapping created'))),
 
   http.get('*/api/rest/invoice/list', () =>
     HttpResponse.json({
@@ -1369,6 +1504,58 @@ export const handlers = [
   http.post('*/api/rest/billing/mediation/createCDR', async ({ request }) => {
     await request.json();
     return HttpResponse.json(success('CDR created'));
+  }),
+
+  http.post('*/v2/articles/accountingCodeMapping', async ({ request }) => {
+    const payload = (await request.json()) as AccountingCodeMappingInputDto;
+    const normalized = normalizeAccountingCodeMappingInput(payload);
+
+    if (!normalized.accountingArticleCode) {
+      return HttpResponse.json({ status: 'FAIL', message: 'Missing accountingArticleCode' }, { status: 400 });
+    }
+
+    const mappings = normalized.mappings.map((mapping) => {
+      if (typeof mapping.id === 'number') {
+        return mapping;
+      }
+      const id = nextAccountingCodeMappingId++;
+      return { ...mapping, id };
+    });
+
+    accountingCodeMappingsStore.set(normalized.accountingArticleCode, mappings);
+
+    return HttpResponse.json(
+      toAccountingCodeMappingResponse(normalized.accountingArticleCode, mappings),
+    );
+  }),
+
+  http.put('*/v2/articles/{accountingArticleCode}/accountingCodeMapping', async ({ request, params }) => {
+    const payload = (await request.json()) as AccountingCodeMappingInputDto;
+    const accountingArticleCode =
+      typeof params.accountingArticleCode === 'string'
+        ? params.accountingArticleCode
+        : payload.accountingArticleCode ?? '';
+
+    if (!accountingArticleCode) {
+      return HttpResponse.json({ status: 'FAIL', message: 'Missing accountingArticleCode' }, { status: 400 });
+    }
+
+    const normalized = normalizeAccountingCodeMappingInput({
+      ...payload,
+      accountingArticleCode,
+    });
+
+    const mappings = normalized.mappings.map((mapping) => {
+      if (typeof mapping.id === 'number') {
+        return mapping;
+      }
+      const id = nextAccountingCodeMappingId++;
+      return { ...mapping, id };
+    });
+
+    accountingCodeMappingsStore.set(accountingArticleCode, mappings);
+
+    return HttpResponse.json(toAccountingCodeMappingResponse(accountingArticleCode, mappings));
   }),
 
   http.post('*/api/rest/massImport/uploadAndImport', async ({ request }) => {

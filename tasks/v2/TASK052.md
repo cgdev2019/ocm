@@ -19,12 +19,12 @@ Le domaine « PaymentPlan » (tag OpenAPI `PaymentPlan`) est défini dans `tasks
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/payment-plan` | Create Payment plan | POST_Payment-Plan |
-| PUT | `/payment-plan/{id}` | Update Payment plan | PUT_Payment-Plan |
-| DELETE | `/payment-plan/{id}` | Delete Payment plan by id | DELETE_Payment-Plan |
-| PUT | `/payment-plan/{id}/activate` | Activate Payment plan by Id | PUT_Activate-Payment-Plan |
+| POST | `/api/rest/v2/payment-plan` | Create Payment plan | POST_Payment-Plan |
+| PUT | `/api/rest/v2/payment-plan/{id}` | Update Payment plan | PUT_Payment-Plan |
+| DELETE | `/api/rest/v2/payment-plan/{id}` | Delete Payment plan by id | DELETE_Payment-Plan |
+| PUT | `/api/rest/v2/payment-plan/{id}/activate` | Activate Payment plan by Id | PUT_Activate-Payment-Plan |
 
-#### POST /payment-plan
+#### POST /api/rest/v2/payment-plan
 
 - Résumé: Create Payment plan
 - OperationId: POST_Payment-Plan
@@ -36,7 +36,7 @@ Le domaine « PaymentPlan » (tag OpenAPI `PaymentPlan`) est défini dans `tasks
 - Réponses:
   - default: Id of created Payment plan
 
-#### PUT /payment-plan/{id}
+#### PUT /api/rest/v2/payment-plan/{id}
 
 - Résumé: Update Payment plan
 - OperationId: PUT_Payment-Plan
@@ -50,7 +50,7 @@ Le domaine « PaymentPlan » (tag OpenAPI `PaymentPlan`) est défini dans `tasks
 - Réponses:
   - default: Id of updated Payment plan
 
-#### DELETE /payment-plan/{id}
+#### DELETE /api/rest/v2/payment-plan/{id}
 
 - Résumé: Delete Payment plan by id
 - OperationId: DELETE_Payment-Plan
@@ -62,7 +62,7 @@ Le domaine « PaymentPlan » (tag OpenAPI `PaymentPlan`) est défini dans `tasks
   - default: default response
     - application/json: inconnu
 
-#### PUT /payment-plan/{id}/activate
+#### PUT /api/rest/v2/payment-plan/{id}/activate
 
 - Résumé: Activate Payment plan by Id
 - OperationId: PUT_Activate-Payment-Plan

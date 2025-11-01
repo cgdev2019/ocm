@@ -19,11 +19,11 @@ Le domaine « sms » (tag OpenAPI `sms`) est défini dans `tasks/openceapi.json`
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/setting/internationalSettings/SMSTemplate` | Create an SMS Template | create_7 |
-| GET | `/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}` | Get an SMSTemplate | get_1 |
-| DELETE | `/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}` | Delete an SMSTemplate | delete_4 |
+| POST | `/api/rest/v2/setting/internationalSettings/SMSTemplate` | Create an SMS Template | create_7 |
+| GET | `/api/rest/v2/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}` | Get an SMSTemplate | get_1 |
+| DELETE | `/api/rest/v2/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}` | Delete an SMSTemplate | delete_4 |
 
-#### POST /setting/internationalSettings/SMSTemplate
+#### POST /api/rest/v2/setting/internationalSettings/SMSTemplate
 
 - Résumé: Create an SMS Template
 - OperationId: create_7
@@ -35,7 +35,7 @@ Le domaine « sms » (tag OpenAPI `sms`) est défini dans `tasks/openceapi.json`
   - 200: the sms template successfully updated
   - 400: An error happened while creating SMS Template
 
-#### GET /setting/internationalSettings/SMSTemplate/{SMSTemplateCode}
+#### GET /api/rest/v2/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}
 
 - Résumé: Get an SMSTemplate
 - OperationId: get_1
@@ -47,7 +47,7 @@ Le domaine « sms » (tag OpenAPI `sms`) est défini dans `tasks/openceapi.json`
   - 400: An error happened while getting SMSTemplate
   - 404: The SMS Template does not exists
 
-#### DELETE /setting/internationalSettings/SMSTemplate/{SMSTemplateCode}
+#### DELETE /api/rest/v2/setting/internationalSettings/SMSTemplate/{SMSTemplateCode}
 
 - Résumé: Delete an SMSTemplate
 - OperationId: delete_4

@@ -19,9 +19,9 @@ Le domaine « articleMapping » (tag OpenAPI `articleMapping`) est défini dans 
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| GET | `/articleMapping/{code}` | This endpoint allows to find an existing article mapping resource | find_2 |
+| GET | `/api/rest/v2/articleMapping/{code}` | This endpoint allows to find an existing article mapping resource | find_2 |
 
-#### GET /articleMapping/{code}
+#### GET /api/rest/v2/articleMapping/{code}
 
 - Résumé: This endpoint allows to find an existing article mapping resource
 - OperationId: find_2

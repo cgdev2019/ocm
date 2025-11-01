@@ -51,6 +51,8 @@ export const NAV_SECTIONS: Array<{
     | 'accountingPeriod'
     | 'mediation'
     | 'providerContact';
+    | 'providerContact'
+    | 'accountingArticle';
 }> = [
   { label: 'navigation.dashboard', path: '/', icon: 'dashboard' },
   { label: 'navigation.customers', path: '/customers', icon: 'customers' },
@@ -103,6 +105,7 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.pdfInvoices', path: '/pdf-invoices', icon: 'pdfInvoice' },
   { label: 'navigation.provider', path: '/provider', icon: 'provider' },
   { label: 'navigation.query', path: '/query', icon: 'query' },
+  { label: 'navigation.accountingArticles', path: '/accounting-articles', icon: 'accountingArticle' },
   { label: 'navigation.accountingCodes', path: '/accounting-codes', icon: 'accountingCode' },
   { label: 'navigation.accountingPeriods', path: '/accounting-periods', icon: 'accountingPeriod' },
   { label: 'navigation.mediation', path: '/mediation', icon: 'mediation' },

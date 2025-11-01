@@ -60,7 +60,8 @@
     "accountingPeriods": "Accounting periods",
     "mediation": "Mediation",
     "businessAccountModels": "Business account models",
-    "providerContacts": "Provider contacts"
+    "providerContacts": "Provider contacts",
+    "accountingArticles": "Accounting articles"
   },
   "breadcrumbs": {
     "ariaLabel": "Breadcrumb",
@@ -1113,6 +1114,34 @@
       "enable": "Enable",
       "disable": "Disable",
       "enabled": "Discount plan enabled"
+    },
+    "invalidJson": "Invalid JSON payload",
+    "accountingArticle": {
+      "code": "Code",
+      "description": "Description",
+      "invoiceSubCategory": "Invoice sub-category",
+      "taxClass": "Tax class",
+      "accountingCode": "Accounting code",
+      "articleFamily": "Article family",
+      "invoiceType": "Invoice type",
+      "unitPrice": "Unit price",
+      "invoiceTypeEl": "Invoice type expression",
+      "accountingCodeEl": "Accounting code expression",
+      "columnCriteriaEl": "Column criteria expression",
+      "analyticCode1": "Analytic code 1",
+      "analyticCode2": "Analytic code 2",
+      "analyticCode3": "Analytic code 3",
+      "ignoreAggregation": "Ignore aggregation",
+      "languageDescriptions": "Language descriptions",
+      "languageCode": "Language code",
+      "languageDescription": "Description",
+      "noLanguageDescriptions": "No translations defined",
+      "customFields": "Custom fields",
+      "noCustomFields": "No custom fields configured",
+      "generalInformation": "General information",
+      "accountingInformation": "Accounting information",
+      "analyticsSection": "Analytics",
+      "deleteConfirmation": "Are you sure you want to delete accounting article {code}?"
     }
   },
   "feedback": {

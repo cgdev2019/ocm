@@ -19,12 +19,12 @@ Le domaine « CollectionPlan » (tag OpenAPI `CollectionPlan`) est défini dans 
 
 | Méthode | Chemin | Résumé | OperationId |
 | --- | --- | --- | --- |
-| POST | `/dunning/collectionPlan/availableDunningPolicies` | List of available dunning policies | availableDunningPolicies |
-| POST | `/dunning/collectionPlan/checkMassSwitch` | Check eligible collection for switch | checkMassSwitch |
-| POST | `/dunning/collectionPlan/massSwitch` | Mass switch collection plan | massSwitchCollectionPlan |
-| POST | `/dunning/collectionPlan/switch/{collectionPlanId}` | Switch collection plan | switchCollectionPlan |
+| POST | `/api/rest/v2/dunning/collectionPlan/availableDunningPolicies` | List of available dunning policies | availableDunningPolicies |
+| POST | `/api/rest/v2/dunning/collectionPlan/checkMassSwitch` | Check eligible collection for switch | checkMassSwitch |
+| POST | `/api/rest/v2/dunning/collectionPlan/massSwitch` | Mass switch collection plan | massSwitchCollectionPlan |
+| POST | `/api/rest/v2/dunning/collectionPlan/switch/{collectionPlanId}` | Switch collection plan | switchCollectionPlan |
 
-#### POST /dunning/collectionPlan/availableDunningPolicies
+#### POST /api/rest/v2/dunning/collectionPlan/availableDunningPolicies
 
 - Résumé: List of available dunning policies
 - OperationId: availableDunningPolicies
@@ -37,7 +37,7 @@ Le domaine « CollectionPlan » (tag OpenAPI `CollectionPlan`) est défini dans 
   - 200: List successfully returned
   - 404: Entity does not exits
 
-#### POST /dunning/collectionPlan/checkMassSwitch
+#### POST /api/rest/v2/dunning/collectionPlan/checkMassSwitch
 
 - Résumé: Check eligible collection for switch
 - OperationId: checkMassSwitch
@@ -50,7 +50,7 @@ Le domaine « CollectionPlan » (tag OpenAPI `CollectionPlan`) est défini dans 
   - 200: Check successfully passed
   - 404: Entity does not exits
 
-#### POST /dunning/collectionPlan/massSwitch
+#### POST /api/rest/v2/dunning/collectionPlan/massSwitch
 
 - Résumé: Mass switch collection plan
 - OperationId: massSwitchCollectionPlan
@@ -63,7 +63,7 @@ Le domaine « CollectionPlan » (tag OpenAPI `CollectionPlan`) est défini dans 
   - 200: Mass switch success
   - 404: Entity does not exist
 
-#### POST /dunning/collectionPlan/switch/{collectionPlanId}
+#### POST /api/rest/v2/dunning/collectionPlan/switch/{collectionPlanId}
 
 - Résumé: Switch collection plan
 - OperationId: switchCollectionPlan
