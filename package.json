@@ -13,7 +13,8 @@
     "e2e:ui": "playwright test --ui",
     "test:watch": "cross-env NODE_ENV=test jest --watch",
     "api:gen": "openapi-typescript opencell.json --output lib/api/generated/schema.ts",
-    "mock": "cross-env MOCK=on NEXT_PUBLIC_MOCK=on next dev"
+    "mock": "cross-env MOCK=on NEXT_PUBLIC_MOCK=on next dev",
+    "tasks:generate:views": "node scripts/generateViewTasks.mjs"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
