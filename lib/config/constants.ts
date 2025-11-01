@@ -80,6 +80,7 @@ export const NAV_SECTIONS: Array<{
   { label: 'navigation.channels', path: '/channels', icon: 'channel' },
   { label: 'navigation.channelsAndSegments', path: '/channels-and-segments', icon: 'channelsAndSegments' },
   { label: 'navigation.chargeTemplates', path: '/charge-templates', icon: 'chargeTemplate' },
+  { label: 'navigation.counterInstances', path: '/counter-instances', icon: 'usage' },
   { label: 'navigation.counterTemplates', path: '/counter-templates', icon: 'counterTemplate' },
   { label: 'navigation.discountPlans', path: '/discount-plans', icon: 'discountPlan' },
   { label: 'navigation.discountPlanItems', path: '/discount-plan-items', icon: 'discountPlanItem' },

@@ -88,7 +88,7 @@
  - [x] API V2 communication — cf. `tasks/v2/TASK015.md`
 - [x] API V2 contact — cf. `tasks/v2/TASK016.md`
 - [ ] API V2 contact_category — cf. `tasks/v2/TASK017.md`
-- [ ] API V2 CounterInstance — cf. `tasks/v2/TASK018.md`
+- [x] API V2 CounterInstance — cf. `tasks/v2/TASK018.md`
 - [ ] API V2 Create — cf. `tasks/v2/TASK019.md`
 - [ ] API V2 Credit — cf. `tasks/v2/TASK020.md`
 - [ ] API V2 crm — cf. `tasks/v2/TASK021.md`
@@ -144,6 +144,8 @@
 - [ ] API V2 TrialBalance — cf. `tasks/v2/TASK071.md`
 
 ## Notes
+- 2025-11-24 : Validation JSON sur CounterInstance (`accumulatedValues`) + re-run `npm run test -- --runTestsByPath features/counter-instances/__tests__/counterInstanceApi.test.tsx` ✅.
+- 2025-11-24 : `npm run lint` ❌ (erreurs connues dans `scripts/generateTasks.mjs` et composants historiques, voir sortie ci-dessus).
 - `npm run dev` Utiliser pour viser l'API distante.
 - Les variables d'env Keycloak/API lisent désormais les variantes `NEXT_PUBLIC_*` pour fonctionner côté navigateur.
 - `npm run lint` → OK après le correctif d'auth (cf. Keycloak/API).

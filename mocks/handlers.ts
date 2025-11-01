@@ -201,6 +201,24 @@ let nextContactCategoryId =
     (acc, item) => (typeof item.id === 'number' && item.id > acc ? item.id : acc),
     100,
   ) + 1;
+const counterInstancesStore: CounterInstanceFormValues[] = counterInstancesData.map((item) => ({
+  ...item,
+  counterPeriods: item.counterPeriods.map((period) => ({ ...period })),
+}));
+let nextCounterInstanceId =
+  counterInstancesStore.reduce(
+    (acc, item) => (typeof item.id === 'number' && item.id > acc ? item.id : acc),
+    500,
+  ) + 1;
+let nextCounterPeriodId =
+  counterInstancesStore.reduce((acc, instance) => {
+    for (const period of instance.counterPeriods) {
+      if (typeof period.id === 'number' && period.id > acc) {
+        acc = period.id;
+      }
+    }
+    return acc;
+  }, 2000) + 1;
 
 const success = (message = 'OK') => ({ status: 'SUCCESS', message });
 
@@ -270,6 +288,148 @@ const findInvoicingPlanItem = (code: string) =>
   invoicingPlanItemsStore.find((item) => item.code === code);
 const findLanguageIso = (code: string) => languageIsosStore.find((item) => item.code === code);
 const findLanguage = (code: string) => languagesStore.find((item) => item.code === code);
+const parseAccumulatedValuesJson = (input: string | undefined) => {
+  if (!input) {
+    return undefined;
+  }
+  try {
+    const parsed = JSON.parse(input);
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      return parsed as Record<string, number>;
+    }
+  } catch (_error) {
+    return undefined;
+  }
+  return undefined;
+};
+
+const mapCounterPeriodPayloadToStore = (
+  payload: Record<string, unknown>,
+): CounterInstanceFormValues['counterPeriods'][number] => {
+  const resolvedId = (() => {
+    const candidate = payload.id;
+    if (typeof candidate === 'number' && Number.isFinite(candidate)) {
+      return candidate;
+    }
+    if (typeof candidate === 'string') {
+      const parsed = Number(candidate);
+      if (Number.isFinite(parsed)) {
+        return parsed;
+      }
+    }
+    return nextCounterPeriodId++;
+  })();
+
+  const levelValue = payload.level;
+  const resolvedLevel =
+    typeof levelValue === 'number'
+      ? String(levelValue)
+      : typeof levelValue === 'string' && levelValue.length > 0
+        ? levelValue
+        : '';
+
+  const rawValue = payload.value;
+  const resolvedValue =
+    typeof rawValue === 'number'
+      ? String(rawValue)
+      : typeof rawValue === 'string' && rawValue.length > 0
+        ? rawValue
+        : '';
+
+  const accumulatedValuesJson =
+    typeof payload.accumulatedValues === 'object' && payload.accumulatedValues !== null
+      ? JSON.stringify(payload.accumulatedValues)
+      : typeof payload.accumulatedValuesJson === 'string'
+        ? payload.accumulatedValuesJson
+        : undefined;
+
+  return {
+    id: resolvedId,
+    code: typeof payload.code === 'string' ? payload.code : undefined,
+    counterType: typeof payload.counterType === 'string' ? payload.counterType : '',
+    level: resolvedLevel,
+    periodStartDate: typeof payload.periodStartDate === 'string' ? payload.periodStartDate : undefined,
+    periodEndDate: typeof payload.periodEndDate === 'string' ? payload.periodEndDate : undefined,
+    value: resolvedValue,
+    accumulator: typeof payload.accumulator === 'boolean' ? payload.accumulator : undefined,
+    accumulatorType: typeof payload.accumulatorType === 'string' ? payload.accumulatorType : '',
+    accumulatedValuesJson,
+  };
+};
+
+const mapCounterInstancePayloadToStore = (payload: Record<string, unknown>): CounterInstanceFormValues => {
+  const code =
+    typeof payload.code === 'string' && payload.code.trim().length > 0
+      ? payload.code.trim()
+      : `CINST-${nextCounterInstanceId}`;
+
+  const resolvedId = (() => {
+    const candidate = payload.id;
+    if (typeof candidate === 'number' && Number.isFinite(candidate)) {
+      return candidate;
+    }
+    if (typeof candidate === 'string') {
+      const parsed = Number(candidate);
+      if (Number.isFinite(parsed)) {
+        return parsed;
+      }
+    }
+    return nextCounterInstanceId++;
+  })();
+
+  const counterPeriodsPayload = Array.isArray(payload.counterPeriods)
+    ? payload.counterPeriods
+    : [];
+
+  return {
+    id: resolvedId,
+    code,
+    counterTemplateCode:
+      typeof payload.counterTemplateCode === 'string' && payload.counterTemplateCode.length > 0
+        ? payload.counterTemplateCode
+        : '',
+    chargeInstanceCode: typeof payload.chargeInstanceCode === 'string' ? payload.chargeInstanceCode : undefined,
+    productCode: typeof payload.productCode === 'string' ? payload.productCode : undefined,
+    userAccountCode: typeof payload.userAccountCode === 'string' ? payload.userAccountCode : undefined,
+    customerAccountCode:
+      typeof payload.customerAccountCode === 'string' ? payload.customerAccountCode : undefined,
+    billingAccountCode:
+      typeof payload.billingAccountCode === 'string' ? payload.billingAccountCode : undefined,
+    subscriptionCode: typeof payload.subscriptionCode === 'string' ? payload.subscriptionCode : undefined,
+    counterPeriods: counterPeriodsPayload.map((entry) =>
+      mapCounterPeriodPayloadToStore(entry as Record<string, unknown>),
+    ),
+  };
+};
+
+const toCounterPeriodDto = (
+  period: CounterInstanceFormValues['counterPeriods'][number],
+): Record<string, unknown> => ({
+  id: period.id,
+  code: period.code,
+  counterType: period.counterType && period.counterType.length > 0 ? period.counterType : undefined,
+  level: period.level && period.level.length > 0 ? Number(period.level) : undefined,
+  periodStartDate: period.periodStartDate,
+  periodEndDate: period.periodEndDate,
+  value: period.value && period.value.length > 0 ? Number(period.value) : undefined,
+  accumulator: period.accumulator,
+  accumulatorType:
+    period.accumulatorType && period.accumulatorType.length > 0 ? period.accumulatorType : undefined,
+  accumulatedValues: parseAccumulatedValuesJson(period.accumulatedValuesJson),
+});
+
+const toCounterInstanceDto = (instance: CounterInstanceFormValues): Record<string, unknown> => ({
+  id: instance.id,
+  code: instance.code,
+  counterTemplateCode: instance.counterTemplateCode,
+  chargeInstanceCode: instance.chargeInstanceCode,
+  productCode: instance.productCode,
+  userAccountCode: instance.userAccountCode,
+  customerAccountCode: instance.customerAccountCode,
+  billingAccountCode: instance.billingAccountCode,
+  subscriptionCode: instance.subscriptionCode,
+  counterPeriods: instance.counterPeriods.map(toCounterPeriodDto),
+});
 const findAccountingCode = (code: string) => accountingCodesStore.find((item) => item.code === code);
 const findAccountingPeriod = (fiscalYear: string) =>
   accountingPeriodsStore.find((item) => item.fiscalYear === fiscalYear);
@@ -690,7 +850,7 @@ export const handlers = [
     let body: Record<string, unknown> = {};
     try {
       body = (await request.json()) as Record<string, unknown>;
-    } catch (error) {
+    } catch (_error) {
       body = {};
     }
 
@@ -790,6 +950,117 @@ export const handlers = [
       contactCategoriesStore.splice(index, 1);
     }
     return HttpResponse.json({ actionStatus: success('Deleted') });
+  }),
+
+  http.post('*/api/rest/v2/generic/all/counterInstance', async ({ request }) => {
+    let body: Record<string, unknown> = {};
+    try {
+      body = (await request.json()) as Record<string, unknown>;
+    } catch (_error) {
+      body = {};
+    }
+
+    const filters = (body.filters as Record<string, unknown>) ?? {};
+    const codeFilter =
+      typeof filters.code === 'string' && filters.code.trim().length > 0
+        ? filters.code.trim().toLowerCase()
+        : undefined;
+
+    const otherFilters = { ...filters };
+    delete otherFilters.code;
+    const hasAdditionalFilters = Object.keys(otherFilters).length > 0;
+
+    const collectSearchTerms = (entries: unknown[]): string[] => {
+      const terms: string[] = [];
+      for (const entry of entries) {
+        if (typeof entry === 'string' && entry.trim().length > 0) {
+          const value = entry.trim().toLowerCase();
+          if (!terms.includes(value)) {
+            terms.push(value);
+          }
+        }
+      }
+      return terms;
+    };
+
+    const searchTerms = collectSearchTerms([
+      filters.code,
+      filters.counterTemplateCode,
+      filters.userAccountCode,
+      filters.subscriptionCode,
+      filters.chargeInstanceCode,
+    ]);
+
+    let instances = [...counterInstancesStore];
+
+    if (codeFilter && !hasAdditionalFilters) {
+      instances = instances.filter((item) => item.code.toLowerCase() === codeFilter);
+    } else if (searchTerms.length > 0) {
+      instances = instances.filter((item) => {
+        const haystack = [
+          item.code,
+          item.counterTemplateCode,
+          item.userAccountCode,
+          item.subscriptionCode,
+          item.chargeInstanceCode,
+        ]
+          .filter((value): value is string => typeof value === 'string')
+          .map((value) => value.toLowerCase());
+        return searchTerms.some((term) => haystack.some((field) => field.includes(term)));
+      });
+    }
+
+    instances.sort((a, b) => (b.id ?? 0) - (a.id ?? 0));
+
+    const offset = typeof body.offset === 'number' ? Math.max(0, Math.floor(body.offset)) : 0;
+    const limit =
+      typeof body.limit === 'number' && body.limit >= 0 ? Math.floor(body.limit) : instances.length;
+    const paginated = instances.slice(offset, offset + limit);
+
+    return HttpResponse.json({
+      actionStatus: success(),
+      data: paginated.map((item) => toCounterInstanceDto(item)),
+      paging: { totalNumberOfRecords: instances.length },
+    });
+  }),
+
+  http.post('*/api/rest/v2/accountsManagement/counterInstance', async ({ request }) => {
+    const payload = (await request.json()) as Record<string, unknown>;
+    const entry = mapCounterInstancePayloadToStore(payload);
+    counterInstancesStore.push({
+      ...entry,
+      counterPeriods: entry.counterPeriods.map((period) => ({ ...period })),
+    });
+    return HttpResponse.json({
+      actionStatus: success('Created'),
+      counterInstance: toCounterInstanceDto(entry),
+    });
+  }),
+
+  http.put('*/api/rest/v2/accountsManagement/counterInstance/{id}', async ({ params, request }) => {
+    const idParam = Number(params.id);
+    if (!Number.isFinite(idParam)) {
+      return HttpResponse.json({ actionStatus: { status: 'FAIL', message: 'Invalid identifier' } }, { status: 400 });
+    }
+
+    const payload = (await request.json()) as Record<string, unknown>;
+    payload.id = idParam;
+    const entry = mapCounterInstancePayloadToStore(payload);
+    const index = counterInstancesStore.findIndex((item) => item.id === idParam);
+    const stored = {
+      ...entry,
+      counterPeriods: entry.counterPeriods.map((period) => ({ ...period })),
+    };
+    if (index >= 0) {
+      counterInstancesStore[index] = stored;
+    } else {
+      counterInstancesStore.push(stored);
+    }
+
+    return HttpResponse.json({
+      actionStatus: success('Updated'),
+      counterInstance: toCounterInstanceDto(entry),
+    });
   }),
 
   http.post('*/v2/generic/all/accountingPeriod', async ({ request }) => {

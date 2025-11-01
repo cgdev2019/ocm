@@ -252,6 +252,12 @@ import type {
   ContactCategoryListResponse,
 } from '@/features/contact-categories/types';
 import type {
+  CounterInstanceDetail,
+  CounterInstanceFormValues,
+  CounterInstanceListItem,
+  CounterInstanceListResponse,
+} from '@/features/counter-instances/types';
+import type {
   UsageChargeAggregateListItem,
   UsageChargeAggregateResponseDto,
   UsageListItem,
@@ -2470,6 +2476,21 @@ export const contactCategoryListResponseFixture: ContactCategoryListResponse = {
   data: [contactCategoryDtoFixture],
   paging: { totalNumberOfRecords: 1 },
 };
+
+export {
+  counterInstanceDetailFixture,
+  counterInstanceDtoFixture,
+  counterInstanceFormFixture,
+  counterInstanceListItemFixture,
+  counterInstanceListResponseFixture,
+} from './counterInstance';
+
+export const counterInstanceFormFixtures: CounterInstanceFormValues[] = [counterInstanceFormFixture];
+export const counterInstanceListFixtures: CounterInstanceListItem[] = [counterInstanceListItemFixture];
+export const counterInstanceDetailFixtures: CounterInstanceDetail[] = [counterInstanceDetailFixture];
+export const counterInstanceListResponseFixtures: CounterInstanceListResponse[] = [
+  counterInstanceListResponseFixture,
+];
 
 export const queryResponseFixture: QueryResponse = {
   actionStatus: { status: 'SUCCESS', message: 'OK' },

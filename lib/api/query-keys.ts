@@ -398,6 +398,12 @@ export const queryKeys = {
     detail: (code: string) => ['counterTemplates', 'detail', code] as const,
     version: () => ['counterTemplates', 'version'] as const,
   },
+  counterInstances: {
+    root: ['counterInstances'] as const,
+    list: (params?: { page?: number; pageSize?: number; search?: string | null }) =>
+      params ? (['counterInstances', 'list', params] as const) : (['counterInstances', 'list'] as const),
+    detail: (code: string) => ['counterInstances', 'detail', code || ''] as const,
+  },
   discountPlanItems: {
     list: (filters?: Record<string, unknown>) =>
       filters ? (['discountPlanItems', 'list', filters] as const) : (['discountPlanItems', 'list'] as const),
