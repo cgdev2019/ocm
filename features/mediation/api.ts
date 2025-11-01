@@ -96,17 +96,20 @@ const adaptChargeResponse = (
   const listResult = payload as ChargeCdrListResult;
 
   if (Array.isArray(listResult.chargedCDRs)) {
-    const firstCharge = listResult.chargedCDRs.find(
+    const chargedItems = listResult.chargedCDRs.filter(
       (item): item is ChargeCdrResponseDto => Boolean(item),
     );
+    const firstCharge = chargedItems[0];
 
     if (listResult.actionStatus) {
       assertActionSuccess(listResult.actionStatus, errorMessage);
     }
 
-    if (firstCharge?.actionStatus) {
-      assertActionSuccess(firstCharge.actionStatus, errorMessage);
-    }
+    chargedItems.forEach((item) => {
+      if (item.actionStatus) {
+        assertActionSuccess(item.actionStatus, errorMessage);
+      }
+    });
 
     return {
       message: listResult.actionStatus?.message ?? firstCharge?.actionStatus?.message ?? undefined,
